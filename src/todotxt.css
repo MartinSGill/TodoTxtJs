@@ -1,0 +1,326 @@
+@charset "utf-8";
+
+body
+{
+    color: #000000;
+    background-color: #FDFFE8;
+    font-size: 16pt;
+}
+
+label
+{
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+label:after
+{
+    content: ": ";
+}
+
+.importButton
+{
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    left: auto;
+    bottom: auto;
+    height: 20px;
+    border-style: solid;
+    border-color: #436f93;
+    border-width: thin;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0;
+    cursor: pointer;
+}
+
+.importButton.selected
+{
+    background-color: #436f93;
+    color: #FFFFFF;
+}
+
+.importBox
+{
+    float: left;
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    width: 60%;
+    height: 425px;
+    z-index: 1000;
+    background-color: #436f93;
+    padding: 5px;
+    text-align: right;
+}
+
+.importBox textarea
+{
+    margin: 0;
+    padding: 0;
+    height: 400px;
+    width: 100%;
+}
+
+.importHelp
+{
+    color: #FFFFFF;
+    font-size: small;
+}
+
+.importHelp:after
+{
+    content: " \2192";
+}
+
+.importWarning
+{
+    font-size: small;
+    color: #FF8282;
+    font-weight: bold;
+}
+
+.importBox button
+{
+    height: 22px;
+    margin-top: 3px;
+    margin-right: 0;
+}
+
+.todo
+{
+    border-style: groove;
+    border-width: thin;
+    border-color: #03419C;
+    border-radius: 5px;
+    background-color: #A2C6FD;
+    padding: 3px;
+    margin: 3px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.ballotBox
+{
+    cursor: pointer;
+    display: inline-block;
+    width: 1em;
+}
+
+div.completed
+{
+    background-color: #C0C0C0;
+}
+
+.completed
+{
+    text-decoration: none;
+}
+
+.completedFlag
+{
+    color: #0F066A;
+    display: none;
+}
+
+.completedDate
+{
+    color: #0F066A;
+    font-size: smaller;
+    margin-right: 0.2em;
+}
+
+.priority
+{
+    color: #006742;
+    background-color: white;
+    text-align: center;
+    display: inline-block;
+    width: 1.5em;
+}
+
+.priorityBrace
+{
+    color: #548ECA;
+    display: none;
+}
+
+.contextFlag
+{
+    font-size: small;
+    margin-left: 0.5em;
+    color: #4E41D1;
+}
+
+.context
+{
+    color: #4E41D1;
+}
+
+.projectFlag
+{
+    color: #0D58A6;
+    font-size: small;
+    margin-left: 0.5em;
+}
+
+.project
+{
+    color: #0D58A6;
+}
+
+.message
+{
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.cssmenu {
+    height: 37px;
+    display: block;
+    padding: 0;
+    margin: 20px auto;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+    .cssmenu > ul {
+        list-style: inside none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .cssmenu > ul > li {
+            list-style: inside none;
+            padding: 0;
+            margin: 0;
+            float: left;
+            display: block;
+            position: relative;
+        }
+
+            .cssmenu > ul > li > a {
+                outline: none;
+                display: block;
+                position: relative;
+                padding: 12px 20px;
+                font: bold 13px/100% Arial, Helvetica, sans-serif;
+                text-align: center;
+                text-decoration: none;
+                text-shadow: 1px 1px 0 rgba(0,0,0, 0.4);
+            }
+
+            .cssmenu > ul > li:first-child > a {
+                border-radius: 5px 0 0 5px;
+            }
+
+            .cssmenu > ul > li > a:after {
+                content: '';
+                position: absolute;
+                border-right: 1px solid;
+                top: -1px;
+                bottom: -1px;
+                right: -2px;
+                z-index: 99;
+            }
+
+    .cssmenu ul li.has-sub:hover > a:after {
+        top: 0;
+        bottom: 0;
+    }
+
+    .cssmenu > ul > li.has-sub > a:before {
+        content: '';
+        position: absolute;
+        top: 18px;
+        right: 6px;
+        border: 5px solid transparent;
+        border-top: 5px solid #fff;
+    }
+
+    .cssmenu > ul > li.has-sub:hover > a:before {
+        top: 19px;
+    }
+
+    .cssmenu ul li.has-sub:hover > a {
+        background: #3f3f3f;
+        border-color: #3f3f3f;
+        padding-bottom: 13px;
+        padding-top: 13px;
+        top: -1px;
+        z-index: 999;
+    }
+
+    .cssmenu ul li.has-sub:hover > ul, .cssmenu ul li.has-sub:hover > div {
+        display: block;
+    }
+
+    .cssmenu ul li.has-sub > a:hover {
+        background: #3f3f3f;
+        border-color: #3f3f3f;
+    }
+
+    .cssmenu ul li > ul, .cssmenu ul li > div {
+        display: none;
+        width: auto;
+        position: absolute;
+        top: 38px;
+        padding: 10px 0;
+        background: #3f3f3f;
+        border-radius: 0 0 5px 5px;
+        z-index: 999;
+    }
+
+    .cssmenu ul li > ul {
+        width: 200px;
+    }
+
+        .cssmenu ul li > ul li {
+            display: block;
+            list-style: inside none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+
+            .cssmenu ul li > ul li a {
+                outline: none;
+                display: block;
+                position: relative;
+                margin: 0;
+                padding: 8px 20px;
+                font: 10pt Arial, Helvetica, sans-serif;
+                color: #fff;
+                text-decoration: none;
+                text-shadow: 1px 1px 0 rgba(0,0,0, 0.5);
+            }
+
+    .cssmenu, .cssmenu > ul > li > ul > li a:hover {
+        background: #3e698c;
+        background: -moz-linear-gradient(top, #3e698c 0%, #30576e 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3e698c), color-stop(100%,#30576e));
+        background: -webkit-linear-gradient(top, #3e698c 0%,#30576e 100%);
+        background: -o-linear-gradient(top, #3e698c 0%,#30576e 100%);
+        background: -ms-linear-gradient(top, #3e698c 0%,#30576e 100%);
+        background: linear-gradient(top, #3e698c 0%,#30576e 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e698c', endColorstr='#30576E',GradientType=0 );
+    }
+
+.cssmenu {
+    border-color: #1b313d;
+}
+
+    .cssmenu > ul > li > a {
+        border-right: 1px solid #1b313d;
+        color: #fff;
+    }
+
+        .cssmenu > ul > li > a:after {
+            border-color: #6696bd;
+        }
+
+        .cssmenu > ul > li > a:hover {
+            background: #436f93;
+        }

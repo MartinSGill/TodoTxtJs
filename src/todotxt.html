@@ -1,0 +1,90 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>My TodoTxt</title>
+    <link rel="stylesheet" href="todotxt.css">
+</head>
+<body>
+    <div data-bind="with: importing">
+        <button class="importButton" data-bind="css: { selected: importingTodos }, click: showImportBox">Import Todos</button>
+        <div class="importBox" data-bind="visible: importingTodos">
+            <textarea  data-bind="value: importText"></textarea>
+
+            <span class="importHelp">Paste or write your Todos into the text box and click import. <span class="importWarning">This will delete existing Todos.</span></span>
+            <button data-bind="click: importTodos">Import</button>
+        </div>
+    </div>
+    <h1>Todos</h1>
+    <div class="cssmenu">
+        <ul>
+            <li>
+                <a href="javascript:void(0);" data-bind="click: function() {displayCompleted(!displayCompleted());}">
+                    <span class="menuSelected" data-bind="visible: displayCompleted()">&#x2714;</span>
+                    <span class="menuSelected" data-bind="visible: !displayCompleted()">&nbsp;</span>
+                    <span>Show Completed</span>
+                </a>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:void(0);"><span>Priorities</span></a>
+                <ul data-bind="foreach: priorities">
+                    <li data-bind="css: { selected: checked }">
+                        <a href="javascript:void(0);" data-bind="click: $root.toggleMenuItem">
+                            <span class="menuSelected" data-bind="visible: checked">&#x2714;</span>
+                    <span class="menuSelected" data-bind="visible: !checked">&nbsp;</span>
+                    <span data-bind="text: name"></span>
+                </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:void(0);"><span>Projects</span></a>
+                <ul data-bind="foreach: projects">
+                    <li data-bind="css: { selected: checked }">
+                        <a href="javascript:void(0);" data-bind="click: $root.toggleMenuItem">
+                            <span class="menuSelected" data-bind="visible: checked">&#x2714;</span>
+                            <span class="menuSelected" data-bind="visible: !checked">&nbsp;</span>
+                            <span data-bind="text: name"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:void(0);"><span>Contexts</span></a>
+                <ul data-bind="foreach: contexts">
+                    <li data-bind="css: { selected: checked }">
+                        <a href="javascript:void(0);" data-bind="click: $root.toggleMenuItem">
+                            <span class="menuSelected" data-bind="visible: checked">&#x2714;</span>
+                            <span class="menuSelected" data-bind="visible: !checked">&nbsp;</span>
+                            <span data-bind="text: name"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-bind="click: showAllToggle">
+                    <span class="menuSelected" data-bind="visible: showingAll">&#x2714;</span>
+                    <span class="menuSelected" data-bind="visible: !showingAll">&nbsp;</span>
+                    <span>Show All</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-bind="foreach: todos">
+        <div class="todo" data-bind="css: { completed: completed }">
+            <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: !completed()">&#x2610;</span>
+            <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: completed()">&#x2611;</span>
+            <span data-bind="css: { completed: completed }">
+                <span class="completedFlag" data-bind="visible: completed()">x</span>
+                <span class="completedDate" data-bind="text: completedDate(), visible: completed()"></span>
+                <span class="priorityBrace" data-bind="visible: priority != null">(</span><span class="priority" data-bind="text: priority, visible: priority != null"></span><span class="priorityBrace" data-bind="visible: priority != null">)</span>
+                <span class="message" data-bind="html: formatted"></span>
+            </span>
+        </div>
+    </div>
+</body>
+<script src="knockoutjs-2.1.0.js" type="text/javascript"></script>
+<script src="jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
+<script src="underscore.js" type="text/javascript"></script>
+<script src="todotxt.js" type="text/javascript"></script>
+</html>
