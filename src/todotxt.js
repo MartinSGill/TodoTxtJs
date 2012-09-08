@@ -157,18 +157,6 @@ function TodoTxtViewModel()
         };
     }
 
-    function MenuEntry(name, checked)
-    {
-        var self = this;
-        self.name = ko.observable(name);
-        self.checked = ko.observable(checked);
-    }
-
-    function compareMenuEntry(left, right)
-    {
-        return left.name() == right.name() ? 0 : (left.name() < right.name() ? -1 : 1);
-    }
-
     /************************************************
      * Observables
      ***********************************************/
@@ -180,86 +168,23 @@ function TodoTxtViewModel()
     self.projects               = ko.observableArray([]);
     self.contexts               = ko.observableArray([]);
 
-    self.displayCompleted       = ko.observable(true);
-    self.displayEverythingElse  = ko.observable(true);
+    self.showCompleted          = ko.observable(true);
+
+    self.newPriorityFilter      = ko.observable();
 
     /************************************************
      * Computed
      ***********************************************/
 
-    self.showingAll = ko.computed(function()
-        {
-            if (!self.displayCompleted()) { return false; }
-            if (_.find(self.priorities(), function(o) { return !o.checked(); } ) !== undefined) { return false; }
-            if (_.find(self.projects(), function(o) { return !o.checked(); } ) !== undefined) { return false; }
-            if (_.find(self.contexts(), function(o) { return !o.checked(); } ) !== undefined) { return false; }
-            if (!self.displayEverythingElse) { return false; }
-
-            return true;
-        });
-
-    function isDisplayed(name, menuEntryarray)
+    self.isDisplayed = function(todo)
     {
-        var found = _.find(menuEntryarray, function(o) { return o.name() === name; });
-        if (found !== undefined)
+        if (!self.showCompleted() && todo.completed())
         {
-            return found.checked();
+            return false;
         }
-        return false;
-    }
 
-    self.todos = ko.computed(function()
-        {
-            var result = [];
-            for (var i = 0; i < self.allTodos().length; i++)
-            {
-                var todo = self.allTodos()[i];
-                var display = self.displayEverythingElse();
-
-                var subMenuDisplay = false;
-                for (var k = 0; k < todo.projects.length; k++)
-                {
-                    subMenuDisplay = subMenuDisplay || isDisplayed(todo.projects[k], self.projects() );
-                }
-                display = display && subMenuDisplay;
-
-                subMenuDisplay = false;
-                for (var l = 0; l < todo.contexts.length; l++)
-                {
-                    subMenuDisplay = subMenuDisplay || isDisplayed(todo.contexts[l], self.contexts() );
-                }
-                display = display && subMenuDisplay;
-
-                display = display && isDisplayed(todo.priority, self.priorities());
-
-                if (todo.completed())
-                {
-                    display = display && self.displayCompleted();
-                }
-
-                if (display)
-                {
-                    result.push(todo);
-                }
-            }
-
-            return result;
-        })
-        // using throttle otherwise computed get's confused when
-        // showAllToggle is triggered.
-        // this ensures all updates are made, before triggering
-        // a recompute.
-        .extend({throttle: 1});
-
-    self.todoExport = ko.computed( function()
-        {
-            var result = [];
-            for (var i = 0; i < self.allTodos().length; i++)
-            {
-                result.push( self.allTodos().toString() );
-            }
-        });
-
+        return true;
+    };
 
     /************************************************
      * Functions
@@ -267,39 +192,25 @@ function TodoTxtViewModel()
 
     function addPriority(name)
     {
-        if (_.find(self.priorities(), function(menuEntry) { return menuEntry.name() === name; }) === undefined )
+        if (!_.find(self.priorities(), function(val) { return val === name; } ))
         {
-            self.priorities.push(new MenuEntry(name, true));
-            self.priorities.sort(compareMenuEntry);
+            self.priorities.push(name);
+            self.priorities.sort();
         }
     }
 
     function addProjects(projects)
     {
-        for (var i = 0; i < projects.length; i++)
-        {
-            var name = projects[i];
-            if (_.find(self.projects(), function (menuEntry) { return menuEntry.name() === name; }) === undefined )
-            {
-                self.projects.push(new MenuEntry(name, true));
-            }
-        }
-
-        self.projects.sort(compareMenuEntry);
+        var notSeen = _.difference(projects, self.projects());
+        self.projects.push(notSeen);
+        self.projects.sort();
     }
 
     function addContexts(contexts)
     {
-        for (var i = 0; i < contexts.length; i++)
-        {
-            var name = contexts[i];
-            if (_.find(self.contexts(), function (menuEntry) { return menuEntry.name() === name; }) === undefined )
-            {
-                self.contexts.push(new MenuEntry(name, true));
-            }
-        }
-
-        self.contexts.sort(compareMenuEntry);
+        var notSeen = _.difference(contexts, self.contexts());
+        self.projects.push(notSeen);
+        self.projects.sort();
     }
 
     self.addTodo = function(todo)
@@ -315,17 +226,6 @@ function TodoTxtViewModel()
         addContexts(todo.contexts);
     };
 
-    self.showAllToggle = function()
-    {
-        var newSetting = !self.showingAll();
-
-        self.displayCompleted(newSetting);
-        _.each(self.priorities(), function(o) { o.checked(newSetting); });
-        _.each(self.projects(), function(o) { o.checked(newSetting); });
-        _.each(self.contexts(), function(o) { o.checked(newSetting); });
-        self.displayEverythingElse(newSetting);
-    };
-
     self.toggleCompleted = function(todo)
     {
         todo.completed(!todo.completed());
@@ -337,11 +237,6 @@ function TodoTxtViewModel()
         {
             todo.completedDate("");
         }
-    };
-
-    self.toggleMenuItem = function(data)
-    {
-        data.checked( !data.checked() );
     };
 }
 

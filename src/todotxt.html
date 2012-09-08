@@ -15,62 +15,20 @@
         </div>
     </div>
     <h1>Todos</h1>
-    <div class="cssmenu">
-        <ul>
-            <li>
-                <a href="javascript:void(0);" data-bind="click: function() {displayCompleted(!displayCompleted());}">
-                    <span class="menuSelected" data-bind="visible: displayCompleted()">&#x2714;</span>
-                    <span class="menuSelected" data-bind="visible: !displayCompleted()">&nbsp;</span>
-                    <span>Show Completed</span>
-                </a>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:void(0);"><span>Priorities</span></a>
-                <ul data-bind="foreach: priorities">
-                    <li data-bind="css: { selected: checked }">
-                        <a href="javascript:void(0);" data-bind="click: $root.toggleMenuItem">
-                            <span class="menuSelected" data-bind="visible: checked">&#x2714;</span>
-                    <span class="menuSelected" data-bind="visible: !checked">&nbsp;</span>
-                    <span data-bind="text: name"></span>
-                </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:void(0);"><span>Projects</span></a>
-                <ul data-bind="foreach: projects">
-                    <li data-bind="css: { selected: checked }">
-                        <a href="javascript:void(0);" data-bind="click: $root.toggleMenuItem">
-                            <span class="menuSelected" data-bind="visible: checked">&#x2714;</span>
-                            <span class="menuSelected" data-bind="visible: !checked">&nbsp;</span>
-                            <span data-bind="text: name"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:void(0);"><span>Contexts</span></a>
-                <ul data-bind="foreach: contexts">
-                    <li data-bind="css: { selected: checked }">
-                        <a href="javascript:void(0);" data-bind="click: $root.toggleMenuItem">
-                            <span class="menuSelected" data-bind="visible: checked">&#x2714;</span>
-                            <span class="menuSelected" data-bind="visible: !checked">&nbsp;</span>
-                            <span data-bind="text: name"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0);" data-bind="click: showAllToggle">
-                    <span class="menuSelected" data-bind="visible: showingAll">&#x2714;</span>
-                    <span class="menuSelected" data-bind="visible: !showingAll">&nbsp;</span>
-                    <span>Show All</span>
-                </a>
-            </li>
-        </ul>
+    <div class="filters">
+        <h2>Filters</h2>
+        <div class="filterChoice">
+            <label>Show Completed</label>
+            <input type="checkbox" data-bind="checked: showCompleted" />
+        </div>
+        <div class="filterChoice">
+            <label>Priority</label>
+            <select data-bind="options: priorities, value: newPriorityFilter, optionsCaption: 'Choose...'"></select>
+            <button>Add</button>
+        </div>
     </div>
-    <div data-bind="foreach: todos">
-        <div class="todo" data-bind="css: { completed: completed }">
+    <div data-bind="foreach: allTodos">
+        <div class="todo" data-bind="css: { completed: completed }, visible: $root.isDisplayed($data)">
             <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: !completed()">&#x2610;</span>
             <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: completed()">&#x2611;</span>
             <span data-bind="css: { completed: completed }">
