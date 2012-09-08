@@ -14,20 +14,20 @@
             <button data-bind="click: importTodos">Import</button>
         </div>
     </div>
+
     <h1>Todos</h1>
+
     <div class="filters">
-        <h2>Filters</h2>
-        <div class="filterChoice">
-            <label>Show Completed</label>
-            <input type="checkbox" data-bind="checked: showCompleted" />
+        <div><label>Filters</label></div>
+        <div class="showCompleted">
+            <input type="checkbox" data-bind="checked: showCompleted">Show Completed</input>
         </div>
-        <div class="filterChoice">
-            <label>Priority</label>
-            <select data-bind="options: priorities, value: newPriorityFilter, optionsCaption: 'Choose...'"></select>
-            <button>Add</button>
+        <div class="quickFilter">
+            Quick Filter:<input type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'" title="Example: +Project @Context (A)" />
         </div>
     </div>
-    <div data-bind="foreach: allTodos">
+
+    <div class="todos" data-bind="foreach: allTodos">
         <div class="todo" data-bind="css: { completed: completed }, visible: $root.isDisplayed($data)">
             <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: !completed()">&#x2610;</span>
             <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: completed()">&#x2611;</span>

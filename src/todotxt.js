@@ -4,6 +4,22 @@
  *
  **************************************************************/
 
+var TodoHelpers = {
+    extractFlagged: function(text, flag)
+    {
+        var regex = new RegExp("(?:\\s|^)" + flag + "(\\w+)(?=\\s|$)", 'g');
+        var result = [];
+        match = regex.exec(text);
+        while (match !== null)
+        {
+            result.push(match[1].toLowerCase());
+            match = regex.exec(text);
+        }
+
+        return result;
+    }
+};
+
 function Todo(raw)
 {
     self = this;
@@ -58,30 +74,14 @@ function Todo(raw)
         return text;
     }
 
-    function extractProjects(text)
+    function extractProjects()
     {
-        self.projects = [];
-
-        var regex = /(?:\s|^)\+(\w+)(?=\s|$)/g;
-        match = regex.exec(self.message);
-        while (match !== null)
-        {
-            self.projects.push(match[1].toLowerCase());
-            match = regex.exec(self.message);
-        }
+        self.projects = TodoHelpers.extractFlagged(self.message, '\\+');
     }
 
-    function extractContexts(text)
+    function extractContexts()
     {
-        self.contexts = [];
-
-        var regex = /(?:\s|^)@(\w+)(?=\s|$)/g;
-        match = regex.exec(self.message);
-        while (match !== null)
-        {
-            self.contexts.push(match[1].toLowerCase());
-            match = regex.exec(self.message);
-        }
+        self.contexts = TodoHelpers.extractFlagged(self.message, '@');
     }
 
 
@@ -183,7 +183,36 @@ function TodoTxtViewModel()
             return false;
         }
 
-        return true;
+        var result = true;
+        if (self.filtered())
+        {
+            result = true;
+            if (self.filtersProject().length > 0)
+            {
+                if (_.intersection(todo.projects, self.filtersProject()).length == self.filtersProject().length)
+                {
+                    result = result && true;
+                }
+                else
+                {
+                    result = false;
+                }
+            }
+
+            if (self.filtersContext().length > 0)
+            {
+                if (_.intersection(todo.contexts, self.filtersContext()).length == self.filtersContext().length)
+                {
+                    result = result && true;
+                }
+                else
+                {
+                    result = false;
+                }
+            }
+        }
+
+        return result;
     };
 
     /************************************************
@@ -198,6 +227,29 @@ function TodoTxtViewModel()
             self.priorities.sort();
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Filters
+    ////////////////////////////////////////////////////////////////////////////
+
+    self.filters = ko.observable();
+
+    self.filtersProject = ko.computed( function ()
+    {
+        return TodoHelpers.extractFlagged(self.filters(), "\\+");
+    });
+
+    self.filtersContext = ko.computed( function ()
+    {
+        return TodoHelpers.extractFlagged(self.filters(), "@");
+    });
+
+    self.filtered = ko.computed( function()
+    {
+        return self.filtersProject().length > 0 ||
+               self.filtersContext().length > 0;
+    });
+
 
     function addProjects(projects)
     {
