@@ -46,18 +46,20 @@ label:after
 }
 
 div.quickFilter{
-    width: 50%;
+    width: 400px;
     float: right;
+    text-align: right;
 }
 
 .quickFilter > input
 {
-    width: 100%;
+    width: 300px;
     background-color: #6896BB;
     border-color: #436f93;
+    margin-left: 5px;
 }
 
-.importButton
+.importButton, .exportButton
 {
     float: right;
     position: absolute;
@@ -66,6 +68,7 @@ div.quickFilter{
     left: auto;
     bottom: auto;
     height: 20px;
+    width: 110px;
     border-style: solid;
     border-color: #436f93;
     border-width: thin;
@@ -75,13 +78,28 @@ div.quickFilter{
     cursor: pointer;
 }
 
+.exportButton
+{
+    position: absolute;
+    right: 130px;
+    top: 10px;
+    left: auto;
+    bottom: auto;
+}
+
 .importButton.selected
 {
     background-color: #436f93;
     color: #FFFFFF;
 }
 
-.importBox
+.exportButton.selected
+{
+    background-color: #007100;
+    color: #FFFFFF;
+}
+
+.importBox, .exportBox
 {
     float: left;
     position: absolute;
@@ -95,7 +113,12 @@ div.quickFilter{
     text-align: right;
 }
 
-.importBox textarea
+.exportBox
+{
+    background-color: #007100;
+}
+
+.importBox textarea, .exportBox textarea
 {
     margin: 0;
     padding: 0;
@@ -103,25 +126,25 @@ div.quickFilter{
     width: 100%;
 }
 
-.importHelp
+.help
 {
     color: #FFFFFF;
     font-size: small;
 }
 
-.importHelp:after
+.importBox > .help:after
 {
     content: " \2192";
 }
 
-.importWarning
+.warning
 {
     font-size: small;
     color: #FF8282;
     font-weight: bold;
 }
 
-.importBox button
+.importBox button, .exportBox button
 {
     height: 22px;
     margin-top: 3px;

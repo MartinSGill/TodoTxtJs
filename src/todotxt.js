@@ -88,18 +88,18 @@ function Todo(raw)
     self.toString = function()
     {
         result = "";
-        if (self.completed())
+        if (this.completed())
         {
             result += "x ";
-            result += self.completedDate() + " ";
+            result += this.completedDate() + " ";
         }
 
-        if (self.Priority !== null)
+        if (this.Priority !== null)
         {
-            result += "(" + self.priority + ") ";
+            result += "(" + this.priority + ") ";
         }
 
-        result += self.message;
+        result += this.message;
         return result;
     };
 
@@ -142,6 +142,7 @@ function TodoTxtViewModel()
 
         self.showImportBox = function()
         {
+            parent.exporting.exportingTodos(false);
             self.importingTodos(!self.importingTodos());
         };
 
@@ -157,20 +158,48 @@ function TodoTxtViewModel()
         };
     }
 
+    function Exporting(parent)
+    {
+        var self = this;
+        self.exportingTodos = ko.observable(false);
+        self.exportText = ko.observable("");
+
+        self.showExportBox = function()
+        {
+            parent.importing.importingTodos(false);
+            self.exportingTodos(!self.exportingTodos());
+            if (self.exportingTodos())
+            {
+                var result = "";
+                for (var i = 0; i < parent.allTodos().length; i++)
+                {
+                    if (i > 0)
+                    {
+                        result += "\n";
+                    }
+                    result += parent.allTodos()[i].toString();
+                }
+
+                self.exportText(result);
+            }
+        };
+   }
+
     /************************************************
      * Observables
      ***********************************************/
 
-    self.importing              = new Importing(self);
+    self.importing = new Importing(self);
+    self.exporting = new Exporting(self);
 
-    self.allTodos               = ko.observableArray([]);
-    self.priorities             = ko.observableArray([]);
-    self.projects               = ko.observableArray([]);
-    self.contexts               = ko.observableArray([]);
+    self.allTodos = ko.observableArray([]);
+    self.priorities = ko.observableArray([]);
+    self.projects = ko.observableArray([]);
+    self.contexts = ko.observableArray([]);
 
-    self.showCompleted          = ko.observable(true);
+    self.showCompleted = ko.observable(true);
 
-    self.newPriorityFilter      = ko.observable();
+    self.newPriorityFilter = ko.observable();
 
     /************************************************
      * Computed

@@ -10,11 +10,17 @@
         <div class="importBox" data-bind="visible: importingTodos">
             <textarea  data-bind="value: importText"></textarea>
 
-            <span class="importHelp">Paste or write your Todos into the text box and click import. <span class="importWarning">This will delete existing Todos.</span></span>
+            <span class="help">Paste or write your Todos into the text box and click import. <span class="warning">This will delete existing Todos.</span></span>
             <button data-bind="click: importTodos">Import</button>
         </div>
     </div>
-
+    <div data-bind="with: exporting">
+        <button class="exportButton" data-bind="css: { selected: exportingTodos }, click: showExportBox">Export Todos</button>
+        <div class="exportBox" data-bind="visible: exportingTodos">
+            <textarea  data-bind="value: exportText"></textarea>
+            <span class="help">Copy the text and save it into a text file.</span>
+        </div>
+    </div>
     <h1>Todos</h1>
 
     <div class="filters">
