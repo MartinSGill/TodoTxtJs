@@ -97,7 +97,7 @@ function Todo(raw)
             result += this.completedDate() + " ";
         }
 
-        if (this.Priority !== null)
+        if (this.Priority)
         {
             result += "(" + this.priority + ") ";
         }
@@ -134,6 +134,7 @@ function TodoTxtViewModel()
     self.version = ko.observable("0.1");
 
     self.allTodos = ko.observableArray([]);
+
     self.priorities = ko.observableArray([]);
     self.projects = ko.observableArray([]);
     self.contexts = ko.observableArray([]);
@@ -179,23 +180,28 @@ function TodoTxtViewModel()
         self.exportingTodos = ko.observable(false);
         self.exportText = ko.observable("");
 
+        self.buildExportText = function()
+        {
+            var result = "";
+            for (var i = 0; i < parent.allTodos().length; i++)
+            {
+                if (i > 0)
+                {
+                    result += "\n";
+                }
+                result += parent.allTodos()[i].toString();
+            }
+
+            return result;
+        };
+
         self.showExportBox = function()
         {
             parent.importing.importingTodos(false);
             self.exportingTodos(!self.exportingTodos());
             if (self.exportingTodos())
             {
-                var result = "";
-                for (var i = 0; i < parent.allTodos().length; i++)
-                {
-                    if (i > 0)
-                    {
-                        result += "\n";
-                    }
-                    result += parent.allTodos()[i].toString();
-                }
-
-                self.exportText(result);
+                self.exportText(self.buildExportText());
             }
         };
    }
@@ -328,15 +334,38 @@ function TodoTxtViewModel()
         addContexts(todo.contexts);
     };
 
+    self.save = function()
+    {
+        if(typeof(Storage) !== "undefined")
+        {
+            localStorage.todos = self.exporting.buildExportText();
+        }
+        else
+        {
+            // Sorry! No web storage support..
+        }
+    };
+
+    self.load = function()
+    {
+        if(typeof(Storage) !== "undefined")
+        {
+            if (localStorage.todos)
+            {
+                self.importing.importText(localStorage.todos);
+                self.importing.importTodos();
+            }
+        }
+        else
+        {
+            // Sorry! No web storage support..
+        }
+    };
+
+    self.load();
 }
 
-var TodoTxtView = new TodoTxtViewModel();
-ko.applyBindings(TodoTxtView, document.head);
-ko.applyBindings(TodoTxtView);
+var todoTxtView = new TodoTxtViewModel();
+ko.applyBindings(todoTxtView, document.head);
+ko.applyBindings(todoTxtView);
 
-// Test Data
-TodoTxtView.addTodo(new Todo("(A) This is a +project for @home"));
-TodoTxtView.addTodo(new Todo("(A) This is a +project +anotherProject for @home"));
-TodoTxtView.addTodo(new Todo("(A) This is a +project for @home, @email"));
-TodoTxtView.addTodo(new Todo("x 2012-12-12 (A) This is a +project2 for @home"));
-TodoTxtView.addTodo(new Todo("x 2012-12-12 (A) This is a +project3 for @home"));

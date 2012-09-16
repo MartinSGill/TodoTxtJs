@@ -4,7 +4,7 @@
     <title data-bind="text: title">My TodoTxt</title>
     <link rel="stylesheet" href="todotxt.css">
 </head>
-<body>
+<body onunload="todoTxtView.save()">
     <div data-bind="with: importing">
         <button class="importButton" data-bind="css: { selected: importingTodos }, click: showImportBox">Import Todos</button>
         <div class="importBox" data-bind="visible: importingTodos">
