@@ -1,8 +1,7 @@
-/***************************************************************
- *
- * Todo Object
- *
- **************************************************************/
+
+////////////////////////////////////////////////////////////////////////////
+// Todo Helpers
+////////////////////////////////////////////////////////////////////////////
 
 var TodoHelpers = {
     extractFlagged: function(text, flag)
@@ -19,6 +18,10 @@ var TodoHelpers = {
         return result;
     }
 };
+
+////////////////////////////////////////////////////////////////////////////
+// Todo Class
+////////////////////////////////////////////////////////////////////////////
 
 function Todo(raw)
 {
@@ -115,24 +118,36 @@ function Todo(raw)
     extractContexts();
 }
 
-/**************************************************************
- *
- * Main View Model
- *
- *************************************************************/
+////////////////////////////////////////////////////////////////////////////
+// Main View Model
+////////////////////////////////////////////////////////////////////////////
 
 function TodoTxtViewModel()
 {
-
-    /************************************************
-     * Normal Properties
-     ***********************************************/
-
     var self = this;
 
     /************************************************
      * Inner Constructors
      ***********************************************/
+
+    self.title = ko.observable("TodoTxtJS");
+    self.version = ko.observable("0.1");
+
+    self.allTodos = ko.observableArray([]);
+    self.priorities = ko.observableArray([]);
+    self.projects = ko.observableArray([]);
+    self.contexts = ko.observableArray([]);
+
+    self.showCompleted = ko.observable(true);
+
+    self.newPriorityFilter = ko.observable();
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Import / Export
+    ////////////////////////////////////////////////////////////////////////////
+
+    self.importing = new Importing(self);
+    self.exporting = new Exporting(self);
 
     function Importing(parent)
     {
@@ -185,25 +200,37 @@ function TodoTxtViewModel()
         };
    }
 
-    /************************************************
-     * Observables
-     ***********************************************/
+    ////////////////////////////////////////////////////////////////////////////
+    // Build Helper Arrays
+    ////////////////////////////////////////////////////////////////////////////
 
-    self.importing = new Importing(self);
-    self.exporting = new Exporting(self);
+    function addPriority(name)
+    {
+        if (!_.find(self.priorities(), function(val) { return val === name; } ))
+        {
+            self.priorities.push(name);
+            self.priorities.sort();
+        }
+    }
 
-    self.allTodos = ko.observableArray([]);
-    self.priorities = ko.observableArray([]);
-    self.projects = ko.observableArray([]);
-    self.contexts = ko.observableArray([]);
+    function addProjects(projects)
+    {
+        var notSeen = _.difference(projects, self.projects());
+        self.projects.push(notSeen);
+        self.projects.sort();
+    }
 
-    self.showCompleted = ko.observable(true);
+    function addContexts(contexts)
+    {
+        var notSeen = _.difference(contexts, self.contexts());
+        self.projects.push(notSeen);
+        self.projects.sort();
+    }
 
-    self.newPriorityFilter = ko.observable();
 
-    /************************************************
-     * Computed
-     ***********************************************/
+    ////////////////////////////////////////////////////////////////////////////
+    // Filters
+    ////////////////////////////////////////////////////////////////////////////
 
     self.isDisplayed = function(todo)
     {
@@ -244,23 +271,6 @@ function TodoTxtViewModel()
         return result;
     };
 
-    /************************************************
-     * Functions
-     ***********************************************/
-
-    function addPriority(name)
-    {
-        if (!_.find(self.priorities(), function(val) { return val === name; } ))
-        {
-            self.priorities.push(name);
-            self.priorities.sort();
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Filters
-    ////////////////////////////////////////////////////////////////////////////
-
     self.filters = ko.observable();
 
     self.filtersProject = ko.computed( function ()
@@ -280,19 +290,30 @@ function TodoTxtViewModel()
     });
 
 
-    function addProjects(projects)
+    self.toggleCompleted = function(todo)
     {
-        var notSeen = _.difference(projects, self.projects());
-        self.projects.push(notSeen);
-        self.projects.sort();
-    }
+        todo.completed(!todo.completed());
+        if (todo.completed())
+        {
+            todo.completedDate($.datepicker.formatDate('yy-mm-dd', new Date()));
+        }
+        else
+        {
+            todo.completedDate("");
+        }
+    };
 
-    function addContexts(contexts)
+    ////////////////////////////////////////////////////////////////////////////
+    // TODO Management
+    ////////////////////////////////////////////////////////////////////////////
+
+    self.newTodoText = ko.observable("");
+
+    self.addNewTodo = function()
     {
-        var notSeen = _.difference(contexts, self.contexts());
-        self.projects.push(notSeen);
-        self.projects.sort();
-    }
+        self.addTodo(new Todo(self.newTodoText()));
+        self.newTodoText("");
+    };
 
     self.addTodo = function(todo)
     {
@@ -307,21 +328,10 @@ function TodoTxtViewModel()
         addContexts(todo.contexts);
     };
 
-    self.toggleCompleted = function(todo)
-    {
-        todo.completed(!todo.completed());
-        if (todo.completed())
-        {
-            todo.completedDate($.datepicker.formatDate('yy-mm-dd', new Date()));
-        }
-        else
-        {
-            todo.completedDate("");
-        }
-    };
 }
 
 var TodoTxtView = new TodoTxtViewModel();
+ko.applyBindings(TodoTxtView, document.head);
 ko.applyBindings(TodoTxtView);
 
 // Test Data

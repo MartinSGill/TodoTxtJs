@@ -23,6 +23,45 @@ label:after
     content: ": ";
 }
 
+footer
+{
+    background-color: #FAFFB3;
+
+    border-color: #F0FF33;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 5px;
+
+    text-align: center;
+    font-size: 8pt;
+    font-family: sans-serif;
+
+    margin-top: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.addTodo
+{
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    border-style: ridge;
+    border-width: thin;
+    border-color: black;
+    background-color: #436f93;
+    color:white;
+    padding-left: 15px;
+}
+
+.addTodo > input
+{
+    width: 50%;
+}
+
+
 .filters
 {
     margin-left: 25px;

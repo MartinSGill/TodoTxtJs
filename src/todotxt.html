@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html>
 <head>
-    <title>My TodoTxt</title>
+    <title data-bind="text: title">My TodoTxt</title>
     <link rel="stylesheet" href="todotxt.css">
 </head>
 <body>
@@ -21,8 +21,11 @@
             <span class="help">Copy the text and save it into a text file.</span>
         </div>
     </div>
-    <h1>Todos</h1>
-
+    <h1 data-bind="text: title"></h1>
+    <div class="addTodo">
+        <input type="text" data-bind="value: newTodoText">
+        <button data-bind="click: addNewTodo">Add</button>
+    </div>
     <div class="filters">
         <div><label>Filters</label></div>
         <div class="showCompleted">
@@ -45,6 +48,11 @@
             </span>
         </div>
     </div>
+    <footer>
+        <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
+        <div><label>Privacy</label> This page sends no data to any other server. All data is stored in your own browser.<div>
+        <div class="copyright">Copyright &copy; 2012, Martin Gill. All rights reserved.<div>
+    </footer>
 </body>
 <script src="knockoutjs-2.1.0.js" type="text/javascript"></script>
 <script src="jquery-1.8.0.min.js" type="text/javascript"></script>
