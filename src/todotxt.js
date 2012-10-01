@@ -97,7 +97,7 @@ function Todo(raw)
             result += this.completedDate() + " ";
         }
 
-        if (this.Priority)
+        if (this.priority != null)
         {
             result += "(" + this.priority + ") ";
         }
