@@ -238,6 +238,42 @@ function TodoTxtViewModel()
     // Filters
     ////////////////////////////////////////////////////////////////////////////
 
+    self.filters = ko.observable();
+
+    self.filtersProject = ko.computed( function ()
+    {
+        return TodoHelpers.extractFlagged(self.filters(), "\\+");
+    });
+
+    self.filtersContext = ko.computed( function ()
+    {
+        return TodoHelpers.extractFlagged(self.filters(), "@");
+    });
+
+    self.filtered = ko.computed( function()
+    {
+        return self.filtersProject().length > 0 ||
+               self.filtersContext().length > 0;
+    });
+
+
+    self.toggleCompleted = function(todo)
+    {
+        todo.completed(!todo.completed());
+        if (todo.completed())
+        {
+            todo.completedDate($.datepicker.formatDate('yy-mm-dd', new Date()));
+        }
+        else
+        {
+            todo.completedDate("");
+        }
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Display
+    ////////////////////////////////////////////////////////////////////////////
+
     self.isDisplayed = function(todo)
     {
         if (!self.showCompleted() && todo.completed())
@@ -277,37 +313,34 @@ function TodoTxtViewModel()
         return result;
     };
 
-    self.filters = ko.observable();
-
-    self.filtersProject = ko.computed( function ()
+    var sortTodos = function(todo)
     {
-        return TodoHelpers.extractFlagged(self.filters(), "\\+");
-    });
-
-    self.filtersContext = ko.computed( function ()
-    {
-        return TodoHelpers.extractFlagged(self.filters(), "@");
-    });
-
-    self.filtered = ko.computed( function()
-    {
-        return self.filtersProject().length > 0 ||
-               self.filtersContext().length > 0;
-    });
-
-
-    self.toggleCompleted = function(todo)
-    {
-        todo.completed(!todo.completed());
-        if (todo.completed())
+        var result = 0;
+        if (todo.priority === null)
         {
-            todo.completedDate($.datepicker.formatDate('yy-mm-dd', new Date()));
+            result += 1000;
         }
         else
         {
-            todo.completedDate("");
+            result += todo.priority.charCodeAt(0);
         }
+
+        return result;
     };
+
+    self.displayedTodos = ko.computed( function()
+    {
+        var todos = [];
+        for (var i = 0; i < self.allTodos().length; i++)
+        {
+            if (self.isDisplayed(self.allTodos()[i]))
+            {
+                todos.push(self.allTodos()[i]);
+            }
+        }
+
+        return _.sortBy(todos, sortTodos);
+    });
 
     ////////////////////////////////////////////////////////////////////////////
     // TODO Management

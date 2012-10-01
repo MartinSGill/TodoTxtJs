@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="todos" data-bind="foreach: allTodos">
+    <div class="todos" data-bind="foreach: displayedTodos">
         <div class="todo" data-bind="css: { completed: completed }, visible: $root.isDisplayed($data)">
             <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: !completed()">&#x2610;</span>
             <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: completed()">&#x2611;</span>
