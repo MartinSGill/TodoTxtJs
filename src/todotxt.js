@@ -154,7 +154,7 @@ function TodoTxtViewModel()
     self.projects = ko.observableArray([]);
     self.contexts = ko.observableArray([]);
 
-    self.showCompleted = ko.observable(true);
+    self.showCompleted = ko.observable(false);
 
     self.newPriorityFilter = ko.observable();
 
