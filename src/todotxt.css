@@ -30,7 +30,7 @@ footer
 {
     background-color: #582C7C;
 
-    color: #000000;
+    color: #9069B0;
 
     border-color: #734896;
     border-style: solid;
@@ -269,11 +269,15 @@ div.completed
 
 .priority
 {
-    color: #E7CB83;
-    background-color: #267469;
+    color: #FFFFFF;
+    background-color: #000000;
     text-align: center;
     display: inline-block;
-    width: 1.5em;
+    width: 1.2em;
+    border-color: #267469;
+    border-style: solid;
+    border-width: medium;
+    border-radius: 5px;
 }
 
 .priorityBrace
@@ -311,3 +315,30 @@ div.completed
     padding-left: 3px;
     padding-right: 3px;
 }
+
+.A
+{
+    color: #FF0000;
+}
+
+.B
+{
+    color: #FF8000;
+}
+
+.C
+{
+    color: #FFFF00;
+}
+
+.D
+{
+    color: #00FF00;
+}
+
+.E
+{
+    color: #0080FF;
+}
+
+

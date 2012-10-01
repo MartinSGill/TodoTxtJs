@@ -16,6 +16,21 @@ var TodoHelpers = {
         }
 
         return result;
+    },
+
+    extractPriority: function(text)
+    {
+        var regex = new RegExp("\\(([A-Z])\\)", "g");
+        var result = [];
+        match = regex.exec(text);
+
+        while (match !== null)
+        {
+            result.push(match[1]);
+            match = regex.exec(text);
+        }
+
+        return result;
     }
 };
 
@@ -131,7 +146,7 @@ function TodoTxtViewModel()
      ***********************************************/
 
     self.title = ko.observable("TodoTxtJS");
-    self.version = ko.observable("0.1");
+    self.version = ko.observable("0.2");
 
     self.allTodos = ko.observableArray([]);
 
@@ -250,10 +265,16 @@ function TodoTxtViewModel()
         return TodoHelpers.extractFlagged(self.filters(), "@");
     });
 
+    self.filtersPriority = ko.computed( function()
+    {
+        return TodoHelpers.extractPriority(self.filters());
+    });
+
     self.filtered = ko.computed( function()
     {
         return self.filtersProject().length > 0 ||
-               self.filtersContext().length > 0;
+               self.filtersContext().length > 0 ||
+               self.filtersPriority().length > 0;
     });
 
 
@@ -308,6 +329,18 @@ function TodoTxtViewModel()
                     result = false;
                 }
             }
+
+            if (self.filtersPriority().length > 0)
+            {
+                if (_.indexOf(self.filtersPriority(), todo.priority) >= 0)
+                {
+                    result = result && true;
+                }
+                else
+                {
+                    result = false;
+                }
+            }
         }
 
         return result;
@@ -323,6 +356,11 @@ function TodoTxtViewModel()
         else
         {
             result += todo.priority.charCodeAt(0);
+        }
+
+        if (todo.completed())
+        {
+            result += 5000;
         }
 
         return result;

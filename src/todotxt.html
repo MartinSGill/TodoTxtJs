@@ -43,7 +43,11 @@
             <span data-bind="css: { completed: completed }">
                 <span class="completedFlag" data-bind="visible: completed()">x</span>
                 <span class="completedDate" data-bind="text: completedDate(), visible: completed()"></span>
-                <span class="priorityBrace" data-bind="visible: priority != null">(</span><span class="priority" data-bind="text: priority, visible: priority != null"></span><span class="priorityBrace" data-bind="visible: priority != null">)</span>
+                <span class="priorityBrace" data-bind="visible: priority != null">(</span>
+                <span class="priority" data-bind="visible: priority != null">
+                    <span data-bind="text: priority, attr: { 'class': priority }"></span>
+                </span>
+                <span class="priorityBrace" data-bind="visible: priority != null">)</span>
                 <span class="message" data-bind="html: formatted"></span>
             </span>
         </div>
