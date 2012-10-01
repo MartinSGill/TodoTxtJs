@@ -2,14 +2,17 @@
 
 body
 {
-    color: #000000;
-    background-color: #FDFFE8;
+    color: #FFFFFF;
+    background-color: #000000;
     font-size: 16pt;
 }
 
 h1
 {
     clear: both;
+    padding-left: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 label
@@ -25,9 +28,11 @@ label:after
 
 footer
 {
-    background-color: #FAFFB3;
+    background-color: #582C7C;
 
-    border-color: #F0FF33;
+    color: #000000;
+
+    border-color: #734896;
     border-style: solid;
     border-width: thin;
     border-radius: 5px;
@@ -46,19 +51,24 @@ footer
     margin-left: 25px;
     margin-right: 25px;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     border-radius: 20px;
     border-style: ridge;
     border-width: thin;
     border-color: black;
-    background-color: #436f93;
-    color:white;
+    background-color: #582C7C;
+    color: #000000;
     padding-left: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .addTodo > input
 {
     width: 50%;
+    background-color: #267469;
+    color: #FFFFFF;
+    border: none;
 }
 
 
@@ -66,12 +76,20 @@ footer
 {
     margin-left: 25px;
     margin-right: 25px;
+    margin-top: 0;
     border-radius: 20px;
     border-style: ridge;
     border-width: thin;
     border-color: black;
-    background-color: #436f93;
+    background-color: #582C7C;
     color:white;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.filters label
+{
+    color: #8C60B0;
 }
 
 .filters > div
@@ -93,9 +111,10 @@ div.quickFilter{
 .quickFilter > input
 {
     width: 300px;
-    background-color: #6896BB;
-    border-color: #436f93;
+    background-color: #267469;
+    border: none;
     margin-left: 5px;
+    color: #FFFFFF;
 }
 
 .importButton, .exportButton
@@ -109,7 +128,6 @@ div.quickFilter{
     height: 20px;
     width: 110px;
     border-style: solid;
-    border-color: #436f93;
     border-width: thin;
     vertical-align: middle;
     text-align: center;
@@ -124,18 +142,25 @@ div.quickFilter{
     top: 10px;
     left: auto;
     bottom: auto;
+    border-color: #8C60B0;
 }
+
+.importButton
+{
+    border-color: #60A99F;
+}
+
 
 .importButton.selected
 {
-    background-color: #436f93;
-    color: #FFFFFF;
+    background-color: #267469;
+    color: #000000;
 }
 
 .exportButton.selected
 {
-    background-color: #007100;
-    color: #FFFFFF;
+    background-color: #734896;
+    color: #000000;
 }
 
 .importBox, .exportBox
@@ -147,18 +172,20 @@ div.quickFilter{
     width: 60%;
     height: 425px;
     z-index: 1000;
-    background-color: #436f93;
+    background-color: #267469;
     padding: 5px;
     text-align: right;
 }
 
 .exportBox
 {
-    background-color: #007100;
+    background-color: #734896;
 }
 
 .importBox textarea, .exportBox textarea
 {
+    color: #FFFFFF;
+    background-color: #000000;
     margin: 0;
     padding: 0;
     height: 400px;
@@ -167,7 +194,7 @@ div.quickFilter{
 
 .help
 {
-    color: #FFFFFF;
+    color: #000000;
     font-size: small;
 }
 
@@ -199,9 +226,10 @@ div.quickFilter{
 {
     border-style: groove;
     border-width: thin;
-    border-color: #03419C;
+    color: #000000;
+    border-color: #E7CB83;
     border-radius: 5px;
-    background-color: #A2C6FD;
+    background-color: #B8963D;
     padding: 3px;
     margin: 3px;
     margin-left: 15px;
@@ -217,7 +245,8 @@ div.quickFilter{
 
 div.completed
 {
-    background-color: #C0C0C0;
+    background-color: #626262;
+    border-color: #787878;
 }
 
 .completed
@@ -240,8 +269,8 @@ div.completed
 
 .priority
 {
-    color: #006742;
-    background-color: white;
+    color: #E7CB83;
+    background-color: #267469;
     text-align: center;
     display: inline-block;
     width: 1.5em;
@@ -257,24 +286,24 @@ div.completed
 {
     font-size: small;
     margin-left: 0.5em;
-    color: #4E41D1;
+    color: #267469;
 }
 
 .context
 {
-    color: #4E41D1;
+    color: #267469;
 }
 
 .projectFlag
 {
-    color: #0D58A6;
+    color: #582C7C;
     font-size: small;
     margin-left: 0.5em;
 }
 
 .project
 {
-    color: #0D58A6;
+    color: #582C7C;
 }
 
 .message
