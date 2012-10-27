@@ -1,14 +1,14 @@
-
 ////////////////////////////////////////////////////////////////////////////
 // Todo Helpers
 ////////////////////////////////////////////////////////////////////////////
 
-var TodoHelpers = {
-    extractFlagged: function(text, flag)
+var TodoHelpers =
+{
+    extractFlagged:function(text, flag)
     {
         var regex = new RegExp("(?:\\s|^)" + flag + "(\\w+)(?=\\s|$)", 'g');
         var result = [];
-        match = regex.exec(text);
+        var match = regex.exec(text);
         while (match !== null)
         {
             result.push(match[1].toLowerCase());
@@ -18,11 +18,11 @@ var TodoHelpers = {
         return result;
     },
 
-    extractPriority: function(text)
+    extractPriority:function(text)
     {
         var regex = new RegExp("\\(([A-Z])\\)", "g");
         var result = [];
-        match = regex.exec(text);
+        var match = regex.exec(text);
 
         while (match !== null)
         {
@@ -33,105 +33,6 @@ var TodoHelpers = {
         return result;
     }
 };
-
-////////////////////////////////////////////////////////////////////////////
-// Todo Class
-////////////////////////////////////////////////////////////////////////////
-
-function Todo(raw)
-{
-    self = this;
-
-    function buildHtml()
-    {
-        formattedMessage = self.message;
-
-        var contextRegex = /\s(@)(\w+)(?=\W|$)/g;
-        formattedMessage = formattedMessage.replace(contextRegex,
-                 '<span class="contextFlag">$1</span><span class="context">$2</span>');
-
-
-        var projectRegex = /\s(\+)(\w+)(?=\W|$)/g;
-        formattedMessage = formattedMessage.replace(projectRegex,
-                 '<span class="projectFlag">$1</span><span class="project">$2</span>');
-
-        return formattedMessage;
-    }
-
-    function extractCompleted(text)
-    {
-        var completedRegex = /^(x )(((19|20)[0-9]{2}[\-](0[1-9]|1[012])[\-](0[1-9]|[12][0-9]|3[01])\s)?)/;
-        var match = completedRegex.exec(text);
-        if (match !== null)
-        {
-            self.completed = ko.observable(true);
-            self.completedDate = ko.observable(match[2]);
-            text = $.trim(text.replace(completedRegex, ''));
-        }
-        else
-        {
-            self.completed = ko.observable(false);
-            self.completedDate = ko.observable("");
-        }
-        return text;
-    }
-
-    function extractPriority(text)
-    {
-        var priorityRegex = /^\(([A-Z])\)\s/;
-        match = priorityRegex.exec(text);
-        if (match !== null)
-        {
-            self.priority = match[1];
-            text = $.trim(text.replace(priorityRegex, ''));
-        }
-        else
-        {
-            self.priority = null;
-        }
-        return text;
-    }
-
-    function extractProjects()
-    {
-        self.projects = TodoHelpers.extractFlagged(self.message, '\\+');
-    }
-
-    function extractContexts()
-    {
-        self.contexts = TodoHelpers.extractFlagged(self.message, '@');
-    }
-
-
-    self.toString = function()
-    {
-        result = "";
-        if (this.completed())
-        {
-            result += "x ";
-            result += this.completedDate() + " ";
-        }
-
-        if (this.priority != null)
-        {
-            result += "(" + this.priority + ") ";
-        }
-
-        result += this.message;
-        return result;
-    };
-
-    workingData = raw;
-    workingData = extractCompleted(workingData);
-    workingData = extractPriority(workingData);
-
-    self.raw = raw;
-    self.message = workingData;
-    self.formatted = buildHtml();
-
-    extractProjects();
-    extractContexts();
-}
 
 ////////////////////////////////////////////////////////////////////////////
 // Main View Model
@@ -219,7 +120,7 @@ function TodoTxtViewModel()
                 self.exportText(self.buildExportText());
             }
         };
-   }
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     // Build Helper Arrays
@@ -227,7 +128,10 @@ function TodoTxtViewModel()
 
     function addPriority(name)
     {
-        if (!_.find(self.priorities(), function(val) { return val === name; } ))
+        if (!_.find(self.priorities(), function(val)
+        {
+            return val === name;
+        }))
         {
             self.priorities.push(name);
             self.priorities.sort();
@@ -248,35 +152,33 @@ function TodoTxtViewModel()
         self.projects.sort();
     }
 
-
     ////////////////////////////////////////////////////////////////////////////
     // Filters
     ////////////////////////////////////////////////////////////////////////////
 
     self.filters = ko.observable();
 
-    self.filtersProject = ko.computed( function ()
-    {
-        return TodoHelpers.extractFlagged(self.filters(), "\\+");
-    });
+    self.filtersProject = ko.computed(function()
+                                      {
+                                          return TodoHelpers.extractFlagged(self.filters(), "\\+");
+                                      });
 
-    self.filtersContext = ko.computed( function ()
-    {
-        return TodoHelpers.extractFlagged(self.filters(), "@");
-    });
+    self.filtersContext = ko.computed(function()
+                                      {
+                                          return TodoHelpers.extractFlagged(self.filters(), "@");
+                                      });
 
-    self.filtersPriority = ko.computed( function()
-    {
-        return TodoHelpers.extractPriority(self.filters());
-    });
+    self.filtersPriority = ko.computed(function()
+                                       {
+                                           return TodoHelpers.extractPriority(self.filters());
+                                       });
 
-    self.filtered = ko.computed( function()
-    {
-        return self.filtersProject().length > 0 ||
-               self.filtersContext().length > 0 ||
-               self.filtersPriority().length > 0;
-    });
-
+    self.filtered = ko.computed(function()
+                                {
+                                    return self.filtersProject().length > 0 ||
+                                           self.filtersContext().length > 0 ||
+                                           self.filtersPriority().length > 0;
+                                });
 
     self.toggleCompleted = function(todo)
     {
@@ -308,7 +210,7 @@ function TodoTxtViewModel()
             result = true;
             if (self.filtersProject().length > 0)
             {
-                if (_.intersection(todo.projects, self.filtersProject()).length == self.filtersProject().length)
+                if (_.intersection(todo.projects, self.filtersProject()).length === self.filtersProject().length)
                 {
                     result = result && true;
                 }
@@ -320,7 +222,7 @@ function TodoTxtViewModel()
 
             if (self.filtersContext().length > 0)
             {
-                if (_.intersection(todo.contexts, self.filtersContext()).length == self.filtersContext().length)
+                if (_.intersection(todo.contexts, self.filtersContext()).length === self.filtersContext().length)
                 {
                     result = result && true;
                 }
@@ -366,19 +268,19 @@ function TodoTxtViewModel()
         return result;
     };
 
-    self.displayedTodos = ko.computed( function()
-    {
-        var todos = [];
-        for (var i = 0; i < self.allTodos().length; i++)
-        {
-            if (self.isDisplayed(self.allTodos()[i]))
-            {
-                todos.push(self.allTodos()[i]);
-            }
-        }
+    self.displayedTodos = ko.computed(function()
+                                      {
+                                          var todos = [];
+                                          for (var i = 0; i < self.allTodos().length; i++)
+                                          {
+                                              if (self.isDisplayed(self.allTodos()[i]))
+                                              {
+                                                  todos.push(self.allTodos()[i]);
+                                              }
+                                          }
 
-        return _.sortBy(todos, sortTodos);
-    });
+                                          return _.sortBy(todos, sortTodos);
+                                      });
 
     ////////////////////////////////////////////////////////////////////////////
     // TODO Management
@@ -407,29 +309,21 @@ function TodoTxtViewModel()
 
     self.save = function()
     {
-        if(typeof(Storage) !== "undefined")
+        if (typeof(Storage) !== "undefined")
         {
             localStorage.todos = self.exporting.buildExportText();
-        }
-        else
-        {
-            // Sorry! No web storage support..
         }
     };
 
     self.load = function()
     {
-        if(typeof(Storage) !== "undefined")
+        if (typeof(Storage) !== "undefined")
         {
             if (localStorage.todos)
             {
                 self.importing.importText(localStorage.todos);
                 self.importing.importTodos();
             }
-        }
-        else
-        {
-            // Sorry! No web storage support..
         }
     };
 

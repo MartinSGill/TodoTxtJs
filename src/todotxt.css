@@ -286,6 +286,12 @@ div.completed
     display: none;
 }
 
+.createDate
+{
+    color: #005B88;
+    font-size: smaller;
+}
+
 .contextFlag
 {
     font-size: small;
