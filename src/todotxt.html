@@ -5,7 +5,13 @@
     <link rel="stylesheet" href="todotxt.css">
 </head>
 <body onunload="todoTxtView.save()">
-    <div data-bind="with: importing">
+    <div data-bind="with: options">
+        <button class="optionsButton" data-bind="css: { selected: showingOptions }, click: showOptionsBox">Import Todos</button>
+        <div class="optionsBox" data-bind="visible: showingOptions">
+            <input type="checkbox" data-bind="checked: useDropbox"/><label class="option">Use Dropbox.</label>
+        </div>
+    </div>
+    <div data-bind="with: importing, visible: !options.useDropbox()">
         <button class="importButton" data-bind="css: { selected: importingTodos }, click: showImportBox">Import Todos</button>
         <div class="importBox" data-bind="visible: importingTodos">
             <textarea  data-bind="value: importText"></textarea>
@@ -14,7 +20,7 @@
             <button data-bind="click: importTodos">Import</button>
         </div>
     </div>
-    <div data-bind="with: exporting">
+    <div data-bind="with: exporting, visible: !options.useDropbox()">
         <button class="exportButton" data-bind="css: { selected: exportingTodos }, click: showExportBox">Export Todos</button>
         <div class="exportBox" data-bind="visible: exportingTodos">
             <textarea  data-bind="value: exportText"></textarea>

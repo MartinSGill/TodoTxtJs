@@ -47,7 +47,7 @@ function TodoTxtViewModel()
      ***********************************************/
 
     self.title = ko.observable("TodoTxtJS");
-    self.version = ko.observable("0.2");
+    self.version = ko.observable("0.3");
 
     self.allTodos = ko.observableArray([]);
 
@@ -58,6 +58,63 @@ function TodoTxtViewModel()
     self.showCompleted = ko.observable(false);
 
     self.newPriorityFilter = ko.observable();
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Options
+    ////////////////////////////////////////////////////////////////////////////
+    self.options = new Options(self);
+
+    function Options(parent)
+    {
+        var self = this;
+
+        ///////////////////////////
+        // Options
+        ///////////////////////////
+        self.useDropbox = ko.observable(false);
+
+        ///////////////////////////
+        // Control
+        ///////////////////////////
+        self.showingOptions = ko.observable(false);
+
+        self.showOptionsBox = function()
+        {
+            parent.exporting.hide();
+            parent.importing.hide();
+            self.showingOptions(!self.showingOptions());
+            if (!self.showingOptions())
+            {
+                self.save();
+                if (self.useDropbox())
+                {
+                    parent.load();
+                }
+            }
+        };
+
+        self.hide = function()
+        {
+            self.showingOptions(false);
+        };
+
+        self.save = function()
+        {
+            localStorage.TodoTxtJsOptions = ko.toJSON(self);
+        };
+
+        self.load = function()
+        {
+            if (localStorage.TodoTxtJsOptions)
+            {
+                var options = JSON.parse(localStorage.TodoTxtJsOptions);
+                if (options.hasOwnProperty("useDropbox"))
+                {
+                    self.useDropbox(options.useDropbox);
+                }
+            }
+        };
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     // Import / Export
@@ -74,7 +131,8 @@ function TodoTxtViewModel()
 
         self.showImportBox = function()
         {
-            parent.exporting.exportingTodos(false);
+            parent.exporting.hide();
+            parent.options.hide();
             self.importingTodos(!self.importingTodos());
         };
 
@@ -86,6 +144,11 @@ function TodoTxtViewModel()
             {
                 parent.addTodo(new Todo(todos[i]));
             }
+            self.importingTodos(false);
+        };
+
+        self.hide = function()
+        {
             self.importingTodos(false);
         };
     }
@@ -113,12 +176,18 @@ function TodoTxtViewModel()
 
         self.showExportBox = function()
         {
-            parent.importing.importingTodos(false);
+            parent.importing.hide();
+            parent.options.hide();
             self.exportingTodos(!self.exportingTodos());
             if (self.exportingTodos())
             {
                 self.exportText(self.buildExportText());
             }
+        };
+
+        self.hide = function()
+        {
+            self.exportingTodos(false);
         };
     }
 
@@ -319,10 +388,21 @@ function TodoTxtViewModel()
     {
         if (typeof(Storage) !== "undefined")
         {
-            if (localStorage.todos)
+            if (self.options.useDropbox())
             {
-                self.importing.importText(localStorage.todos);
-                self.importing.importTodos();
+                $.getJSON("/todo/api/getTodoFile.php", null, function(data)
+                {
+                    self.importing.importText(data.data);
+                    self.importing.importTodos();
+                });
+            }
+            else
+            {
+                if (localStorage.todos)
+                {
+                    self.importing.importText(localStorage.todos);
+                    self.importing.importTodos();
+                }
             }
         }
     };
