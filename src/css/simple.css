@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+body
+{
+    background-color: ivory;
+    color: black;
+}
+
+/*****************************************************
+ * Toolbar
+ *****************************************************/
+
+.toolButton
+{
+    float: right;
+    position: absolute;
+    width: 110px;
+    height: 25px;
+    top: 5px;
+    bottom: auto;
+    left: auto;
+    background-color: #CEFFFF;
+
+    border-style: solid;
+    border-color: #0DFFFF;
+    border-width: thin;
+
+    font-weight: bold;
+    font-family: sans-serif;
+
+    cursor: pointer;
+}
+
+.toolButton.import
+{
+    right: 235px;
+}
+
+.toolButton.export
+{
+    right: 120px;
+}
+
+.toolButton.options
+{
+    right: 5px;
+}
+
+.toolButton.refresh
+{
+    right: 120px;
+}
+
+.toolbutton.selected
+{
+    background-color: #0080FF;
+    border-top-color: #0000A0;
+    border-right-color: #0000A0;
+    border-left-color: #0000A0;
+    border-bottom-color: #0080FF;
+    height: 26px;
+    z-index: 5001;
+}
+
+.lastUpdated
+{
+    display: block;
+    float: right;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+}
+
+.toolBox
+{
+    float: right;
+    position: absolute;
+    z-index: 5000;
+    right: 3px;
+    top: 30px;
+
+    min-width: 250px;
+
+    background-color: #0080FF;
+
+    border: solid thin #0000A0;
+}

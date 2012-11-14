@@ -2,7 +2,7 @@
 <html>
 <head>
     <title data-bind="text: title">My TodoTxt</title>
-    <link rel="stylesheet" href="css/todotxt.css">
+    <link rel="stylesheet" href="css/simple.css">
 </head>
 <body onunload="todoTxtView.save()">
     <section class="toolbar">
@@ -13,7 +13,7 @@
             **********************************
          -->
         <div data-bind="with: options">
-            <button class="toolbutton options" data-bind="css: { selected: showingOptions }, click: showOptionsBox">Options</button>
+            <button class="toolButton options" data-bind="css: { selected: showingOptions }, click: showOptionsBox">Options</button>
             <div class="toolBox options" data-bind="visible: showingOptions">
                 <input type="checkbox" data-bind="checked: useDropbox"/><label class="options">Use Dropbox.</label>
             </div>
@@ -25,7 +25,7 @@
             **********************************
          -->
         <div data-bind="with: importing, visible: !options.useDropbox()">
-            <button class="toolbutton import" data-bind="css: { selected: importingTodos }, click: showImportBox">Import Todos</button>
+            <button class="toolButton import" data-bind="css: { selected: importingTodos }, click: showImportBox">Import Todos</button>
             <div class="toolBox import" data-bind="visible: importingTodos">
                 <textarea  data-bind="value: importText"></textarea>
 
@@ -34,8 +34,8 @@
             </div>
         </div>
         <div data-bind="with: exporting, visible: !options.useDropbox()">
-            <button class="toolbox" data-bind="css: { selected: exportingTodos }, click: showExportBox">Export Todos</button>
-            <div class="exportBox" data-bind="visible: exportingTodos">
+            <button class="toolButton export" data-bind="css: { selected: exportingTodos }, click: showExportBox">Export Todos</button>
+            <div class="toolBox" data-bind="visible: exportingTodos">
                 <textarea  data-bind="value: exportText"></textarea>
                 <span class="help">Copy the text and save it into a text file.</span>
             </div>
@@ -48,7 +48,7 @@
          -->
         <div data-bind="visible: options.useDropbox()">
             <span class="lastUpdated" data-bind="text: lastUpdated"></span>
-            <button class="refreshButton" data-bind="click: refresh">Refresh</button>
+            <button class="toolButton refresh" data-bind="click: refresh">Refresh</button>
         </div>
     </section>
     <h1 data-bind="text: title"></h1>
