@@ -114,6 +114,8 @@ function TodoTxtViewModel()
                 }
             }
         };
+
+        self.load();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -390,8 +392,10 @@ function TodoTxtViewModel()
         {
             if (self.options.useDropbox())
             {
+                self.lastUpdated("updating...");
                 $.getJSON("/todo/api/getTodoFile.php", null, function(data)
                 {
+                    self.lastUpdated(new Date());
                     self.importing.importText(data.data);
                     self.importing.importTodos();
                 });
@@ -405,6 +409,12 @@ function TodoTxtViewModel()
                 }
             }
         }
+    };
+
+    self.lastUpdated = ko.observable();
+    self.refresh = function()
+    {
+        self.load();
     };
 
     self.load();

@@ -6,7 +6,7 @@
 </head>
 <body onunload="todoTxtView.save()">
     <div data-bind="with: options">
-        <button class="optionsButton" data-bind="css: { selected: showingOptions }, click: showOptionsBox">Import Todos</button>
+        <button class="optionsButton" data-bind="css: { selected: showingOptions }, click: showOptionsBox">Options</button>
         <div class="optionsBox" data-bind="visible: showingOptions">
             <input type="checkbox" data-bind="checked: useDropbox"/><label class="option">Use Dropbox.</label>
         </div>
@@ -26,6 +26,10 @@
             <textarea  data-bind="value: exportText"></textarea>
             <span class="help">Copy the text and save it into a text file.</span>
         </div>
+    </div>
+    <div data-bind="visible: options.useDropbox()">
+        <span class="lastUpdated" data-bind="text: lastUpdated"></span>
+        <button class="refreshButton" data-bind="click: refresh">Refresh</button>
     </div>
     <h1 data-bind="text: title"></h1>
     <div class="addTodo">
@@ -61,7 +65,6 @@
     </div>
     <footer>
         <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
-        <div><label>Privacy</label> This page sends no data to any other server. All data is stored in your own browser.<div>
         <div class="copyright">Copyright &copy; 2012, Martin Gill. All rights reserved.<div>
     </footer>
 </body>

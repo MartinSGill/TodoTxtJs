@@ -122,7 +122,7 @@ div.quickFilter{
     color: #FFFFFF;
 }
 
-.importButton, .exportButton, .optionsButton
+.importButton, .exportButton, .optionsButton, .refreshButton
 {
     float: right;
     position: absolute;
@@ -164,6 +164,12 @@ div.quickFilter{
     background-color: yellow;
     color: #000000;
     border-bottom: none;
+}
+
+.refreshButton
+{
+    clear: both;
+    top: 45px;
 }
 
 .importButton.selected
@@ -219,6 +225,12 @@ div.quickFilter{
     padding: 0;
     height: 400px;
     width: 100%;
+}
+
+.lastUpdated
+{
+    font-size: xx-small;
+    font-style: italic;
 }
 
 .help
