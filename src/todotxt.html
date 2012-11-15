@@ -52,13 +52,20 @@
         </div>
     </section>
     <h1 data-bind="text: title"></h1>
+    <!--
+        **********************************
+        * Add Todo
+        **********************************
+     -->
     <section class="addTodo">
-        <div class="addTodo">
             <input type="text" data-bind="value: newTodoText">
             <button data-bind="click: addNewTodo">Add</button>
-        </div>
     </section>
-
+    <!--
+        **********************************
+        * Filters
+        **********************************
+     -->
     <section class="filters">
         <div><label>Filters</label></div>
         <div class="showCompleted">
@@ -68,14 +75,17 @@
             <label>Quick Filter</label><input type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'" title="Example: +Project @Context (A)" />
         </div>
     </section>
-
+    <!--
+        **********************************
+        * Todo
+        **********************************
+     -->
     <section class="todos" data-bind="foreach: displayedTodos">
         <div class="todo" data-bind="css: { completed: completed }, visible: $root.isDisplayed($data)">
-            <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: !completed()">&#x2610;</span>
-            <span class="ballotbox" data-bind="click: $root.toggleCompleted, visible: completed()">&#x2611;</span>
+            <input type="checkbox" data-bind="checked: completed"/>
             <span data-bind="css: { completed: completed }">
-                <span class="completedFlag" data-bind="visible: completed()">x</span>
-                <span class="completedDate" data-bind="text: completedDate(), visible: completed()"></span>
+                <span class="completedFlag" data-bind="visible: completed">x</span>
+                <span class="completedDate" data-bind="text: completedDate(), visible: completed"></span>
                 <span class="priorityBrace" data-bind="visible: priority !== null">(</span>
                 <span class="priority" data-bind="visible: priority != null">
                     <span data-bind="text: priority, attr: { 'class': priority }"></span>

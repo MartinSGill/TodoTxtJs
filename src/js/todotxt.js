@@ -251,19 +251,6 @@ function TodoTxtViewModel()
                                            self.filtersPriority().length > 0;
                                 });
 
-    self.toggleCompleted = function(todo)
-    {
-        todo.completed(!todo.completed());
-        if (todo.completed())
-        {
-            todo.completedDate($.datepicker.formatDate('yy-mm-dd', new Date()));
-        }
-        else
-        {
-            todo.completedDate("");
-        }
-    };
-
     ////////////////////////////////////////////////////////////////////////////
     // Display
     ////////////////////////////////////////////////////////////////////////////
@@ -340,18 +327,18 @@ function TodoTxtViewModel()
     };
 
     self.displayedTodos = ko.computed(function()
-                                      {
-                                          var todos = [];
-                                          for (var i = 0; i < self.allTodos().length; i++)
-                                          {
-                                              if (self.isDisplayed(self.allTodos()[i]))
-                                              {
-                                                  todos.push(self.allTodos()[i]);
-                                              }
-                                          }
+    {
+      var todos = [];
+      for (var i = 0; i < self.allTodos().length; i++)
+      {
+          if (self.isDisplayed(self.allTodos()[i]))
+          {
+              todos.push(self.allTodos()[i]);
+          }
+      }
 
-                                          return _.sortBy(todos, sortTodos);
-                                      });
+      return _.sortBy(todos, sortTodos);
+    });
 
     ////////////////////////////////////////////////////////////////////////////
     // TODO Management

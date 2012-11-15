@@ -4,6 +4,8 @@ body
 {
     background-color: ivory;
     color: black;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 /*****************************************************
@@ -58,7 +60,7 @@ body
     border-right-color: #0000A0;
     border-left-color: #0000A0;
     border-bottom-color: #0080FF;
-    height: 26px;
+    height: 31px;
     z-index: 5001;
 }
 
@@ -77,11 +79,204 @@ body
     position: absolute;
     z-index: 5000;
     right: 3px;
-    top: 30px;
+    top: 35px;
 
     min-width: 250px;
 
     background-color: #0080FF;
 
     border: solid thin #0000A0;
+
+    padding: 3px;
+}
+
+.toolBox > textarea
+{
+    display: block;
+    width: 650px;
+    height: 300px;
+}
+
+.toolBox > span
+{
+    clear:both;
+}
+
+.toolBox > button
+{
+    float:right;
+}
+
+.warning
+{
+    color: yellow;
+}
+
+/*******************************************************
+ * Add
+ ******************************************************/
+
+.addTodo
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: silver;
+    border-radius: 5px;
+
+    padding: 5px;
+
+    background-color: #EDEF85;
+}
+
+.addTodo > input
+{
+    width: 600px;
+}
+
+ /*******************************************************
+ * Filters
+ ******************************************************/
+
+.filters
+{
+    margin-top: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: silver;
+    border-radius: 5px;
+
+    padding: 5px;
+
+    background-color: #E1E1FF;
+}
+
+.filters > div
+{
+    display: inline-block;
+}
+
+.filters label
+{
+    font-weight: bold;
+}
+
+.quickFilter
+{
+    margin-left: 100px;
+}
+
+.quickFilter > label:after
+{
+    content: ": ";
+}
+
+.quickFilter > input
+{
+    width: 300px;
+}
+
+footer
+{
+    margin-top: 5px;
+    font-size: 0.6em;
+    text-align: center;
+}
+
+ /*******************************************************
+ * Todos
+ ******************************************************/
+
+ .todos
+ {
+    margin-top: 5px;
+    padding: 5px;
+    border: ridge thin silver;
+    border-radius: 5px;
+    font-size: 1.1em;
+ }
+
+.completedFlag
+{
+    display: none;
+}
+
+.priorityBrace
+{
+    display: none;
+}
+
+.priority
+{
+    font-weight: bold;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    color: #59955C;
+}
+
+.A
+{
+    color: #FF4848;
+}
+
+.B
+{
+    color: #9A03FE;
+}
+
+.C
+{
+    color: #2966B8;
+}
+
+.D
+{
+    color: #06DCFB;
+}
+
+.E
+{
+    color: #01F33E;
+}
+
+.createDate
+{
+    font-size: smaller;
+    font-family: sans-serif;
+}
+
+.completedDate
+{
+    font-size: smaller;
+    font-family: sans-serif;
+}
+
+.projectFlag
+{
+    margin-left: 0.3em;
+    color: #9A03FE;
+}
+
+.project
+{
+    color: #9A03FE;
+    font-family: sans-serif;
+    font-size: 1.0em;
+}
+
+.contextFlag
+{
+    margin-left: 0.3em;
+    color: #2966B8;
+}
+
+.context
+{
+    color: #2966B8;
+    font-family: sans-serif;
+    font-size: 1.0em;
+}
+
+.completed
+{
+    background-color: silver;
 }

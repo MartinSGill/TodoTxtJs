@@ -6,6 +6,36 @@ function Todo(raw)
 {
     var self = this;
 
+    var completed = ko.observable(false);
+    self.completed = ko.computed({
+        read: function()
+        {
+            return completed();
+        },
+        write: function(value)
+        {
+            if (value)
+            {
+                self.completedDate($.datepicker.formatDate('yy-mm-dd', new Date()));
+            }
+            else
+            {
+                self.completedDate("");
+            }
+            completed(value);
+        }
+    });
+
+    // Defaults
+    self.raw = "";
+    self.completedDate = ko.observable();
+    self.priority = null;
+    self.createDate = null;
+    self.message = "";
+    self.contexts = [];
+    self.projects = [];
+    self.formatted = "";
+
     function buildHtml()
     {
         var formattedMessage = self.message;
@@ -29,13 +59,13 @@ function Todo(raw)
         var match = completedRegex.exec(text);
         if (match !== null)
         {
-            self.completed = ko.observable(true);
+            completed(true);
             self.completedDate = ko.observable(match[2]);
             text = $.trim(text.replace(completedRegex, ''));
         }
         else
         {
-            self.completed = ko.observable(false);
+            completed(false);
             self.completedDate = ko.observable("");
         }
 
@@ -129,17 +159,6 @@ function Todo(raw)
         extractProjects();
         extractContexts();
     };
-
-    // Defaults
-    self.raw = "";
-    self.completed = ko.observable(false);
-    self.completedDate = ko.observable();
-    self.priority = null;
-    self.createDate = null;
-    self.message = "";
-    self.contexts = [];
-    self.projects = [];
-    self.formatted = "";
 
     // Construction
     self.fromString(raw);
