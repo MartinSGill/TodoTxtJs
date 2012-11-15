@@ -367,7 +367,19 @@ function TodoTxtViewModel()
 
     self.save = function()
     {
-        if (typeof(Storage) !== "undefined")
+        if (self.options.useDropbox())
+        {
+            self.lastUpdated("saving...");
+            $.ajax({
+                    url: '/todo/api/putTodoFile.php',
+                    type: 'post',
+                    data: JSON.stringify({ text: self.exporting.buildExportText() }),
+                    success: function(data) {
+                        self.lastUpdated(new Date());
+                    }
+                });
+        }
+        else if (typeof(Storage) !== "undefined")
         {
             localStorage.todos = self.exporting.buildExportText();
         }

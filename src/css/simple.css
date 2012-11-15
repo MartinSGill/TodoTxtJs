@@ -53,6 +53,11 @@ body
     right: 120px;
 }
 
+.toolButton.save
+{
+    right: 235px;
+}
+
 .toolbutton.selected
 {
     background-color: #0080FF;
