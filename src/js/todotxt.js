@@ -41,6 +41,7 @@ var TodoHelpers =
 function TodoTxtViewModel()
 {
     var self = this;
+    var apiPath = document.location.pathname.replace('todotxt.html', '');
 
     /************************************************
      * Inner Constructors
@@ -371,7 +372,7 @@ function TodoTxtViewModel()
         {
             self.lastUpdated("saving...");
             $.ajax({
-                    url: '/todo/api/putTodoFile.php',
+                    url: apiPath + 'api/putTodoFile.php',
                     type: 'post',
                     data: JSON.stringify({ text: self.exporting.buildExportText() }),
                     success: function(data) {
@@ -392,12 +393,19 @@ function TodoTxtViewModel()
             if (self.options.useDropbox())
             {
                 self.lastUpdated("updating...");
-                $.getJSON("/todo/api/getTodoFile.php", null, function(data)
-                {
-                    self.lastUpdated(new Date());
-                    self.importing.importText(data.data);
-                    self.importing.importTodos();
-                });
+                $.ajax({
+                    url: apiPath + "api/getTodoFile.php",
+                    data: null,
+                    success: function(data)
+                    {
+                        self.lastUpdated(new Date());
+                        self.importing.importText(data.data);
+                        self.importing.importTodos();
+                    },
+                    error: function(a,b,c)
+                    {
+                        console.write(a,b,c);
+                    }});
             }
             else
             {
@@ -417,6 +425,7 @@ function TodoTxtViewModel()
     };
 
     self.load();
+
 }
 
 var todoTxtView = new TodoTxtViewModel();
