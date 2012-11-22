@@ -6,51 +6,48 @@
 </head>
 <body onunload="todoTxtView.save()">
     <section class="toolbar">
+        <ul class="menu">
+            <li class="menuItem">
+                Options
+                <div data-bind="with: options">
+                    <div class="toolBox options" data-bind="visible: showingOptions">
+                        <label>Storage</label>&nbsp;
+                        <select data-bind="options: storageOptions,
+                                           optionsText: 'name',
+                                           value: storageInfo">
+                        </select>
+                        <span data-bind="text: storageInfo().tip"></span>
+                    </div>
+                </div>
+            </li>
+            <li class="menuItem" data-bind="visible: options.showImport">
+                Import
+                <div data-bind="with: importing, visible: options.showImport">
+                    <div class="toolBox import" data-bind="visible: importingTodos">
+                        <textarea  data-bind="value: importText"></textarea>
 
-        <!--
-            **********************************
-            * Options
-            **********************************
-         -->
-        <div data-bind="with: options">
-            <button class="toolButton options" data-bind="css: { selected: showingOptions }, click: showOptionsBox">Options</button>
-            <div class="toolBox options" data-bind="visible: showingOptions">
-                <input type="checkbox" data-bind="checked: useDropbox"/><label class="options">Use Dropbox.</label>
-            </div>
-        </div>
-
-        <!--
-            **********************************
-            * Import / Export
-            **********************************
-         -->
-        <div data-bind="with: importing, visible: !options.useDropbox()">
-            <button class="toolButton import" data-bind="css: { selected: importingTodos }, click: showImportBox">Import Todos</button>
-            <div class="toolBox import" data-bind="visible: importingTodos">
-                <textarea  data-bind="value: importText"></textarea>
-
-                <span class="help">Paste or write your Todos into the text box and click import. <span class="warning">This will delete existing Todos.</span></span>
-                <button data-bind="click: importTodos">Import</button>
-            </div>
-        </div>
-        <div data-bind="with: exporting, visible: !options.useDropbox()">
-            <button class="toolButton export" data-bind="css: { selected: exportingTodos }, click: showExportBox">Export Todos</button>
-            <div class="toolBox" data-bind="visible: exportingTodos">
-                <textarea  data-bind="value: exportText"></textarea>
-                <span class="help">Copy the text and save it into a text file.</span>
-            </div>
-        </div>
-
-        <!--
-            **********************************
-            * Dropbox Controls
-            **********************************
-         -->
-        <div data-bind="visible: options.useDropbox()">
-            <span class="lastUpdated" data-bind="text: lastUpdated"></span>
-            <button class="toolButton refresh" data-bind="click: refresh">Refresh</button>
-            <button class="toolButton save" data-bind="click: save">Save</button>
-        </div>
+                        <span class="help">Paste or write your Todos into the text box and click import. <span class="warning">This will delete existing Todos.</span></span>
+                        <button data-bind="click: importTodos">Import</button>
+                    </div>
+                </div>
+            </li>
+            <li class="menuItem" data-bind="visible: options.showExport">
+                Export
+                <div data-bind="with: exporting">
+                    <div class="toolBox" data-bind="visible: exportingTodos">
+                        <textarea  data-bind="value: exportText"></textarea>
+                        <span class="help">Copy the text and save it into a text file.</span>
+                    </div>
+                </div>
+            </li>
+            <li class="menuItem" data-bind="click: save">
+                Save
+            </li>
+            <li class="menuItem" data-bind="click: refresh">
+                Load
+            </li>
+        </ul>
+        <span class="lastUpdated" data-bind="text: lastUpdated"></span>
     </section>
     <h1 data-bind="text: title"></h1>
     <!--

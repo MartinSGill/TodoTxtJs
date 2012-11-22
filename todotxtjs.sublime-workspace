@@ -1,0 +1,883 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"i",
+				"iframe	Tag"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"font-we",
+				"font-weight:   (property)"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"lastU",
+				"lastUpdated"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"cre",
+				"createDate"
+			],
+			[
+				"extract",
+				"extractCreateDate"
+			],
+			[
+				"completed",
+				"completedDate"
+			],
+			[
+				"text",
+				"textFormat"
+			],
+			[
+				"fil",
+				"filtersPriority"
+			],
+			[
+				"ex",
+				"extractPriority  (function)"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"impo",
+				"importTodos"
+			],
+			[
+				"buil",
+				"buildExportText"
+			],
+			[
+				"ob",
+				"observable"
+			],
+			[
+				"Ex",
+				"exportText"
+			],
+			[
+				"expor",
+				"exportingTodos"
+			],
+			[
+				"expo",
+				"exportingTodos"
+			],
+			[
+				"Convert",
+				"ConvertTo-TodoObject"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"Todo",
+				"TodoHelpers"
+			],
+			[
+				"comp",
+				"Computed"
+			],
+			[
+				"Con",
+				"contexts"
+			],
+			[
+				"shw",
+				"showCompleted"
+			],
+			[
+				"Wo",
+				"window"
+			],
+			[
+				"display",
+				"displayEverythingElse"
+			],
+			[
+				"com",
+				"completed"
+			],
+			[
+				"in",
+				"inside"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"align",
+				"text-align"
+			],
+			[
+				"smal",
+				"smaller  (value)"
+			],
+			[
+				"html",
+				"html	html"
+			],
+			[
+				"pri",
+				"priority"
+			],
+			[
+				"Im",
+				"importingTodos"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"dis",
+				"displayEverythingElse"
+			],
+			[
+				"con",
+				"contexts"
+			],
+			[
+				"menuEntry",
+				"menuEntryEquality"
+			],
+			[
+				"me",
+				"MenuEntry"
+			],
+			[
+				"T",
+				"Todo"
+			],
+			[
+				"im",
+				"importText"
+			],
+			[
+				"prio",
+				"priorities"
+			],
+			[
+				"displ",
+				"displayedPriorities"
+			],
+			[
+				"j",
+				"jQuery"
+			],
+			[
+				"pr",
+				"priorities"
+			],
+			[
+				"Pri",
+				"priority"
+			],
+			[
+				"Dis",
+				"displayEverythingElse"
+			],
+			[
+				"displa",
+				"displayedPriorities"
+			],
+			[
+				"displayed",
+				"displayedContexts"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"pro",
+				"projects"
+			],
+			[
+				"Com",
+				"CompletedDate"
+			],
+			[
+				"li",
+				"line-through  (value)"
+			],
+			[
+				"border-ra",
+				"border-radius:   (property)"
+			],
+			[
+				"I",
+				"WithIndex"
+			],
+			[
+				"Prio",
+				"Priority"
+			],
+			[
+				"Backgrou",
+				"BackgroundColor"
+			],
+			[
+				"Compl",
+				"CompletedDate"
+			],
+			[
+				"Is",
+				"IsNullOrEmpty"
+			],
+			[
+				"Get-Todo",
+				"Get-TodoFilePath"
+			],
+			[
+				"Get",
+				"Get-TodoFilePath"
+			],
+			[
+				"Format",
+				"Format-Text"
+			],
+			[
+				"Format-",
+				"Format-Context"
+			],
+			[
+				"For",
+				"Format-Text"
+			],
+			[
+				"match",
+				"match1"
+			],
+			[
+				"e",
+				"elifi	(elifi) elseif in-line"
+			],
+			[
+				"else",
+				"elsei	(elsei) else in-line"
+			],
+			[
+				"Form",
+				"Format-Completed"
+			],
+			[
+				"Format-Com",
+				"Format-CompletedDate"
+			],
+			[
+				"To",
+				"TodoPSObject"
+			],
+			[
+				"rex",
+				"regexPriority"
+			],
+			[
+				"re",
+				"regexDate"
+			],
+			[
+				"para",
+				"parameters"
+			],
+			[
+				"regexComple",
+				"regexComplete"
+			],
+			[
+				"proc",
+				"processedTodo"
+			],
+			[
+				"regex",
+				"regexPriority"
+			],
+			[
+				"reg",
+				"regexPriority"
+			],
+			[
+				"Va",
+				"ValidateNotNullOrEmpty"
+			],
+			[
+				"f",
+				"fun	(fun) new function"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/AAAPackageDev/Support/Property List to JSON.sublime-build",
+	"command_palette":
+	{
+		"height": 60.0,
+		"selected_items":
+		[
+			[
+				"syn c#",
+				"Set Syntax: C#"
+			],
+			[
+				"expo",
+				"Export to HTML: Show Export Menu"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"synjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"a",
+				"Abacus: align selection"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"syn po",
+				"Set Syntax: Powershell v2"
+			],
+			[
+				"syn b",
+				"Set Syntax: Batch File"
+			],
+			[
+				"tidy",
+				"Tidy CSS (Low Compression)"
+			],
+			[
+				"ali",
+				"Abacus: align selection"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"packin",
+				"Package Control: Install Package"
+			],
+			[
+				"align",
+				"Abacus: align selection"
+			],
+			[
+				"pacinsta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack ",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"HTML: Encode Special Characters"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"Package Control: rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"git",
+				"Git: Status"
+			],
+			[
+				"INSTALL",
+				"Package Control: Install Package"
+			],
+			[
+				"insal",
+				"SublimeCodeIntel: Disable Live Autocompletion"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"Form",
+				"Format: Javascript"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"Snippet: kn",
+				"Snippet: ForEach template for KnockoutJS"
+			],
+			[
+				"getpack",
+				"Package Control: Install Package"
+			],
+			[
+				"sni",
+				"Snippet: html"
+			],
+			[
+				"pckin",
+				"Package Control: Install Package"
+			],
+			[
+				"packain",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Lorem ipsum"
+			],
+			[
+				"inden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"pacre",
+				"Package Control: Remove Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"syn js",
+				"Set Syntax: JSON"
+			],
+			[
+				"dark",
+				"Sweyla's Color Theme Generator: Generate dark!"
+			],
+			[
+				"darl",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"gen",
+				"Sweyla's Color Theme Generator: Generate dark!"
+			],
+			[
+				"generate",
+				"Sweyla's Color Theme Generator: Generate dark!"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"contr",
+				"Package Control: Install Package"
+			],
+			[
+				"convtsp",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"Convertosp",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"packcin",
+				"Package Control: Install Package"
+			],
+			[
+				"sspo",
+				"Set Syntax: Powershell v2"
+			],
+			[
+				"synpo",
+				"Set Syntax: Powershell v2"
+			],
+			[
+				"setsypo",
+				"Set Syntax: PowerShell"
+			]
+		],
+		"width": 426.0
+	},
+	"console":
+	{
+		"height": 74.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/martin/Dropbox/Settings/powershell/Modules/MartinsTools/New-Credential.psm1",
+		"/C/Projects/BlueLion/Dev/Src/Test/SystemTest/BlueLionSystemTestModule/Run-SystemTests.psm1",
+		"/C/Users/martin/Dropbox/Settings/powershell/Modules/MartinsTools/MartinsTools.psd1",
+		"/C/Users/martin/Dropbox/Settings/powershell/Modules/MartinsTools/Get-OutlookInbox.psm1",
+		"/D/temp/systemtestsstuff.ps1",
+		"/W/landing/css/landing.css",
+		"/W/landing/js/landing.js",
+		"/W/landing/index.html",
+		"/W/landing/api/index.php",
+		"/W/landing/api/.htaccess",
+		"/W/todo/todotxt.html",
+		"//192.168.178.120/Web/todo/todotxt.html",
+		"/C/Users/martin/Dropbox/Apps/TodoTxtJs/todo.txt",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/css/simple.css",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/todo.js",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/todotxt.js",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/todotxt.css",
+		"/C/Users/martin/Dropbox/Projects/Lib/jquery-ui-1.9.1.custom/development-bundle/README.md",
+		"/W/todo/Dropbox/OAuth/Storage/PDO.php",
+		"/W/todo/bootstrap.php",
+		"/W/todo/getTodoFile.php",
+		"/W/todo/getFile.php",
+		"/W/todo/putFile.php",
+		"/C/Users/martin/Dropbox/Apps/TodoTxtJs/.dropbox",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/dropbox.py",
+		"/C/Users/martin/Dropbox/Todo/todo.txt",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/New-Todo.psm1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/todotxt.html",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/dropbox/__init__.py",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/.htaccess",
+		"/C/Users/martin/Dropbox/dropbox-python-sdk-1.5.1/example/cli_client.py",
+		"/C/Users/mgill/Desktop/autosuggest.json",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/todotxtjs/src/todotxt_original.css",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/Set-Todo.psm1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/PSTodoTxt.psd1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/Format-Todo.psm1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/ConvertTo-TodoObject.psm1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/Complete-Todo.psm1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/Get-Todo.psm1",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/Visual Studio Dark - Color Scheme/Visual Studio Dark.JSON-tmTheme",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/Visual Studio Dark - Color Scheme/Visual Studio Dark.tmTheme",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/User/SublimeLinter.sublime-settings",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/history.txt",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/deploy.ps1",
+		"/C/Users/martin/Dropbox/Todo/dev.txt",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/HISTORY.md",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/ChangeLog.txt",
+		"/C/Users/martin/Dropbox/Projects/TodoTxt/pstodotxt/module/Set-Todo",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/pstodotxt/deploy.ps1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/pstodotxt/module/PSTodoTxt.psd1",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/pstodotxt/module/Edit-Todo.psm1",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/TodoTxt.sublime-project",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/todotxt.css",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/todotxt.js",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/todotxt.html",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/TodoTxt.js",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/TodoTxt.html",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/TodoTxt.css",
+		"/W/qnap.php",
+		"/W/todo.php",
+		"/W/index.php",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/index.html",
+		"/W/todo/index.html",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/underscore.js",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/User/BracketHighlighter.sublime-settings",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/BracketHighlighter/BracketHighlighter.sublime-settings",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/jquery.js",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/src/prototype.js",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/SublimeLinter/README.md",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/C/Users/martin/Dropbox/Apps/Sublime Text 2/Data/Packages/User/Sublime Settings.sublime-settings",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/TodoTxt.sublime-workspace",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/TodoTxt.html",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/TodoTxt.css",
+		"/C/Users/martin/Dropbox/Projects/TodoTxtJs/TodoTxt.js",
+		"/C/Users/martin/Dropbox/Projects/HTML5/TodoTxtJs/knockoutjs-2.1.0.js"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"=",
+			"style",
+			"self",
+			"\n    self.isDisplayed = function(todo)\n    {\n        if (!self.showCompleted() && todo.completed())\n        {\n            return false;\n        }\n\n        var result = true;\n        if (self.filtered())\n        {\n            result = true;\n            if (self.filtersProject().length > 0)\n            {\n                if (_.intersection(todo.projects, self.filtersProject()).length == self.filtersProject().length)\n                {\n                    result = result && true;\n                }\n                else\n                {\n                    result = false;\n                }\n            }\n\n            if (self.filtersContext().length > 0)\n            {\n                if (_.intersection(todo.contexts, self.filtersContext()).length == self.filtersContext().length)\n                {\n                    result = result && true;\n                }\n                else\n                {\n                    result = false;\n                }\n            }\n        }\n\n        return result;\n    };",
+			"selected",
+			"New",
+			"[",
+			"    [",
+			"[System.Reflection.Assembly]::Load",
+			"visible: checked\">",
+			"found.check",
+			"k",
+			"j",
+			"completed",
+			"completedDate",
+			"webShare",
+			"*************************************************************\n",
+			"new Todo",
+			"projects",
+			"priorities",
+			"unique",
+			"#cssmenu",
+			"#",
+			"displayedPriorities",
+			"priorities",
+			"priorties",
+			"#",
+			"null",
+			"#cssmenu",
+			"uniq",
+			"isAnyFalse",
+			"setAll",
+			"howAll",
+			"AllToggle",
+			"i",
+			"observable",
+			"contexts",
+			"( ",
+			"Find",
+			"Projects",
+			"\"",
+			"Write-Spa",
+			"\\$colors.Background",
+			"$colors.Background",
+			"\\t",
+			"TodoObject",
+			"TodoPSObject",
+			"Format-TodoPSObject",
+			"IsNullOrWhi",
+			"Color",
+			"color",
+			"colors",
+			";",
+			"null",
+			"I",
+			"=",
+			"'",
+			"= ",
+			"font",
+			"match",
+			"param",
+			"aram",
+			"    ",
+			"        ",
+			"    ",
+			"}"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"Contexts",
+			"'",
+			"$background",
+			"    ",
+			"Todo",
+			"TodoObject",
+			"Todo",
+			"TodoObject",
+			"Format-Todo"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 32.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.aaa_package_dev":
+	{
+		"height": 106.0
+	},
+	"output.exec":
+	{
+		"height": 202.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/C/Users/martin/Dropbox/Projects/Sublime/PowerShell.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 213.0,
+	"status_bar_visible": true
+}

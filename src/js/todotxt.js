@@ -63,21 +63,37 @@ function TodoTxtViewModel()
     ////////////////////////////////////////////////////////////////////////////
     // Options
     ////////////////////////////////////////////////////////////////////////////
-    self.options = new Options(self);
 
     function Options(parent)
     {
         var self = this;
 
+        var storageConstants = {
+            browser: "browser",
+            server: "server",
+            dropbox: "dropbox"
+        };
+
         ///////////////////////////
         // Options
         ///////////////////////////
-        self.useDropbox = ko.observable(false);
+
+        self.storageOptions = ko.observableArray([
+                { name: storageConstants.browser, tip: "Store in Local Browser storage." },
+                { name: storageConstants.server, tip: "Store data on the server."}
+            ]
+          );
+        self.storageInfo = ko.observable(self.storageOptions()[0]);
+        self.storage = ko.computed(function() { return self.storageInfo().name; } );
 
         ///////////////////////////
         // Control
         ///////////////////////////
         self.showingOptions = ko.observable(false);
+
+        self.showStorageControls = ko.computed( function() { return self.storage() === storageConstants.server; } );
+        self.showImport = ko.computed( function() { return self.storage() === storageConstants.browser; } );
+        self.showExport = ko.computed( function() { return self.storage() === storageConstants.browser; } );
 
         self.showOptionsBox = function()
         {
@@ -87,10 +103,6 @@ function TodoTxtViewModel()
             if (!self.showingOptions())
             {
                 self.save();
-                if (self.useDropbox())
-                {
-                    parent.load();
-                }
             }
         };
 
@@ -109,22 +121,27 @@ function TodoTxtViewModel()
             if (localStorage.TodoTxtJsOptions)
             {
                 var options = JSON.parse(localStorage.TodoTxtJsOptions);
-                if (options.hasOwnProperty("useDropbox"))
+                if (options.hasOwnProperty("storage"))
                 {
-                    self.useDropbox(options.useDropbox);
+                    for (var i = 0; i < self.storageOptions().length; i++)
+                    {
+                        if (self.storageOptions()[i].name === options.storage)
+                        {
+                            self.storageInfo(self.storageOptions()[i]);
+                            break;
+                        }
+                    }
                 }
             }
         };
 
         self.load();
     }
+    self.options = new Options(self);
 
     ////////////////////////////////////////////////////////////////////////////
     // Import / Export
     ////////////////////////////////////////////////////////////////////////////
-
-    self.importing = new Importing(self);
-    self.exporting = new Exporting(self);
 
     function Importing(parent)
     {
@@ -193,6 +210,9 @@ function TodoTxtViewModel()
             self.exportingTodos(false);
         };
     }
+
+    self.importing = new Importing(self);
+    self.exporting = new Exporting(self);
 
     ////////////////////////////////////////////////////////////////////////////
     // Build Helper Arrays
@@ -368,21 +388,37 @@ function TodoTxtViewModel()
 
     self.save = function()
     {
-        if (self.options.useDropbox())
+        switch (self.options.storage().name)
         {
-            self.lastUpdated("saving...");
-            $.ajax({
-                    url: apiPath + 'api/putTodoFile.php',
-                    type: 'post',
-                    data: JSON.stringify({ text: self.exporting.buildExportText() }),
-                    success: function(data) {
+            case 'dropbox':
+                self.lastUpdated("saving...");
+                $.ajax({
+                        url: apiPath + 'api/putTodoFile.php',
+                        type: 'post',
+                        data: JSON.stringify({ text: self.exporting.buildExportText() }),
+                        success: function(data) {
+                            self.lastUpdated(new Date());
+                        }
+                    });
+                break;
+
+            case 'browser':
+                localStorage.todos = self.exporting.buildExportText();
+                break;
+
+            case 'server':
+                self.lastUpdated("saving...");
+                $.ajax({
+                    url: apiPath + "api/setTodos",
+                    data: null,
+                    success: function(data)
+                    {
                         self.lastUpdated(new Date());
-                    }
-                });
-        }
-        else if (typeof(Storage) !== "undefined")
-        {
-            localStorage.todos = self.exporting.buildExportText();
+                    },
+                    error: function(xhr, ajax, thrownError)
+                    {
+                    }});
+                break;
         }
     };
 
@@ -390,30 +426,48 @@ function TodoTxtViewModel()
     {
         if (typeof(Storage) !== "undefined")
         {
-            if (self.options.useDropbox())
+            switch (self.options.storage().name)
             {
-                self.lastUpdated("updating...");
-                $.ajax({
-                    url: apiPath + "api/getTodoFile.php",
-                    data: null,
-                    success: function(data)
+                case 'dropbox':
+                    self.lastUpdated("updating...");
+                    $.ajax({
+                        url: apiPath + "api/getTodoFile.php",
+                        data: null,
+                        success: function(data)
+                        {
+                            self.lastUpdated(new Date());
+                            self.importing.importText(data.data);
+                            self.importing.importTodos();
+                        },
+                        error: function(a,b,c)
+                        {
+                            console.write(a,b,c);
+                        }});
+                    break;
+
+                case 'browser':
+                    if (localStorage.todos)
                     {
-                        self.lastUpdated(new Date());
-                        self.importing.importText(data.data);
+                        self.importing.importText(localStorage.todos);
                         self.importing.importTodos();
-                    },
-                    error: function(a,b,c)
-                    {
-                        console.write(a,b,c);
-                    }});
-            }
-            else
-            {
-                if (localStorage.todos)
-                {
-                    self.importing.importText(localStorage.todos);
-                    self.importing.importTodos();
-                }
+                    }
+                    break;
+
+                case 'server':
+                    self.lastUpdated("updating...");
+                    $.ajax({
+                        url: apiPath + "api/getTodos",
+                        data: null,
+                        success: function(data)
+                        {
+                            self.lastUpdated(new Date());
+                            self.importing.importText(data.data);
+                            self.importing.importTodos();
+                        },
+                        error: function(xhr, ajax, thrownError)
+                        {
+                        }});
+                    break;
             }
         }
     };
