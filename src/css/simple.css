@@ -12,60 +12,63 @@ body
  * Toolbar
  *****************************************************/
 
-.toolButton
+form
+{
+    margin: 0;
+}
+
+.toolbar
 {
     float: right;
     position: absolute;
-    width: 110px;
-    height: 25px;
     top: 5px;
-    bottom: auto;
-    left: auto;
-    background-color: #CEFFFF;
+    right: 40px;
+    display: block;
+    width: 100%;
+}
 
+.menu
+{
+    float: right;
+    width:100%;
+    padding:0;
+    margin:0;
+    list-style-type:none;
+    font-family: sans-serif;
+}
+
+.menuItem a
+{
+    float: right;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 100px;
+    height: 20px;
+
+    background-color: #FFCC00;
     border-style: solid;
-    border-color: #0DFFFF;
+    border-color: #FF9900;
     border-width: thin;
 
-    font-weight: bold;
-    font-family: sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    text-decoration: none;
 
-    cursor: pointer;
+    position: relative;
 }
 
-.toolButton.import
+.menuItem a:hover
 {
-    right: 235px;
+    background-color: #FF9900;
+    color: blue;
 }
 
-.toolButton.export
+.menuItem.selected a
 {
-    right: 120px;
-}
-
-.toolButton.options
-{
-    right: 5px;
-}
-
-.toolButton.refresh
-{
-    right: 120px;
-}
-
-.toolButton.save
-{
-    right: 235px;
-}
-
-.toolbutton.selected
-{
-    background-color: #0080FF;
-    border-top-color: #0000A0;
-    border-right-color: #0000A0;
-    border-left-color: #0000A0;
-    border-bottom-color: #0080FF;
-    height: 31px;
+    background-color: #FF9900;
+    height: 25px;
     z-index: 5001;
 }
 
@@ -83,16 +86,16 @@ body
     float: right;
     position: absolute;
     z-index: 5000;
-    right: 3px;
-    top: 35px;
+    top: 26px;
+    right: 2px;
 
     min-width: 250px;
 
-    background-color: #0080FF;
-
-    border: solid thin #0000A0;
+    background-color: #FF9900;
 
     padding: 3px;
+
+    display: none;
 }
 
 .toolBox > textarea
@@ -133,7 +136,7 @@ body
     background-color: #EDEF85;
 }
 
-.addTodo > input
+.addTodo input
 {
     width: 600px;
 }

@@ -89,8 +89,6 @@ function TodoTxtViewModel()
         ///////////////////////////
         // Control
         ///////////////////////////
-        self.showingOptions = ko.observable(false);
-
         self.showStorageControls = ko.computed( function() { return self.storage() === storageConstants.server; } );
         self.showImport = ko.computed( function() { return self.storage() === storageConstants.browser; } );
         self.showExport = ko.computed( function() { return self.storage() === storageConstants.browser; } );
@@ -136,8 +134,29 @@ function TodoTxtViewModel()
         };
 
         self.load();
+
+
     }
     self.options = new Options(self);
+
+    self.toggleToolbox = function(element)
+    {
+        var selected = false;
+        var menuItem = $(element).parent();
+        if (menuItem.hasClass("selected"))
+        {
+            selected = true;
+        }
+
+        $(".menuItem").removeClass("selected");
+        $(".menuItem .toolbox").hide();
+
+        if (!selected)
+        {
+            menuItem.addClass("selected");
+            $(".toolbox", menuItem).show();
+        }
+    };
 
     ////////////////////////////////////////////////////////////////////////////
     // Import / Export
@@ -146,15 +165,7 @@ function TodoTxtViewModel()
     function Importing(parent)
     {
         var self = this;
-        self.importingTodos = ko.observable(false);
         self.importText = ko.observable("");
-
-        self.showImportBox = function()
-        {
-            parent.exporting.hide();
-            parent.options.hide();
-            self.importingTodos(!self.importingTodos());
-        };
 
         self.importTodos = function()
         {
@@ -166,17 +177,11 @@ function TodoTxtViewModel()
             }
             self.importingTodos(false);
         };
-
-        self.hide = function()
-        {
-            self.importingTodos(false);
-        };
     }
 
     function Exporting(parent)
     {
         var self = this;
-        self.exportingTodos = ko.observable(false);
         self.exportText = ko.observable("");
 
         self.buildExportText = function()

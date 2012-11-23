@@ -6,11 +6,13 @@
 </head>
 <body onunload="todoTxtView.save()">
     <section class="toolbar">
-        <ul class="menu">
+        <ul id="menu" class="menu">
             <li class="menuItem">
-                Options
+                <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+                    Options
+                </a>
                 <div data-bind="with: options">
-                    <div class="toolBox options" data-bind="visible: showingOptions">
+                    <div class="toolBox options">
                         <label>Storage</label>&nbsp;
                         <select data-bind="options: storageOptions,
                                            optionsText: 'name',
@@ -21,9 +23,11 @@
                 </div>
             </li>
             <li class="menuItem" data-bind="visible: options.showImport">
-                Import
-                <div data-bind="with: importing, visible: options.showImport">
-                    <div class="toolBox import" data-bind="visible: importingTodos">
+                <a href="#" onClick="todoTxtView.toggleToolbox(this)" >
+                    Import
+                </a>
+                <div data-bind="with: importing">
+                    <div class="toolBox import">
                         <textarea  data-bind="value: importText"></textarea>
 
                         <span class="help">Paste or write your Todos into the text box and click import. <span class="warning">This will delete existing Todos.</span></span>
@@ -32,22 +36,28 @@
                 </div>
             </li>
             <li class="menuItem" data-bind="visible: options.showExport">
-                Export
+                <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+                    Export
+                </a>
                 <div data-bind="with: exporting">
-                    <div class="toolBox" data-bind="visible: exportingTodos">
+                    <div class="toolBox">
                         <textarea  data-bind="value: exportText"></textarea>
                         <span class="help">Copy the text and save it into a text file.</span>
                     </div>
                 </div>
             </li>
-            <li class="menuItem" data-bind="click: save">
-                Save
+            <li class="menuItem" data-bind="click: save, visible: options.showStorageOptions">
+                <a href="#">
+                    Save
+                </a>
             </li>
-            <li class="menuItem" data-bind="click: refresh">
-                Load
+            <li class="menuItem" data-bind="click: refresh, visible: options.showStorageOptions">
+                <a href="#">
+                    Load
+                </a>
             </li>
         </ul>
-        <span class="lastUpdated" data-bind="text: lastUpdated"></span>
+        <span class="lastUpdated" data-bind="text: lastUpdated, visible: options.showStorageOptions"></span>
     </section>
     <h1 data-bind="text: title"></h1>
     <!--
@@ -56,8 +66,10 @@
         **********************************
      -->
     <section class="addTodo">
+        <form data-bind="submit: addNewTodo">
+            <label>New Todo: </label>
             <input type="text" data-bind="value: newTodoText">
-            <button data-bind="click: addNewTodo">Add</button>
+        </form>
     </section>
     <!--
         **********************************
