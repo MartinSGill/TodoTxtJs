@@ -468,11 +468,12 @@ function TodoTxtViewModel()
                     self.lastUpdated("updating...");
                     $.ajax({
                         url: apiPath + "api/getTodos",
+                        type: 'post',
                         data: null,
                         success: function(data)
                         {
                             self.lastUpdated(new Date());
-                            self.importing.importText(data.data);
+                            self.importing.importText(JSON.parse(data).data);
                             self.importing.importTodos();
                         },
                         error: function(xhr, ajax, thrownError)

@@ -21,16 +21,12 @@ $app->post('/info', function () {
 
 // POST route
 $app->post('/getTodos', function () {
-$var = <<<EOS
-(A) Call Mom @Phone +Family
-(A) Schedule annual checkup +Health
-(B) Outline chapter 5 +Novel @Computer
-(C) Add cover sheets @Office +TPSReports
-Plan backyard herb garden @Home
-Pick up milk @GroceryStore
-Research self-publishing services +Novel @Computer
-x Download Todo.txt mobile app @Phone
-EOS;
+
+    // mysqli
+    $mysqli = new mysqli("localhost", "todotxtjs", "todotxtjs", "todotxtjs");
+    $result = $mysqli->query("SELECT data FROM data WHERE user = 'test'");
+    $row = $result->fetch_assoc();
+    $var = $row['data'];
 
     $response = array('data' => $var);
     print json_encode($response, JSON_FORCE_OBJECT);
