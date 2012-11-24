@@ -259,7 +259,7 @@ function TodoTxtViewModel()
     // Filters
     ////////////////////////////////////////////////////////////////////////////
 
-    self.filters = ko.observable();
+    self.filters = ko.observable("");
 
     self.filtersProject = ko.computed(function()
                                       {
@@ -282,6 +282,21 @@ function TodoTxtViewModel()
                                            self.filtersContext().length > 0 ||
                                            self.filtersPriority().length > 0;
                                 });
+
+    self.addFilterPriority = function(priority)
+    {
+        self.filters(self.filters() + " (" + priority + ")");
+    };
+
+    self.addFilterProject = function(project)
+    {
+        self.filters(self.filters() + " +" + project);
+    };
+
+    self.addFilterContext = function(context)
+    {
+        self.filters(self.filters() + " @" + context);
+    };
 
     ////////////////////////////////////////////////////////////////////////////
     // Display
