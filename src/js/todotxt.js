@@ -48,7 +48,7 @@ function TodoTxtViewModel()
      ***********************************************/
 
     self.title = ko.observable("TodoTxtJS");
-    self.version = ko.observable("0.3");
+    self.version = ko.observable("0.4");
 
     self.allTodos = ko.observableArray([]);
 
@@ -143,9 +143,22 @@ function TodoTxtViewModel()
     {
         var selected = false;
         var menuItem = $(element).parent();
+        self.options.save();
         if (menuItem.hasClass("selected"))
         {
+
+            if (menuItem[0].id === 'options')
+            {
+                self.options.save();
+            }
             selected = true;
+        }
+        else
+        {
+            if (menuItem[0].id === 'export')
+            {
+               self.exporting.fillExportBox();
+            }
         }
 
         $(".menuItem").removeClass("selected");
@@ -175,7 +188,6 @@ function TodoTxtViewModel()
             {
                 parent.addTodo(new Todo(todos[i]));
             }
-            self.importingTodos(false);
         };
     }
 
@@ -199,15 +211,9 @@ function TodoTxtViewModel()
             return result;
         };
 
-        self.showExportBox = function()
+        self.fillExportBox = function()
         {
-            parent.importing.hide();
-            parent.options.hide();
-            self.exportingTodos(!self.exportingTodos());
-            if (self.exportingTodos())
-            {
-                self.exportText(self.buildExportText());
-            }
+            self.exportText(self.buildExportText());
         };
 
         self.hide = function()
@@ -393,7 +399,7 @@ function TodoTxtViewModel()
 
     self.save = function()
     {
-        switch (self.options.storage().name)
+        switch (self.options.storage())
         {
             case 'dropbox':
                 self.lastUpdated("saving...");
@@ -431,7 +437,7 @@ function TodoTxtViewModel()
     {
         if (typeof(Storage) !== "undefined")
         {
-            switch (self.options.storage().name)
+            switch (self.options.storage())
             {
                 case 'dropbox':
                     self.lastUpdated("updating...");
@@ -477,6 +483,8 @@ function TodoTxtViewModel()
         }
     };
 
+    $(window).unload( self.save );
+
     self.lastUpdated = ko.observable();
     self.refresh = function()
     {
@@ -485,6 +493,8 @@ function TodoTxtViewModel()
 
     self.load();
 
+    self.pageReady = ko.observable(false);
+    $(document).ready( function() { self.pageReady(true); });
 }
 
 var todoTxtView = new TodoTxtViewModel();

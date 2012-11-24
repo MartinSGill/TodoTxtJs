@@ -5,111 +5,116 @@
     <link rel="stylesheet" href="css/simple.css">
 </head>
 <body onunload="todoTxtView.save()">
-    <section class="toolbar">
-        <ul id="menu" class="menu">
-            <li class="menuItem">
-                <a href="#" onClick="todoTxtView.toggleToolbox(this)">
-                    Options
-                </a>
-                <div data-bind="with: options">
-                    <div class="toolBox options">
-                        <label>Storage</label>&nbsp;
-                        <select data-bind="options: storageOptions,
-                                           optionsText: 'name',
-                                           value: storageInfo">
-                        </select>
-                        <span data-bind="text: storageInfo().tip"></span>
+    <section class="splash" data-bind="css: { hidden: pageReady}">
+        <p>Loading</p>
+    </section>
+    <section class="hidden" data-bind="css: { hidden: !pageReady }">
+        <section class="toolbar">
+            <ul id="menu" class="menu">
+                <li class="menuItem" id="options">
+                    <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+                        Options
+                    </a>
+                    <div data-bind="with: options">
+                        <div class="toolBox options">
+                            <label>Storage</label>&nbsp;
+                            <select data-bind="options: storageOptions,
+                                               optionsText: 'name',
+                                               value: storageInfo">
+                            </select>
+                            <span data-bind="text: storageInfo().tip"></span>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="menuItem" data-bind="visible: options.showImport">
-                <a href="#" onClick="todoTxtView.toggleToolbox(this)" >
-                    Import
-                </a>
-                <div data-bind="with: importing">
-                    <div class="toolBox import">
-                        <textarea  data-bind="value: importText"></textarea>
+                </li>
+                <li class="menuItem" data-bind="visible: options.showImport" id="import">
+                    <a href="#" onClick="todoTxtView.toggleToolbox(this)" >
+                        Import
+                    </a>
+                    <div data-bind="with: importing">
+                        <div class="toolBox import">
+                            <textarea  data-bind="value: importText"></textarea>
 
-                        <span class="help">Paste or write your Todos into the text box and click import. <span class="warning">This will delete existing Todos.</span></span>
-                        <button data-bind="click: importTodos">Import</button>
+                            <span class="help">Paste or write your Todos into the text box and click import. <span class="warning">This will delete existing Todos.</span></span>
+                            <button data-bind="click: importTodos">Import</button>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="menuItem" data-bind="visible: options.showExport">
-                <a href="#" onClick="todoTxtView.toggleToolbox(this)">
-                    Export
-                </a>
-                <div data-bind="with: exporting">
-                    <div class="toolBox">
-                        <textarea  data-bind="value: exportText"></textarea>
-                        <span class="help">Copy the text and save it into a text file.</span>
+                </li>
+                <li class="menuItem" data-bind="visible: options.showExport" id="export">
+                    <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+                        Export
+                    </a>
+                    <div data-bind="with: exporting">
+                        <div class="toolBox">
+                            <textarea  data-bind="value: exportText"></textarea>
+                            <span class="help">Copy the text and save it into a text file.</span>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="menuItem" data-bind="click: save, visible: options.showStorageOptions">
-                <a href="#">
-                    Save
-                </a>
-            </li>
-            <li class="menuItem" data-bind="click: refresh, visible: options.showStorageOptions">
-                <a href="#">
-                    Load
-                </a>
-            </li>
-        </ul>
-        <span class="lastUpdated" data-bind="text: lastUpdated, visible: options.showStorageOptions"></span>
-    </section>
-    <h1 data-bind="text: title"></h1>
-    <!--
-        **********************************
-        * Add Todo
-        **********************************
-     -->
-    <section class="addTodo">
-        <form data-bind="submit: addNewTodo">
-            <label>New Todo: </label>
-            <input type="text" data-bind="value: newTodoText">
-        </form>
-    </section>
-    <!--
-        **********************************
-        * Filters
-        **********************************
-     -->
-    <section class="filters">
-        <div><label>Filters</label></div>
-        <div class="showCompleted">
-            <input type="checkbox" data-bind="checked: showCompleted">Show Completed</input>
-        </div>
-        <div class="quickFilter">
-            <label>Quick Filter</label><input type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'" title="Example: +Project @Context (A)" />
-        </div>
-    </section>
-    <!--
-        **********************************
-        * Todo
-        **********************************
-     -->
-    <section class="todos" data-bind="foreach: displayedTodos">
-        <div class="todo" data-bind="css: { completed: completed }, visible: $root.isDisplayed($data)">
-            <input type="checkbox" data-bind="checked: completed"/>
-            <span data-bind="css: { completed: completed }">
-                <span class="completedFlag" data-bind="visible: completed">x</span>
-                <span class="completedDate" data-bind="text: completedDate(), visible: completed"></span>
-                <span class="priorityBrace" data-bind="visible: priority !== null">(</span>
-                <span class="priority" data-bind="visible: priority != null">
-                    <span data-bind="text: priority, attr: { 'class': priority }"></span>
+                </li>
+                <li class="menuItem" data-bind="click: save, visible: options.showStorageOptions" id="save">
+                    <a href="#">
+                        Save
+                    </a>
+                </li>
+                <li class="menuItem" data-bind="click: refresh, visible: options.showStorageOptions" id="load">
+                    <a href="#">
+                        Load
+                    </a>
+                </li>
+            </ul>
+            <span class="lastUpdated" data-bind="text: lastUpdated, visible: options.showStorageOptions"></span>
+        </section>
+        <h1 data-bind="text: title"></h1>
+        <!--
+            **********************************
+            * Add Todo
+            **********************************
+         -->
+        <section class="addTodo">
+            <form data-bind="submit: addNewTodo">
+                <label>New Todo: </label>
+                <input type="text" data-bind="value: newTodoText">
+            </form>
+        </section>
+        <!--
+            **********************************
+            * Filters
+            **********************************
+         -->
+        <section class="filters">
+            <div><label>Filters</label></div>
+            <div class="showCompleted">
+                <input type="checkbox" data-bind="checked: showCompleted">Show Completed</input>
+            </div>
+            <div class="quickFilter">
+                <label>Quick Filter</label><input type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'" title="Example: +Project @Context (A)" />
+            </div>
+        </section>
+        <!--
+            **********************************
+            * Todo
+            **********************************
+         -->
+        <section class="todos" data-bind="foreach: displayedTodos">
+            <div class="todo" data-bind="css: { completed: completed }, visible: $root.isDisplayed($data)">
+                <input type="checkbox" data-bind="checked: completed"/>
+                <span data-bind="css: { completed: completed }">
+                    <span class="completedFlag" data-bind="visible: completed">x</span>
+                    <span class="completedDate" data-bind="text: completedDate(), visible: completed"></span>
+                    <span class="priorityBrace" data-bind="visible: priority !== null">(</span>
+                    <span class="priority" data-bind="visible: priority != null">
+                        <span data-bind="text: priority, attr: { 'class': priority }"></span>
+                    </span>
+                    <span class="priorityBrace" data-bind="visible: priority !== null">)</span>
+                    <span class="createDate" data-bind="visible: createDate !== null, text: createDate"></span>
+                    <span class="message" data-bind="html: formatted"></span>
                 </span>
-                <span class="priorityBrace" data-bind="visible: priority !== null">)</span>
-                <span class="createDate" data-bind="visible: createDate !== null, text: createDate"></span>
-                <span class="message" data-bind="html: formatted"></span>
-            </span>
-        </div>
+            </div>
+        </section>
+        <footer>
+            <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
+            <div class="copyright">Copyright &copy; 2012, Martin Gill. All rights reserved.<div>
+        </footer>
     </section>
-    <footer>
-        <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
-        <div class="copyright">Copyright &copy; 2012, Martin Gill. All rights reserved.<div>
-    </footer>
 </body>
 <script src="js/jQuery/js/jquery.js" type="text/javascript"></script>
 <script src="js/jQuery/js/jquery-ui.js" type="text/javascript"></script>

@@ -8,6 +8,25 @@ body
     margin-right: 40px;
 }
 
+.splash
+{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: table;
+}
+
+.splash p
+{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 3em;
+    font-family: fantasy;
+}
+
 /*****************************************************
  * Toolbar
  *****************************************************/
@@ -287,4 +306,9 @@ footer
 .completed
 {
     background-color: silver;
+}
+
+.hidden
+{
+    display : none;
 }
