@@ -4,7 +4,7 @@
 
 var TodoHelpers =
 {
-    extractFlagged:function(text, flag)
+    extractFlagged:function (text, flag)
     {
         var regex = new RegExp("(?:\\s|^)" + flag + "(\\w+)(?=\\s|$)", 'g');
         var result = [];
@@ -18,7 +18,7 @@ var TodoHelpers =
         return result;
     },
 
-    extractPriority:function(text)
+    extractPriority:function (text)
     {
         var regex = new RegExp("\\(([A-Z])\\)", "g");
         var result = [];
@@ -69,9 +69,9 @@ function TodoTxtViewModel()
         var self = this;
 
         var storageConstants = {
-            browser: "browser",
-            server: "server",
-            dropbox: "dropbox"
+            browser:"browser",
+            server:"server",
+            dropbox:"dropbox"
         };
 
         ///////////////////////////
@@ -79,21 +79,33 @@ function TodoTxtViewModel()
         ///////////////////////////
 
         self.storageOptions = ko.observableArray([
-                { name: storageConstants.browser, tip: "Store in Local Browser storage." },
-                { name: storageConstants.server, tip: "Store data on the server."}
-            ]
-          );
+            { name:storageConstants.browser, tip:"Store in Local Browser storage." },
+            { name:storageConstants.server, tip:"Store data on the server."}
+        ]
+        );
         self.storageInfo = ko.observable(self.storageOptions()[0]);
-        self.storage = ko.computed(function() { return self.storageInfo().name; } );
+        self.storage = ko.computed(function ()
+        {
+            return self.storageInfo().name;
+        });
 
         ///////////////////////////
         // Control
         ///////////////////////////
-        self.showStorageControls = ko.computed( function() { return self.storage() === storageConstants.server; } );
-        self.showImport = ko.computed( function() { return self.storage() === storageConstants.browser; } );
-        self.showExport = ko.computed( function() { return self.storage() === storageConstants.browser; } );
+        self.showStorageControls = ko.computed(function ()
+        {
+            return self.storage() === storageConstants.server;
+        });
+        self.showImport = ko.computed(function ()
+        {
+            return self.storage() === storageConstants.browser;
+        });
+        self.showExport = ko.computed(function ()
+        {
+            return self.storage() === storageConstants.browser;
+        });
 
-        self.showOptionsBox = function()
+        self.showOptionsBox = function ()
         {
             parent.exporting.hide();
             parent.importing.hide();
@@ -104,17 +116,17 @@ function TodoTxtViewModel()
             }
         };
 
-        self.hide = function()
+        self.hide = function ()
         {
             self.showingOptions(false);
         };
 
-        self.save = function()
+        self.save = function ()
         {
             localStorage.TodoTxtJsOptions = ko.toJSON(self);
         };
 
-        self.load = function()
+        self.load = function ()
         {
             if (localStorage.TodoTxtJsOptions)
             {
@@ -137,9 +149,10 @@ function TodoTxtViewModel()
 
 
     }
+
     self.options = new Options(self);
 
-    self.toggleToolbox = function(element)
+    self.toggleToolbox = function (element)
     {
         var selected = false;
         var menuItem = $(element).parent();
@@ -157,7 +170,7 @@ function TodoTxtViewModel()
         {
             if (menuItem[0].id === 'export')
             {
-               self.exporting.fillExportBox();
+                self.exporting.fillExportBox();
             }
         }
 
@@ -180,7 +193,7 @@ function TodoTxtViewModel()
         var self = this;
         self.importText = ko.observable("");
 
-        self.importTodos = function()
+        self.importTodos = function ()
         {
             parent.allTodos.removeAll();
             var todos = self.importText().match(/^(.+)$/mg);
@@ -196,7 +209,7 @@ function TodoTxtViewModel()
         var self = this;
         self.exportText = ko.observable("");
 
-        self.buildExportText = function()
+        self.buildExportText = function ()
         {
             var result = "";
             for (var i = 0; i < parent.allTodos().length; i++)
@@ -211,12 +224,12 @@ function TodoTxtViewModel()
             return result;
         };
 
-        self.fillExportBox = function()
+        self.fillExportBox = function ()
         {
             self.exportText(self.buildExportText());
         };
 
-        self.hide = function()
+        self.hide = function ()
         {
             self.exportingTodos(false);
         };
@@ -231,7 +244,7 @@ function TodoTxtViewModel()
 
     function addPriority(name)
     {
-        if (!_.find(self.priorities(), function(val)
+        if (!_.find(self.priorities(), function (val)
         {
             return val === name;
         }))
@@ -261,48 +274,53 @@ function TodoTxtViewModel()
 
     self.filters = ko.observable("");
 
-    self.filtersProject = ko.computed(function()
-                                      {
-                                          return TodoHelpers.extractFlagged(self.filters(), "\\+");
-                                      });
+    self.filtersProject = ko.computed(function ()
+    {
+        return TodoHelpers.extractFlagged(self.filters(), "\\+");
+    });
 
-    self.filtersContext = ko.computed(function()
-                                      {
-                                          return TodoHelpers.extractFlagged(self.filters(), "@");
-                                      });
+    self.filtersContext = ko.computed(function ()
+    {
+        return TodoHelpers.extractFlagged(self.filters(), "@");
+    });
 
-    self.filtersPriority = ko.computed(function()
-                                       {
-                                           return TodoHelpers.extractPriority(self.filters());
-                                       });
+    self.filtersPriority = ko.computed(function ()
+    {
+        return TodoHelpers.extractPriority(self.filters());
+    });
 
-    self.filtered = ko.computed(function()
-                                {
-                                    return self.filtersProject().length > 0 ||
-                                           self.filtersContext().length > 0 ||
-                                           self.filtersPriority().length > 0;
-                                });
+    self.filtered = ko.computed(function ()
+    {
+        return self.filtersProject().length > 0 ||
+            self.filtersContext().length > 0 ||
+            self.filtersPriority().length > 0;
+    });
 
-    self.addFilterPriority = function(priority)
+    self.addFilterPriority = function (priority)
     {
         self.filters(self.filters() + " (" + priority + ")");
     };
 
-    self.addFilterProject = function(project)
+    self.addFilterProject = function (project)
     {
         self.filters(self.filters() + " +" + project);
     };
 
-    self.addFilterContext = function(context)
+    self.addFilterContext = function (context)
     {
         self.filters(self.filters() + " @" + context);
+    };
+
+    self.clearFilters = function ()
+    {
+        self.filters("");
     };
 
     ////////////////////////////////////////////////////////////////////////////
     // Display
     ////////////////////////////////////////////////////////////////////////////
 
-    self.isDisplayed = function(todo)
+    self.isDisplayed = function (todo)
     {
         if (!self.showCompleted() && todo.completed())
         {
@@ -353,7 +371,7 @@ function TodoTxtViewModel()
         return result;
     };
 
-    var sortTodos = function(todo)
+    var sortTodos = function (todo)
     {
         var result = 0;
         if (todo.priority === null)
@@ -373,18 +391,18 @@ function TodoTxtViewModel()
         return result;
     };
 
-    self.displayedTodos = ko.computed(function()
+    self.displayedTodos = ko.computed(function ()
     {
-      var todos = [];
-      for (var i = 0; i < self.allTodos().length; i++)
-      {
-          if (self.isDisplayed(self.allTodos()[i]))
-          {
-              todos.push(self.allTodos()[i]);
-          }
-      }
+        var todos = [];
+        for (var i = 0; i < self.allTodos().length; i++)
+        {
+            if (self.isDisplayed(self.allTodos()[i]))
+            {
+                todos.push(self.allTodos()[i]);
+            }
+        }
 
-      return _.sortBy(todos, sortTodos);
+        return _.sortBy(todos, sortTodos);
     });
 
     ////////////////////////////////////////////////////////////////////////////
@@ -393,13 +411,13 @@ function TodoTxtViewModel()
 
     self.newTodoText = ko.observable("");
 
-    self.addNewTodo = function()
+    self.addNewTodo = function ()
     {
         self.addTodo(new Todo(self.newTodoText()));
         self.newTodoText("");
     };
 
-    self.addTodo = function(todo)
+    self.addTodo = function (todo)
     {
         self.allTodos.push(todo);
 
@@ -412,20 +430,21 @@ function TodoTxtViewModel()
         addContexts(todo.contexts);
     };
 
-    self.save = function()
+    self.save = function ()
     {
         switch (self.options.storage())
         {
             case 'dropbox':
                 self.lastUpdated("saving...");
                 $.ajax({
-                        url: apiPath + 'api/putTodoFile.php',
-                        type: 'post',
-                        data: JSON.stringify({ text: self.exporting.buildExportText() }),
-                        success: function(data) {
-                            self.lastUpdated(new Date());
-                        }
-                    });
+                    url:apiPath + 'api/putTodoFile.php',
+                    type:'post',
+                    data:JSON.stringify({ text:self.exporting.buildExportText() }),
+                    success:function (data)
+                    {
+                        self.lastUpdated(new Date());
+                    }
+                });
                 break;
 
             case 'browser':
@@ -435,20 +454,20 @@ function TodoTxtViewModel()
             case 'server':
                 self.lastUpdated("saving...");
                 $.ajax({
-                    url: apiPath + "api/setTodos",
-                    data: null,
-                    success: function(data)
+                    url:apiPath + "api/setTodos",
+                    data:null,
+                    success:function (data)
                     {
                         self.lastUpdated(new Date());
                     },
-                    error: function(xhr, ajax, thrownError)
+                    error:function (xhr, ajax, thrownError)
                     {
                     }});
                 break;
         }
     };
 
-    self.load = function()
+    self.load = function ()
     {
         if (typeof(Storage) !== "undefined")
         {
@@ -457,17 +476,17 @@ function TodoTxtViewModel()
                 case 'dropbox':
                     self.lastUpdated("updating...");
                     $.ajax({
-                        url: apiPath + "api/getTodoFile.php",
-                        data: null,
-                        success: function(data)
+                        url:apiPath + "api/getTodoFile.php",
+                        data:null,
+                        success:function (data)
                         {
                             self.lastUpdated(new Date());
                             self.importing.importText(data.data);
                             self.importing.importTodos();
                         },
-                        error: function(a,b,c)
+                        error:function (a, b, c)
                         {
-                            console.write(a,b,c);
+                            console.write(a, b, c);
                         }});
                     break;
 
@@ -482,16 +501,16 @@ function TodoTxtViewModel()
                 case 'server':
                     self.lastUpdated("updating...");
                     $.ajax({
-                        url: apiPath + "api/getTodos",
-                        type: 'post',
-                        data: null,
-                        success: function(data)
+                        url:apiPath + "api/getTodos",
+                        type:'post',
+                        data:null,
+                        success:function (data)
                         {
                             self.lastUpdated(new Date());
                             self.importing.importText(JSON.parse(data).data);
                             self.importing.importTodos();
                         },
-                        error: function(xhr, ajax, thrownError)
+                        error:function (xhr, ajax, thrownError)
                         {
                         }});
                     break;
@@ -499,10 +518,10 @@ function TodoTxtViewModel()
         }
     };
 
-    $(window).unload( self.save );
+    $(window).unload(self.save);
 
     self.lastUpdated = ko.observable();
-    self.refresh = function()
+    self.refresh = function ()
     {
         self.load();
     };
@@ -510,7 +529,10 @@ function TodoTxtViewModel()
     self.load();
 
     self.pageReady = ko.observable(false);
-    $(document).ready( function() { self.pageReady(true); });
+    $(document).ready(function ()
+    {
+        self.pageReady(true);
+    });
 }
 
 var todoTxtView = new TodoTxtViewModel();

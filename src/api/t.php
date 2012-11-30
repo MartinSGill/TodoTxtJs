@@ -32,6 +32,19 @@ $app->post('/getTodos', function () {
     print json_encode($response, JSON_FORCE_OBJECT);
 });
 
+// POST route
+$app->post('/setTodos', function () {
+
+    // mysqli
+    //$mysqli = new mysqli("localhost", "todotxtjs", "todotxtjs", "todotxtjs");
+    //$result = $mysqli->query("SELECT data FROM data WHERE user = 'test'");
+    //$row = $result->fetch_assoc();
+    //$var = $row['data'];
+
+    //$response = array('data' => $var);
+    //print json_encode($response, JSON_FORCE_OBJECT);
+});
+
 
 $app->run();
 

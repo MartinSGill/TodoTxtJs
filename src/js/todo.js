@@ -8,11 +8,11 @@ function Todo(raw)
 
     var completed = ko.observable(false);
     self.completed = ko.computed({
-        read: function()
+        read:function ()
         {
             return completed();
         },
-        write: function(value)
+        write:function (value)
         {
             if (value)
             {
@@ -27,7 +27,7 @@ function Todo(raw)
     });
 
     // Defaults
-    self.raw = "";
+    self.raw = ko.observable("");
     self.completedDate = ko.observable();
     self.priority = null;
     self.createDate = null;
@@ -42,11 +42,11 @@ function Todo(raw)
 
         var contextRegex = /\s(@)(\w+)(?=\W|$)/g;
         formattedMessage = formattedMessage.replace(contextRegex,
-                                                    '<span class="contextFlag" onclick="todoTxtView.addFilterContext(\'$2\')">$1</span><span class="context" onclick="todoTxtView.addFilterContext(\'$2\')">$2</span>');
+            '<span class="contextFlag" onclick="todoTxtView.addFilterContext(\'$2\')">$1</span><span class="context" onclick="todoTxtView.addFilterContext(\'$2\')">$2</span>');
 
         var projectRegex = /\s(\+)(\w+)(?=\W|$)/g;
         formattedMessage = formattedMessage.replace(projectRegex,
-                                                    '<span class="projectFlag" onclick="todoTxtView.addFilterProject(\'$2\')">$1</span><span class="project" onclick="todoTxtView.addFilterProject(\'$2\')">$2</span>');
+            '<span class="projectFlag" onclick="todoTxtView.addFilterProject(\'$2\')">$1</span><span class="project" onclick="todoTxtView.addFilterProject(\'$2\')">$2</span>');
 
         return formattedMessage;
     }
@@ -120,7 +120,7 @@ function Todo(raw)
         self.contexts = TodoHelpers.extractFlagged(self.message, '@');
     }
 
-    self.toString = function()
+    self.toString = function ()
     {
         var result = "";
         if (self.completed())
@@ -145,20 +145,27 @@ function Todo(raw)
         return result;
     };
 
-    self.fromString = function(text)
+    var rawUpdated = function (newValue)
     {
+        text = newValue;
         var workingData = text;
         workingData = extractCompleted(workingData);
         workingData = extractPriority(workingData);
         workingData = extractCreateDate(workingData);
 
-        self.raw = text;
         self.message = workingData;
         self.formatted = buildHtml();
 
         extractProjects();
         extractContexts();
     };
+
+    self.fromString = function (text)
+    {
+        self.raw(text);
+    };
+
+    self.raw.subscribe(rawUpdated);
 
     // Construction
     self.fromString(raw);
