@@ -380,7 +380,10 @@ function TodoTxtViewModel()
         }
         else
         {
-            result += todo.priority.charCodeAt(0);
+            if (todo.priority())
+            {
+                result += todo.priority().charCodeAt(0);
+            }
         }
 
         if (todo.completed())
@@ -432,6 +435,8 @@ function TodoTxtViewModel()
 
     self.save = function ()
     {
+        // TODO: remove
+        return;
         switch (self.options.storage())
         {
             case 'dropbox':

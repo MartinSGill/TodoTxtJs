@@ -113,8 +113,8 @@
                             <span data-bind="text: priority, attr: { 'class': priority }"></span>
                         </span>
                         <span class="priorityBrace" data-bind="visible: priority !== null">)</span>
-                        <span class="createDate" data-bind="visible: createDate !== null, text: createDate"></span>
-                        <span class="message" data-bind="html: formatted"></span>
+                        <span class="createDate" data-bind="visible: createdDate !== null, text: createdDate"></span>
+                        <span class="message" data-bind="html: htmlContents"></span>
                     </span>
             </div>
             <!--
@@ -135,5 +135,6 @@
 <script src="js/knockout/knockoutjs.js" type="text/javascript"></script>
 <script src="js/underscore/underscore.js" type="text/javascript"></script>
 <script src="js/todo.js" type="text/javascript"></script>
+<script src="js/todoHtmlRender.js" type="text/javascript"></script>
 <script src="js/todotxt.js" type="text/javascript"></script>
 </html>
