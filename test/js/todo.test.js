@@ -161,5 +161,44 @@ buster.testCase("todo Tests",
         {
             var target = new Todo("johndoe@example.com");
             assert.equals(target.contexts().length, 0);
+        },
+
+        "test Todo Update Priority, change": function()
+        {
+            // Arrange
+            var target = new Todo("(D) Hello World");
+
+            // Act
+            target.priority("A");
+
+            // Assert
+            assert.equals(target.priority(), "A");
+            assert.equals(target.text(), "(A) Hello World");
+        },
+
+        "test Todo Update Priority, add": function()
+        {
+            // Arrange
+            var target = new Todo("Hello World");
+
+            // Act
+            target.priority("A");
+
+            // Assert
+            assert.equals(target.priority(), "A");
+            assert.equals(target.text(), "(A) Hello World");
+        },
+
+        "test Todo Update Priority, remove": function()
+        {
+            // Arrange
+            var target = new Todo("(D) Hello World");
+
+            // Act
+            target.priority(undefined);
+
+            // Assert
+            refute.defined(target.priority());
+            assert.equals(target.text(), "Hello World");
         }
     });
