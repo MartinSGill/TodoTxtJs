@@ -226,7 +226,7 @@ buster.testCase("todo Tests",
             target.completed(false);
 
             // Assert
-            assert.equals(target.completed, false);
+            assert.equals(target.completed(), false);
             refute.defined(target.completedDate());
             assert.equals(target.text(), "Hello World");
         }
