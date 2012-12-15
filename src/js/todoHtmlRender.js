@@ -7,7 +7,7 @@ function todoHtmlContentsRenderer(contents)
 
     if (contents instanceof Todo)
     {
-        return toHtml(content.contents());
+        return toHtml(contents.contents());
     }
 
     if (typeof(contents) !== "string")

@@ -4,12 +4,12 @@ config["My tests"] = {
     rootPath: "../",
     environment: "browser", // or "node"
     libs: [
-        "js/knockout/*.js",
-        "js/jQuery/js/*.js",
-        "js/underscore/*.js"
+        "src/js/knockout/*.js",
+        "src/js/jQuery/js/*.js",
+        "src/js/underscore/*.js"
     ],
     sources: [
-        "js/todo.js"
+        "src/js/todo.js"
     ],
     tests: [
         "test/**/*.test.js"
