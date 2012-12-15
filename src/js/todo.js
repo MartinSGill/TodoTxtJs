@@ -43,7 +43,7 @@ function Todo(text)
      * Extracts all the flagged elements of a
      * @param text The text to examine
      * @param flag The flag character to search for (e.g. @ or +)
-     * @return array of lowercase matches, or undefined
+     * @return Array of lowercase matches, or undefined
      */
     function findFlags(text, flag)
     {

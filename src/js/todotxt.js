@@ -66,7 +66,7 @@ function TodoTxtViewModel()
     // Options
     ////////////////////////////////////////////////////////////////////////////
 
-    function Options(parent)
+    function Options()
     {
         var self = this;
 
@@ -136,7 +136,7 @@ function TodoTxtViewModel()
 
     }
 
-    self.options = new Options(self);
+    self.options = new Options();
 
     self.toggleToolbox = function (element)
     {
@@ -174,7 +174,7 @@ function TodoTxtViewModel()
     // Import / Export
     ////////////////////////////////////////////////////////////////////////////
 
-    function Importing(parent)
+    function Importing()
     {
         var self = this;
         self.importText = ko.observable("");
@@ -187,7 +187,7 @@ function TodoTxtViewModel()
         };
     }
 
-    function Exporting(parent)
+    function Exporting()
     {
         var self = this;
         self.exportText = ko.observable("");
@@ -324,8 +324,6 @@ function TodoTxtViewModel()
 
     self.save = function ()
     {
-        // TODO: remove
-        return;
         switch (self.options.storage())
         {
             case 'dropbox':
@@ -334,7 +332,7 @@ function TodoTxtViewModel()
                     url:apiPath + 'api/putTodoFile.php',
                     type:'post',
                     data:JSON.stringify({ text:self.exporting.buildExportText() }),
-                    success:function (data)
+                    success:function()
                     {
                         self.lastUpdated(new Date());
                     }
@@ -350,11 +348,11 @@ function TodoTxtViewModel()
                 $.ajax({
                     url:apiPath + "api/setTodos",
                     data:null,
-                    success:function (data)
+                    success:function()
                     {
                         self.lastUpdated(new Date());
                     },
-                    error:function (xhr, ajax, thrownError)
+                    error:function (/*xhr, ajax, thrownError*/)
                     {
                     }});
                 break;
@@ -404,7 +402,7 @@ function TodoTxtViewModel()
                             self.importing.importText(JSON.parse(data).data);
                             self.importing.importTodos();
                         },
-                        error:function (xhr, ajax, thrownError)
+                        error:function (/*xhr, ajax, thrownError*/)
                         {
                         }});
                     break;

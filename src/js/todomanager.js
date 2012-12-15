@@ -90,8 +90,7 @@ function TodoManager()
         }
 
         // return -ve if left smaller than right, +ve if right smaller than left, 0 for equal
-        var result = leftValue === rightValue ? 0 : (leftValue > rightValue ? -1 : 1);
-        return result;
+        return leftValue === rightValue ? 0 : (leftValue > rightValue ? -1 : 1);
     }
 
     self.removeAll = function()
