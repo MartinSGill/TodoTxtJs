@@ -127,5 +127,26 @@ buster.testCase("todo Tests",
             assert.equals(target.projects().length, 2);
             assert.equals(target.projects()[0], "todo");
             assert.equals(target.projects()[1], "projects");
+        },
+
+        "test Todo Constructor, extract context, surround by stuff": function()
+        {
+            var target = new Todo("Some(! @contexts).");
+            assert.equals(target.contexts().length, 1);
+            assert.equals(target.contexts()[0], "contexts");
+        },
+
+        "test Todo Constructor, extract context with underscore": function()
+        {
+            var target = new Todo("@some_context");
+            assert.equals(target.contexts().length, 1);
+            assert.equals(target.contexts()[0], "some_context");
+        },
+
+        "test Todo Constructor, extract context make lower-case": function()
+        {
+            var target = new Todo("@sOmeContext");
+            assert.equals(target.contexts().length, 1);
+            assert.equals(target.contexts()[0], "somecontext");
         }
     });
