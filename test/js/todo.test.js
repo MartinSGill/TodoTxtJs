@@ -38,7 +38,7 @@ buster.testCase("todo Tests",
             refute.defined(target.completedDate());
             assert.equals("Hello World", target.contents());
             refute.defined(target.createdDate());
-            refute.equals("A", target.priority());
+            assert.equals("A", target.priority());
             assert.equals(0, target.projects().length);
             assert.equals(0, target.contexts().length);
         },
@@ -73,7 +73,7 @@ buster.testCase("todo Tests",
         {
             var target = new Todo("x 10-12-2013 Hello +World");
             assert.equals(true, target.completed());
-            assert.equals("x 10-12-2013 Hello World", target.text());
+            assert.equals("x 10-12-2013 Hello +World", target.text());
             assert.equals("10-12-2013", target.completedDate());
             assert.equals("Hello +World", target.contents());
             refute.defined(target.createdDate());
@@ -87,7 +87,7 @@ buster.testCase("todo Tests",
         {
             var target = new Todo("x 10-12-2013 Hello @World");
             assert.equals(true, target.completed());
-            assert.equals("x 10-12-2013 Hello World", target.text());
+            assert.equals("x 10-12-2013 Hello @World", target.text());
             assert.equals("10-12-2013", target.completedDate());
             assert.equals("Hello +World", target.contents());
             refute.defined(target.createdDate());
@@ -101,9 +101,9 @@ buster.testCase("todo Tests",
         {
             var target = new Todo("+Hello @World");
             assert.equals(true, target.completed());
-            assert.equals("x 10-12-2013 Hello World", target.text());
+            assert.equals("+Hello @World", target.text());
             assert.equals("10-12-2013", target.completedDate());
-            assert.equals("Hello +World", target.contents());
+            assert.equals("+Hello @World", target.contents());
             refute.defined(target.createdDate());
             refute.defined(target.priority());
             assert.equals(1, target.contexts().length);
