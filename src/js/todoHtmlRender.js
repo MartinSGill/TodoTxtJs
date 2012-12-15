@@ -5,6 +5,11 @@ function todoHtmlContentsRenderer(contents)
 
     contents = ko.utils.unwrapObservable(contents);
 
+    if (!contents)
+    {
+        return undefined;
+    }
+
     if (contents instanceof Todo)
     {
         return toHtml(contents.contents());

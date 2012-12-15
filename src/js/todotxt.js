@@ -55,12 +55,12 @@ function TodoTxtViewModel()
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
     self.priorities = ko.observableArray([]);
-    self.projects = ko.observableArray([]);
-    self.contexts = ko.observableArray([]);
+    self.projects = ko.computed(function() { return todoManager.allProjects(); } );
+    self.contexts = ko.computed(function() { return todoManager.allContexts(); } );
 
     self.showCompleted = ko.observable(false);
 
-    self.newPriorityFilter = ko.observable();
+    self.newPriorityFilter = ko.observable(undefined);
 
     ////////////////////////////////////////////////////////////////////////////
     // Options
@@ -106,22 +106,6 @@ function TodoTxtViewModel()
         {
             return self.storage() === storageConstants.browser;
         });
-
-        self.showOptionsBox = function ()
-        {
-            parent.exporting.hide();
-            parent.importing.hide();
-            self.showingOptions(!self.showingOptions());
-            if (!self.showingOptions())
-            {
-                self.save();
-            }
-        };
-
-        self.hide = function ()
-        {
-            self.showingOptions(false);
-        };
 
         self.save = function ()
         {
@@ -197,12 +181,9 @@ function TodoTxtViewModel()
 
         self.importTodos = function ()
         {
-            parent.allTodos.removeAll();
+            todoManager.removeAll();
             var todos = self.importText().match(/^(.+)$/mg);
-            for (var i = 0; i < todos.length; i++)
-            {
-                parent.addTodo(new Todo(todos[i]));
-            }
+            todoManager.loadFromStringArray(todos);
         };
     }
 
@@ -230,45 +211,10 @@ function TodoTxtViewModel()
         {
             self.exportText(self.buildExportText());
         };
-
-        self.hide = function ()
-        {
-            self.exportingTodos(false);
-        };
     }
 
     self.importing = new Importing(self);
     self.exporting = new Exporting(self);
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Build Helper Arrays
-    ////////////////////////////////////////////////////////////////////////////
-
-    function addPriority(name)
-    {
-        if (!_.find(self.priorities(), function (val)
-        {
-            return val === name;
-        }))
-        {
-            self.priorities.push(name);
-            self.priorities.sort();
-        }
-    }
-
-    function addProjects(projects)
-    {
-        var notSeen = _.difference(projects, self.projects());
-        self.projects.push(notSeen);
-        self.projects.sort();
-    }
-
-    function addContexts(contexts)
-    {
-        var notSeen = _.difference(contexts, self.contexts());
-        self.projects.push(notSeen);
-        self.projects.sort();
-    }
 
     ////////////////////////////////////////////////////////////////////////////
     // Filters
@@ -418,21 +364,8 @@ function TodoTxtViewModel()
 
     self.addNewTodo = function ()
     {
-        self.addTodo(new Todo(self.newTodoText()));
+        todoManager.add(new Todo(self.newTodoText()));
         self.newTodoText("");
-    };
-
-    self.addTodo = function (todo)
-    {
-        todoManager.add(todo);
-
-        if (todo.priority !== null)
-        {
-            addPriority(todo.priority);
-        }
-
-        addProjects(todo.projects);
-        addContexts(todo.contexts);
     };
 
     self.save = function ()
@@ -527,7 +460,7 @@ function TodoTxtViewModel()
 
     $(window).unload(self.save);
 
-    self.lastUpdated = ko.observable();
+    self.lastUpdated = ko.observable(undefined);
     self.refresh = function ()
     {
         self.load();

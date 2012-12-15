@@ -104,6 +104,7 @@
     <section class="todos" data-bind="foreach: displayedTodos">
         <div class="todo" data-bind="css: { completed: completed }, visible: $root.isDisplayed($data)">
             <div class="display">
+                <span class="index" data-bind="text: index"></span>
                 <input type="checkbox" data-bind="checked: completed" />
                     <span data-bind="css: { completed: completed }">
                         <span class="completedFlag" data-bind="visible: completed">x</span>

@@ -12,23 +12,32 @@ function Todo(text)
         throw "argument is not a string.";
     }
 
-    self.text = ko.observable(text);
+    var _text = ko.observable(text);
+    parse();
+
+    self.text = ko.computed(
+        {
+            read: function()
+            {
+                return _text();
+            },
+            write: function(value)
+            {
+                _text(value);
+                parse();
+            }
+        }
+    );
+
     self.index = undefined;
 
-    // Matches:
-    // 1: Completed ( == 'x' )
-    // 2: Completed Date
-    // 3: Priority
-    // 4: Contents
-    var parsingRegex = /^(?:(x) (?:((?:19|20)[0-9]{2}[\- \/.](?:0[1-9]|1[012])[\- \/.](?:0[1-9]|[12][0-9]|3[01])) )?)?(?:(?:\(([A-Z])\)) )?(.+)$/;
-
     // Set defaults
-    var priority;
-    var completed = false;
-    var completedDate;
-    var contents;
-    var projects = [];
-    var contexts = [];
+    var _priority;
+    var _completed = false;
+    var _completedDate;
+    var _contents;
+    var _projects = [];
+    var _contexts = [];
 
     /**
      * Extracts all the flagged elements of a
@@ -56,69 +65,76 @@ function Todo(text)
      */
     function parse()
     {
-        priority = undefined;
-        completed = false;
-        completedDate = undefined;
-        contents = undefined;
-        projects = [];
-        contexts = [];
+        // Matches:
+        // 1: Completed ( == 'x' )
+        // 2: Completed Date
+        // 3: Priority
+        // 4: Contents
+        var parsingRegex = /^(?:(x) (?:((?:19|20)[0-9]{2}[\- \/.](?:0[1-9]|1[012])[\- \/.](?:0[1-9]|[12][0-9]|3[01])) )?)?(?:(?:\(([A-Z])\)) )?(.+)$/;
 
-        if (self.text() === undefined)
+        _priority = undefined;
+        _completed = false;
+        _completedDate = undefined;
+        _contents = undefined;
+        _projects = [];
+        _contexts = [];
+
+        if (_text() === undefined)
         {
             return;
         }
 
-        var match = parsingRegex.exec(self.text());
+        var match = parsingRegex.exec(_text());
         if (match !== null)
         {
             if (match[1] === 'x')
             {
-                completed = true;
+                _completed = true;
 
                 if (match[2])
                 {
-                    completedDate = match[2];
+                    _completedDate = match[2];
                 }
             }
 
             if (match[3])
             {
-                priority = match[3];
+                _priority = match[3];
             }
 
             if (match[4])
             {
-                contents = match[4];
+                _contents = match[4];
             }
 
-            projects = findFlags(contents, '+');
-            contexts = findFlags(contents, '@');
+            _projects = findFlags(_contents, '+');
+            _contexts = findFlags(_contents, '@');
         }
     }
 
     function render()
     {
         var result = '';
-        if (completed)
+        if (_completed)
         {
             result += 'x ';
-            if (completedDate)
+            if (_completedDate)
             {
-                result += completedDate + ' ';
+                result += _completedDate + ' ';
             }
         }
 
-        if (priority)
+        if (_priority)
         {
-            result += '(' + priority + ') ';
+            result += '(' + _priority + ') ';
         }
 
-        if (contents)
+        if (_contents)
         {
-            result += contents;
+            result += _contents;
         }
 
-        self.text(result);
+        _text(result);
     }
 
     self.createdDate = ko.computed(
@@ -134,11 +150,11 @@ function Todo(text)
             read: function()
             {
                 parse();
-                return priority;
+                return _priority;
             },
             write: function(value)
             {
-                priority = value;
+                _priority = value;
                 render();
             }
         });
@@ -148,11 +164,20 @@ function Todo(text)
             read: function()
             {
                 parse();
-                return completed;
+                return _completed;
             },
             write: function(value)
             {
-                completed = value;
+                _completed = value;
+                if (_completed)
+                {
+                    _completedDate = $.datepicker.formatDate("yy-mm-dd", new Date());
+                }
+                else
+                {
+                    _completedDate = undefined;
+                }
+
                 render();
             }
         });
@@ -162,11 +187,11 @@ function Todo(text)
             read: function()
             {
                 parse();
-                return completedDate;
+                return _completedDate;
             },
             write: function(value)
             {
-                completedDate = value;
+                _completedDate = value;
                 render();
             }
         });
@@ -176,7 +201,7 @@ function Todo(text)
             read: function()
             {
                 parse();
-                return projects;
+                return _projects;
             }
         });
 
@@ -185,7 +210,7 @@ function Todo(text)
             read: function()
             {
                 parse();
-                return contexts;
+                return _contexts;
             }
         });
 
@@ -194,7 +219,7 @@ function Todo(text)
         read: function()
         {
             parse();
-            return contents;
+            return _contents;
         }
     });
 }

@@ -12,6 +12,54 @@ function TodoManager()
         return data();
     };
 
+    self.allProjects = function()
+    {
+        var hash = {};
+        for (var i = 0; i < data().length; i++)
+        {
+            var projects = data()[i].projects();
+            for (var j = 0; j < projects.length; j++)
+            {
+                hash[projects[j]] = true;
+            }
+        }
+
+        var result = [];
+        for(var name in hash)
+        {
+            if (hash.hasOwnProperty(name))
+            {
+                result.push(name);
+            }
+        }
+
+        return result;
+    };
+
+    self.allContexts = function()
+    {
+        var hash = {};
+        for (var i = 0; i < data().length; i++)
+        {
+            var contexts = data()[i].contexts();
+            for (var j = 0; j < contexts.length; j++)
+            {
+                hash[contexts[j]] = true;
+            }
+        }
+
+        var result = [];
+        for(var name in hash)
+        {
+            if (hash.hasOwnProperty(name))
+            {
+                result.push(name);
+            }
+        }
+
+        return result;
+    };
+
     function sorter(left, right)
     {
         // return -ve if left smaller than right, 0 for equal
@@ -66,7 +114,7 @@ function TodoManager()
 
     self.loadFromStringArray = function(newData)
     {
-        if (typeof(newData) !== 'array')
+        if (!newData instanceof Array)
         {
             throw "Argument isn't an array.";
         }
@@ -74,12 +122,12 @@ function TodoManager()
         for (var i = 0; i < newData.length; i++)
         {
             var obj = newData[i];
-            if (obj !== 'string')
+            if (!obj instanceof String)
             {
                 throw "Argument elements are not strings";
             }
 
-            var todo = Todo(obj);
+            var todo = new Todo(obj);
             todo.index = nextId++;
             data().push(todo);
         }

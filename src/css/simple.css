@@ -2,36 +2,36 @@
 
 body
 {
-    background-color : ivory;
-    color            : black;
-    margin-left      : 40px;
-    margin-right     : 40px;
+    background-color: ivory;
+    color: black;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .splash
 {
-    top      : 0;
-    left     : 0;
-    width    : 100%;
-    height   : 100%;
-    position : absolute;
-    display  : table;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: table;
 }
 
 .splash p
 {
-    display        : table-cell;
-    vertical-align : middle;
-    text-align     : center;
-    font-size      : 3em;
-    font-family    : fantasy;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 3em;
+    font-family: fantasy;
 }
 
 footer
 {
-    margin-top : 5px;
-    font-size  : 0.6em;
-    text-align : center;
+    margin-top: 5px;
+    font-size: 0.6em;
+    text-align: center;
 }
 
 /*****************************************************
@@ -40,110 +40,110 @@ footer
 
 form
 {
-    margin : 0;
+    margin: 0;
 }
 
 .toolbar
 {
-    float    : right;
-    position : absolute;
-    top      : 5px;
-    right    : 40px;
-    display  : block;
-    width    : 100%;
+    float: right;
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    display: block;
+    width: 100%;
 }
 
 .menu
 {
-    float           : right;
-    width           : 100%;
-    padding         : 0;
-    margin          : 0;
-    list-style-type : none;
-    font-family     : sans-serif;
+    float: right;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: sans-serif;
 }
 
 .menuItem a
 {
-    float            : right;
-    cursor           : pointer;
-    margin-left      : 2px;
-    margin-right     : 2px;
-    width            : 100px;
-    height           : 20px;
+    float: right;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 100px;
+    height: 20px;
 
-    background-color : #FFCC00;
-    border-style     : solid;
-    border-color     : #FF9900;
-    border-width     : thin;
+    background-color: #FFCC00;
+    border-style: solid;
+    border-color: #FF9900;
+    border-width: thin;
 
-    text-align       : center;
-    vertical-align   : middle;
-    color            : black;
-    text-decoration  : none;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    text-decoration: none;
 
-    position         : relative;
+    position: relative;
 }
 
 .menuItem a:hover
 {
-    background-color : #FF9900;
-    color            : blue;
+    background-color: #FF9900;
+    color: blue;
 }
 
 .menuItem.selected a
 {
-    background-color : #FF9900;
-    height           : 25px;
-    z-index          : 5001;
+    background-color: #FF9900;
+    height: 25px;
+    z-index: 5001;
 }
 
 .lastUpdated
 {
-    display  : block;
-    float    : right;
-    position : absolute;
-    top      : 30px;
-    right    : 10px;
+    display: block;
+    float: right;
+    position: absolute;
+    top: 30px;
+    right: 10px;
 }
 
 .toolBox
 {
-    float            : right;
-    position         : absolute;
-    z-index          : 5000;
-    top              : 26px;
-    right            : 2px;
+    float: right;
+    position: absolute;
+    z-index: 5000;
+    top: 26px;
+    right: 2px;
 
-    min-width        : 250px;
+    min-width: 250px;
 
-    background-color : #FF9900;
+    background-color: #FF9900;
 
-    padding          : 3px;
+    padding: 3px;
 
-    display          : none;
+    display: none;
 }
 
 .toolBox > textarea
 {
-    display : block;
-    width   : 650px;
-    height  : 300px;
+    display: block;
+    width: 650px;
+    height: 300px;
 }
 
 .toolBox > span
 {
-    clear : both;
+    clear: both;
 }
 
 .toolBox > button
 {
-    float : right;
+    float: right;
 }
 
 .warning
 {
-    color : yellow;
+    color: yellow;
 }
 
 /*******************************************************
@@ -152,19 +152,17 @@ form
 
 .addTodo
 {
-    border-style     : solid;
-    border-width     : 1px;
-    border-color     : silver;
-    border-radius    : 5px;
+    border: 1px solid silver;
+    border-radius: 5px;
 
-    padding          : 5px;
+    padding: 5px;
 
-    background-color : #EDEF85;
+    background-color: #EDEF85;
 }
 
 .addTodo input
 {
-    width : 600px;
+    width: 600px;
 }
 
 /*******************************************************
@@ -173,67 +171,65 @@ form
 
 .filters
 {
-    margin-top       : 10px;
-    border-style     : solid;
-    border-width     : 1px;
-    border-color     : silver;
-    border-radius    : 5px;
+    margin-top: 10px;
+    border: 1px solid silver;
+    border-radius: 5px;
 
-    padding          : 5px;
+    padding: 5px;
 
-    background-color : #E1E1FF;
+    background-color: #E1E1FF;
 }
 
 .filters > div
 {
-    display : inline-block;
+    display: inline-block;
 }
 
 .filters label
 {
-    font-weight : bold;
+    font-weight: bold;
 }
 
 .quickFilter
 {
-    margin-left : 100px;
+    margin-left: 100px;
 }
 
 .quickFilter > label:after
 {
-    content : ": ";
+    content: ": ";
 }
 
 .quickFilter > input
 {
-    width : 300px;
+    width: 300px;
 }
 
 .clearFilters
 {
-    display     : inline-block;
-    margin-left : 5px;
-    padding-top : 6px;
+    display: inline-block;
+    margin-left: 5px;
+    padding-top: 6px;
 }
 
 .clearFilters a
 {
-    border-radius    : 50px;
-    background-color : silver;
-    color            : white;
-    font-family      : sans-serif;
-    display          : table-cell;
-    text-decoration  : none;
-    font-weight      : bold;
-    height           : 0.8em;
-    width            : 1em;
-    text-align       : center;
-    vertical-align   : middle;
+    border-radius: 50px;
+    background-color: silver;
+    color: white;
+    font-family: sans-serif;
+    display: table-cell;
+    text-decoration: none;
+    font-weight: bold;
+    height: 0.8em;
+    width: 1em;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .clearFilters a:hover
 {
-    color : red;
+    color: red;
 }
 
 /*******************************************************
@@ -246,114 +242,122 @@ form
 
 .edit
 {
-    width : 100%;
+    width: 100%;
 }
 
 .edit input
 {
-    width : 100%;
+    width: 100%;
 }
 
 .todos
 {
-    margin-top    : 5px;
-    padding       : 5px;
-    border        : ridge thin silver;
-    border-radius : 5px;
-    font-size     : 1.1em;
+    margin-top: 5px;
+    padding: 5px;
+    border: ridge thin silver;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+.index
+{
+    display: inline-block;
+    width: 20px;
+    text-align: right;
+    font-size: 0.5em;
 }
 
 .completedFlag
 {
-    display : none;
+    display: none;
 }
 
 .priorityBrace
 {
-    display : none;
+    display: none;
 }
 
 .priority
 {
-    font-weight : bold;
-    font-size   : 1.2em;
-    font-family : sans-serif;
-    color       : #59955C;
+    font-weight: bold;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    color: #59955C;
 }
 
 .A
 {
-    color : #FF4848;
+    color: #FF4848;
 }
 
 .B
 {
-    color : #9A03FE;
+    color: #9A03FE;
 }
 
 .C
 {
-    color : #2966B8;
+    color: #2966B8;
 }
 
 .D
 {
-    color : #06DCFB;
+    color: #06DCFB;
 }
 
 .E
 {
-    color : #01F33E;
+    color: #01F33E;
 }
 
 .createDate
 {
-    font-size   : smaller;
-    font-family : sans-serif;
+    font-size: smaller;
+    font-family: sans-serif;
 }
 
 .completedDate
 {
-    font-size   : smaller;
-    font-family : sans-serif;
+    font-size: smaller;
+    font-family: sans-serif;
 }
 
 .projectFlag
 {
-    margin-left : 0.3em;
-    color       : #9A03FE;
-    cursor      : pointer;
+    margin-left: 0.3em;
+    color: #9A03FE;
+    cursor: pointer;
 }
 
 .project
 {
-    color       : #9A03FE;
-    font-family : sans-serif;
-    font-size   : 1.0em;
-    cursor      : pointer;
+    color: #9A03FE;
+    font-family: sans-serif;
+    font-size: 1.0em;
+    cursor: pointer;
 }
 
 .contextFlag
 {
-    margin-left : 0.3em;
-    color       : #2966B8;
-    cursor      : pointer;
+    margin-left: 0.3em;
+    color: #2966B8;
+    cursor: pointer;
 }
 
 .context
 {
-    color       : #2966B8;
-    font-family : sans-serif;
-    font-size   : 1.0em;
-    cursor      : pointer;
+    color: #2966B8;
+    font-family: sans-serif;
+    font-size: 1.0em;
+    cursor: pointer;
 }
 
 .completed
 {
-    background-color : silver;
+    background-color: silver;
 }
 
 .hidden
 {
-    display : none;
+    display: none;
 }
