@@ -200,5 +200,34 @@ buster.testCase("todo Tests",
             // Assert
             refute.defined(target.priority());
             assert.equals(target.text(), "Hello World");
+        },
+
+        "test Todo set completed": function()
+        {
+            // Arrange
+            var target = new Todo("Hello World");
+            var actual = $.datepicker.formatDate('yy-mm-dd', new Date());
+
+            // Act
+            target.completed(true);
+
+            // Assert
+            assert.equals(target.completed, true);
+            assert.equals(target.completedDate(), actual);
+            assert.equals(target.text(), "x " + actual + " Hello World");
+        },
+
+        "test Todo unset completed": function()
+        {
+            // Arrange
+            var target = new Todo("x 2013-12-11 Hello World");
+
+            // Act
+            target.completed(false);
+
+            // Assert
+            assert.equals(target.completed, false);
+            refute.defined(target.completedDate());
+            assert.equals(target.text(), "Hello World");
         }
     });
