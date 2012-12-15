@@ -9,7 +9,7 @@ function TodoManager()
 
     self.all = function()
     {
-        return data();
+        return data;
     };
 
     self.allProjects = function()
@@ -62,33 +62,36 @@ function TodoManager()
 
     function sorter(left, right)
     {
-        // return -ve if left smaller than right, 0 for equal
-        var leftValue = left.id;
-        var rightValue = right.id;
+        var leftValue = left.index;
+        var rightValue = right.index;
 
         // Priority
+        var priorityWeight = 1000;
         if (left.priority())
         {
-            leftValue += left.priority().charCodeAt(0);
+            leftValue += priorityWeight + Math.abs(priorityWeight - left.priority().charCodeAt(0));
         }
 
         if (right.priority())
         {
-            rightValue += right.priority().charCodeAt(0);
+            rightValue += priorityWeight + Math.abs(priorityWeight - right.priority().charCodeAt(0));
         }
 
         // Completed
+        var completedWeight = -5000;
         if (left.completed())
         {
-            leftValue -= 1000;
+            leftValue += completedWeight;
         }
 
         if (right.completed())
         {
-            rightValue -= 1000;
+            rightValue += completedWeight;
         }
 
-        return leftValue - rightValue;
+        // return -ve if left smaller than right, +ve if right smaller than left, 0 for equal
+        var result = leftValue === rightValue ? 0 : (leftValue > rightValue ? -1 : 1);
+        return result;
     }
 
     self.removeAll = function()
@@ -111,6 +114,7 @@ function TodoManager()
 
         newTodo.id = nextId++;
         data.push(newTodo);
+        data.sort(sorter);
     };
 
     self.loadFromStringArray = function(newData)

@@ -310,43 +310,6 @@ function TodoTxtViewModel()
         return result;
     };
 
-    var sortTodos = function (todo)
-    {
-        var result = 0;
-        if (todo.priority === null)
-        {
-            result += 1000;
-        }
-        else
-        {
-            if (todo.priority())
-            {
-                result += todo.priority().charCodeAt(0);
-            }
-        }
-
-        if (todo.completed())
-        {
-            result += 5000;
-        }
-
-        return result;
-    };
-
-    self.displayedTodos = ko.computed(function ()
-    {
-        var todos = [];
-        for (var i = 0; i < self.allTodos().length; i++)
-        {
-            if (self.isDisplayed(self.allTodos()[i]))
-            {
-                todos.push(self.allTodos()[i]);
-            }
-        }
-
-        return _.sortBy(todos, sortTodos);
-    });
-
     ////////////////////////////////////////////////////////////////////////////
     // TODO Management
     ////////////////////////////////////////////////////////////////////////////
