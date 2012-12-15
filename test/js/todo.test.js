@@ -89,7 +89,7 @@ buster.testCase("todo Tests",
             assert.equals(target.completed(), true);
             assert.equals("x 2013-12-10 Hello @World", target.text());
             assert.equals(target.completedDate(), "2013-12-10");
-            assert.equals("Hello +World", target.contents());
+            assert.equals("Hello @World", target.contents());
             refute.defined(target.createdDate());
             refute.defined(target.priority());
             assert.equals(target.contexts().length, 1);
@@ -100,7 +100,7 @@ buster.testCase("todo Tests",
         "test Todo Constructor, mixed projects and contexts": function()
         {
             var target = new Todo("+Hello @World");
-            assert.equals(target.completed(), true);
+            assert.equals(target.completed(), false);
             assert.equals("+Hello @World", target.text());
             refute.defined(target.completedDate());
             assert.equals("+Hello @World", target.contents());
@@ -116,7 +116,7 @@ buster.testCase("todo Tests",
         {
             var target = new Todo("x 2013-12-10 (D) This +todo has many +projects! (@and some @contexts).");
             assert.equals(target.completed(), true);
-            assert.equals("x 2013-12-10 This +todo has many +projects! (@and some @contexts).", target.text());
+            assert.equals("x 2013-12-10 (D) This +todo has many +projects! (@and some @contexts).", target.text());
             assert.equals(target.completedDate(), "2013-12-10");
             assert.equals("This +todo has many +projects! (@and some @contexts).", target.contents());
             refute.defined(target.createdDate());
