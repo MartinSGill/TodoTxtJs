@@ -39,7 +39,7 @@ function Todo(text)
     function findFlags(text, flag)
     {
         flag = flag.replace(/[\-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-        var regex = new RegExp("(?:\\s|^)" + flag + "(\\w+)\\b", 'g');
+        var regex = new RegExp("(?:\\W|^)" + flag + "(\\w+)\\b", 'g');
         var result = [];
         var match = regex.exec(text);
         while (match !== null)

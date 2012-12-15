@@ -136,6 +136,13 @@ buster.testCase("todo Tests",
             assert.equals(target.contexts()[0], "contexts");
         },
 
+        "test Todo Constructor, extract context, surround by braces": function()
+        {
+            var target = new Todo("(@contexts).");
+            assert.equals(target.contexts().length, 1);
+            assert.equals(target.contexts()[0], "contexts");
+        },
+
         "test Todo Constructor, extract context with underscore": function()
         {
             var target = new Todo("@some_context");
@@ -148,5 +155,11 @@ buster.testCase("todo Tests",
             var target = new Todo("@sOmeContext");
             assert.equals(target.contexts().length, 1);
             assert.equals(target.contexts()[0], "somecontext");
+        },
+
+        "test Todo Constructor, extract context ignores emails": function()
+        {
+            var target = new Todo("johndoe@example.com");
+            assert.equals(target.contexts().length, 0);
         }
     });
