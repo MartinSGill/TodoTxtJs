@@ -194,17 +194,8 @@ function TodoTxtViewModel()
 
         self.buildExportText = function ()
         {
-            var result = "";
-            for (var i = 0; i < parent.allTodos().length; i++)
-            {
-                if (i > 0)
-                {
-                    result += "\n";
-                }
-                result += parent.allTodos()[i].toString();
-            }
-
-            return result;
+            var todos = todoManager.exportToStringArray();
+            return todos.join("\n");
         };
 
         self.fillExportBox = function ()

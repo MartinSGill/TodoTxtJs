@@ -94,6 +94,7 @@ function TodoManager()
     self.removeAll = function()
     {
         data.removeAll();
+        nextId = 0;
     };
 
     self.add = function(newTodo)
@@ -110,7 +111,7 @@ function TodoManager()
 
         newTodo.id = nextId++;
         data.push(newTodo);
-    }
+    };
 
     self.loadFromStringArray = function(newData)
     {
@@ -119,6 +120,7 @@ function TodoManager()
             throw "Argument isn't an array.";
         }
 
+        self.removeAll();
         for (var i = 0; i < newData.length; i++)
         {
             var obj = newData[i];
@@ -133,5 +135,19 @@ function TodoManager()
         }
 
         data.sort(sorter);
+    };
+
+    self.exportToStringArray = function()
+    {
+        var sorted = ko.observableArray(data());
+        sorted.sort(function(left, right) { return left.index - right.index; });
+
+        var result = [];
+        for (var i = 0; i < sorted().length; i++)
+        {
+            result.push(sorted()[i].text());
+        }
+
+        return result;
     };
 }
