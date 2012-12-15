@@ -43,6 +43,8 @@ function TodoTxtViewModel()
     var self = this;
     var apiPath = document.location.pathname.replace('todotxt.html', '');
 
+    var todoManager = new TodoManager();
+
     /************************************************
      * Inner Constructors
      ***********************************************/
@@ -50,7 +52,7 @@ function TodoTxtViewModel()
     self.title = ko.observable("TodoTxtJS");
     self.version = ko.observable("0.4");
 
-    self.allTodos = ko.observableArray([]);
+    self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
     self.priorities = ko.observableArray([]);
     self.projects = ko.observableArray([]);
@@ -422,7 +424,7 @@ function TodoTxtViewModel()
 
     self.addTodo = function (todo)
     {
-        self.allTodos.push(todo);
+        todoManager.add(todo);
 
         if (todo.priority !== null)
         {

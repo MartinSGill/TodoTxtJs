@@ -1,22 +1,25 @@
 
-function todoHtmlContentsRenderer(todo)
+function todoHtmlContentsRenderer(contents)
 {
     "use strict";
 
-    todo = ko.utils.unwrapObservable(todo);
+    contents = ko.utils.unwrapObservable(contents);
 
-    if (todo instanceof Todo)
+    if (contents instanceof Todo)
     {
-        return toHtml(todo);
-    }
-    else
-    {
-        throw "Not a todo!";
+        return toHtml(content.contents());
     }
 
-    function toHtml(todo)
+    if (typeof(contents) !== "string")
     {
-        var formattedMessage = todo.contents;
+        throw "Contents should be a string";
+    }
+
+    return toHtml(contents);
+
+    function toHtml(contents)
+    {
+        var formattedMessage = contents;
 
         if (formattedMessage)
         {

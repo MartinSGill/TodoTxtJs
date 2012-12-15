@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. Martin Gill. All Rights Reserved.
+ */
+
 buster.testCase("todo Tests",
     {
         "test Default Constructor": function()

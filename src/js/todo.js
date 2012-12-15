@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////
-// Todo Class
-////////////////////////////////////////////////////////////////////////////
+/*
+ * Copyright (c) 2012. Martin Gill. All Rights Reserved.
+ */
 
 function Todo(text)
 {
@@ -38,7 +38,7 @@ function Todo(text)
      */
     function findFlags(text, flag)
     {
-        flag.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+        flag = flag.replace(/[\-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
         var regex = new RegExp("(?:\\s|^)" + flag + "(\\w+)\\b", 'g');
         var result = [];
         var match = regex.exec(text);
