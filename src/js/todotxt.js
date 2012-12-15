@@ -50,7 +50,7 @@ function TodoTxtViewModel()
      ***********************************************/
 
     self.title = ko.observable("TodoTxtJS");
-    self.version = ko.observable("0.4");
+    self.version = ko.observable("0.5");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
