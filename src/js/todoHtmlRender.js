@@ -30,11 +30,11 @@ function todoHtmlContentsRenderer(contents)
         {
             var contextRegex = /\s(@)(\w+)(?=\W|$)/g;
             formattedMessage = formattedMessage.replace(contextRegex,
-                                                        '<span class="contextFlag" onclick="todoTxtView.addFilterContext(\'$2\')">$1</span><span class="context" onclick="todoTxtView.addFilterContext(\'$2\')">$2</span>');
+                                                        '<span class="contextFlag" onclick="todoTxtView.addFilter(\'@$2\')">$1</span><span class="context" onclick="todoTxtView.addFilter(\'@$2\')">$2</span>');
 
             var projectRegex = /\s(\+)(\w+)(?=\W|$)/g;
             formattedMessage = formattedMessage.replace(projectRegex,
-                                                        '<span class="projectFlag" onclick="todoTxtView.addFilterProject(\'$2\')">$1</span><span class="project" onclick="todoTxtView.addFilterProject(\'$2\')">$2</span>');
+                                                        '<span class="projectFlag" onclick="todoTxtView.addFilter(\'+$2\')">$1</span><span class="project" onclick="todoTxtView.addFilter(\'+$2\')">$2</span>');
         }
 
         return formattedMessage;

@@ -1,40 +1,4 @@
 ////////////////////////////////////////////////////////////////////////////
-// Todo Helpers
-////////////////////////////////////////////////////////////////////////////
-
-var TodoHelpers =
-{
-    extractFlagged:function (text, flag)
-    {
-        var regex = new RegExp("(?:\\s|^)" + flag + "(\\w+)(?=\\s|$)", 'g');
-        var result = [];
-        var match = regex.exec(text);
-        while (match !== null)
-        {
-            result.push(match[1].toLowerCase());
-            match = regex.exec(text);
-        }
-
-        return result;
-    },
-
-    extractPriority:function (text)
-    {
-        var regex = new RegExp("\\(([A-Z])\\)", "g");
-        var result = [];
-        var match = regex.exec(text);
-
-        while (match !== null)
-        {
-            result.push(match[1]);
-            match = regex.exec(text);
-        }
-
-        return result;
-    }
-};
-
-////////////////////////////////////////////////////////////////////////////
 // Main View Model
 ////////////////////////////////////////////////////////////////////////////
 
@@ -213,47 +177,26 @@ function TodoTxtViewModel()
 
     self.filters = ko.observable("");
 
-    self.filtersProject = ko.computed(function ()
-    {
-        return TodoHelpers.extractFlagged(self.filters(), "\\+");
-    });
-
-    self.filtersContext = ko.computed(function ()
-    {
-        return TodoHelpers.extractFlagged(self.filters(), "@");
-    });
-
-    self.filtersPriority = ko.computed(function ()
-    {
-        return TodoHelpers.extractPriority(self.filters());
-    });
-
     self.filtered = ko.computed(function ()
     {
-        return self.filtersProject().length > 0 ||
-            self.filtersContext().length > 0 ||
-            self.filtersPriority().length > 0;
+        return self.filters() && self.filters().length > 0;
     });
-
-    self.addFilterPriority = function (priority)
-    {
-        self.filters(self.filters() + " (" + priority + ")");
-    };
-
-    self.addFilterProject = function (project)
-    {
-        self.filters(self.filters() + " +" + project);
-    };
-
-    self.addFilterContext = function (context)
-    {
-        self.filters(self.filters() + " @" + context);
-    };
 
     self.clearFilters = function ()
     {
         self.filters("");
     };
+
+    self.addFilter = function(newFilter)
+    {
+        var result = self.filters().trim();
+        if (self.filters().length > 0)
+        {
+            result += " ";
+        }
+        result += newFilter;
+        self.filters(result);
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     // Display
@@ -266,44 +209,14 @@ function TodoTxtViewModel()
             return false;
         }
 
+        var testText = todo.text().toLowerCase();
+        var filters = self.filters().split(/\s/);
         var result = true;
         if (self.filtered())
         {
-            result = true;
-            if (self.filtersProject().length > 0)
+            for (var i = 0; i < filters.length && result; i++)
             {
-                if (_.intersection(todo.projects, self.filtersProject()).length === self.filtersProject().length)
-                {
-                    result = result && true;
-                }
-                else
-                {
-                    result = false;
-                }
-            }
-
-            if (self.filtersContext().length > 0)
-            {
-                if (_.intersection(todo.contexts, self.filtersContext()).length === self.filtersContext().length)
-                {
-                    result = result && true;
-                }
-                else
-                {
-                    result = false;
-                }
-            }
-
-            if (self.filtersPriority().length > 0)
-            {
-                if (_.indexOf(self.filtersPriority(), todo.priority) >= 0)
-                {
-                    result = result && true;
-                }
-                else
-                {
-                    result = false;
-                }
+                result = testText.indexOf(filters[i].toLowerCase()) >= 0;
             }
         }
 
