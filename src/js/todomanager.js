@@ -4,12 +4,12 @@ function TodoManager()
     "use strict";
     var self = this;
 
-    var nextId = 0;
+    var nextIndex = 0;
     var data = ko.observableArray([]);
 
     self.all = function()
     {
-        return data;
+        return data();
     };
 
     self.allProjects = function()
@@ -62,41 +62,47 @@ function TodoManager()
 
     function sorter(left, right)
     {
-        var leftValue = left.index;
-        var rightValue = right.index;
+        // Order by "score" from highest to lowest.
+        // Default order:
+        // Completed -> Priority -> index
 
-        // Priority
-        var priorityWeight = 1000;
-        if (left.priority())
-        {
-            leftValue += priorityWeight + Math.abs(priorityWeight - left.priority().charCodeAt(0));
-        }
-
-        if (right.priority())
-        {
-            rightValue += priorityWeight + Math.abs(priorityWeight - right.priority().charCodeAt(0));
-        }
+        var leftScore = 0;
+        var rightScore = 0;
 
         // Completed
         var completedWeight = -5000;
         if (left.completed())
         {
-            leftValue += completedWeight;
+            leftScore += completedWeight;
         }
-
         if (right.completed())
         {
-            rightValue += completedWeight;
+            rightScore += completedWeight;
         }
 
-        // return -ve if left smaller than right, +ve if right smaller than left, 0 for equal
-        return leftValue === rightValue ? 0 : (leftValue > rightValue ? -1 : 1);
+        // Priority
+        var priorityWeight = 1000;
+        if (left.priority())
+        {
+            leftScore += priorityWeight + Math.abs(priorityWeight - left.priority().charCodeAt(0));
+        }
+
+        if (right.priority())
+        {
+            rightScore += priorityWeight + Math.abs(priorityWeight - right.priority().charCodeAt(0));
+        }
+
+        // The lower the index (i.e. the earlier in the file) the higher the score has to be.
+        leftScore += nextIndex - left.index;
+        rightScore += nextIndex - right.index;
+
+        return leftScore === rightScore ? 0 : (leftScore > rightScore ? -1 : 1);
     }
 
     self.removeAll = function()
     {
         data.removeAll();
-        nextId = 0;
+        nextIndex = 0;
     };
 
     self.add = function(newTodo)
@@ -111,7 +117,7 @@ function TodoManager()
             throw "Argument is invalid. Must be Todo or string";
         }
 
-        newTodo.id = nextId++;
+        newTodo.index = nextIndex++;
         data.push(newTodo);
         data.sort(sorter);
     };
@@ -133,7 +139,7 @@ function TodoManager()
             }
 
             var todo = new Todo(obj);
-            todo.index = nextId++;
+            todo.index = nextIndex++;
             data().push(todo);
         }
 
