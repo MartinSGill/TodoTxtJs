@@ -114,21 +114,17 @@ form
     z-index: 5000;
     top: 26px;
     right: 2px;
-
-    min-width: 250px;
-
+    width: 40%;
     background-color: #FF9900;
-
     padding: 3px;
-
     display: none;
 }
 
 .toolBox > textarea
 {
     display: block;
-    width: 650px;
     height: 300px;
+    width: 100%;
 }
 
 .toolBox > span
@@ -136,14 +132,22 @@ form
     clear: both;
 }
 
-.toolBox > button
+.toolBoxFooter
 {
-    float: right;
+    text-align: right;
+    font-size: smaller;
 }
 
 .warning
 {
-    color: yellow;
+    background: #8b0000;
+    color: white;
+}
+
+.tip
+{
+    font-size: smaller;
+    font-style: italic;
 }
 
 /*******************************************************
@@ -261,7 +265,7 @@ form
 
 .index
 {
-    display: inline-block;
+    display: none;
     width: 20px;
     text-align: right;
     font-size: 0.5em;

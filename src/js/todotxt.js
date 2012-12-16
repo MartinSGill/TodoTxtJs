@@ -13,7 +13,7 @@ function TodoTxtViewModel()
      * Inner Constructors
      ***********************************************/
 
-    self.title = ko.observable("TodoTxtJS");
+    self.title = ko.observable("TodoTxt WebApp");
     self.version = ko.observable("0.5");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
@@ -35,9 +35,9 @@ function TodoTxtViewModel()
         var self = this;
 
         var storageConstants = {
-            browser:"browser",
-            server:"server",
-            dropbox:"dropbox"
+            browser:"browser"//,
+            //server:"server",
+            //dropbox:"dropbox"
         };
 
         ///////////////////////////
@@ -45,8 +45,8 @@ function TodoTxtViewModel()
         ///////////////////////////
 
         self.storageOptions = ko.observableArray([
-            { name:storageConstants.browser, tip:"Store in Local Browser storage." },
-            { name:storageConstants.server, tip:"Store data on the server."}
+            { name:storageConstants.browser, tip:"Store in browser LocalStorage. (This means your Todos are saved on your own computer.)" }//,
+            //{ name:storageConstants.server, tip:"Store data on the server."}
         ]
         );
         self.storageInfo = ko.observable(self.storageOptions()[0]);
@@ -196,7 +196,7 @@ function TodoTxtViewModel()
         }
         result += newFilter;
         self.filters(result);
-    }
+    };
 
     ////////////////////////////////////////////////////////////////////////////
     // Display
