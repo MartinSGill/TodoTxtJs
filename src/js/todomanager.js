@@ -9,7 +9,7 @@ function TodoManager()
 
     self.all = function()
     {
-        return data();
+        return data().sort(sorter);
     };
 
     self.allProjects = function()
@@ -62,41 +62,25 @@ function TodoManager()
 
     function sorter(left, right)
     {
-        // Order by "score" from highest to lowest.
-        // Default order:
-        // Completed -> Priority -> index
-
-        var leftScore = 0;
-        var rightScore = 0;
-
-        // Completed
-        var completedWeight = -5000;
-        if (left.completed())
+        if (left.completed() !== right.completed())
         {
-            leftScore += completedWeight;
-        }
-        if (right.completed())
-        {
-            rightScore += completedWeight;
+            if (left.completed() && !right.completed())
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
-        // Priority
-        var priorityWeight = 1000;
-        if (left.priority())
+        if (left.priorityScore() !== right.priorityScore())
         {
-            leftScore += priorityWeight + Math.abs(priorityWeight - left.priority().charCodeAt(0));
+            return left.priorityScore() < right.priorityScore() ? -1 : 1;
         }
 
-        if (right.priority())
-        {
-            rightScore += priorityWeight + Math.abs(priorityWeight - right.priority().charCodeAt(0));
-        }
-
-        // The lower the index (i.e. the earlier in the file) the higher the score has to be.
-        leftScore += nextIndex - left.index;
-        rightScore += nextIndex - right.index;
-
-        return leftScore === rightScore ? 0 : (leftScore > rightScore ? -1 : 1);
+        // Run out of significant values so use file order.
+        return left.index < right.index ? -1 : 1;
     }
 
     self.removeAll = function()
@@ -118,8 +102,8 @@ function TodoManager()
         }
 
         newTodo.index = nextIndex++;
+
         data.push(newTodo);
-        data.sort(sorter);
     };
 
     self.loadFromStringArray = function(newData)
@@ -138,12 +122,8 @@ function TodoManager()
                 throw "Argument elements are not strings";
             }
 
-            var todo = new Todo(obj);
-            todo.index = nextIndex++;
-            data().push(todo);
+            self.add(obj);
         }
-
-        data.sort(sorter);
     };
 
     self.exportToStringArray = function()

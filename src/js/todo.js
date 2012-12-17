@@ -29,7 +29,7 @@ function Todo(text)
         }
     );
 
-    self.index = undefined;
+    self.index = 0;
 
     // Set defaults
     var _priority;
@@ -156,6 +156,22 @@ function Todo(text)
             {
                 _priority = value;
                 render();
+            }
+        });
+
+    self.priorityScore = ko.computed(
+        {
+            read: function()
+            {
+                parse();
+                if (_priority !== undefined)
+                {
+                    return _priority.charCodeAt(0) - 64;
+                }
+                else
+                {
+                    return 100;
+                }
             }
         });
 
