@@ -28,13 +28,14 @@ function todoHtmlContentsRenderer(contents)
 
         if (formattedMessage)
         {
+            // TODO: Need to find a better way of doing this.
             var contextRegex = /\s(@)(\w+)(?=\W|$)/g;
             formattedMessage = formattedMessage.replace(contextRegex,
-                                                        '<span class="contextFlag" onclick="todoTxtView.addFilter(\'@$2\')">$1</span><span class="context" onclick="todoTxtView.addFilter(\'@$2\')">$2</span>');
+                                                        '<span class="contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span><span class="context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>');
 
             var projectRegex = /\s(\+)(\w+)(?=\W|$)/g;
             formattedMessage = formattedMessage.replace(projectRegex,
-                                                        '<span class="projectFlag" onclick="todoTxtView.addFilter(\'+$2\')">$1</span><span class="project" onclick="todoTxtView.addFilter(\'+$2\')">$2</span>');
+                                                        '<span class="projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
         }
 
         return formattedMessage;

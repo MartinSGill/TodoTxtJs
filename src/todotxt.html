@@ -115,29 +115,7 @@
         * Todo
         **********************************
      -->
-    <section class="todos" data-bind="foreach: allTodos">
-        <div class="todo" data-bind="css: { completed: completed }, if: $root.isDisplayed($data)">
-            <div class="display">
-                <span class="index" data-bind="text: index"></span>
-                <input type="checkbox" data-bind="checked: completed" />
-                    <span data-bind="css: { completed: completed }">
-                        <span class="completedFlag" data-bind="visible: completed">x</span>
-                        <span class="completedDate" data-bind="text: completedDate(), visible: completed"></span>
-                        <span class="priorityBrace" data-bind="visible: priority !== null">(</span>
-                        <span class="priority" data-bind="visible: priority != null">
-                            <span data-bind="text: priority, attr: { 'class': priority }"></span>
-                        </span>
-                        <span class="priorityBrace" data-bind="visible: priority !== null">)</span>
-                        <span class="createDate" data-bind="visible: createdDate !== null, text: createdDate"></span>
-                        <span class="message" data-bind="html: todoHtmlContentsRenderer(contents)"></span>
-                    </span>
-            </div>
-            <!--
-            <div class="edit">
-                <input type="text" data-bind="value: raw, valueUpdate: 'afterkeydown'"/>
-            </div>
-            -->
-        </div>
+    <section class="todos" data-bind="template: { name: 'todo-template', foreach: allTodos }">
     </section>
     <footer>
         <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
@@ -145,6 +123,29 @@
     </footer>
 </section>
 </body>
+<script type="text/html" id="todo-template">
+    <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
+        <div class="display">
+                <span class="index" data-bind="text: index"></span>
+                <input type="checkbox" data-bind="checked: completed" />
+                <span data-bind="css: { completed: completed }">
+                    <span class="completedFlag" data-bind="visible: completed">x</span>
+                    <span class="completedDate" data-bind="text: completedDate(), visible: completed"></span>
+                    <span class="priorityBrace" data-bind="visible: priority !== null">(</span>
+                    <span class="priority" data-bind="visible: priority != null">
+                        <span data-bind="text: priority, attr: { 'class': priority }"></span>
+                    </span>
+                    <span class="priorityBrace" data-bind="visible: priority !== null">)</span>
+                    <span class="createDate" data-bind="visible: createdDate !== null, text: createdDate"></span>
+                    <span class="message" data-bind="html: todoHtmlContentsRenderer(contents)"></span>
+                </span>
+        </div>
+        <div class="edit">
+            <span class="tip">Press ENTER to accept, ESC to discard.</span>
+            <input type="text" />
+        </div>
+    </div>
+</script>
 <script src="js/jQuery/js/jquery.js" type="text/javascript"></script>
 <script src="js/jQuery/js/jquery-ui.js" type="text/javascript"></script>
 <script src="js/knockout/knockoutjs.js" type="text/javascript"></script>

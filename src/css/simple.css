@@ -247,6 +247,7 @@ form
 .edit
 {
     width: 100%;
+    display: none;
 }
 
 .edit input
@@ -312,6 +313,11 @@ form
 .E
 {
     color: #01F33E;
+}
+
+.message
+{
+    cursor: hand;
 }
 
 .createDate

@@ -340,7 +340,63 @@ function TodoTxtViewModel()
     });
 }
 
+ko.bindingHandlers.todo = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var template = $(element);
+        var viewer = template.find(".display");
+        var trigger = template.find(".message");
+        var editor = template.find(".edit");
+        var input = template.find(".edit input");
+
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function ()
+        {
+            // not currently required
+        });
+
+        var toggle = function(edit)
+        {
+            if (edit)
+            {
+                viewer.hide();
+                editor.show();
+            }
+            else
+            {
+                viewer.show();
+                editor.hide();
+            }
+        };
+
+        // Clicking on the text
+        trigger.click(function(event) {
+            toggle(true);
+            input.val(ko.utils.unwrapObservable(valueAccessor()).text());
+            input.focus();
+        });
+
+        // Keys
+        input.keyup(function (event)
+        {
+            // ENTER
+            if (event.keyCode === 13)
+            {
+                toggle(false);
+                ko.utils.unwrapObservable(valueAccessor()).text(input.val());
+            }
+
+            // ESC
+            if (event.keyCode === 27)
+            {
+                toggle(false);
+            }
+        });
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, bindingContext)
+    {
+        $(element).find("liveView a").val(ko.utils.unwrapObservable(valueAccessor()));
+    }
+};
+
 var todoTxtView = new TodoTxtViewModel();
 ko.applyBindings(todoTxtView, document.head);
 ko.applyBindings(todoTxtView);
-
