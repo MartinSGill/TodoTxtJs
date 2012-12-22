@@ -1,0 +1,453 @@
+/*
+ * Copyright (c) 2012. Martin Gill. All Rights Reserved.
+ */
+
+body
+{
+    background-color: black;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+footer
+{
+    background-color: black;
+    color: #a9a9a9;
+    text-align: right;
+    padding: 5px;
+    font-family: Verdana, sans-serif;
+    font-size: 0.8em;
+}
+
+form
+{
+    margin: 0;
+}
+
+h1
+{
+    clear: both;
+    font-size: 2em;
+    width: 100%;
+    text-align: center;
+    background-color: #00498f;
+    color: white;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin: 0;
+}
+
+/**********************************************************************
+ * Splash screen
+ *********************************************************************/
+
+.splash
+{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: table;
+}
+
+.splash p
+{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 5em;
+    font-family: fantasy;
+    font-variant: small-caps;
+}
+
+.splash p:before
+{
+    content: "... ";
+}
+
+.splash p:after
+{
+    content: " ...";
+}
+
+/**********************************************************************
+ * Toolbar
+ *********************************************************************/
+
+.toolbar
+{
+    color: white;
+    text-align: right;
+}
+
+.menu
+{
+    list-style-type: none;
+    background-color: black;;
+    float: right;
+    width: 100%;
+    margin: 0;
+}
+
+.menuItem a
+{
+    background-color: #00498f;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    width: 100px;
+    cursor: pointer;
+    float: right;
+    font-family: Verdana, sans-serif;
+
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.menuItem.selected a
+{
+    background-color: #8F8D00 ;
+    color: white;
+    z-index: 5001;
+    height: 25px;
+}
+
+.menuItem a:hover
+{
+    background-color: white;
+    color: black;
+}
+
+.toolbox
+{
+    display: none;
+    position: absolute;
+    z-index: 5000;
+    background-color: #8F8D00 ;
+    border-left: thin black solid;
+    border-right: thin black solid;
+    border-bottom: thin black solid;
+    color: black;
+    right: 5px;
+    top: 28px;
+    width: 650px;
+    text-align: center;
+    padding: 8px;
+}
+
+.toolbox > textarea
+{
+    color: black;
+    background-color: #75abff;
+    min-height: 400px;
+    width: 100%;
+    font-family: "Courier New", monospace;
+    border: black solid thin;
+}
+
+.toolbox > span
+{
+    background-color: blue;
+}
+
+.toolbox td:first-child
+{
+    font-family: Verdana, sans-serif;
+}
+
+.toolbox td:nth-child(3)
+{
+    padding: 3px;
+}
+
+.tip
+{
+    font-size: smaller;
+    font-family: cursive;
+}
+
+.toolboxFooter
+{
+    background-color: #00498f;
+    color: #ffffff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    vertical-align: middle;
+}
+
+.warning
+{
+    background-color: #8F4600;
+    color: white;
+}
+
+/**********************************************************************
+ * Add Todo
+ *********************************************************************/
+
+.addTodo
+{
+    background-color: #68006a;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.addTodo input
+{
+    width: 500px;
+    background-color: #78007a;
+    color: white;
+    border: thin solid #8f4192;
+    padding-left: 5px;
+}
+
+.addTodo .tip
+{
+    color: #ae47b1;
+}
+
+/**********************************************************************
+ * Filters
+ *********************************************************************/
+
+.filters
+{
+    background-color: #006f6c;
+    padding: 5px;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.filters div
+{
+    display: inline-block;
+}
+
+.filters label
+{
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+.filters label:after
+{
+    content: ": ";
+}
+
+.quickFilter
+{
+    margin-left: 50px;
+}
+
+.quickFilter > input
+{
+    width: 300px;
+    color: white;
+    background-color: #006a66;
+    border: thin solid #00a19c;
+}
+
+.showCompleted
+{
+    color: white;
+}
+
+.clearFilters
+{
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.clearFilters a
+{
+    display: table;
+    background-color: #00312e;
+    height: 0.8em;
+    width: 1.2em;
+    color: #00a19c;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.clearFilters a:hover
+{
+    color: red;
+}
+
+/**********************************************************************
+ * Todos
+ *********************************************************************/
+
+.todo
+{
+    background-color: #c1e5ff;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 1.5em;
+}
+
+/**********************************************************************
+ * Todo Text
+ *********************************************************************/
+
+.index
+{
+    display: none;
+}
+
+.edit
+{
+    display: none;
+}
+
+.edit input
+{
+    width: 80%;
+    border-color: #00498f;
+    border-style: solid;
+    border-width: thin;;
+    color: black;
+    background-color: #64a9e6;
+    margin-left: 25px;
+    font-size: inherit;
+}
+
+.edit .tip
+{
+    float: right;
+    color: #00498f;
+    font-size: 0.5em;
+}
+
+.completedFlag
+{
+    display: none;
+}
+
+
+.completed
+{
+    background-color: #4d4d4d;
+    color: silver;
+}
+
+.completedDate
+{
+    font-family: verdana, sans-serif;
+    font-size: 0.7em;
+}
+
+.project
+{
+    color: #78007a;
+    margin-left: 0.3em;
+    font-family: verdana, sans-serif;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.project:hover
+{
+    background-color: #78007a;
+    color: #6dbbff;
+}
+.completed .project
+{
+    color: inherit;
+}
+
+.projectFlag
+{
+    display: none;
+}
+
+.context
+{
+    color: #006a66;
+    margin-left: 0.3em;
+    font-family: verdana, sans-serif;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.context:hover
+{
+    background-color: #006a66;
+    color: #6dbbff;
+}
+
+.completed .context
+{
+    color: inherit;
+}
+
+.contextFlag
+{
+    display: none;
+}
+
+/**********************************************************************
+ * Priority
+ *********************************************************************/
+
+.priorityBrace
+{
+    display: none;
+}
+
+.priority
+{
+    color: #00498f;
+    font-weight: bold;
+    font-family: verdana, sans-serif;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 4px #000000;
+}
+
+.A
+{
+    color: #e14242;
+}
+
+.B
+{
+    color: #c36c00;
+}
+
+.C
+{
+    color: #c3ab00;
+}
+
+.D
+{
+    color: #69c300;
+}
+
+.E
+{
+    color: #004ef3;
+}
+/**********************************************************************
+ * Effects
+ *********************************************************************/
+
+.hidden
+{
+    display: none;
+}

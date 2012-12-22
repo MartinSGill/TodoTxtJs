@@ -212,23 +212,21 @@ form
 .clearFilters
 {
     display: inline-block;
-    margin-left: 5px;
-    padding-top: 6px;
+    vertical-align: text-bottom;
 }
 
 .clearFilters a
 {
-    border-radius: 50px;
+    display: table;
     background-color: silver;
-    color: white;
-    font-family: sans-serif;
-    display: table-cell;
-    text-decoration: none;
-    font-weight: bold;
     height: 0.8em;
-    width: 1em;
-    text-align: center;
-    vertical-align: middle;
+    width: 1.2em;
+    color: black;
+    border-radius: 50px;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: capitalize;
 }
 
 .clearFilters a:hover

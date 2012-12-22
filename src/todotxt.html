@@ -2,7 +2,7 @@
 <html>
 <head>
     <title data-bind="text: title">My TodoTxt</title>
-    <link rel="stylesheet" href="css/simple.css">
+    <link rel="stylesheet" href="css/blocky.css">
 </head>
 <body onunload="todoTxtView.save()">
 <section class="splash" data-bind="css: { hidden: pageReady}">
@@ -125,7 +125,7 @@
 </body>
 <script type="text/html" id="todo-template">
     <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
-        <div class="display">
+        <div class="display" data-bind="attr: { 'class': 'Priority' + priority }"></span>
                 <span class="index" data-bind="text: index"></span>
                 <input type="checkbox" data-bind="checked: completed" />
                 <span data-bind="css: { completed: completed }">
