@@ -307,6 +307,7 @@ form
     font-family: sans-serif;
     color: #59955C;
     text-shadow: 1px 1px 3px #000000;
+    cursor: pointer;
 }
 
 .A

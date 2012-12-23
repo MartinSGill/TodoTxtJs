@@ -418,6 +418,7 @@ h1
     font-family: verdana, sans-serif;
     font-size: 1.1em;
     text-shadow: 1px 1px 4px #000000;
+    cursor: pointer;
 }
 
 .A

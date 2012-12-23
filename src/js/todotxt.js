@@ -387,6 +387,11 @@ ko.bindingHandlers.todo = {
             }
         };
 
+        template.find(".priority").click(function(event)
+        {
+            todoTxtView.addFilter('(' + ko.utils.unwrapObservable(valueAccessor()).priority() + ')');
+        });
+
         // Clicking on the text
         trigger.click(function(event)
         {
