@@ -347,6 +347,17 @@ function TodoTxtViewModel()
     {
         self.pageReady(true);
     });
+
+    //////////////////////////////////////////////////////////
+    // Keyboard shortcuts
+    //////////////////////////////////////////////////////////
+
+    $(document).bind('keydown', 'n', function(event)
+    {
+        event.preventDefault();
+        $(".addTodo Input").focus();
+    });
+
 }
 
 ko.bindingHandlers.todo = {
