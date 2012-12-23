@@ -14,7 +14,7 @@ function TodoTxtViewModel()
      ***********************************************/
 
     self.title = ko.observable("TodoTxt WebApp");
-    self.version = ko.observable("0.5");
+    self.version = ko.observable("0.6");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
