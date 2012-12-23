@@ -250,7 +250,15 @@ form
 
 .edit input
 {
-    width: 100%;
+    width: 80%;
+    font-size: inherit;
+    margin-left: 25px;
+}
+
+.edit .tip
+{
+    font-size: 0.6em;
+    float: right;
 }
 
 .todos
@@ -259,7 +267,7 @@ form
     padding: 5px;
     border: ridge thin silver;
     border-radius: 5px;
-    font-size: 1.1em;
+    font-size: 1.5em;
 }
 
 .index
@@ -286,6 +294,7 @@ form
     font-size: 1.2em;
     font-family: sans-serif;
     color: #59955C;
+    text-shadow: 1px 1px 3px #000000;
 }
 
 .A
