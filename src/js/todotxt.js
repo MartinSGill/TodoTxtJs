@@ -107,8 +107,6 @@ function TodoTxtViewModel()
         };
 
         self.load();
-
-
     }
 
     self.options = new Options();
@@ -136,12 +134,12 @@ function TodoTxtViewModel()
         }
 
         $(".menuItem").removeClass("selected");
-        $(".menuItem .toolbox").hide();
+        $(".menuItem .toolBox").hide();
 
         if (!selected)
         {
             menuItem.addClass("selected");
-            $(".toolbox", menuItem).show();
+            $(".toolBox", menuItem).show();
         }
     };
 
@@ -404,7 +402,6 @@ ko.bindingHandlers.todo = {
     },
     update: function (element, valueAccessor, allBindingsAccessor, bindingContext)
     {
-        $(element).find("liveView a").val(ko.utils.unwrapObservable(valueAccessor()));
     }
 };
 

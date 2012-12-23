@@ -123,7 +123,7 @@ h1
     color: black;
 }
 
-.toolbox
+.toolBox
 {
     display: none;
     position: absolute;
@@ -140,7 +140,7 @@ h1
     padding: 8px;
 }
 
-.toolbox > textarea
+.toolBox > textarea
 {
     color: black;
     background-color: #75abff;
@@ -150,19 +150,20 @@ h1
     border: black solid thin;
 }
 
-.toolbox > span
+.toolBox > span
 {
     background-color: blue;
 }
 
-.toolbox td:first-child
+.toolBox td:first-child
 {
     font-family: Verdana, sans-serif;
 }
 
-.toolbox td:nth-child(3)
+.toolBox td:nth-child(3)
 {
     padding: 3px;
+    text-align: left;
 }
 
 .tip
@@ -171,7 +172,7 @@ h1
     font-family: cursive;
 }
 
-.toolboxFooter
+.toolBoxFooter
 {
     background-color: #00498f;
     color: #ffffff;

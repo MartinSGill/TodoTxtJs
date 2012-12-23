@@ -1,8 +1,9 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8"/>
     <title data-bind="text: title">My TodoTxt</title>
-    <link rel="stylesheet" href="" data-bind="attr: { 'href' : options.stylesheet().source }">
+    <link rel="stylesheet" href="css/simple.css" data-bind="attr: { 'href' : options.stylesheet().source }">
 </head>
 <body onunload="todoTxtView.save()">
 <section class="splash" data-bind="css: { hidden: pageReady}">
@@ -115,7 +116,7 @@
     <section class="filters">
         <div><label>Filters</label></div>
         <div class="showCompleted">
-            <input type="checkbox" data-bind="checked: showCompleted">Show Completed</input>
+            <input type="checkbox" data-bind="checked: showCompleted"/>Show Completed
         </div>
         <div class="quickFilter">
             <label>Quick Filter</label><input type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'"
@@ -134,14 +135,18 @@
     <footer>
         <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
         <div class="copyright">Copyright &copy; 2012, Martin Gill. All rights reserved.</div>
+        <div class="html5">
+            <a href="http://www.w3.org/html/logo/">
+                <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-semantics-storage.png" width="98" height="32" alt="HTML5 Powered with CSS3 / Styling, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Semantics, and Offline &amp; Storage">
+            </a>
+        </div>
     </footer>
 </section>
-</body>
 <script type="text/html" id="todo-template">
     <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
         <div class="display" data-bind="attr: { 'class': 'Priority' + priority }"></span>
-                <span class="index" data-bind="text: index"></span>
-                <input type="checkbox" data-bind="checked: completed" />
+            <span class="index" data-bind="text: index"></span>
+            <input type="checkbox" data-bind="checked: completed" />
                 <span data-bind="css: { completed: completed }">
                     <span class="completedFlag" data-bind="visible: completed">x</span>
                     <span class="completedDate" data-bind="text: completedDate(), visible: completed"></span>
@@ -168,4 +173,5 @@
 <script src="js/todoHtmlRender.js" type="text/javascript"></script>
 <script src="js/todomanager.js" type="text/javascript"></script>
 <script src="js/todotxt.js" type="text/javascript"></script>
+</body>
 </html>

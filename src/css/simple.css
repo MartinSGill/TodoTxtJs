@@ -23,8 +23,19 @@ body
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    font-size: 3em;
+    font-size: 5em;
     font-family: fantasy;
+    font-variant: small-caps;
+}
+
+.splash p:before
+{
+    content: "... ";
+}
+
+.splash p:after
+{
+    content: " ...";
 }
 
 footer
@@ -227,6 +238,7 @@ form
     font-weight: bold;
     text-decoration: none;
     text-transform: capitalize;
+    text-align: center;
 }
 
 .clearFilters a:hover
