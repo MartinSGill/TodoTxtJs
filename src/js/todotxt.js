@@ -388,7 +388,8 @@ ko.bindingHandlers.todo = {
         };
 
         // Clicking on the text
-        trigger.click(function(event) {
+        trigger.click(function(event)
+        {
             toggle(true);
             input.val(ko.utils.unwrapObservable(valueAccessor()).text());
             input.focus();
@@ -409,6 +410,11 @@ ko.bindingHandlers.todo = {
             {
                 toggle(false);
             }
+        });
+
+        input.blur(function (event)
+        {
+            toggle(false);
         });
     },
     update: function (element, valueAccessor, allBindingsAccessor, bindingContext)
