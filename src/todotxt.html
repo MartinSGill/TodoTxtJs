@@ -2,7 +2,7 @@
 <html>
 <head>
     <title data-bind="text: title">My TodoTxt</title>
-    <link rel="stylesheet" href="css/blocky.css">
+    <link rel="stylesheet" href="" data-bind="attr: { 'href' : options.stylesheet().source }">
 </head>
 <body onunload="todoTxtView.save()">
 <section class="splash" data-bind="css: { hidden: pageReady}">
@@ -31,6 +31,20 @@
                                 </td>
                                 <td>
                                     <span class="tip" data-bind="text: storageInfo().tip"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Theme</label>&nbsp;
+                                </td>
+                                <td>
+                                    <select data-bind="options: stylesheets,
+                                               optionsText: 'name',
+                                               value: stylesheet">
+                                    </select>
+                                </td>
+                                <td>
+                                    <span class="tip" data-bind="text: stylesheet().info"></span>
                                 </td>
                             </tr>
                         </table>

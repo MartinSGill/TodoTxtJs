@@ -55,6 +55,12 @@ function TodoTxtViewModel()
             return self.storageInfo().name;
         });
 
+        self.stylesheets = ko.observableArray([
+                                                  { name: "Simple", source: "css/simple.css", info:"light and rounded/simple theme." },
+                                                  { name: "Blocky", source: "css/blocky.css", info: "darker blockier theme." }
+                                              ]);
+        self.stylesheet = ko.observable(self.stylesheets()[0]);
+
         ///////////////////////////
         // Control
         ///////////////////////////
@@ -91,6 +97,11 @@ function TodoTxtViewModel()
                             break;
                         }
                     }
+                }
+
+                if (options.hasOwnProperty("stylesheet"))
+                {
+                    self.stylesheet(options.stylesheet);
                 }
             }
         };
