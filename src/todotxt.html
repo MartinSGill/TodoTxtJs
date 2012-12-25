@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title data-bind="text: title">My TodoTxt</title>
-    <link rel="stylesheet" href="css/simple.css" data-bind="attr: { 'href' : options.stylesheet().source }">
+    <link rel="stylesheet" href="css/simple.css">
 </head>
 <body onunload="todoTxtView.save()">
 <section class="splash" data-bind="css: { hidden: pageReady}">
@@ -39,13 +39,13 @@
                                     <label>Theme</label>&nbsp;
                                 </td>
                                 <td>
-                                    <select data-bind="options: stylesheets,
+                                    <select data-bind="options: themes,
                                                optionsText: 'name',
-                                               value: stylesheet">
+                                               value: theme">
                                     </select>
                                 </td>
                                 <td>
-                                    <span class="tip" data-bind="text: stylesheet().info"></span>
+                                    <span class="tip" data-bind="text: theme().info"></span>
                                 </td>
                             </tr>
                         </table>

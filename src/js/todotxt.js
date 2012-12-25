@@ -14,7 +14,7 @@ function TodoTxtViewModel()
      ***********************************************/
 
     self.title = ko.observable("TodoTxt WebApp");
-    self.version = ko.observable("0.6");
+    self.version = ko.observable("0.7");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
@@ -55,11 +55,12 @@ function TodoTxtViewModel()
             return self.storageInfo().name;
         });
 
-        self.stylesheets = ko.observableArray([
+        self.themes = ko.observableArray([
                                                   { name: "Simple", source: "css/simple.css", info:"light and rounded/simple theme." },
                                                   { name: "Blocky", source: "css/blocky.css", info: "darker blockier theme." }
                                               ]);
-        self.stylesheet = ko.observable(self.stylesheets()[0]);
+
+        self.theme = ko.observable();
 
         ///////////////////////////
         // Control
@@ -99,14 +100,16 @@ function TodoTxtViewModel()
                     }
                 }
 
-                if (options.hasOwnProperty("stylesheet"))
+                if (options.hasOwnProperty("theme"))
                 {
-                    self.stylesheet(options.stylesheet);
+                    self.theme(options.theme);
+                }
+                else
+                {
+                    self.theme = ko.observable(self.themes()[0]);
                 }
             }
         };
-
-        self.load();
     }
 
     self.options = new Options();
@@ -283,6 +286,7 @@ function TodoTxtViewModel()
 
     self.load = function ()
     {
+        self.options.load();
         if (typeof(Storage) !== "undefined")
         {
             switch (self.options.storage())
@@ -340,13 +344,20 @@ function TodoTxtViewModel()
         self.load();
     };
 
-    self.load();
-
     self.pageReady = ko.observable(false);
     $(document).ready(function ()
     {
         self.pageReady(true);
     });
+
+    //////////////////////////////////////////////////////////
+    // Subscriptions
+    //////////////////////////////////////////////////////////
+    self.options.theme.subscribe(function(newValue)
+    {
+        $(document.head).find("[rel=stylesheet]").attr('href', newValue.source);
+    });
+
 
     //////////////////////////////////////////////////////////
     // Keyboard shortcuts
@@ -358,6 +369,7 @@ function TodoTxtViewModel()
         $(".addTodo Input").focus();
     });
 
+    self.load();
 }
 
 ko.bindingHandlers.todo = {
@@ -430,3 +442,4 @@ ko.bindingHandlers.todo = {
 var todoTxtView = new TodoTxtViewModel();
 ko.applyBindings(todoTxtView, document.head);
 ko.applyBindings(todoTxtView);
+$(document.head).find("[rel=stylesheet]").attr('href', todoTxtView.options.theme().source);
