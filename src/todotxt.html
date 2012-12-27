@@ -20,6 +20,7 @@
                 <div data-bind="with: options">
                     <div class="toolBox options">
                         <table>
+                            <!--
                             <tr>
                                 <td>
                                     <label>Storage</label>&nbsp;
@@ -34,6 +35,7 @@
                                     <span class="tip" data-bind="text: storageInfo().tip"></span>
                                 </td>
                             </tr>
+                            -->
                             <tr>
                                 <td>
                                     <label>Theme</label>&nbsp;
@@ -59,11 +61,11 @@
 
                 <div data-bind="with: importing">
                     <div class="toolBox import">
-                        <textarea data-bind="value: importText"></textarea>
+                        <div id="fileUpload" class="uploadTarget">
+                            <span>Drop your todo.txt file here.</span>
+                        </div>
                         <div class="toolBoxFooter">
-                            <span class="help">Paste or write your Todos into the text box and click import. <span
-                                    class="warning">This will delete existing Todos.</span></span>
-                            <button data-bind="click: importTodos">Import</button>
+                            <span class="warning">This will delete existing Todos.</span>
                         </div>
                     </div>
                 </div>
@@ -75,10 +77,12 @@
 
                 <div data-bind="with: exporting">
                     <div class="toolBox">
-                        <textarea data-bind="value: exportText"></textarea>
                         <div class="toolBoxFooter">
-                            <span class="help">Copy the text and save it into a text file.</span>
+                            <span class="help">Copy the text and save it into a text file. Or
+                                <button data-bind="click: download">Download</button>
+                            </span>
                         </div>
+                        <textarea data-bind="value: exportText"></textarea>
                     </div>
                 </div>
             </li>

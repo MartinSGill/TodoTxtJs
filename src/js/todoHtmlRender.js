@@ -36,6 +36,9 @@ function todoHtmlContentsRenderer(contents)
             var projectRegex = /(?:\s|^)(\+)(\w+)(?=\W|$)/g;
             formattedMessage = formattedMessage.replace(projectRegex,
                                                         '<span class="projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
+
+            var urlRegex = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
+            formattedMessage = formattedMessage.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
         }
 
         return formattedMessage;

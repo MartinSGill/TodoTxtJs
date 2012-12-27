@@ -391,3 +391,27 @@ form
 {
     display: none;
 }
+
+.import
+{
+    width: 400px;
+}
+
+.uploadTarget
+{
+    display: table-cell;
+    border: black dashed medium;
+    vertical-align: middle;
+    text-align: center;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 380px;
+    height: 200px;
+}
+
+.dragOver
+{
+    border-color: red;
+    font-weight: bold;
+}

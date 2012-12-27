@@ -14,7 +14,7 @@ function TodoTxtViewModel()
      ***********************************************/
 
     self.title = ko.observable("TodoTxt WebApp");
-    self.version = ko.observable("0.7");
+    self.version = ko.observable("0.8");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
@@ -153,14 +153,75 @@ function TodoTxtViewModel()
     function Importing()
     {
         var self = this;
-        self.importText = ko.observable("");
+        self.$dropTarget = null;
+        var entered = 0;
 
-        self.importTodos = function ()
+        function dragEnter(event)
         {
-            todoManager.removeAll();
-            var todos = self.importText().match(/^(.+)$/mg);
-            todoManager.loadFromStringArray(todos);
-        };
+            entered++;
+            console.info("dragEnter");
+            event.preventDefault();
+            self.$dropTarget.addClass("dragOver");
+        }
+
+        function dragLeave(event)
+        {
+            entered--;
+            console.info("dragLeave");
+            event.stopPropagation();
+            if (entered === 0)
+            {
+                self.$dropTarget.removeClass("dragOver");
+            }
+        }
+
+        function dragOver(event)
+        {
+            console.info("dragOver");
+            event.dataTransfer.dropEffect = "link";
+            event.preventDefault();
+        }
+
+        function drop(event)
+        {
+            console.info("drop");
+            event.preventDefault();
+            self.$dropTarget.removeClass("dropOver");
+
+            var files = event.dataTransfer.files;
+
+            if (files.length > 0)
+            {
+                var file = files[0];
+                var reader = new FileReader();
+
+                reader.onloadend = function (event)
+                {
+                    todoManager.removeAll();
+                    var todos = event.target.result.match(/^(.+)$/mg);
+                    todoManager.loadFromStringArray(todos);
+                };
+
+                reader.readAsText(file, 'UTF-8');
+            }
+        }
+
+        $(document).ready(function() {
+            // Get jQuery events to support dataTransfer props
+            jQuery.event.props.push('dataTransfer');
+            self.$dropTarget = $("#fileUpload");
+
+            self.$dropTarget.on('dragenter', dragEnter);
+            self.$dropTarget.on('dragover', dragOver);
+            self.$dropTarget.on('dragleave', dragLeave);
+            self.$dropTarget.on('drop', drop);
+
+            $dropTargetChild = self.$dropTarget.find("span");
+            $dropTargetChild.on('dragenter', dragEnter);
+            $dropTargetChild.on('dragover', dragOver);
+            $dropTargetChild.on('dragleave', dragLeave);
+            $dropTargetChild.on('drop', drop);
+        });
     }
 
     function Exporting()
@@ -177,6 +238,14 @@ function TodoTxtViewModel()
         self.fillExportBox = function ()
         {
             self.exportText(self.buildExportText());
+        };
+
+        self.download = function()
+        {
+            var data = "data:text;charset=utf-8,";
+            data += encodeURI(self.exportText());
+
+            window.location.href = data;
         };
     }
 
@@ -299,8 +368,6 @@ function TodoTxtViewModel()
                         success:function (data)
                         {
                             self.lastUpdated(new Date());
-                            self.importing.importText(data.data);
-                            self.importing.importTodos();
                         },
                         error:function (a, b, c)
                         {
@@ -311,8 +378,9 @@ function TodoTxtViewModel()
                 case 'browser':
                     if (localStorage.todos)
                     {
-                        self.importing.importText(localStorage.todos);
-                        self.importing.importTodos();
+                        todoManager.removeAll();
+                        var todos = localStorage.todos.match(/^(.+)$/mg);
+                        todoManager.loadFromStringArray(todos);
                     }
                     break;
 
@@ -325,8 +393,6 @@ function TodoTxtViewModel()
                         success:function (data)
                         {
                             self.lastUpdated(new Date());
-                            self.importing.importText(JSON.parse(data).data);
-                            self.importing.importTodos();
                         },
                         error:function (/*xhr, ajax, thrownError*/)
                         {
