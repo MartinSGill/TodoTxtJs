@@ -45,7 +45,7 @@
         </loadfile>
 
         <loadfile srcfile="${output}/scripts.min.js" property="html.script" failonerror="true"/>
-        <loadfile srcfile="${src}/css/simple.css" property="html.style" failonerror="true"/>
+        <loadfile srcfile="${output}/simple.min.css" property="html.style" failonerror="true"/>
 
         <echo file="${output}/todotxt.html"><![CDATA[${html.top}
 <style>
@@ -95,7 +95,17 @@ ${html.bottom}
         </concat>
     </target>
 
-    <target name="compile" depends="clean, compileScripts, buildHtmlOutput">
+    <target name="compileCss">
+        <property environment="env"/>
+        <property name="path.csso" value="${env.APPDATA}/npm/node_modules/csso/lib/csso.js"/>
+        <exec executable="node">
+            <arg value="${path.csso}"/>
+            <arg value="${src}/css/simple.css"/>
+            <arg value="${output}/simple.min.css"/>
+        </exec>
+    </target>
+
+    <target name="compile" depends="clean, compileScripts, compileCss, buildHtmlOutput">
     </target>
 
     <target name="clean">
