@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<project basedir=".." default="compile">
+
+    <property name="src" location="${basedir}/src"/>
+    <property name="src.js" location="${src}/js"/>
+    <property name="src.js.lib" location="${src}/js/lib"/>
+    <property name="output" location="${basedir}/output"/>
+    <property name="externs" location="${basedir}/build/externs"/>
+
+    <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
+             classpath="${basedir}/build/compiler.jar"/>
+
+    <target name="buildHtmlOutput" depends="compileScripts">
+        <loadfile srcfile="${src}/todotxt.html" property="html.top">
+            <filterchain>
+                <tokenfilter>
+                    <filetokenizer/>
+                    <replaceregex pattern=".*?&lt;!-- Build: Top --&gt;(.*)&lt;!-- Build: End Top --&gt;.*"
+                                  replace="\1"
+                                  flags="s"/>
+                </tokenfilter>
+            </filterchain>
+        </loadfile>
+
+        <loadfile srcfile="${src}/todotxt.html" property="html.body">
+            <filterchain>
+                <tokenfilter>
+                    <filetokenizer/>
+                    <replaceregex pattern=".*?&lt;!-- Build: Body --&gt;(.*)&lt;!-- Build: End Body --&gt;.*"
+                                  replace="\1"
+                                  flags="s"/>
+                </tokenfilter>
+            </filterchain>
+        </loadfile>
+
+        <loadfile srcfile="${src}/todotxt.html" property="html.bottom">
+            <filterchain>
+                <tokenfilter>
+                    <filetokenizer/>
+                    <replaceregex pattern=".*?&lt;!-- Build: Bottom --&gt;(.*)&lt;!-- Build: End Bottom --&gt;.*"
+                                  replace="\1"
+                                  flags="s"/>
+                </tokenfilter>
+            </filterchain>
+        </loadfile>
+
+        <loadfile srcfile="${output}/scripts.min.js" property="html.script" failonerror="true"/>
+        <loadfile srcfile="${src}/css/simple.css" property="html.style" failonerror="true"/>
+
+        <echo file="${output}/todotxt.html"><![CDATA[${html.top}
+<style>
+${html.style}
+</style>
+${html.body}
+<script type="text/javascript">
+    ${html.script}
+</script>
+${html.bottom}
+]]>
+        </echo>
+    </target>
+
+    <target name="compileScripts">
+        <concat destfile="${output}/output.js">
+            <filelist dir="${src.js}">
+                <file name="lib/jquery.hotkeys.js"/>
+                <file name="todo.js"/>
+                <file name="todoHtmlRender.js"/>
+                <file name="todomanager.js"/>
+                <file name="todotxt.js"/>
+            </filelist>
+        </concat>
+        <jscomp compilationLevel="simple" warning="verbose"
+                debug="false" output="output/output.min.js">
+
+            <externs dir="${externs}">
+                <file name="jquery.externs"/>
+                <file name="json.externs"/>
+                <file name="knockoutjs.externs"/>
+            </externs>
+
+            <sources dir="${output}">
+                <file name="output.js"/>
+            </sources>
+
+        </jscomp>
+
+        <concat destfile="${output}/scripts.min.js">
+            <filelist dir="${basedir}">
+                <file name="src/js/lib/jquery-1.8.3.min.js"/>
+                <file name="src/js/lib/jquery-ui.js"/>
+                <file name="src/js/lib/knockoutjs.js"/>
+                <file name="output/output.min.js"/>
+            </filelist>
+        </concat>
+    </target>
+
+    <target name="compile" depends="clean, compileScripts, buildHtmlOutput">
+    </target>
+
+    <target name="clean">
+        <delete dir="${output}" />
+    </target>
+
+</project>

@@ -13,8 +13,8 @@ function TodoTxtViewModel()
      * Inner Constructors
      ***********************************************/
 
-    self.title = ko.observable("TodoTxt WebApp");
     self.version = ko.observable("0.8");
+    self.title = ko.observable("TodoTxt Web App");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
@@ -80,14 +80,14 @@ function TodoTxtViewModel()
 
         self.save = function ()
         {
-            localStorage.TodoTxtJsOptions = ko.toJSON(self);
+            window.localStorage.TodoTxtJsOptions = ko.toJSON(self);
         };
 
         self.load = function ()
         {
-            if (localStorage.TodoTxtJsOptions)
+            if (window.localStorage.TodoTxtJsOptions)
             {
-                var options = JSON.parse(localStorage.TodoTxtJsOptions);
+                var options = JSON.parse(window.localStorage.TodoTxtJsOptions);
                 if (options.hasOwnProperty("storage"))
                 {
                     for (var i = 0; i < self.storageOptions().length; i++)
@@ -159,7 +159,6 @@ function TodoTxtViewModel()
         function dragEnter(event)
         {
             entered++;
-            console.info("dragEnter");
             event.preventDefault();
             self.$dropTarget.addClass("dragOver");
         }
@@ -167,7 +166,6 @@ function TodoTxtViewModel()
         function dragLeave(event)
         {
             entered--;
-            console.info("dragLeave");
             event.stopPropagation();
             if (entered === 0)
             {
@@ -177,14 +175,12 @@ function TodoTxtViewModel()
 
         function dragOver(event)
         {
-            console.info("dragOver");
             event.dataTransfer.dropEffect = "link";
             event.preventDefault();
         }
 
         function drop(event)
         {
-            console.info("drop");
             event.preventDefault();
             self.$dropTarget.removeClass("dropOver");
 
@@ -216,7 +212,7 @@ function TodoTxtViewModel()
             self.$dropTarget.on('dragleave', dragLeave);
             self.$dropTarget.on('drop', drop);
 
-            $dropTargetChild = self.$dropTarget.find("span");
+            var $dropTargetChild = self.$dropTarget.find("span");
             $dropTargetChild.on('dragenter', dragEnter);
             $dropTargetChild.on('dragover', dragOver);
             $dropTargetChild.on('dragleave', dragLeave);
@@ -334,7 +330,7 @@ function TodoTxtViewModel()
                 break;
 
             case 'browser':
-                localStorage.todos = self.exporting.buildExportText();
+                window.localStorage.todos = self.exporting.buildExportText();
                 break;
 
             case 'server':
@@ -369,17 +365,16 @@ function TodoTxtViewModel()
                         {
                             self.lastUpdated(new Date());
                         },
-                        error:function (a, b, c)
+                        error:function (/*xhr, ajax, thrownError*/)
                         {
-                            console.write(a, b, c);
                         }});
                     break;
 
                 case 'browser':
-                    if (localStorage.todos)
+                    if (window.localStorage.todos)
                     {
                         todoManager.removeAll();
-                        var todos = localStorage.todos.match(/^(.+)$/mg);
+                        var todos = window.localStorage.todos.match(/^(.+)$/mg);
                         todoManager.loadFromStringArray(todos);
                     }
                     break;

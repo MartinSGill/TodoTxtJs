@@ -1,0 +1,253 @@
+var ko = {
+    "exportSymbol": function () {},
+    "exportProperty": function () {},
+    "version": {},
+    "utils": {
+        "fieldsIncludedWithJsonPost": {
+            "0": {},
+            "1": function () {}
+        },
+        "arrayForEach": function () {},
+        "arrayIndexOf": function () {},
+        "arrayFirst": function () {},
+        "arrayRemoveItem": function () {},
+        "arrayGetDistinctValues": function () {},
+        "arrayMap": function () {},
+        "arrayFilter": function () {},
+        "arrayPushAll": function () {},
+        "extend": function () {},
+        "emptyDomNode": function () {},
+        "moveCleanedNodesToContainerElement": function () {},
+        "cloneNodes": function () {},
+        "setDomNodeChildren": function () {},
+        "replaceDomNodes": function () {},
+        "setOptionNodeSelectionState": function () {},
+        "stringTrim": function () {},
+        "stringTokenize": function () {},
+        "stringStartsWith": function () {},
+        "domNodeIsContainedBy": function () {},
+        "domNodeIsAttachedToDocument": function () {},
+        "tagNameLower": function () {},
+        "registerEventHandler": function () {},
+        "triggerEvent": function () {},
+        "unwrapObservable": function () {},
+        "peekObservable": function () {},
+        "toggleDomNodeCssClass": function () {},
+        "setTextContent": function () {},
+        "setElementName": function () {},
+        "forceRefresh": function () {},
+        "ensureSelectElementIsRenderedCorrectly": function () {},
+        "range": function () {},
+        "makeArray": function () {},
+        "isIe6": {},
+        "isIe7": {},
+        "ieVersion": {},
+        "getFormFields": function () {},
+        "parseJson": function () {},
+        "stringifyJson": function () {},
+        "postJson": function () {},
+        "domData": {
+            "get": function () {},
+            "set": function () {},
+            "getAll": function () {},
+            "clear": function () {}
+        },
+        "domNodeDisposal": {
+            "addDisposeCallback": function () {},
+            "removeDisposeCallback": function () {},
+            "cleanNode": function () {},
+            "removeNode": function () {}
+        },
+        "parseHtmlFragment": function () {},
+        "setHtml": function () {},
+        "compareArrays": function () {},
+        "setDomNodeChildrenFromArrayMapping": function () {}
+    },
+    "cleanNode": function () {},
+    "removeNode": function () {},
+    "memoization": {
+        "memoize": function () {},
+        "unmemoize": function () {},
+        "unmemoizeDomNodeAndDescendants": function () {},
+        "parseMemoText": function () {}
+    },
+    "extenders": {
+        "throttle": function () {},
+        "notify": function () {}
+    },
+    "subscription": function () {},
+    "subscribable": function () {},
+    "isSubscribable": function () {},
+    "dependencyDetection": {
+        "begin": function () {},
+        "end": function () {},
+        "registerDependency": function () {},
+        "ignore": function () {}
+    },
+    "observable": function () {},
+    "hasPrototype": function () {},
+    "isObservable": function () {},
+    "isWriteableObservable": function () {},
+    "observableArray": function () {},
+    "dependentObservable": function () {},
+    "isComputed": function () {},
+    "computed": function () {},
+    "toJS": function () {},
+    "toJSON": function () {},
+    "selectExtensions": {
+        "readValue": function () {},
+        "writeValue": function () {}
+    },
+    "expressionRewriting": {
+        "bindingRewriteValidators": {
+            "foreach": {},
+            "if": {},
+            "ifnot": {},
+            "with": {},
+            "template": function () {}
+        },
+        "parseObjectLiteral": function () {},
+        "preProcessBindings": function () {},
+        "keyValueArrayContainsKey": function () {},
+        "writeValueToProperty": function () {},
+        "insertPropertyAccessorsIntoJson": function () {}
+    },
+    "jsonExpressionRewriting": {
+        "bindingRewriteValidators": {
+            "foreach": {},
+            "if": {},
+            "ifnot": {},
+            "with": {},
+            "template": function () {}
+        },
+        "parseObjectLiteral": function () {},
+        "preProcessBindings": function () {},
+        "keyValueArrayContainsKey": function () {},
+        "writeValueToProperty": function () {},
+        "insertPropertyAccessorsIntoJson": function () {}
+    },
+    "virtualElements": {
+        "allowedBindings": {
+            "foreach": {},
+            "if": {},
+            "ifnot": {},
+            "with": {},
+            "text": {},
+            "template": {}
+        },
+        "childNodes": function () {},
+        "emptyNode": function () {},
+        "setDomNodeChildren": function () {},
+        "prepend": function () {},
+        "insertAfter": function () {},
+        "firstChild": function () {},
+        "nextSibling": function () {},
+        "virtualNodeBindingValue": function () {},
+        "normaliseVirtualElementDomStructure": function () {}
+    },
+    "bindingProvider": function () {},
+    "bindingHandlers": {
+        "attr": {
+            "update": function () {}
+        },
+        "checked": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "css": {
+            "update": function () {}
+        },
+        "enable": {
+            "update": function () {}
+        },
+        "disable": {
+            "update": function () {}
+        },
+        "event": {
+            "init": function () {}
+        },
+        "foreach": {
+            "makeTemplateValueAccessor": function () {},
+            "init": function () {},
+            "update": function () {}
+        },
+        "hasfocus": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "html": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "if": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "ifnot": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "with": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "options": {
+            "update": function () {},
+            "optionValueDomDataKey": {}
+        },
+        "selectedOptions": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "style": {
+            "update": function () {}
+        },
+        "submit": {
+            "init": function () {}
+        },
+        "text": {
+            "update": function () {}
+        },
+        "uniqueName": {
+            "init": function () {},
+            "currentIndex": {}
+        },
+        "value": {
+            "init": function () {},
+            "update": function () {}
+        },
+        "visible": {
+            "update": function () {}
+        },
+        "click": {
+            "init": function () {}
+        },
+        "template": {
+            "init": function () {},
+            "update": function () {}
+        }
+    },
+    "bindingContext": function () {},
+    "storedBindingContextForNode": function () {},
+    "applyBindingsToNode": function () {},
+    "applyBindingsToDescendants": function () {},
+    "applyBindings": function () {},
+    "contextFor": function () {},
+    "dataFor": function () {},
+    "templateEngine": function () {},
+    "templateRewriting": {
+        "ensureTemplateIsRewritten": function () {},
+        "memoizeBindingAttributeSyntax": function () {},
+        "applyMemoizedBindingsToNextSibling": function () {}
+    },
+    "__tr_ambtns": function () {},
+    "templateSources": {
+        "domElement": function () {},
+        "anonymousTemplate": function () {}
+    },
+    "setTemplateEngine": function () {},
+    "renderTemplate": function () {},
+    "renderTemplateForEach": function () {},
+    "nativeTemplateEngine": function () {},
+    "jqueryTmplTemplateEngine": function () {}
+}
