@@ -10,7 +10,7 @@ function TodoTxtViewModel()
     /************************************************
      * Inner Constructors
      ***********************************************/
-    self.version = ko.observable("0.8 - Dropbox");
+    self.version = ko.observable("0.9");
     self.title = ko.observable("TodoTxtJs Web App");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
