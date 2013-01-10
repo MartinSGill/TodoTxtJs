@@ -15,48 +15,47 @@
 <section class="hidden" data-bind="css: { hidden: !pageReady }">
     <section class="toolbar">
         <ul id="menu" class="menu">
-            <li class="menuItem" id="options">
-                <a href="#" onClick="todoTxtView.toggleToolbox(this)">
-                    Options
-                </a>
-
-                <div data-bind="with: options">
-                    <div class="toolBox options">
-                        <table>
-                            <!--
-                            <tr>
-                                <td>
-                                    <label>Storage</label>&nbsp;
-                                </td>
-                                <td>
-                                    <select data-bind="options: storageOptions,
-                                               optionsText: 'name',
-                                               value: storageInfo">
-                                    </select>
-                                </td>
-                                <td>
-                                    <span class="tip" data-bind="text: storageInfo().tip"></span>
-                                </td>
-                            </tr>
-                            -->
-                            <tr>
-                                <td>
-                                    <label>Theme</label>&nbsp;
-                                </td>
-                                <td>
-                                    <select data-bind="options: themes,
-                                               optionsText: 'name',
-                                               value: theme">
-                                    </select>
-                                </td>
-                                <td>
-                                    <span class="tip" data-bind="text: theme().info"></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+            <!--
+        <li class="menuItem" id="options">
+            <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+                Options
+            </a>
+            <div data-bind="with: options">
+                <div class="toolBox options">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>Storage</label>&nbsp;
+                            </td>
+                            <td>
+                                <select data-bind="options: storageOptions,
+                                           optionsText: 'name',
+                                           value: storageInfo">
+                                </select>
+                            </td>
+                            <td>
+                                <span class="tip" data-bind="text: storageInfo().tip"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Theme</label>&nbsp;
+                            </td>
+                            <td>
+                                <select data-bind="options: themes,
+                                           optionsText: 'name',
+                                           value: theme">
+                                </select>
+                            </td>
+                            <td>
+                                <span class="tip" data-bind="text: theme().info"></span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-            </li>
+            </div>
+        </li>
+        -->
             <li class="menuItem" data-bind="visible: options.showImport" id="import">
                 <a href="#" onClick="todoTxtView.toggleToolbox(this)">
                     Import

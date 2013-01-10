@@ -6,6 +6,7 @@
     <property name="src.js.lib" location="${src}/js/lib"/>
     <property name="output" location="${basedir}/output"/>
     <property name="externs" location="${basedir}/build/externs"/>
+    <property name="target" location="${output}/todotxt.html"/>
 
     <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
              classpath="${basedir}/build/compiler.jar"/>
@@ -47,7 +48,7 @@
         <loadfile srcfile="${output}/scripts.min.js" property="html.script" failonerror="true"/>
         <loadfile srcfile="${output}/simple.min.css" property="html.style" failonerror="true"/>
 
-        <echo file="${output}/todotxt.html"><![CDATA[${html.top}
+        <echo file="${target}"><![CDATA[${html.top}
 <style>
 ${html.style}
 </style>
@@ -108,8 +109,13 @@ ${html.bottom}
     <target name="compile" depends="clean, compileScripts, compileCss, buildHtmlOutput">
     </target>
 
+    <target name="tidyOutput">
+        <delete>
+            <fileset dir="${output}" includes="**/*" excludes="${target}"/>
+        </delete>
+    </target>
+
     <target name="clean">
         <delete dir="${output}" />
     </target>
-
 </project>

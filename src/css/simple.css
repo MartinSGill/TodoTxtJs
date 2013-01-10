@@ -134,8 +134,9 @@ form
 .toolBox > textarea
 {
     display: block;
+    overflow-y: visible;
     height: 300px;
-    width: 100%;
+    width: 99%;
 }
 
 .toolBox > span
