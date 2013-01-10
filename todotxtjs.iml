@@ -8,6 +8,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Knockout-2.1.0" level="application" />
+    <orderEntry type="library" name="dropbox" level="application" />
   </component>
 </module>
 

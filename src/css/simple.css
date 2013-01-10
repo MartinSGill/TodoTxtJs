@@ -162,6 +162,13 @@ form
     font-style: italic;
 }
 
+.help
+{
+    font-size: smaller;
+    font-variant: small-caps;
+    text-align: right;
+}
+
 /*******************************************************
  * Add
  ******************************************************/
