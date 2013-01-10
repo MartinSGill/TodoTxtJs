@@ -1,0 +1,27 @@
+var Dropbox = {
+    "ApiError": function () {},
+    "Client": function () {},
+    "AuthDriver": function () {},
+    "Drivers": {
+        "BrowserBase": function () {},
+        "Redirect": function () {},
+        "Popup": function () {},
+        "Chrome": function () {},
+        "NodeServer": function () {}
+    },
+    "EventSource": function () {},
+    "Oauth": function () {},
+    "PulledChanges": function () {},
+    "PullChange": function () {},
+    "PublicUrl": function () {},
+    "CopyReference": function () {},
+    "Stat": function () {},
+    "UploadCursor": function () {},
+    "UserInfo": function () {},
+    "Xhr": function () {},
+    "atob": function () {},
+    "btoa": function () {},
+    "hmac": function () {},
+    "sha1": function () {},
+    "encodeKey": function () {}
+}

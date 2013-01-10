@@ -65,9 +65,12 @@ ${html.bottom}
         <concat destfile="${output}/output.js">
             <filelist dir="${src.js}">
                 <file name="lib/jquery.hotkeys.js"/>
+                <file name="util.js"/>
                 <file name="todo.js"/>
                 <file name="todoHtmlRender.js"/>
                 <file name="todomanager.js"/>
+                <file name="browser.js"/>
+                <file name="dropbox.js"/>
                 <file name="todotxt.js"/>
             </filelist>
         </concat>
@@ -78,6 +81,7 @@ ${html.bottom}
                 <file name="jquery.externs"/>
                 <file name="json.externs"/>
                 <file name="knockoutjs.externs"/>
+                <file name="dropbox.externs"/>
             </externs>
 
             <sources dir="${output}">
@@ -90,6 +94,7 @@ ${html.bottom}
             <filelist dir="${basedir}">
                 <file name="src/js/lib/jquery-1.8.3.min.js"/>
                 <file name="src/js/lib/knockoutjs.js"/>
+                <file name="src/js/lib/dropbox.js_0.8.1_dropbox.min.js"/>
                 <file name="output/output.min.js"/>
             </filelist>
         </concat>
