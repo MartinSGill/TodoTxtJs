@@ -89,7 +89,6 @@ ${html.bottom}
         <concat destfile="${output}/scripts.min.js">
             <filelist dir="${basedir}">
                 <file name="src/js/lib/jquery-1.8.3.min.js"/>
-                <file name="src/js/lib/jquery-ui.js"/>
                 <file name="src/js/lib/knockoutjs.js"/>
                 <file name="output/output.min.js"/>
             </filelist>

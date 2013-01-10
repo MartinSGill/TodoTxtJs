@@ -48,7 +48,7 @@ function TodoTxtViewModel()
 
         self.themes = ko.observableArray([
                                                   { name: "Simple", source: "css/simple.css", info:"light and rounded/simple theme." },
-                                                  { name: "Blocky", source: "css/blocky.css", info: "darker blockier theme." }
+                                                  { name: "Blocks", source: "css/blocky.css", info: "darker more block-style theme." }
                                               ]);
 
         self.theme = ko.observable();
@@ -315,9 +315,21 @@ function TodoTxtViewModel()
         self.newTodoText("");
     };
 
+    self.spinner = ko.observable(false);
+
     self.save = function ()
     {
-        self.options.storageInfo().save(self.exporting.buildExportText());
+        self.lastUpdated("Saving Todos to " + self.options.storage());
+        self.spinner(true);
+
+
+        function onSuccess()
+        {
+            self.lastUpdated("Last Saved: " + toISO8601DateTime(new Date()));
+            self.spinner(false);
+        }
+
+        self.options.storageInfo().save(self.exporting.buildExportText(), onSuccess);
     };
 
     self.load = function ()
@@ -327,10 +339,15 @@ function TodoTxtViewModel()
         function onSuccess(data)
         {
             todoManager.loadFromStringArray(data);
+            self.lastUpdated("Loaded " + toISO8601DateTime(new Date()));
+            self.spinner(false);
         }
 
         if (typeof(Storage) !== "undefined")
         {
+            todoManager.removeAll();
+            self.spinner(true);
+            self.lastUpdated("Loading Todos from " + self.options.storage());
             self.options.storageInfo().load(onSuccess);
         }
     };

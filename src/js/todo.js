@@ -187,7 +187,7 @@ function Todo(text)
                 _completed = value;
                 if (_completed)
                 {
-                    _completedDate = $.datepicker.formatDate("yy-mm-dd", new Date());
+                    _completedDate = toISO8601Date(new Date());
                 }
                 else
                 {

@@ -7,7 +7,6 @@ config["My tests"] = {
         "src/js/jQuery/js/jquery.js",
         "src/js/knockout/*.js",
         "src/js/underscore/*.js",
-        "src/js/jQuery/js/jquery-ui.js"
     ],
     sources: [
         "src/js/todo.js"
