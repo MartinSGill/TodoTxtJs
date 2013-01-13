@@ -16,8 +16,8 @@ function TodoTxtViewModel()
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
     self.priorities = ko.observableArray([]);
-    self.projects = ko.computed(function() { return todoManager.allProjects(); } );
-    self.contexts = ko.computed(function() { return todoManager.allContexts(); } );
+    self.projects = ko.computed(function() { return todoManager.allProjects().sort(); } );
+    self.contexts = ko.computed(function() { return todoManager.allContexts().sort(); } );
 
     self.showCompleted = ko.observable(false);
 
@@ -267,8 +267,20 @@ function TodoTxtViewModel()
         self.filters("");
     };
 
+    self.addFilterFromElement = function(newFilter)
+    {
+        var result = self.filters().trim();
+        if (self.filters().length > 0)
+        {
+            result += " ";
+        }
+        result += $(newFilter).text();
+        self.filters(result);
+    };
+
     self.addFilter = function(newFilter)
     {
+
         var result = self.filters().trim();
         if (self.filters().length > 0)
         {

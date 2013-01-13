@@ -126,8 +126,26 @@
         * Todo
         **********************************
      -->
-    <section class="todos" data-bind="template: { name: 'todo-template', foreach: allTodos }">
-    </section>
+    <table class="mainLayout">
+        <tr>
+            <td>
+                <section class="todos" data-bind="template: { name: 'todo-template', foreach: allTodos }">
+                </section>
+            </td>
+            <td>
+                <section class="list">
+                    <h3>Contexts</h3>
+                    <ul data-bind="foreach: contexts">
+                        <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem context"></li>
+                    </ul>
+                    <h3>Projects</h3>
+                    <ul data-bind="foreach: projects">
+                        <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem project"></li>
+                    </ul>
+                </section>
+            </td>
+        </tr>
+    </table>
     <footer>
         <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
         <div class="copyright">Copyright &copy; 2012, Martin Gill. All rights reserved.</div>
