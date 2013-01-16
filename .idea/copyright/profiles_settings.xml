@@ -1,5 +1,9 @@
 <component name="CopyrightManager">
   <settings default="Default">
     <module2copyright />
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="separateBefore" value="true" />
+      <option name="separateAfter" value="true" />
+    </LanguageOptions>
   </settings>
 </component>
