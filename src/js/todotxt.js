@@ -39,8 +39,59 @@ function TodoTxtViewModel()
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
     self.priorities = ko.observableArray([]);
-    self.projects = ko.computed(function() { return todoManager.allProjects().sort(); } );
-    self.contexts = ko.computed(function() { return todoManager.allContexts().sort(); } );
+    self.projects = ko.computed(function()
+    {
+        var hash = {};
+        for (var i = 0; i < self.allTodos().length; i++)
+        {
+            if (self.isDisplayed(self.allTodos()[i]))
+            {
+                var projects = self.allTodos()[i].projects();
+                for (var j = 0; j < projects.length; j++)
+                {
+                    hash[projects[j]] = true;
+                }
+            }
+        }
+
+        var result = [];
+        for(var name in hash)
+        {
+            if (hash.hasOwnProperty(name))
+            {
+                result.push(name);
+            }
+        }
+
+        return result.sort();
+    });
+
+    self.contexts = ko.computed(function()
+    {
+        var hash = {};
+        for (var i = 0; i < self.allTodos().length; i++)
+        {
+            if (self.isDisplayed(self.allTodos()[i]))
+            {
+                var contexts = self.allTodos()[i].contexts();
+                for (var j = 0; j < contexts.length; j++)
+                {
+                    hash[contexts[j]] = true;
+                }
+            }
+        }
+
+        var result = [];
+        for(var name in hash)
+        {
+            if (hash.hasOwnProperty(name))
+            {
+                result.push(name);
+            }
+        }
+
+        return result.sort();
+    });
 
     self.showCompleted = ko.observable(false);
 
@@ -292,17 +343,27 @@ function TodoTxtViewModel()
 
     self.addFilterFromElement = function(newFilter)
     {
+        var filterText = $(newFilter).text();
+        if (self.filters().indexOf(filterText.toLowerCase()) > -1)
+        {
+            return;
+        }
+
         var result = self.filters().trim();
         if (self.filters().length > 0)
         {
             result += " ";
         }
-        result += $(newFilter).text();
+        result += filterText;
         self.filters(result);
     };
 
     self.addFilter = function(newFilter)
     {
+        if (self.filters().indexOf(newFilter.toLowerCase()) > -1)
+        {
+            return;
+        }
 
         var result = self.filters().trim();
         if (self.filters().length > 0)
