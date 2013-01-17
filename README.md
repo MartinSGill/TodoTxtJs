@@ -14,6 +14,16 @@ Features
 * Sorts by completed-state, completed-date, priority, file order.
 * Preserves item order in Todo.txt file.
 
+Libraries Used
+--------------
+
+With thanks to their authors.
+
+* [KnockoutJS](http://www.knockoutjs.com)
+* [jQuery](http://jquery.com)
+* [jQuery.hotkeys](https://github.com/jeresig/jquery.hotkeys/)
+* [dropbox.js](https://github.com/dropbox/dropbox-js)
+
 License
 -------
 
