@@ -280,13 +280,13 @@ h1
     color: white;
 }
 
-.clearFilters
+.deleteButton
 {
     display: inline-block;
     vertical-align: text-bottom;
 }
 
-.clearFilters a
+.deleteButton a
 {
     display: table;
     background-color: #00312e;
@@ -299,7 +299,7 @@ h1
     text-transform: capitalize;
 }
 
-.clearFilters a:hover
+.deleteButton a:hover
 {
     color: red;
 }

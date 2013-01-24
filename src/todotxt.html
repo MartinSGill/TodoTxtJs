@@ -141,7 +141,7 @@
             <label>Quick Filter</label><input type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'"
                                               title="Example: +Project @Context (A)" />
 
-            <div class="clearFilters"><a href="" data-bind="click: clearFilters">x</a></div>
+            <div class="deleteButton"><a href="" data-bind="click: clearFilters">x</a></div>
         </div>
     </section>
     <!--
@@ -177,6 +177,7 @@
 </section>
 <script type="text/html" id="todo-template">
     <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
+        <div class="deleteButton deleteTodo"><a onclick="todoTxtView.removeTodo(this)">x</a></div>
         <div class="display" data-bind="attr: { 'class': 'Priority' + priority }"></span>
             <span class="index" data-bind="text: index"></span>
             <input type="checkbox" data-bind="checked: completed" />

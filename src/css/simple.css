@@ -264,18 +264,19 @@ form
     width: 300px;
 }
 
-.clearFilters
+.deleteButton
 {
     display: inline-block;
     vertical-align: text-bottom;
 }
 
-.clearFilters a
+.deleteButton a
 {
     display: table;
     background-color: silver;
     height: 0.8em;
     width: 1.2em;
+    font-size: 12pt;
     color: black;
     border-radius: 50px;
     font-family: sans-serif;
@@ -283,11 +284,18 @@ form
     text-decoration: none;
     text-transform: capitalize;
     text-align: center;
+    cursor: pointer;
 }
 
-.clearFilters a:hover
+.deleteButton a:hover
 {
     color: red;
+}
+
+.deleteTodo
+{
+    display: inline-block;
+    float: right;
 }
 
 /*******************************************************

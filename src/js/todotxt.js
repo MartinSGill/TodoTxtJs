@@ -33,7 +33,7 @@ function TodoTxtViewModel()
     /************************************************
      * Inner Constructors
      ***********************************************/
-    self.version = ko.observable("0.9");
+    self.version = ko.observable("0.9.1");
     self.title = ko.observable("TodoTxtJs Web App");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
@@ -461,6 +461,12 @@ function TodoTxtViewModel()
     {
         self.pageReady(true);
     });
+
+    self.removeTodo = function(element)
+    {
+        var index = parseInt($(element).parents(".todo").find(".index").text(), 10);
+        todoManager.remove(index);
+    };
 
     //////////////////////////////////////////////////////////
     // Subscriptions

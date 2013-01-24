@@ -111,6 +111,18 @@ function TodoManager()
         nextIndex = 0;
     };
 
+    self.remove = function(index)
+    {
+        for (var i = 0; i < data().length; i++)
+        {
+            if (data()[i].index === index)
+            {
+                data.splice(i, 1);
+                return;
+            }
+        }
+    };
+
     self.add = function(newTodo)
     {
         if (typeof(newTodo) === 'string')
