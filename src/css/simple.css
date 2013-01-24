@@ -264,15 +264,19 @@ form
     width: 300px;
 }
 
+.todo:hover
+{
+    background-color: #fffda4;
+}
+
 .deleteButton
 {
     display: inline-block;
-    vertical-align: text-bottom;
 }
 
 .deleteButton a
 {
-    display: table;
+    display: inline-table;
     background-color: silver;
     height: 0.8em;
     width: 1.2em;
