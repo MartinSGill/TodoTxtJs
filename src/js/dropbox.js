@@ -69,7 +69,11 @@ function DropboxStorageProvider()
                          client.readFile('Todo/todo.txt', function(error, data){
                              if (error)
                              {
-                                 onError(error);
+                                 var errorMsg = JSON.parse(error.responseText).error;
+                                 if (onError)
+                                 {
+                                    onError(errorMsg);
+                                 }
                                  return;
                              }
 
@@ -86,11 +90,18 @@ function DropboxStorageProvider()
                          client.writeFile('Todo/todo.txt', data, function(error, data){
                              if (error)
                              {
-                                 onError(error);
+                                 var errorMsg = JSON.parse(error.responseText).error;
+                                 if (onError)
+                                 {
+                                     onError(errorMsg);
+                                 }
                                  return;
                              }
 
-                             onSuccess();
+                             if (onSuccess)
+                             {
+                                onSuccess();
+                             }
                          });
                      }, onError);
     };

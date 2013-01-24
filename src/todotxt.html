@@ -109,10 +109,15 @@
                 </a>
             </li>
         </ul>
-        <span class="lastUpdated" data-bind="visible: options.showStorageControls">
-            <span class="spinner" data-bind="visible: spinner"></span>
-            <span data-bind="text: lastUpdated"></span>
-        </span>
+        <div id="notice" class="notice" data-bind="visible: options.showStorageControls">
+            <span>
+                <span class="spinner" data-bind="visible: spinner"></span>
+                <span data-bind="text: lastUpdated"></span>
+            </span>
+        </div>
+        <div id="target">
+
+        </div>
     </section>
     <h1 data-bind="text: title"></h1>
     <!--
@@ -172,7 +177,7 @@
     <footer>
         <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
         <div class="copyright">Copyright &copy; 2013, Martin Gill.</div>
-        <div class="copyright">The software running this page is available in <a href="https://github.com/MartinSGill/TodoTxtJs">GitHub</a> under an MIT License.</div>
+        <div class="copyright">The software running this page is available in <a href="https://github.com/MartinSGill/TodoTxtJs">GitHub</a> under an <a href="https://github.com/MartinSGill/TodoTxtJs#license">MIT License</a>.</div>
     </footer>
 </section>
 <script type="text/html" id="todo-template">
@@ -203,6 +208,7 @@
 <!-- Build: Scripts -->
 <script src="js/lib/jquery.js" type="text/javascript"></script>
 <script src="js/lib/jquery.hotkeys.js" type="text/javascript"></script>
+<script src="js/lib/jquery-ui-1.10.0.custom.min.js" type="text/javascript"></script>
 <script src="js/lib/knockoutjs.js" type="text/javascript"></script>
 <script src="js/util.js" type="text/javascript"></script>
 <script src="js/todo.js" type="text/javascript"></script>

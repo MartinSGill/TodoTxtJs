@@ -145,13 +145,48 @@ form
     z-index: 5001;
 }
 
-.lastUpdated
+.notice
 {
     display: block;
-    float: right;
+    width: 100%;
+    text-align: right;
+}
+
+.noticeHighlight
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.noticeHighlight > span
+{
+    display: inline-block;
+    width: 40%;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: #ffd57a;
+}
+
+.noticeError > span
+{
+    background-color: #e97072;
+}
+
+#target
+{
+    height: 15px;
+    width: 300px;
+    display: inline-block;
     position: absolute;
-    top: 30px;
-    right: 10px;
+    top: 25px;
+    right: 0;
+}
+
+.ui-effects-transfer
+{
+    border: 1px dotted black;
 }
 
 .toolBox
@@ -429,7 +464,7 @@ form
 
 .message
 {
-    cursor: hand;
+    cursor: pointer;
 }
 
 .createDate

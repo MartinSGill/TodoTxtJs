@@ -33,7 +33,7 @@ function TodoTxtViewModel()
     /************************************************
      * Inner Constructors
      ***********************************************/
-    self.version = ko.observable("0.9.1");
+    self.version = ko.observable("0.9.2");
     self.title = ko.observable("TodoTxtJs Web App");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
@@ -415,6 +415,7 @@ function TodoTxtViewModel()
 
     self.save = function ()
     {
+        highlightNotice();
         self.lastUpdated("Saving Todos to " + self.options.storage());
         self.spinner(true);
 
@@ -423,13 +424,23 @@ function TodoTxtViewModel()
         {
             self.lastUpdated("Last Saved: " + toISO8601DateTime(new Date()));
             self.spinner(false);
+            setTimeout(normalNotice, 1000);
         }
 
-        self.options.storageInfo().save(self.exporting.buildExportText(), onSuccess);
+        function onError(error)
+        {
+            self.lastUpdated("Error: [" + error  +  "]");
+            highlightNotice(true);
+            setTimeout(normalNotice, 2000);
+            self.spinner(false);
+        }
+
+        self.options.storageInfo().save(self.exporting.buildExportText(), onSuccess, onError);
     };
 
     self.load = function ()
     {
+        highlightNotice();
         self.options.load();
 
         function onSuccess(data)
@@ -437,14 +448,22 @@ function TodoTxtViewModel()
             todoManager.loadFromStringArray(data);
             self.lastUpdated("Loaded " + toISO8601DateTime(new Date()));
             self.spinner(false);
+            setTimeout(normalNotice, 1000);
         }
 
+        function onError(error)
+        {
+            self.lastUpdated("Error: [" + error  +  "]");
+            highlightNotice(true);
+            self.spinner(false);
+            setTimeout(normalNotice, 2000);
+        }
         if (typeof(Storage) !== "undefined")
         {
             todoManager.removeAll();
             self.spinner(true);
             self.lastUpdated("Loading Todos from " + self.options.storage());
-            self.options.storageInfo().load(onSuccess);
+            self.options.storageInfo().load(onSuccess, onError);
         }
     };
 
@@ -476,6 +495,30 @@ function TodoTxtViewModel()
         $(document.head).find("[rel=stylesheet]").attr('href', newValue.source);
     });
 
+    //////////////////////////////////////////////////////////
+    // Effects
+    //////////////////////////////////////////////////////////
+    function highlightNotice(isError)
+    {
+        var notice = $("#notice");
+        notice.addClass("noticeHighlight");
+
+        if (isError)
+        {
+            notice.addClass("noticeError");
+        }
+        else
+        {
+            notice.removeClass("noticeError");
+        }
+    }
+
+    function normalNotice()
+    {
+        var notice = $("#notice");
+        notice.find(".spinner").siblings().effect("transfer", { to: $("#target") }, 1000);
+        notice.removeClass("noticeHighlight");
+    }
 
     //////////////////////////////////////////////////////////
     // Keyboard shortcuts

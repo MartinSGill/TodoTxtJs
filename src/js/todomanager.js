@@ -142,21 +142,24 @@ function TodoManager()
 
     self.loadFromStringArray = function(newData)
     {
-        if (!newData instanceof Array)
+        if (newData)
         {
-            throw "Argument isn't an array.";
-        }
-
-        self.removeAll();
-        for (var i = 0; i < newData.length; i++)
-        {
-            var obj = newData[i];
-            if (!obj instanceof String)
+            if (!newData instanceof Array)
             {
-                throw "Argument elements are not strings";
+                throw "Argument isn't an array.";
             }
 
-            self.add(obj);
+            self.removeAll();
+            for (var i = 0; i < newData.length; i++)
+            {
+                var obj = newData[i];
+                if (!obj instanceof String)
+                {
+                    throw "Argument elements are not strings";
+                }
+
+                self.add(obj);
+            }
         }
     };
 
