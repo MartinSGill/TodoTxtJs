@@ -38,6 +38,11 @@
 <section class="hidden" data-bind="css: { hidden: !pageReady }">
     <section class="toolbar">
         <ul id="menu" class="menu">
+            <li class="menuItem menuItem_help" data-bind="click: onClick_ShowHelp" id="showHelp">
+                <a href="#">
+                    ?
+                </a>
+            </li>
             <li class="menuItem" id="options">
                 <a href="#" onClick="todoTxtView.toggleToolbox(this)">
                     Options
@@ -174,6 +179,35 @@
             </td>
         </tr>
     </table>
+    <section id="help" data-bind="visible: showHelp">
+        <h1>
+            Welcome To TodoTxtJs
+        </h1>
+        <p>
+            This is a Todo Manager based on the TodoTxt format. Click on the text in any todo to edit it or see how it's formatted.
+            <br/>
+            To close this window just click the help '?' button again.
+        </p>
+        <h2>Format</h2>
+        <ul>
+            <li>You can have priorities just use '(<span class="A">A</span>)' at the beginning of the line. </li>
+            <li>You can specify a <span class="project">+Project</span> with the <span class="project">+</span> symbol.</li>
+            <li>You can specify a <span class="context">@Context</span> with the <span class="context">@</span> symbol.</li>
+            <li>You can have as many Projects and Contexts as you like.</li>
+        </ul>
+        <h2>
+            Features
+        </h2>
+        <ul>
+            <li>Click on the text in any todo to edit it.</li>
+            <li>Click on a <span class="context">@Context</span> or <span class="project">+Project</span> (in text or on right side) to filter on it.</li>
+            <li>If you have a DropBox account, you can save your Todos into that.</li>
+            <li>Select DropBox in the Options and once you close the options again you'll be synced to DropBox.</li>
+            <li>You can mark a Todo as completed by click on the checkbox at its left.</li>
+            <li>Completed Todos are hidden by default. Click on 'Show Completed' to see them.</li>
+            <li>Visit <a href="http://www.todotxt.com">Todotxt.com</a> for more details on the format and for other tools.</li>
+        </ul>
+    </section>
     <footer>
         <div class="version"><label>Version</label> <span data-bind="text: version"></span></div>
         <div class="copyright">Copyright &copy; 2013, Martin Gill.</div>

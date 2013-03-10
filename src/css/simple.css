@@ -116,7 +116,7 @@ form
     cursor: pointer;
     margin-left: 2px;
     margin-right: 2px;
-    width: 100px;
+    min-width: 75px;
     height: 20px;
 
     background-color: #FFCC00;
@@ -131,6 +131,12 @@ form
 
     position: relative;
 }
+
+.menuItem_help a
+{
+    min-width: 20px;
+}
+
 
 .menuItem a:hover
 {
@@ -541,4 +547,24 @@ form
 {
     border-color: red;
     font-weight: bold;
+}
+
+#help
+{
+    border: #FF9900 solid 3px;
+    color: #c3ab00;
+    background-color: #000000;
+    padding: 15px;
+    max-width: 900px;
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    vertical-align: middle;
+
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px #444444;
+
+    position: fixed;
+    top: 150px;
+    left: 450px;
 }

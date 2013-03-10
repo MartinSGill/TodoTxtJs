@@ -3,14 +3,26 @@ TodoTxtJs
 
 A Javascript web app implementation of TodoTxt.
 
+Purpose
+-------
+
+The principle purpose of this project is two-fold.
+# To provide a means for me to learn and practice writing web-apps.
+# To provide me with a way to easily edit my Todos from any computer.
+
+Additionally:
+
+* To write a WebApp that will run on any WebServer without the need for server-side scripting.
+* To keep me entertained.
+* To contribute back to the open source community that I've long benefited from.
+
 Features
 --------
 
-* Uses the excellent and simple TodoTxt format
+* Uses the excellent and simple [TodoTxt](http://www.todotxt.com) format
 * Fully editable Todos.
 * Quick Filters: Click on Priority / Project / Context to quickly filter.
 * Save to Local Browser Storage
-* Save to Dropbox (not available when using as file:///)
 * Sorts by completed-state, completed-date, priority, file order.
 * Preserves item order in Todo.txt file.
 

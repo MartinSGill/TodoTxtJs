@@ -33,7 +33,7 @@ function TodoTxtViewModel()
     /************************************************
      * Inner Constructors
      ***********************************************/
-    self.version = ko.observable("0.9.2");
+    self.version = ko.observable("0.9.3");
     self.title = ko.observable("TodoTxtJs Web App");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
@@ -96,6 +96,8 @@ function TodoTxtViewModel()
     self.showCompleted = ko.observable(false);
 
     self.newPriorityFilter = ko.observable(undefined);
+
+    self.showHelp = ko.observable(false);
 
     ////////////////////////////////////////////////////////////////////////////
     // Options
@@ -326,6 +328,15 @@ function TodoTxtViewModel()
     self.exporting = new Exporting(self);
 
     ////////////////////////////////////////////////////////////////////////////
+    // Help
+    ////////////////////////////////////////////////////////////////////////////
+
+    self.onClick_ShowHelp = function (data, event)
+    {
+        self.showHelp(!self.showHelp());
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
     // Filters
     ////////////////////////////////////////////////////////////////////////////
 
@@ -528,6 +539,12 @@ function TodoTxtViewModel()
     {
         event.preventDefault();
         $(".addTodo Input").focus();
+    });
+
+    $(document).bind('keydown', '?', function(event)
+    {
+        event.preventDefault();
+        self.onClick_ShowHelp();
     });
 
     self.load();
