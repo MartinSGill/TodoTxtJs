@@ -7,8 +7,8 @@ Purpose
 -------
 
 The principle purpose of this project is two-fold.
-# To provide a means for me to learn and practice writing web-apps.
-# To provide me with a way to easily edit my Todos from any computer.
+1. To provide a means for me to learn and practice writing web-apps.
+2. To provide me with a way to easily edit my Todos from any computer.
 
 Additionally:
 
