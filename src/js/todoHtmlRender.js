@@ -51,13 +51,13 @@ function todoHtmlContentsRenderer(contents)
         if (formattedMessage)
         {
             // TODO: Need to find a better way of doing this.
-            var contextRegex = /(?:\s|^)(@)(\w+)(?=\W|$)/g;
+            var contextRegex = /(?:\W|^)(@)([\S_]+[A-Za-z0-9_](?!\S))/ig;
             formattedMessage = formattedMessage.replace(contextRegex,
-                                                        '<span class="contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span><span class="context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>');
+                                                        ' <span class="contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span><span class="context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>');
 
-            var projectRegex = /(?:\s|^)(\+)(\w+)(?=\W|$)/g;
+            var projectRegex = /(?:\W|^)(\+)([\S_]+[A-Za-z0-9_](?!\S))/ig;
             formattedMessage = formattedMessage.replace(projectRegex,
-                                                        '<span class="projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
+                                                        ' <span class="projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
 
             var urlRegex = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
             formattedMessage = formattedMessage.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
