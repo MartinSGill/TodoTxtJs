@@ -568,3 +568,12 @@ form
     top: 150px;
     left: 450px;
 }
+
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    font-size: 1em;
+  }
+

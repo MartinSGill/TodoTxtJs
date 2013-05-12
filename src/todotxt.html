@@ -28,8 +28,8 @@
     <meta charset="utf-8"/>
     <title data-bind="text: title"></title>
     <!-- Build: End Top -->
-    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css">
-    <link rel="stylesheet" href="css/simple.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="css/simple.css" />
 <!-- Build: Body -->
 </head>
 <body onunload="todoTxtView.save()">
@@ -133,8 +133,8 @@
      -->
     <section class="addTodo">
         <form data-bind="submit: addNewTodo">
-            <label>New Todo: </label>
-            <input type="text" data-bind="value: newTodoText">
+            <label for="newTodoInput">New Todo: </label>
+            <input id="newTodoInput" data-bind="value: newTodoText">
             <span class="tip">Press return to add your new todo.</span>
         </form>
     </section>
@@ -241,11 +241,12 @@
 </script>
 <!-- Build: End Body -->
 <!-- Build: Scripts -->
-<script src="js/lib/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="//code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
 <script src="js/lib/jquery.hotkeys.js" type="text/javascript"></script>
-<script src="js/lib/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
 <script src="js/lib/knockout-2.2.1.js" type="text/javascript"></script>
 <script src="js/util.js" type="text/javascript"></script>
+<script src="js/binding_todo.js" type="text/javascript"></script>
 <script src="js/todo.js" type="text/javascript"></script>
 <script src="js/todoHtmlRender.js" type="text/javascript"></script>
 <script src="js/todomanager.js" type="text/javascript"></script>

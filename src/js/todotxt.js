@@ -33,7 +33,7 @@ function TodoTxtViewModel()
     /************************************************
      * Inner Constructors
      ***********************************************/
-    self.version = ko.observable("0.9.3");
+    self.version = ko.observable("0.9.4");
     self.title = ko.observable("TodoTxtJs Web App");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
@@ -122,13 +122,6 @@ function TodoTxtViewModel()
             return self.storageInfo().name;
         });
 
-        self.themes = ko.observableArray([
-                                                  { name: "Simple", source: "css/simple.css", info:"light and rounded/simple theme." },
-                                                  { name: "Blocks", source: "css/blocky.css", info: "darker more block-style theme." }
-                                              ]);
-
-        self.theme = ko.observable();
-
         ///////////////////////////
         // Control
         ///////////////////////////
@@ -177,15 +170,6 @@ function TodoTxtViewModel()
                             break;
                         }
                     }
-                }
-
-                if (options.hasOwnProperty("theme"))
-                {
-                    self.theme(options.theme);
-                }
-                else
-                {
-                    self.theme = ko.observable(self.themes()[0]);
                 }
             }
         };
@@ -499,14 +483,6 @@ function TodoTxtViewModel()
     };
 
     //////////////////////////////////////////////////////////
-    // Subscriptions
-    //////////////////////////////////////////////////////////
-    self.options.theme.subscribe(function(newValue)
-    {
-        $(document.head).find("[rel=stylesheet]").attr('href', newValue.source);
-    });
-
-    //////////////////////////////////////////////////////////
     // Effects
     //////////////////////////////////////////////////////////
     function highlightNotice(isError)
@@ -547,77 +523,67 @@ function TodoTxtViewModel()
         self.onClick_ShowHelp();
     });
 
-    self.load();
-}
-
-ko.bindingHandlers.todo = {
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-        var template = $(element);
-        var viewer = template.find(".display");
-        var trigger = template.find(".message");
-        var editor = template.find(".edit");
-        var input = template.find(".edit input");
-
-        ko.utils.domNodeDisposal.addDisposeCallback(element, function ()
-        {
-            // not currently required
-        });
-
-        var toggle = function(edit)
-        {
-            if (edit)
-            {
-                viewer.hide();
-                editor.show();
-            }
-            else
-            {
-                viewer.show();
-                editor.hide();
-            }
-        };
-
-        template.find(".priority").click(function(event)
-        {
-            todoTxtView.addFilter('(' + ko.utils.unwrapObservable(valueAccessor()).priority() + ')');
-        });
-
-        // Clicking on the text
-        trigger.click(function(event)
-        {
-            toggle(true);
-            input.val(ko.utils.unwrapObservable(valueAccessor()).text());
-            input.focus();
-        });
-
-        // Keys
-        input.keyup(function (event)
-        {
-            // ENTER
-            if (event.keyCode === 13)
-            {
-                toggle(false);
-                ko.utils.unwrapObservable(valueAccessor()).text(input.val());
-            }
-
-            // ESC
-            if (event.keyCode === 27)
-            {
-                toggle(false);
-            }
-        });
-
-        input.blur(function (event)
-        {
-            toggle(false);
-        });
-    },
-    update: function (element, valueAccessor, allBindingsAccessor, bindingContext)
+    function newTodoAutoCompleteValues()
     {
+        var result = [];
+        var contexts = todoManager.allContexts();
+        var projects = todoManager.allProjects();
+
+        for (var i = 0; i < contexts.length; i++)
+        {
+            result.push("@" + contexts[i]);
+        }
+
+        for (var j = 0; j < projects.length; j++)
+        {
+            result.push("+" + projects[j]);
+        }
+
+        return result;
     }
-};
+
+    self.load();
+
+    function split( val ) {
+      return val.split( /\s+/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+
+    $( "#newTodoInput" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).data( "ui-autocomplete" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 1,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+            newTodoAutoCompleteValues(), extractLast( request.term ) ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( " " );
+          return false;
+        }
+      });
+}
 
 var todoTxtView = new TodoTxtViewModel();
 ko.applyBindings(todoTxtView, document.head);
 ko.applyBindings(todoTxtView);
-$(document.head).find("[rel=stylesheet]").attr('href', todoTxtView.options.theme().source);
