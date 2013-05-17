@@ -149,7 +149,7 @@
             <input type="checkbox" data-bind="checked: showCompleted"/>Show Completed
         </div>
         <div class="quickFilter">
-            <label>Quick Filter</label><input type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'"
+            <label for="filters">Quick Filter</label><input id="filters" type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'"
                                               title="Example: +Project @Context (A)" />
 
             <div class="deleteButton"><a href="" data-bind="click: clearFilters">x</a></div>
