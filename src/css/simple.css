@@ -552,12 +552,14 @@ form
 
 .createDate
 {
+    color: #59955C;
     font-size: smaller;
     font-family: sans-serif;
 }
 
 .completedDate
 {
+    color: #5f5f5f;
     font-size: smaller;
     font-family: sans-serif;
 }

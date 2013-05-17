@@ -63,15 +63,13 @@
                                 This Option will be saved and applied when you close the options.
                             </div>
                         </div>
-                        <!-- TODO: Add start date support
                         <div class="option">
                             <label class="option-label">Add Start Date</label>
                             <span class="option-value">
-                                <input type="checkbox" data-bind="checked: addStartDate">
+                                <input type="checkbox" data-bind="checked: addCreatedDate">
                             </span>
-                            <span class="option-description" data-bind="text: addStartDateDescription"></span>
+                            <span class="option-description" data-bind="text: addCreatedDateDescription"></span>
                         </div>
-                        -->
                     </div>
                 </div>
             </li>
@@ -153,11 +151,9 @@
             <div class="display-options-item">
                 <input type="checkbox" data-bind="checked: showCompleted"/>Completed
             </div>
-            <!-- TODO: add start date support
             <div class="display-options-item">
-                <input type="checkbox" data-bind="checked: showStartDate"/>Start-Date
+                <input type="checkbox" data-bind="checked: showCreatedDate"/>Create-Date
             </div>
-            -->
         </div>
         <div class="quickFilter">
             <label for="filters" class="quickFilter-label label">Filter:</label><input class="quickFilter-input"
@@ -231,7 +227,7 @@
 <script type="text/html" id="todo-template">
     <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
         <div class="deleteButton deleteTodo"><a onclick="todoTxtView.removeTodo(this)">x</a></div>
-        <div class="display" data-bind="attr: { 'class': 'Priority' + priority }"></span>
+        <div class="display" data-bind="attr: { 'class': 'Priority' + priority() }"></span>
             <span class="index" data-bind="text: index"></span>
             <input type="checkbox" data-bind="checked: completed" />
                 <span data-bind="css: { completed: completed }">
@@ -242,7 +238,7 @@
                         <span data-bind="text: priority, attr: { 'class': priority }"></span>
                     </span>
                     <span class="priorityBrace" data-bind="visible: priority !== null">)</span>
-                    <span class="createDate" data-bind="visible: createdDate !== null, text: createdDate"></span>
+                    <span class="createDate" data-bind="visible: createdDate() !== null && $root.showCreatedDate(), text: createdDate"></span>
                     <span class="message" data-bind="html: todoHtmlContentsRenderer(contents)"></span>
                 </span>
         </div>

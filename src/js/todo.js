@@ -31,8 +31,16 @@ function Todo(text)
         throw "argument is not a string.";
     }
 
+    // Set defaults
+    var _priority = null;
+    var _createDate = null;
+    var _completed = false;
+    var _completedDate = null;
+    var _contents = null;
+    var _projects = [];
+    var _contexts = [];
     var _text = ko.observable(text);
-    parse();
+    self.index = 0;
 
     self.text = ko.computed(
         {
@@ -48,15 +56,6 @@ function Todo(text)
         }
     );
 
-    self.index = 0;
-
-    // Set defaults
-    var _priority;
-    var _completed = false;
-    var _completedDate;
-    var _contents;
-    var _projects = [];
-    var _contexts = [];
 
     /**
      * Extracts all the flagged elements of a
@@ -89,12 +88,13 @@ function Todo(text)
         // 2: Completed Date
         // 3: Priority
         // 4: Contents
-        var parsingRegex = /^(?:(x) (?:((?:19|20)[0-9]{2}[\- \/.](?:0[1-9]|1[012])[\- \/.](?:0[1-9]|[12][0-9]|3[01])) )?)?(?:(?:\(([A-Z])\)) )?(.+)$/;
+        var parsingRegex = /^(?:(x) (?:((?:19|20)[0-9]{2}[\- \/.](?:0[1-9]|1[012])[\- \/.](?:0[1-9]|[12][0-9]|3[01])) )?)?(?:(?:\(([A-Z])\)) )?(?:((?:19|20)[0-9]{2}[\- \/.](?:0[1-9]|1[012])[\- \/.](?:0[1-9]|[12][0-9]|3[01])) )?(.+)$/;
 
-        _priority = undefined;
+        _priority = null;
+        _createDate = null;
         _completed = false;
-        _completedDate = undefined;
-        _contents = undefined;
+        _completedDate = null;
+        _contents = null;
         _projects = [];
         _contexts = [];
 
@@ -123,7 +123,12 @@ function Todo(text)
 
             if (match[4])
             {
-                _contents = match[4];
+                _createDate = match[4];
+            }
+
+            if (match[5])
+            {
+                _contents = match[5];
             }
 
             _projects = findFlags(_contents, '+');
@@ -148,6 +153,11 @@ function Todo(text)
             result += '(' + _priority + ') ';
         }
 
+        if (_createDate)
+        {
+            result += _createDate + ' ';
+        }
+
         if (_contents)
         {
             result += _contents;
@@ -160,7 +170,13 @@ function Todo(text)
         {
             read: function()
             {
-                return undefined;
+                parse();
+                return _createDate;
+            },
+            write: function(value)
+            {
+                _createDate = value;
+                render();
             }
         });
 
@@ -183,7 +199,7 @@ function Todo(text)
             read: function()
             {
                 parse();
-                if (_priority !== undefined)
+                if (_priority)
                 {
                     return _priority.charCodeAt(0) - 64;
                 }
@@ -257,5 +273,7 @@ function Todo(text)
             return _contents;
         }
     });
+
+    parse();
 }
 

@@ -122,8 +122,8 @@ function TodoTxtViewModel()
             return self.storageInfo().name;
         });
 
-        self.addStartDate = ko.observable(false);
-        self.addStartDateDescription = ko.observable("Automatically add a start date to new TODOs.");
+        self.addCreatedDate = ko.observable(false);
+        self.addCreatedDateDescription = ko.observable("Automatically add a start date to new TODOs.");
 
         ///////////////////////////
         // Control
@@ -173,6 +173,11 @@ function TodoTxtViewModel()
                             break;
                         }
                     }
+                }
+
+                if (options.hasOwnProperty(("addCreatedDate")))
+                {
+                    self.addCreatedDate(options.addCreatedDate);
                 }
             }
         };
@@ -328,7 +333,7 @@ function TodoTxtViewModel()
     ////////////////////////////////////////////////////////////////////////////
 
     self.filters = ko.observable("");
-    self.showStartDate = ko.observable(true);
+    self.showCreatedDate = ko.observable(true);
 
     self.filtered = ko.computed(function ()
     {
@@ -406,7 +411,17 @@ function TodoTxtViewModel()
 
     self.addNewTodo = function ()
     {
-        todoManager.add(new Todo(self.newTodoText()));
+        var todo = new Todo(self.newTodoText());
+        if (self.options.addCreatedDate())
+        {
+            if (!todo.createdDate())
+            {
+                var date = new Date();
+                todo.createdDate(toISO8601Date(date));
+            }
+        }
+
+        todoManager.add(todo);
         self.newTodoText("");
     };
 
