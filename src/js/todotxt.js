@@ -33,8 +33,8 @@ function TodoTxtViewModel()
     /************************************************
      * Inner Constructors
      ***********************************************/
-    self.version = ko.observable("0.9.4");
-    self.title = ko.observable("TodoTxtJs Web App");
+    self.version = ko.observable("0.9.5");
+    self.title = ko.observable("TodoTxtJs");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
 
@@ -121,6 +121,9 @@ function TodoTxtViewModel()
         {
             return self.storageInfo().name;
         });
+
+        self.addStartDate = ko.observable(false);
+        self.addStartDateDescription = ko.observable("Automatically add a start date to new TODOs.");
 
         ///////////////////////////
         // Control
@@ -325,6 +328,7 @@ function TodoTxtViewModel()
     ////////////////////////////////////////////////////////////////////////////
 
     self.filters = ko.observable("");
+    self.showStartDate = ko.observable(true);
 
     self.filtered = ko.computed(function ()
     {
@@ -411,19 +415,21 @@ function TodoTxtViewModel()
     self.save = function ()
     {
         highlightNotice();
-        self.lastUpdated("Saving Todos to " + self.options.storage());
+        self.notice("Saving Todos to " + self.options.storage());
         self.spinner(true);
 
 
         function onSuccess()
         {
             self.lastUpdated("Last Saved: " + toISO8601DateTime(new Date()));
+            self.notice("Last Saved: " + toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
         }
 
         function onError(error)
         {
+            self.notice("Error: [" + error  +  "]");
             self.lastUpdated("Error: [" + error  +  "]");
             highlightNotice(true);
             setTimeout(normalNotice, 2000);
@@ -441,14 +447,14 @@ function TodoTxtViewModel()
         function onSuccess(data)
         {
             todoManager.loadFromStringArray(data);
-            self.lastUpdated("Loaded " + toISO8601DateTime(new Date()));
+            self.notice("Loaded " + toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
         }
 
         function onError(error)
         {
-            self.lastUpdated("Error: [" + error  +  "]");
+            self.notice("Loaded " + toISO8601DateTime(new Date()));
             highlightNotice(true);
             self.spinner(false);
             setTimeout(normalNotice, 2000);
@@ -457,7 +463,7 @@ function TodoTxtViewModel()
         {
             todoManager.removeAll();
             self.spinner(true);
-            self.lastUpdated("Loading Todos from " + self.options.storage());
+            self.notice("Loading Todos from " + self.options.storage());
             self.options.storageInfo().load(onSuccess, onError);
         }
     };
@@ -465,6 +471,7 @@ function TodoTxtViewModel()
     $(window).unload(self.save);
 
     self.lastUpdated = ko.observable(undefined);
+    self.notice = ko.observable(undefined);
     self.refresh = function ()
     {
         self.load();
@@ -503,8 +510,10 @@ function TodoTxtViewModel()
     function normalNotice()
     {
         var notice = $("#notice");
-        notice.find(".spinner").siblings().effect("transfer", { to: $("#target") }, 1000);
+        notice.find("#notice-text").effect("transfer", { to: $("#target") }, 1000);
         notice.removeClass("noticeHighlight");
+        self.lastUpdated(self.notice());
+        self.notice("");
     }
 
     //////////////////////////////////////////////////////////

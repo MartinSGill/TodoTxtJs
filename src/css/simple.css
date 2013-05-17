@@ -31,6 +31,15 @@ body
     margin-right: 40px;
 }
 
+h1
+{
+    padding: 0;
+    padding-bottom: 5px;
+    margin: 0;
+    display: block;
+    float: left;
+}
+
 .splash
 {
     top: 0;
@@ -81,6 +90,11 @@ footer
     background-image:url(data:image/gif;base64,R0lGODlhEAAQAPYAAP///wAAAPr6+pKSkoiIiO7u7sjIyNjY2J6engAAAI6OjsbGxjIyMlJSUuzs7KamppSUlPLy8oKCghwcHLKysqSkpJqamvT09Pj4+KioqM7OzkRERAwMDGBgYN7e3ujo6Ly8vCoqKjY2NkZGRtTU1MTExDw8PE5OTj4+PkhISNDQ0MrKylpaWrS0tOrq6nBwcKysrLi4uLq6ul5eXlxcXGJiYoaGhuDg4H5+fvz8/KKiohgYGCwsLFZWVgQEBFBQUMzMzDg4OFhYWBoaGvDw8NbW1pycnOLi4ubm5kBAQKqqqiQkJCAgIK6urnJyckpKSjQ0NGpqatLS0sDAwCYmJnx8fEJCQlRUVAoKCggICLCwsOTk5ExMTPb29ra2tmZmZmhoaNzc3KCgoBISEiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCAAAACwAAAAAEAAQAAAHaIAAgoMgIiYlg4kACxIaACEJCSiKggYMCRselwkpghGJBJEcFgsjJyoAGBmfggcNEx0flBiKDhQFlIoCCA+5lAORFb4AJIihCRbDxQAFChAXw9HSqb60iREZ1omqrIPdJCTe0SWI09GBACH5BAkIAAAALAAAAAAQABAAAAdrgACCgwc0NTeDiYozCQkvOTo9GTmDKy8aFy+NOBA7CTswgywJDTIuEjYFIY0JNYMtKTEFiRU8Pjwygy4ws4owPyCKwsMAJSTEgiQlgsbIAMrO0dKDGMTViREZ14kYGRGK38nHguHEJcvTyIEAIfkECQgAAAAsAAAAABAAEAAAB2iAAIKDAggPg4iJAAMJCRUAJRIqiRGCBI0WQEEJJkWDERkYAAUKEBc4Po1GiKKJHkJDNEeKig4URLS0ICImJZAkuQAhjSi/wQyNKcGDCyMnk8u5rYrTgqDVghgZlYjcACTA1sslvtHRgQAh+QQJCAAAACwAAAAAEAAQAAAHZ4AAgoOEhYaCJSWHgxGDJCQARAtOUoQRGRiFD0kJUYWZhUhKT1OLhR8wBaaFBzQ1NwAlkIszCQkvsbOHL7Y4q4IuEjaqq0ZQD5+GEEsJTDCMmIUhtgk1lo6QFUwJVDKLiYJNUd6/hoEAIfkECQgAAAAsAAAAABAAEAAAB2iAAIKDhIWGgiUlh4MRgyQkjIURGRiGGBmNhJWHm4uen4ICCA+IkIsDCQkVACWmhwSpFqAABQoQF6ALTkWFnYMrVlhWvIKTlSAiJiVVPqlGhJkhqShHV1lCW4cMqSkAR1ofiwsjJyqGgQAh+QQJCAAAACwAAAAAEAAQAAAHZ4AAgoOEhYaCJSWHgxGDJCSMhREZGIYYGY2ElYebi56fhyWQniSKAKKfpaCLFlAPhl0gXYNGEwkhGYREUywag1wJwSkHNDU3D0kJYIMZQwk8MjPBLx9eXwuETVEyAC/BOKsuEjYFhoEAIfkECQgAAAAsAAAAABAAEAAAB2eAAIKDhIWGgiUlh4MRgyQkjIURGRiGGBmNhJWHm4ueICImip6CIQkJKJ4kigynKaqKCyMnKqSEK05StgAGQRxPYZaENqccFgIID4KXmQBhXFkzDgOnFYLNgltaSAAEpxa7BQoQF4aBACH5BAkIAAAALAAAAAAQABAAAAdogACCg4SFggJiPUqCJSWGgkZjCUwZACQkgxGEXAmdT4UYGZqCGWQ+IjKGGIUwPzGPhAc0NTewhDOdL7Ykji+dOLuOLhI2BbaFETICx4MlQitdqoUsCQ2vhKGjglNfU0SWmILaj43M5oEAOwAAAAAAAAAAAA==);
 }
 
+.label
+{
+    font-weight: bold;
+}
+
 /*****************************************************
  * Toolbar
  *****************************************************/
@@ -119,9 +133,9 @@ form
     min-width: 75px;
     height: 20px;
 
-    background-color: #FFCC00;
+    background-color: #b8beff;
     border-style: solid;
-    border-color: #FF9900;
+    border-color: #c1e5ff;
     border-width: thin;
 
     text-align: center;
@@ -140,13 +154,13 @@ form
 
 .menuItem a:hover
 {
-    background-color: #FF9900;
+    background-color: #c1e5ff;
     color: blue;
 }
 
 .menuItem.selected a
 {
-    background-color: #FF9900;
+    background-color: #c1e5ff;
     height: 25px;
     z-index: 5001;
 }
@@ -154,8 +168,17 @@ form
 .notice
 {
     display: block;
+    position: absolute;
     width: 100%;
     text-align: right;
+    font-size: 1.1em;
+}
+
+.notice-lastupdated
+{
+    display: block;
+    float: right;
+    font-size: 0.8em;
 }
 
 .noticeHighlight
@@ -163,7 +186,6 @@ form
     display: block;
     width: 100%;
     text-align: center;
-    font-size: 1.1em;
 }
 
 .noticeHighlight > span
@@ -203,7 +225,7 @@ form
     top: 26px;
     right: 2px;
     width: 40%;
-    background-color: #FF9900;
+    background-color: #c1e5ff;
     padding: 3px;
     display: none;
 }
@@ -247,11 +269,50 @@ form
 }
 
 /*******************************************************
+ * Options
+ ******************************************************/
+
+.toolBox-options
+{
+    width: 500px;
+}
+
+.option
+{
+    width: 100%;
+    border-bottom: silver thin solid;
+    padding: 1px;
+}
+
+
+.option-label
+{
+    display: inline-block;
+    font-family: "Courier New", monospace;
+    text-align: right;
+    width: 150px;
+}
+
+.option-value
+{
+    display: inline-block;
+}
+
+.option-description
+{
+    display: block;
+    font-style: italic;
+    font-size: 0.8em;
+    text-align: right;
+}
+
+/*******************************************************
  * Add
  ******************************************************/
 
 .addTodo
 {
+    clear: both;
     border: 1px solid silver;
     border-radius: 5px;
 
@@ -277,38 +338,54 @@ form
 
     padding: 5px;
 
+    height: 25px;
     background-color: #E1E1FF;
-}
-
-.filters > div
-{
-    display: inline-block;
-}
-
-.filters label
-{
-    font-weight: bold;
 }
 
 .quickFilter
 {
-    margin-left: 100px;
+    display: block;
+    float: right;
 }
 
-.quickFilter > label:after
-{
-    content: ": ";
-}
-
-.quickFilter > input
+.quickFilter-input
 {
     width: 300px;
+}
+
+.quickFilter-label
+{
+    padding-right: 5px;
 }
 
 .todo:hover
 {
     background-color: #fffda4;
 }
+
+/*******************************************************
+* Display Options
+******************************************************/
+
+.display-options
+{
+    display: block;
+    float: left;
+}
+
+.display-options-label
+{
+    display: inline-block;
+}
+
+.display-options-item
+{
+    display: inline-block;
+}
+
+/*******************************************************
+* Delete Button
+******************************************************/
 
 .deleteButton
 {
@@ -394,7 +471,7 @@ form
     padding: 5px;
     border: ridge thin silver;
     border-radius: 5px;
-    font-size: 1.5em;
+    font-size: 1.4em;
 }
 
 .list

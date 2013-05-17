@@ -49,26 +49,29 @@
                     Options
                 </a>
                 <div data-bind="with: options">
-                    <div class="toolBox options">
-                        <table>
-                            <tr>
-                                <td>
-                                    <label>Storage</label>&nbsp;
-                                </td>
-                                <td>
+                    <div class="toolBox toolBox-options">
+                        <div class="option">
+                            <label class="option-label">Storage</label>
+                            <span class="option-value">
                                     <select data-bind="options: storageOptions,
                                                optionsText: 'name',
                                                value: storageInfo">
                                     </select>
-                                </td>
-                                <td>
-                                    <span class="tip" data-bind="text: storageInfo().description"></span>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="help">
-                            Options will be saved and applied when you close this box.
+                            </span>
+                            <span class="option-description" data-bind="text: storageInfo().description"></span>
+                            <div class="help">
+                                This Option will be saved and applied when you close the options.
+                            </div>
                         </div>
+                        <!-- TODO: Add start date support
+                        <div class="option">
+                            <label class="option-label">Add Start Date</label>
+                            <span class="option-value">
+                                <input type="checkbox" data-bind="checked: addStartDate">
+                            </span>
+                            <span class="option-description" data-bind="text: addStartDateDescription"></span>
+                        </div>
+                        -->
                     </div>
                 </div>
             </li>
@@ -118,10 +121,11 @@
         <div id="notice" class="notice" data-bind="visible: options.showStorageControls">
             <span>
                 <span class="spinner" data-bind="visible: spinner"></span>
-                <span data-bind="text: lastUpdated"></span>
+                <span id="notice-text" class="notice-text" data-bind="text: notice"></span>
             </span>
         </div>
-        <div id="target">
+        <div class="notice-lastupdated" data-bind="text: lastUpdated"></div>
+        <div id="target" data-="text: lastUpdated">
 
         </div>
     </section>
@@ -144,14 +148,23 @@
         **********************************
      -->
     <section class="filters">
-        <div><label>Filters</label></div>
-        <div class="showCompleted">
-            <input type="checkbox" data-bind="checked: showCompleted"/>Show Completed
+        <div class="display-options">
+            <label class="display-options-label label">Show:</label>
+            <div class="display-options-item">
+                <input type="checkbox" data-bind="checked: showCompleted"/>Completed
+            </div>
+            <!-- TODO: add start date support
+            <div class="display-options-item">
+                <input type="checkbox" data-bind="checked: showStartDate"/>Start-Date
+            </div>
+            -->
         </div>
         <div class="quickFilter">
-            <label for="filters">Quick Filter</label><input id="filters" type="text" data-bind="value: filters, valueUpdate: 'afterkeydown'"
-                                              title="Example: +Project @Context (A)" />
-
+            <label for="filters" class="quickFilter-label label">Filter:</label><input class="quickFilter-input"
+                                                                                 id="filters"
+                                                                                 type="text"
+                                                                                 data-bind="value: filters, valueUpdate: 'afterkeydown'"
+                                                                                 title="Example: +Project @Context (A)" />
             <div class="deleteButton"><a href="" data-bind="click: clearFilters">x</a></div>
         </div>
     </section>
