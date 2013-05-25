@@ -40,7 +40,7 @@ body
     float: left;
 }
 
-.splash
+.page-splashScreen
 {
     top: 0;
     left: 0;
@@ -50,7 +50,7 @@ body
     display: table;
 }
 
-.splash p
+.page-splashScreen p
 {
     display: table-cell;
     vertical-align: middle;
@@ -60,12 +60,12 @@ body
     font-variant: small-caps;
 }
 
-.splash p:before
+.page-splashScreen p:before
 {
     content: "... ";
 }
 
-.splash p:after
+.page-splashScreen p:after
 {
     content: " ...";
 }
@@ -78,7 +78,7 @@ footer
     text-align: center;
 }
 
-.spinner
+.ajax-spinner
 {
     display: inline-block;
     border-style: none;
@@ -181,14 +181,14 @@ form
     font-size: 0.8em;
 }
 
-.noticeHighlight
+.notice-highlight
 {
     display: block;
     width: 100%;
     text-align: center;
 }
 
-.noticeHighlight > span
+.notice-highlight > span
 {
     display: inline-block;
     width: 40%;
@@ -197,7 +197,7 @@ form
     background-color: #ffd57a;
 }
 
-.noticeError > span
+.notice-error > span
 {
     background-color: #e97072;
 }
@@ -217,7 +217,7 @@ form
     border: 1px dotted black;
 }
 
-.toolBox
+.toolbox
 {
     float: right;
     position: absolute;
@@ -230,7 +230,7 @@ form
     display: none;
 }
 
-.toolBox > textarea
+.toolbox > textarea
 {
     display: block;
     overflow-y: visible;
@@ -238,30 +238,30 @@ form
     width: 99%;
 }
 
-.toolBox > span
+.toolbox > span
 {
     clear: both;
 }
 
-.toolBoxFooter
+.toolBox-footer
 {
     text-align: right;
     font-size: smaller;
 }
 
-.warning
+.toolbox-warning
 {
     background: #8b0000;
     color: white;
 }
 
-.tip
+.toolbox-tip
 {
     font-size: smaller;
     font-style: italic;
 }
 
-.help
+.toolbox-help
 {
     font-size: smaller;
     font-variant: small-caps;
@@ -277,7 +277,7 @@ form
     width: 500px;
 }
 
-.option
+.toolbox-option-item
 {
     width: 100%;
     border-bottom: silver thin solid;
@@ -285,7 +285,7 @@ form
 }
 
 
-.option-label
+.toolbox-option-item-label
 {
     display: inline-block;
     font-family: "Courier New", monospace;
@@ -293,12 +293,12 @@ form
     width: 150px;
 }
 
-.option-value
+.toolbox-option-item-value
 {
     display: inline-block;
 }
 
-.option-description
+.toolbox-option-item-description
 {
     display: block;
     font-style: italic;
@@ -421,32 +421,8 @@ form
 }
 
 /*******************************************************
-* Todos
+* Page Layout
 ******************************************************/
-.display
-{
-
-}
-
-.edit
-{
-    width: 100%;
-    display: none;
-}
-
-.edit input
-{
-    width: 80%;
-    font-size: inherit;
-    margin-left: 25px;
-}
-
-.edit .tip
-{
-    font-size: 0.6em;
-    float: right;
-}
-
 .mainLayout
 {
     width: 100%;
@@ -465,7 +441,29 @@ form
     vertical-align: top;
 }
 
-.todos
+/*******************************************************
+* Todos
+******************************************************/
+.todo-view-edit
+{
+    width: 100%;
+    display: none;
+}
+
+.todo-view-edit input
+{
+    width: 80%;
+    font-size: inherit;
+    margin-left: 25px;
+}
+
+.todo-view-edit .toolbox-tip
+{
+    font-size: 0.6em;
+    float: right;
+}
+
+.todo-view
 {
     margin-top: 5px;
     padding: 5px;
@@ -474,17 +472,17 @@ form
     font-size: 1.4em;
 }
 
-.list
+.todo-view-list
 {
     max-width: 150px;
 }
 
-.list h3
+.todo-view-list h3
 {
     margin: 0;
 }
 
-.list ul
+.todo-view-list ul
 {
     margin: 0;
     list-style-position: outside;
@@ -492,7 +490,7 @@ form
     padding-left: 10px;
 }
 
-.index
+.todo-view-index
 {
     display: none;
     width: 20px;
@@ -500,17 +498,17 @@ form
     font-size: 0.5em;
 }
 
-.completedFlag
+.todo-view-completedFlag
 {
     display: none;
 }
 
-.priorityBrace
+.todo-view-priorityBrace
 {
     display: none;
 }
 
-.priority
+.todo-view-priority
 {
     font-weight: bold;
     font-size: 1.2em;
@@ -520,58 +518,58 @@ form
     cursor: pointer;
 }
 
-.A
+.todo-view-priority-A
 {
     color: #FF4848;
 }
 
-.B
+.todo-view-priority-B
 {
     color: #9A03FE;
 }
 
-.C
+.todo-view-priority-C
 {
     color: #2966B8;
 }
 
-.D
+.todo-view-priority-D
 {
     color: #06DCFB;
 }
 
-.E
+.todo-view-priority-E
 {
     color: #01F33E;
 }
 
-.message
+.todo-view-message
 {
     cursor: pointer;
 }
 
-.createDate
+.todo-view-createDate
 {
     color: #59955C;
     font-size: smaller;
     font-family: sans-serif;
 }
 
-.completedDate
+.todo-view-completedDate
 {
     color: #5f5f5f;
     font-size: smaller;
     font-family: sans-serif;
 }
 
-.projectFlag
+.todo-view-projectFlag
 {
     margin-left: 0.3em;
     color: #9A03FE;
     cursor: pointer;
 }
 
-.project
+.todo-view-project
 {
     color: #9A03FE;
     font-family: sans-serif;
@@ -579,14 +577,14 @@ form
     cursor: pointer;
 }
 
-.contextFlag
+.todo-view-contextFlag
 {
     margin-left: 0.3em;
     color: #2966B8;
     cursor: pointer;
 }
 
-.context
+.todo-view-context
 {
     color: #2966B8;
     font-family: sans-serif;
@@ -594,7 +592,7 @@ form
     cursor: pointer;
 }
 
-.completed
+.todo-view-completed
 {
     background-color: silver;
 }

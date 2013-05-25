@@ -25,10 +25,10 @@
 ko.bindingHandlers.todo = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
         var template = $(element);
-        var viewer = template.find(".display");
-        var trigger = template.find(".message");
-        var editor = template.find(".edit");
-        var input = template.find(".edit input");
+        var viewer = template.find(".todo-view-display");
+        var trigger = template.find(".todo-view-message");
+        var editor = template.find(".todo-view-edit");
+        var input = template.find(".todo-view-edit input");
 
         ko.utils.domNodeDisposal.addDisposeCallback(element, function ()
         {

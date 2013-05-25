@@ -21,19 +21,16 @@
   ~ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<!-- Build: Top -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
     <title data-bind="text: title"></title>
-    <!-- Build: End Top -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="css/simple.css" />
-<!-- Build: Body -->
 </head>
 <body onunload="todoTxtView.save()">
-<section class="splash" data-bind="css: { hidden: pageReady}">
+<section class="page-splashScreen" data-bind="css: { hidden: pageReady}">
     <p>Loading</p>
 </section>
 <section class="hidden" data-bind="css: { hidden: !pageReady }">
@@ -49,26 +46,30 @@
                     Options
                 </a>
                 <div data-bind="with: options">
-                    <div class="toolBox toolBox-options">
-                        <div class="option">
-                            <label class="option-label">Storage</label>
-                            <span class="option-value">
-                                    <select data-bind="options: storageOptions,
+                    <div class="toolbox toolBox-options">
+                        <div class="toolbox-option-item">
+                            <label class="toolbox-option-item-label">Storage</label>
+                            <span class="toolbox-option-item-value">
+                                    <label>
+                                        <select data-bind="options: storageOptions,
                                                optionsText: 'name',
                                                value: storageInfo">
-                                    </select>
+                                        </select>
+                                    </label>
                             </span>
-                            <span class="option-description" data-bind="text: storageInfo().description"></span>
-                            <div class="help">
+                            <span class="toolbox-option-item-description" data-bind="text: storageInfo().description"></span>
+                            <div class="toolbox-help">
                                 This Option will be saved and applied when you close the options.
                             </div>
                         </div>
-                        <div class="option">
-                            <label class="option-label">Add Start Date</label>
-                            <span class="option-value">
-                                <input type="checkbox" data-bind="checked: addCreatedDate">
+                        <div class="toolbox-option-item">
+                            <label class="toolbox-option-item-label">Add Start Date</label>
+                            <span class="toolbox-option-item-value">
+                                <label>
+                                    <input type="checkbox" data-bind="checked: addCreatedDate">
+                                </label>
                             </span>
-                            <span class="option-description" data-bind="text: addCreatedDateDescription"></span>
+                            <span class="toolbox-option-item-description" data-bind="text: addCreatedDateDescription"></span>
                         </div>
                     </div>
                 </div>
@@ -79,12 +80,12 @@
                 </a>
 
                 <div data-bind="with: importing">
-                    <div class="toolBox import">
+                    <div class="toolbox import">
                         <div id="fileUpload" class="uploadTarget">
                             <span>Drop your todo.txt file here.</span>
                         </div>
-                        <div class="toolBoxFooter">
-                            <span class="warning">This will delete existing Todos.</span>
+                        <div class="toolBox-footer">
+                            <span class="toolbox-warning">This will delete existing Todos.</span>
                         </div>
                     </div>
                 </div>
@@ -95,13 +96,15 @@
                 </a>
 
                 <div data-bind="with: exporting">
-                    <div class="toolBox">
-                        <div class="toolBoxFooter">
-                            <span class="help">Copy the text and save it into a text file. Or
+                    <div class="toolbox">
+                        <div class="toolBox-footer">
+                            <span class="toolbox-help">Copy the text and save it into a text file. Or
                                 <button data-bind="click: download">Download</button>
                             </span>
                         </div>
-                        <textarea data-bind="value: exportText"></textarea>
+                        <label>
+                            <textarea data-bind="value: exportText"></textarea>
+                        </label>
                     </div>
                 </div>
             </li>
@@ -118,7 +121,7 @@
         </ul>
         <div id="notice" class="notice" data-bind="visible: options.showStorageControls">
             <span>
-                <span class="spinner" data-bind="visible: spinner"></span>
+                <span class="ajax-spinner" data-bind="visible: spinner"></span>
                 <span id="notice-text" class="notice-text" data-bind="text: notice"></span>
             </span>
         </div>
@@ -137,7 +140,7 @@
         <form data-bind="submit: addNewTodo">
             <label for="newTodoInput">New Todo: </label>
             <input id="newTodoInput" data-bind="value: newTodoText">
-            <span class="tip">Press return to add your new todo.</span>
+            <span class="toolbox-tip">Press return to add your new todo.</span>
         </form>
     </section>
     <!--
@@ -149,10 +152,16 @@
         <div class="display-options">
             <label class="display-options-label label">Show:</label>
             <div class="display-options-item">
-                <input type="checkbox" data-bind="checked: showCompleted"/>Completed
+                <label>
+                    <input type="checkbox" data-bind="checked: showCompleted"/>
+                    Completed
+                </label>
             </div>
             <div class="display-options-item">
-                <input type="checkbox" data-bind="checked: showCreatedDate"/>Create-Date
+                <label>
+                    <input type="checkbox" data-bind="checked: showCreatedDate"/>
+                    Create-Date
+                </label>
             </div>
         </div>
         <div class="quickFilter">
@@ -172,18 +181,18 @@
     <table class="mainLayout">
         <tr>
             <td>
-                <section class="todos" data-bind="template: { name: 'todo-template', foreach: allTodos }">
+                <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }">
                 </section>
             </td>
             <td>
-                <section class="list">
+                <section class="todo-view-list">
                     <h3>Contexts</h3>
                     <ul data-bind="foreach: contexts">
-                        <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem context"></li>
+                        <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
                     </ul>
                     <h3>Projects</h3>
                     <ul data-bind="foreach: projects">
-                        <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem project"></li>
+                        <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
                     </ul>
                 </section>
             </td>
@@ -200,9 +209,9 @@
         </p>
         <h2>Format</h2>
         <ul>
-            <li>You can have priorities just use '(<span class="A">A</span>)' at the beginning of the line. </li>
-            <li>You can specify a <span class="project">+Project</span> with the <span class="project">+</span> symbol.</li>
-            <li>You can specify a <span class="context">@Context</span> with the <span class="context">@</span> symbol.</li>
+            <li>You can have priorities just use '(<span class="todo-view-priority-A">A</span>)' at the beginning of the line. </li>
+            <li>You can specify a <span class="todo-view-project">+Project</span> with the <span class="todo-view-project">+</span> symbol.</li>
+            <li>You can specify a <span class="todo-view-context">@Context</span> with the <span class="todo-view-context">@</span> symbol.</li>
             <li>You can have as many Projects and Contexts as you like.</li>
         </ul>
         <h2>
@@ -210,7 +219,7 @@
         </h2>
         <ul>
             <li>Click on the text in any todo to edit it.</li>
-            <li>Click on a <span class="context">@Context</span> or <span class="project">+Project</span> (in text or on right side) to filter on it.</li>
+            <li>Click on a <span class="todo-view-context">@Context</span> or <span class="todo-view-project">+Project</span> (in text or on right side) to filter on it.</li>
             <li>If you have a DropBox account, you can save your Todos into that.</li>
             <li>Select DropBox in the Options and once you close the options again you'll be synced to DropBox.</li>
             <li>You can mark a Todo as completed by click on the checkbox at its left.</li>
@@ -224,48 +233,58 @@
         <div class="copyright">The software running this page is available in <a href="https://github.com/MartinSGill/TodoTxtJs">GitHub</a> under an <a href="https://github.com/MartinSGill/TodoTxtJs#license">MIT License</a>.</div>
     </footer>
 </section>
-<script type="text/html" id="todo-template">
-    <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
-        <div class="deleteButton deleteTodo"><a onclick="todoTxtView.removeTodo(this)">x</a></div>
-        <div class="display" data-bind="attr: { 'class': 'Priority' + priority() }"></span>
-            <span class="index" data-bind="text: index"></span>
-            <input type="checkbox" data-bind="checked: completed" />
+
+<!--
+    **********************************
+    * Scripts
+    **********************************
+ -->
+<section id="scripts">
+    <script type="text/html" id="todo-template">
+        <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
+            <div class="deleteButton deleteTodo"><a onclick="todoTxtView.removeTodo(this)">x</a></div>
+            <div class="todo-view-display">
+                <span class="todo-view-index" data-bind="text: index"></span>
+                <label>
+                    <input type="checkbox" data-bind="checked: completed"/>
+                </label>
                 <span data-bind="css: { completed: completed }">
-                    <span class="completedFlag" data-bind="visible: completed">x</span>
-                    <span class="completedDate" data-bind="text: completedDate(), visible: completed"></span>
-                    <span class="priorityBrace" data-bind="visible: priority !== null">(</span>
-                    <span class="priority" data-bind="visible: priority != null">
-                        <span data-bind="text: priority, attr: { 'class': priority }"></span>
+                    <span class="todo-view-completedFlag" data-bind="visible: completed">x</span>
+                    <span class="todo-view-completedDate" data-bind="text: completedDate(), visible: completed"></span>
+                    <span class="todo-view-priorityBrace" data-bind="visible: priority !== null">(</span>
+                    <span class="todo-view-priority" data-bind="visible: priority != null">
+                        <span data-bind="text: priority, attr: { 'class': 'todo-view-priority-' + priority() }"></span>
                     </span>
-                    <span class="priorityBrace" data-bind="visible: priority !== null">)</span>
-                    <span class="createDate" data-bind="visible: createdDate() !== null && $root.showCreatedDate(), text: createdDate"></span>
-                    <span class="message" data-bind="html: todoHtmlContentsRenderer(contents)"></span>
+                    <span class="todo-view-priorityBrace" data-bind="visible: priority !== null">)</span>
+                    <span class="todo-view-createDate" data-bind="visible: createdDate() !== null && $root.showCreatedDate(), text: createdDate"></span>
+                    <span class="todo-view-message" data-bind="html: todoHtmlContentsRenderer(contents)"></span>
                 </span>
+            </div>
+            <div class="todo-view-edit">
+                <span class="toolbox-tip">Press ENTER to accept, ESC to discard.</span>
+                <label>
+                    <input type="text"/>
+                </label>
+            </div>
         </div>
-        <div class="edit">
-            <span class="tip">Press ENTER to accept, ESC to discard.</span>
-            <input type="text" />
-        </div>
-    </div>
-</script>
-<!-- Build: End Body -->
-<!-- Build: Scripts -->
-<script src="//code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
-<script src="js/lib/jquery.hotkeys.js" type="text/javascript"></script>
-<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
-<script src="js/lib/knockout-2.2.1.js" type="text/javascript"></script>
-<script src="js/utils/datetime.js" type="text/javascript"></script>
-<script src="js/bindings/binding_todo.js" type="text/javascript"></script>
-<script src="js/model/todo.js" type="text/javascript"></script>
-<script src="js/model/todoHtmlRender.js" type="text/javascript"></script>
-<script src="js/model/todomanager.js" type="text/javascript"></script>
-<script src="js/lib/dropbox.js_0.8.1_dropbox.min.js"></script>
-<script src="js/dropbox_key.js"></script>
-<script src="js/storage/storage_dropbox.js"></script>
-<script src="js/storage/storage_browser.js"></script>
-<script src="js/views/todotxt.js" type="text/javascript"></script>
-<!-- Build: End Scripts -->
-<!-- Build: Bottom -->
+    </script>
+    <!-- CDN -->
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.0.min.js" type="text/javascript"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.9.2/dropbox.min.js"></script>
+
+    <!-- Local -->
+    <script src="js/lib/jquery.hotkeys.js" type="text/javascript"></script>
+    <script src="js/utils/datetime.js" type="text/javascript"></script>
+    <script src="js/bindings/binding_todo.js" type="text/javascript"></script>
+    <script src="js/model/todo.js" type="text/javascript"></script>
+    <script src="js/model/todoHtmlRender.js" type="text/javascript"></script>
+    <script src="js/model/todomanager.js" type="text/javascript"></script>
+    <script src="js/dropbox_key.js"></script>
+    <script src="js/storage/storage_dropbox.js"></script>
+    <script src="js/storage/storage_browser.js"></script>
+    <script src="js/views/todotxt.js" type="text/javascript"></script>
+</section>
 </body>
 </html>
-<!-- Build: End Bottom -->

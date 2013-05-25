@@ -208,12 +208,12 @@ function TodoTxtViewModel()
         }
 
         $(".menuItem").removeClass("selected");
-        $(".menuItem .toolBox").hide();
+        $(".menuItem .toolbox").hide();
 
         if (!selected)
         {
             menuItem.addClass("selected");
-            $(".toolBox", menuItem).show();
+            $(".toolbox", menuItem).show();
         }
     };
 
@@ -500,7 +500,7 @@ function TodoTxtViewModel()
 
     self.removeTodo = function(element)
     {
-        var index = parseInt($(element).parents(".todo").find(".index").text(), 10);
+        var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
         todoManager.remove(index);
     };
 
@@ -510,15 +510,15 @@ function TodoTxtViewModel()
     function highlightNotice(isError)
     {
         var notice = $("#notice");
-        notice.addClass("noticeHighlight");
+        notice.addClass("notice-highlight");
 
         if (isError)
         {
-            notice.addClass("noticeError");
+            notice.addClass("notice-error");
         }
         else
         {
-            notice.removeClass("noticeError");
+            notice.removeClass("notice-error");
         }
     }
 
@@ -526,7 +526,7 @@ function TodoTxtViewModel()
     {
         var notice = $("#notice");
         notice.find("#notice-text").effect("transfer", { to: $("#target") }, 1000);
-        notice.removeClass("noticeHighlight");
+        notice.removeClass("notice-highlight");
         self.lastUpdated(self.notice());
         self.notice("");
     }

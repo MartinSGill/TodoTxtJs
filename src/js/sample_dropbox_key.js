@@ -23,7 +23,7 @@
 
 
 // Go to the dropbox site and create a new app
-// Go to https://dl-web.dropbox.com/spa/pjlfdak1tmznswp/api_keys.js/public/index.html
+// Go to https://dl-web.dropbox.com/spa/pjlfdak1tmznswp/api_keys.js/public/todo-view-index.html
 // To create an encoded version of your web-key
 // Put the generated key in the string below here.
 // Then rename this file to dropbox_key.js
