@@ -35,9 +35,14 @@ body
 {
     padding: 0;
     padding-bottom: 5px;
+    padding-top: 3px;
+    padding-left: 5px;
     margin: 0;
     display: block;
     float: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: Arial sans-serif;
 }
 
 .page-splashScreen
@@ -93,6 +98,17 @@ footer
 .label
 {
     font-weight: bold;
+}
+
+.logo
+{
+    display: inline-block;
+    float: left;
+    width: 32px;
+    height: 34px;
+    background-image: url('/images/todotxt_js_logo.png');
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
 }
 
 /*****************************************************
