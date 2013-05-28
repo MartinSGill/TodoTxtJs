@@ -3,6 +3,8 @@ TodoTxtJs
 
 A Javascript web app implementation of TodoTxt.
 
+[Check out the live version]{http://todo.martinsgill.co.uk}.
+
 Purpose
 -------
 
@@ -22,7 +24,7 @@ Features
 * Uses the excellent and simple [TodoTxt](http://www.todotxt.com) format
 * Fully editable Todos.
 * Quick Filters: Click on Priority / Project / Context to quickly filter.
-* Save to Local Browser Storage
+* Save to Local Browser Storage, or Sync with your DropBox.
 * Sorts by completed-state, completed-date, priority, file order.
 * Preserves item order in Todo.txt file.
 
