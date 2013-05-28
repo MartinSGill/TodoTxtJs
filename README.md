@@ -3,7 +3,7 @@ TodoTxtJs
 
 A Javascript web app implementation of TodoTxt.
 
-[Check out the live version]{http://todo.martinsgill.co.uk}.
+Check out the [live version](http://todo.martinsgill.co.uk) to see it in action.
 
 Purpose
 -------
