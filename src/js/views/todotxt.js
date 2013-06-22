@@ -502,7 +502,7 @@ function TodoTxtViewModel()
     self.removeTodo = function(element)
     {
         var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
-        TodoTxt.Events.onRemove();
+        TodoTxtJs.Events.onRemove();
         todoManager.remove(index);
     };
 
