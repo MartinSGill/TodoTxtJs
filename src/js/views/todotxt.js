@@ -421,6 +421,7 @@ function TodoTxtViewModel()
             }
         }
 
+        TodoTxtJs.Events.onNew();
         todoManager.add(todo);
         self.newTodoText("");
     };
@@ -501,6 +502,7 @@ function TodoTxtViewModel()
     self.removeTodo = function(element)
     {
         var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
+        TodoTxt.Events.onRemove();
         todoManager.remove(index);
     };
 
