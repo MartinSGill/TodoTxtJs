@@ -112,7 +112,7 @@ function TodoTxtViewModel()
         ///////////////////////////
 
         self.storageOptions = ko.observableArray([
-            new BrowserStorageProvider(),
+            new TodoTxtJs.StorageProviders.BrowserStorage(),
             new DropboxStorageProvider()
         ]
         );
