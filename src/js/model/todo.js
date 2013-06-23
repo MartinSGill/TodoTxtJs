@@ -223,7 +223,7 @@ function Todo(text)
                 if (_completed)
                 {
                     TodoTxtJs.Events.onComplete();
-                    _completedDate = toISO8601Date(new Date());
+                    _completedDate = DateTime.toISO8601Date(new Date());
                 }
                 else
                 {

@@ -417,7 +417,7 @@ function TodoTxtViewModel()
             if (!todo.createdDate())
             {
                 var date = new Date();
-                todo.createdDate(toISO8601Date(date));
+                todo.createdDate(DateTime.toISO8601Date(date));
             }
         }
 
@@ -437,8 +437,8 @@ function TodoTxtViewModel()
 
         function onSuccess()
         {
-            self.lastUpdated("Last Saved: " + toISO8601DateTime(new Date()));
-            self.notice("Last Saved: " + toISO8601DateTime(new Date()));
+            self.lastUpdated("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
+            self.notice("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
         }
@@ -463,14 +463,14 @@ function TodoTxtViewModel()
         function onSuccess(data)
         {
             todoManager.loadFromStringArray(data);
-            self.notice("Loaded " + toISO8601DateTime(new Date()));
+            self.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
         }
 
         function onError(error)
         {
-            self.notice("Loaded " + toISO8601DateTime(new Date()));
+            self.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
             highlightNotice(true);
             self.spinner(false);
             setTimeout(normalNotice, 2000);
