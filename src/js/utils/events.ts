@@ -36,18 +36,18 @@ module TodoTxtJs
          */
         public static subscribe(eventName:string, callback : () => void) : void
         {
-            if (!subscribers.hasOwnProperty(eventName))
+            if (!Events.subscribers.hasOwnProperty(eventName))
             {
-                subscribers[eventName] = [];
+                Events.subscribers[eventName] = [];
             }
-            subscribers[eventName].push(callback);
+            Events.subscribers[eventName].push(callback);
         }
 
         private static publishSimpleEvent(name: string)
         {
-            if (subscribers.hasOwnProperty(name))
+            if (Events.subscribers.hasOwnProperty(name))
             {
-                var subs = subscribers[name];
+                var subs = Events.subscribers[name];
                 for (var i:number = 0, length = subs.length; i < length; i++)
                 {
                     subs[i]();
@@ -57,9 +57,9 @@ module TodoTxtJs
 
         public static onError(error : string)
         {
-            if (subscribers.hasOwnProperty(name))
+            if (Events.subscribers.hasOwnProperty(name))
             {
-                var subs = subscribers[name];
+                var subs = Events.subscribers[name];
                 for (var i:number = 0, length = subs.length; i < length; i++)
                 {
                     subs[i](error);
@@ -72,7 +72,7 @@ module TodoTxtJs
          */
         public static onComplete()
         {
-            publishSimpleEvent("onComplete");
+            Events.publishSimpleEvent("onComplete");
         }
 
         /**
@@ -80,7 +80,7 @@ module TodoTxtJs
          */
         public static onNew()
         {
-            publishSimpleEvent("onNew");
+            Events.publishSimpleEvent("onNew");
         }
 
         /**
@@ -88,7 +88,7 @@ module TodoTxtJs
          */
         public static onRemove()
         {
-            publishSimpleEvent("onRemove");
+            Events.publishSimpleEvent("onRemove");
         }
     }
 }

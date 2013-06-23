@@ -47,7 +47,7 @@ module TodoTxtJs.StorageProviders
         save(data : Object, onSuccess? : () => void, onError?: (string) => void) : void
         {
             window.localStorage["todos"] = data;
-        };
+        }
     }
 }
 

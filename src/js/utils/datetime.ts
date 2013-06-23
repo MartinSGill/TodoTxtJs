@@ -43,6 +43,7 @@ module DateTime
         return result;
     }
 
+
     export function toISO8601Date(date : Date) : string
     {
         var result = date.getFullYear() + "-";

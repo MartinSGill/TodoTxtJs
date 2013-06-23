@@ -2,17 +2,17 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
-        <item url="file://$PROJECT_DIR$/src/js/utils/events.js" />
         <item url="file://$PROJECT_DIR$/src/js/storage/storage_browser.js" />
+        <item url="file://$PROJECT_DIR$/src/js/utils/events.js" />
+        <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
         <item url="file://$PROJECT_DIR$/src/js/storage/IStorageProvider.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
-      <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
-      <root url="file://$PROJECT_DIR$/src/js/utils/events.js" />
       <root url="file://$PROJECT_DIR$/src/js/storage/storage_browser.js" />
+      <root url="file://$PROJECT_DIR$/src/js/utils/events.js" />
+      <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
       <root url="file://$PROJECT_DIR$/src/js/storage/IStorageProvider.js" />
     </CLASSES>
     <JAVADOC />
