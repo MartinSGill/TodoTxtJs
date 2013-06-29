@@ -440,7 +440,7 @@ function TodoTxtViewModel()
             self.notice("Last Saved: " + toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
-            TodoTxtJs.Events.onSaveComplete(self.storage());
+            TodoTxtJs.Events.onSaveComplete(self.options.storage());
         }
 
         function onError(error)
@@ -450,7 +450,7 @@ function TodoTxtViewModel()
             highlightNotice(true);
             setTimeout(normalNotice, 2000);
             self.spinner(false);
-            TodoTxtJs.Events.onError("Error Saving (" + self.storage() + ") : [" + error + "]");
+            TodoTxtJs.Events.onError("Error Saving (" + self.options.storage() + ") : [" + error + "]");
         }
 
         self.options.storageInfo().save(self.exporting.buildExportText(), onSuccess, onError);
@@ -467,7 +467,7 @@ function TodoTxtViewModel()
             self.notice("Loaded " + toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
-            TodoTxtJs.Events.onLoadComplete(self.storage());
+            TodoTxtJs.Events.onLoadComplete(self.options.storage());
         }
 
         function onError(error)
@@ -476,7 +476,7 @@ function TodoTxtViewModel()
             highlightNotice(true);
             self.spinner(false);
             setTimeout(normalNotice, 2000);
-            TodoTxtJs.Events.onError("Error Loading (" + self.storage() + ") : [" + error + "]");
+            TodoTxtJs.Events.onError("Error Loading (" + self.options.storage() + ") : [" + error + "]");
         }
         if (typeof(Storage) !== "undefined")
         {
