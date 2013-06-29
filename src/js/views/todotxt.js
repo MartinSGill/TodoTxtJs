@@ -434,13 +434,13 @@ function TodoTxtViewModel()
         self.notice("Saving Todos to " + self.options.storage());
         self.spinner(true);
 
-
         function onSuccess()
         {
             self.lastUpdated("Last Saved: " + toISO8601DateTime(new Date()));
             self.notice("Last Saved: " + toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
+            TodoTxtJs.Events.onSaveComplete(self.storage());
         }
 
         function onError(error)
@@ -450,6 +450,7 @@ function TodoTxtViewModel()
             highlightNotice(true);
             setTimeout(normalNotice, 2000);
             self.spinner(false);
+            TodoTxtJs.Events.onError("Error Saving (" + self.storage() + ") : [" + error + "]");
         }
 
         self.options.storageInfo().save(self.exporting.buildExportText(), onSuccess, onError);
@@ -466,6 +467,7 @@ function TodoTxtViewModel()
             self.notice("Loaded " + toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
+            TodoTxtJs.Events.onLoadComplete(self.storage());
         }
 
         function onError(error)
@@ -474,6 +476,7 @@ function TodoTxtViewModel()
             highlightNotice(true);
             self.spinner(false);
             setTimeout(normalNotice, 2000);
+            TodoTxtJs.Events.onError("Error Loading (" + self.storage() + ") : [" + error + "]");
         }
         if (typeof(Storage) !== "undefined")
         {

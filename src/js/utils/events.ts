@@ -36,30 +36,30 @@ module TodoTxtJs
          */
         public static subscribe(eventName:string, callback : () => void) : void
         {
-            if (!subscribers.hasOwnProperty(eventName))
+            if (!Events.subscribers.hasOwnProperty(eventName))
             {
-                subscribers[eventName] = [];
+                Events.subscribers[eventName] = [];
             }
-            subscribers[eventName].push(callback);
+            Events.subscribers[eventName].push(callback);
         }
 
-        private static publishSimpleEvent(name: string)
+        private static publishSimpleEvent(name: string, value?: any) : void
         {
-            if (subscribers.hasOwnProperty(name))
+            if (Events.subscribers.hasOwnProperty(name))
             {
-                var subs = subscribers[name];
+                var subs = Events.subscribers[name];
                 for (var i:number = 0, length = subs.length; i < length; i++)
                 {
-                    subs[i]();
+                    subs[i](value);
                 }
             }
         }
 
-        public static onError(error : string)
+        public static onError(error : string) : void
         {
-            if (subscribers.hasOwnProperty(name))
+            if (Events.subscribers.hasOwnProperty(name))
             {
-                var subs = subscribers[name];
+                var subs = Events.subscribers[name];
                 for (var i:number = 0, length = subs.length; i < length; i++)
                 {
                     subs[i](error);
@@ -70,25 +70,41 @@ module TodoTxtJs
         /**
          * Call when a Todo is marked as complete.
          */
-        public static onComplete()
+        public static onComplete() : void
         {
-            publishSimpleEvent("onComplete");
+            Events.publishSimpleEvent("onComplete");
         }
 
         /**
          * Call when a Todo is created.
          */
-        public static onNew()
+        public static onNew() : void
         {
-            publishSimpleEvent("onNew");
+            Events.publishSimpleEvent("onNew");
         }
 
         /**
          * Call when a Todo is removed.
          */
-        public static onRemove()
+        public static onRemove() : void
         {
-            publishSimpleEvent("onRemove");
+            Events.publishSimpleEvent("onRemove");
+        }
+
+        /**
+         * Call when a Load operation completes.
+         */
+        public static onLoadComplete(type: string) : void
+        {
+            Events.publishSimpleEvent("onLoadComplete", type);
+        }
+
+        /**
+         * Call when a save operation completes.
+         */
+        public static onSaveComplete(type: string) : void
+        {
+            Events.publishSimpleEvent("onSaveComplete", type)
         }
     }
 }
