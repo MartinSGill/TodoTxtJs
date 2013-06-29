@@ -33,7 +33,7 @@ function TodoTxtViewModel()
     /************************************************
      * Inner Constructors
      ***********************************************/
-    self.version = ko.observable("0.9.5");
+    self.version = ko.observable("0.9.6");
     self.title = ko.observable("TodoTxtJs");
 
     self.allTodos = ko.computed(function() { return todoManager.all(); } );
