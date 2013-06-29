@@ -397,6 +397,10 @@ form
 .display-options-item
 {
     display: inline-block;
+    padding-right: 2px;
+    border-left-color: #a7ade9;
+    border-left-style: dotted;
+    border-left-width: thin;
 }
 
 /*******************************************************
@@ -611,6 +615,22 @@ form
 .todo-view-completed
 {
     background-color: silver;
+}
+
+.todo-view-link_full
+{
+
+}
+
+.todo-view-link_short
+{
+    text-decoration: none;
+    background-color: mediumpurple;
+    color: ivory;
+    border-radius: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-variant: small-caps;
 }
 
 .hidden

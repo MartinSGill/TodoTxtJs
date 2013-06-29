@@ -93,8 +93,6 @@ function TodoTxtViewModel()
         return result.sort();
     });
 
-    self.showCompleted = ko.observable(false);
-
     self.newPriorityFilter = ko.observable(undefined);
 
     self.showHelp = ko.observable(false);
@@ -333,6 +331,8 @@ function TodoTxtViewModel()
     ////////////////////////////////////////////////////////////////////////////
 
     self.filters = ko.observable("");
+    self.showCompleted = ko.observable(false);
+    self.showShortUrls = ko.observable(true);
     self.showCreatedDate = ko.observable(true);
 
     self.filtered = ko.computed(function ()
