@@ -93,8 +93,6 @@ function TodoTxtViewModel()
         return result.sort();
     });
 
-    self.showCompleted = ko.observable(false);
-
     self.newPriorityFilter = ko.observable(undefined);
 
     self.showHelp = ko.observable(false);
@@ -333,6 +331,8 @@ function TodoTxtViewModel()
     ////////////////////////////////////////////////////////////////////////////
 
     self.filters = ko.observable("");
+    self.showCompleted = ko.observable(false);
+    self.showShortUrls = ko.observable(true);
     self.showCreatedDate = ko.observable(true);
 
     self.filtered = ko.computed(function ()
@@ -434,13 +434,13 @@ function TodoTxtViewModel()
         self.notice("Saving Todos to " + self.options.storage());
         self.spinner(true);
 
-
         function onSuccess()
         {
             self.lastUpdated("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
             self.notice("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
+            TodoTxtJs.Events.onSaveComplete(self.options.storage());
         }
 
         function onError(error)
@@ -450,6 +450,7 @@ function TodoTxtViewModel()
             highlightNotice(true);
             setTimeout(normalNotice, 2000);
             self.spinner(false);
+            TodoTxtJs.Events.onError("Error Saving (" + self.options.storage() + ") : [" + error + "]");
         }
 
         self.options.storageInfo().save(self.exporting.buildExportText(), onSuccess, onError);
@@ -466,6 +467,7 @@ function TodoTxtViewModel()
             self.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
             self.spinner(false);
             setTimeout(normalNotice, 1000);
+            TodoTxtJs.Events.onLoadComplete(self.options.storage());
         }
 
         function onError(error)
@@ -474,6 +476,7 @@ function TodoTxtViewModel()
             highlightNotice(true);
             self.spinner(false);
             setTimeout(normalNotice, 2000);
+            TodoTxtJs.Events.onError("Error Loading (" + self.options.storage() + ") : [" + error + "]");
         }
         if (typeof(Storage) !== "undefined")
         {

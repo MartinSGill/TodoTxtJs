@@ -43,19 +43,19 @@ module TodoTxtJs
             Events.subscribers[eventName].push(callback);
         }
 
-        private static publishSimpleEvent(name: string)
+        private static publishSimpleEvent(name: string, value?: any) : void
         {
             if (Events.subscribers.hasOwnProperty(name))
             {
                 var subs = Events.subscribers[name];
                 for (var i:number = 0, length = subs.length; i < length; i++)
                 {
-                    subs[i]();
+                    subs[i](value);
                 }
             }
         }
 
-        public static onError(error : string)
+        public static onError(error : string) : void
         {
             if (Events.subscribers.hasOwnProperty(name))
             {
@@ -70,7 +70,7 @@ module TodoTxtJs
         /**
          * Call when a Todo is marked as complete.
          */
-        public static onComplete()
+        public static onComplete() : void
         {
             Events.publishSimpleEvent("onComplete");
         }
@@ -78,7 +78,7 @@ module TodoTxtJs
         /**
          * Call when a Todo is created.
          */
-        public static onNew()
+        public static onNew() : void
         {
             Events.publishSimpleEvent("onNew");
         }
@@ -86,9 +86,25 @@ module TodoTxtJs
         /**
          * Call when a Todo is removed.
          */
-        public static onRemove()
+        public static onRemove() : void
         {
             Events.publishSimpleEvent("onRemove");
+        }
+
+        /**
+         * Call when a Load operation completes.
+         */
+        public static onLoadComplete(type: string) : void
+        {
+            Events.publishSimpleEvent("onLoadComplete", type);
+        }
+
+        /**
+         * Call when a save operation completes.
+         */
+        public static onSaveComplete(type: string) : void
+        {
+            Events.publishSimpleEvent("onSaveComplete", type)
         }
     }
 }

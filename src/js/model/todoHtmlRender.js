@@ -60,7 +60,14 @@ function todoHtmlContentsRenderer(contents)
                                                         ' <span class="todo-view-projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="todo-view-project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
 
             var urlRegex = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
-            formattedMessage = formattedMessage.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
+            if (todoTxtView.showShortUrls())
+            {
+                formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_short" href="$1" target="_blank"><abbr title="$1">Link</abbr></a>');
+            }
+            else
+            {
+                formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_full" href="$1" target="_blank">$1</a>');
+            }
         }
 
         return formattedMessage;
