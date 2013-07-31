@@ -28,7 +28,7 @@
 function TodoTxtViewModel()
 {
     var self = this;
-    var todoManager = new TodoManager();
+    var todoManager = new TodoTxtJs.TodoManager();
 
     /************************************************
      * Inner Constructors
