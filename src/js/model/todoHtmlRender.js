@@ -32,7 +32,7 @@ function todoHtmlContentsRenderer(contents)
         return undefined;
     }
 
-    if (contents instanceof Todo)
+    if (contents instanceof TodoTxtJs.Todo)
     {
         return toHtml(contents.contents());
     }

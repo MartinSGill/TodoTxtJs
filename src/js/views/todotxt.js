@@ -411,7 +411,7 @@ function TodoTxtViewModel()
 
     self.addNewTodo = function ()
     {
-        var todo = new Todo(self.newTodoText());
+        var todo = new TodoTxtJs.Todo(self.newTodoText());
         if (self.options.addCreatedDate())
         {
             if (!todo.createdDate())

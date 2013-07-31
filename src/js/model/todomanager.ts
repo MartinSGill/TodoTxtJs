@@ -22,15 +22,10 @@
  ******************************************************************************/
 
 /// <reference path="../defs/knockout.d.ts" />
+/// <reference path="../model/todo.ts" />
 
 module TodoTxtJs
 {
-    declare class Todo
-    {
-        constructor(source: string);
-    }
-
-
     export class TodoManager
     {
         private _nextIndex = 0;
@@ -107,17 +102,18 @@ module TodoTxtJs
             this._nextIndex = 0;
         }
 
+        public add(newTodo: Todo) : void;
         public add(newTodo: string) : void;
-        public add(newTodo : Object) : void
+        public add(newTodo: any) : void
         {
-            var todo: any;
-            if (newTodo instanceof Todo)
+            var todo: Todo;
+            if (typeof(newTodo) === "string")
+            {
+                todo = new Todo(newTodo);
+            }
+            else if (newTodo instanceof Todo)
             {
                 todo = newTodo;
-            }
-            else if (typeof(newTodo) === "string")
-            {
-                todo = new Todo(<string>newTodo);
             }
             else
             {
