@@ -5,15 +5,16 @@
         <item url="file://$PROJECT_DIR$/src/js/storage/storage_browser.js" />
         <item url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todo.js" />
-        <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
+        <item url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
         <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       <root url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
       <root url="file://$PROJECT_DIR$/src/js/storage/storage_browser.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todo.js" />
-      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
+      <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
       <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
     </CLASSES>
     <JAVADOC />
