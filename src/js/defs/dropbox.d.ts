@@ -28,12 +28,12 @@ declare module TodoTxtJs
 
     export interface IDropboxApi
     {
-        Client(options: Object);
+        Client(options: Object) : void;
         Drivers: IDropboxDrivers;
     }
 
     export interface IDropboxDrivers
     {
-        Redirect(options: Object);
+        Redirect(options: Object) : void;
     }
 }

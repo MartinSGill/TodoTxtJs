@@ -23,6 +23,13 @@
 
 module TodoTxtJs.StorageProviders
 {
+    export interface IStorageProviderControls
+    {
+        storage:boolean;
+        exports:boolean;
+        imports:boolean;
+    }
+
     export interface IStorageProvider
     {
         /**
@@ -37,10 +44,8 @@ module TodoTxtJs.StorageProviders
 
         /**
          * The controls that should be enabled for this provider.
-         * @todo This needs be handled differently. It's in the wrong place.
-         * @todo bool needs to change to boolean, as bool is deprecated in Typescript.
          */
-        controls: { storage: bool; exports:bool; imports:bool; };
+        controls: IStorageProviderControls;
 
         /**
          * Load Todos from the provider.

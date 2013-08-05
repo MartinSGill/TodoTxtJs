@@ -5,6 +5,8 @@
         <item url="file://$PROJECT_DIR$/src/js/storage/storage_browser.js" />
         <item url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todo.js" />
+        <item url="file://$PROJECT_DIR$/src/js/storage/IStorageProvider.js" />
+        <item url="file://$PROJECT_DIR$/src/js/views/options.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
         <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
       </sourceFilesUrls>
@@ -14,6 +16,8 @@
       <root url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
       <root url="file://$PROJECT_DIR$/src/js/storage/storage_browser.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todo.js" />
+      <root url="file://$PROJECT_DIR$/src/js/storage/IStorageProvider.js" />
+      <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
       <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
     </CLASSES>
