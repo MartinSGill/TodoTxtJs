@@ -1,569 +1,413 @@
-/*******************************************************************************
- * Copyright (C) 2013 Martin Gill
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the
- * "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish,
- * distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to
- * the following conditions:
- *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- ******************************************************************************/
+var TodoTxtJs;
+(function (TodoTxtJs) {
+    /*******************************************************************************
+    * Copyright (C) 2013 Martin Gill
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining
+    * a copy of this software and associated documentation files (the
+    * "Software"), to deal in the Software without restriction, including
+    * without limitation the rights to use, copy, modify, merge, publish,
+    * distribute, sublicense, and/or sell copies of the Software, and to
+    * permit persons to whom the Software is furnished to do so, subject to
+    * the following conditions:
+    *
+    * The above copyright notice and this permission notice shall be
+    * included in all copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+    * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    ******************************************************************************/
+    /// <reference path="../defs/knockout.d.ts" />
+    /// <reference path="../defs/jquery.d.ts" />
+    /// <reference path="../defs/jqueryui.d.ts" />
+    /// <reference path="../utils/datetime.ts" />
+    /// <reference path="../utils/events.ts" />
+    /// <reference path="../model/todo.ts" />
+    /// <reference path="../model/todomanager.ts" />
+    /// <reference path="../views/options.ts" />
+    /// <reference path="../views/importing.ts" />
+    /// <reference path="../views/exporting.ts" />
+    (function (View) {
+        var Main = (function () {
+            function Main() {
+                var _this = this;
+                this.save = function () {
+                    Main._highlightNotice();
+                    _this.notice("Saving Todos to " + _this.options.storage());
+                    _this.spinner(true);
 
-////////////////////////////////////////////////////////////////////////////
-// Main View Model
-////////////////////////////////////////////////////////////////////////////
+                    var onSuccess = function () {
+                        _this.lastUpdated("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
+                        _this.notice("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
+                        _this.spinner(false);
+                        setTimeout(_this._normalNotice, 1000);
+                        TodoTxtJs.Events.onSaveComplete(_this.options.storage());
+                    };
 
-function TodoTxtViewModel()
-{
-    var self = this;
-    var todoManager = new TodoTxtJs.TodoManager();
+                    var onError = function (error) {
+                        _this.notice("Error: [" + error + "]");
+                        _this.lastUpdated("Error: [" + error + "]");
+                        Main._highlightNotice(true);
+                        setTimeout(_this._normalNotice, 2000);
+                        _this.spinner(false);
+                        TodoTxtJs.Events.onError("Error Saving (" + _this.options.storage() + ") : [" + error + "]");
+                    };
 
-    /************************************************
-     * Inner Constructors
-     ***********************************************/
-    self.version = ko.observable("0.9.6");
-    self.title = ko.observable("TodoTxtJs");
+                    _this.options.storageInfo().save(_this.exporting.buildExportText(), onSuccess, onError);
+                };
+                this._normalNotice = function () {
+                    var notice = $("#notice");
+                    notice.find("#notice-text").effect("transfer", { to: $("#target") }, 1000);
+                    notice.removeClass("notice-highlight");
+                    _this.lastUpdated(_this.notice());
+                    _this.notice("");
+                };
+                this._todoManager = new TodoTxtJs.TodoManager();
 
-    self.allTodos = ko.computed(function() { return todoManager.all(); } );
+                this.version = ko.observable("0.9.6");
+                this.title = ko.observable("TodoTxtJs");
+                this.allTodos = ko.computed({ owner: this, read: this._getAllTodos });
+                this.priorities = ko.observableArray([]);
+                this.projects = ko.computed({ owner: this, read: this._getAllProjects });
+                this.contexts = ko.computed({ owner: this, read: this._getAllContexts });
 
-    self.priorities = ko.observableArray([]);
-    self.projects = ko.computed(function()
-    {
-        var hash = {};
-        for (var i = 0; i < self.allTodos().length; i++)
-        {
-            if (self.isDisplayed(self.allTodos()[i]))
-            {
-                var projects = self.allTodos()[i].projects();
-                for (var j = 0; j < projects.length; j++)
-                {
-                    hash[projects[j]] = true;
-                }
+                this.newPriorityFilter = ko.observable(undefined);
+                this.showHelp = ko.observable(false);
+
+                this.options = new View.Options();
+
+                this.importing = new View.Importing(this._todoManager);
+                this.exporting = new View.Exporting(this._todoManager);
+
+                this.filters = ko.observable("");
+                this.showCompleted = ko.observable(false);
+                this.showShortUrls = ko.observable(true);
+                this.showCreatedDate = ko.observable(true);
+
+                this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
+
+                this.newTodoText = ko.observable("");
+                this.spinner = ko.observable(false);
+
+                this.lastUpdated = ko.observable(undefined);
+                this.notice = ko.observable(undefined);
+                this.pageReady = ko.observable(false);
+                $(document).ready(function () {
+                    _this.pageReady(true);
+                });
+
+                this._InitializeAutoComplete();
+                this._InitializeKeyboardShortCuts();
+
+                $(window).unload(this.save);
+                this.load();
             }
-        }
+            Main.prototype.removeTodo = function (element) {
+                var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
+                TodoTxtJs.Events.onRemove();
+                this._todoManager.remove(index);
+            };
 
-        var result = [];
-        for(var name in hash)
-        {
-            if (hash.hasOwnProperty(name))
-            {
-                result.push(name);
-            }
-        }
+            Main.prototype.refresh = function () {
+                this.load();
+            };
 
-        return result.sort();
-    });
+            Main.prototype.load = function () {
+                var _this = this;
+                Main._highlightNotice();
+                this.options.load();
 
-    self.contexts = ko.computed(function()
-    {
-        var hash = {};
-        for (var i = 0; i < self.allTodos().length; i++)
-        {
-            if (self.isDisplayed(self.allTodos()[i]))
-            {
-                var contexts = self.allTodos()[i].contexts();
-                for (var j = 0; j < contexts.length; j++)
-                {
-                    hash[contexts[j]] = true;
-                }
-            }
-        }
-
-        var result = [];
-        for(var name in hash)
-        {
-            if (hash.hasOwnProperty(name))
-            {
-                result.push(name);
-            }
-        }
-
-        return result.sort();
-    });
-
-    self.newPriorityFilter = ko.observable(undefined);
-
-    self.showHelp = ko.observable(false);
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Options
-    ////////////////////////////////////////////////////////////////////////////
-    self.options = new TodoTxtJs.View.Options();
-
-    self.toggleToolbox = function (element)
-    {
-        var selected = false;
-        var menuItem = $(element).parent();
-        self.options.save();
-        if (menuItem.hasClass("selected"))
-        {
-
-            if (menuItem[0].id === 'options')
-            {
-                self.options.save();
-            }
-            selected = true;
-        }
-        else
-        {
-            if (menuItem[0].id === 'export')
-            {
-                self.exporting.fillExportBox();
-            }
-        }
-
-        $(".menuItem").removeClass("selected");
-        $(".menuItem .toolbox").hide();
-
-        if (!selected)
-        {
-            menuItem.addClass("selected");
-            $(".toolbox", menuItem).show();
-        }
-    };
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Import / Export
-    ////////////////////////////////////////////////////////////////////////////
-
-    function Importing()
-    {
-        var self = this;
-        self.$dropTarget = null;
-        var entered = 0;
-
-        function dragEnter(event)
-        {
-            entered++;
-            event.preventDefault();
-            self.$dropTarget.addClass("dragOver");
-        }
-
-        function dragLeave(event)
-        {
-            entered--;
-            event.stopPropagation();
-            if (entered === 0)
-            {
-                self.$dropTarget.removeClass("dragOver");
-            }
-        }
-
-        function dragOver(event)
-        {
-            event.dataTransfer.dropEffect = "link";
-            event.preventDefault();
-        }
-
-        function drop(event)
-        {
-            event.preventDefault();
-            self.$dropTarget.removeClass("dropOver");
-
-            var files = event.dataTransfer.files;
-
-            if (files.length > 0)
-            {
-                var file = files[0];
-                var reader = new FileReader();
-
-                reader.onloadend = function (event)
-                {
-                    todoManager.removeAll();
-                    var todos = event.target.result.match(/^(.+)$/mg);
-                    todoManager.loadFromStringArray(todos);
+                var onSuccess = function (data) {
+                    _this._todoManager.loadFromStringArray(data);
+                    _this.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
+                    _this.spinner(false);
+                    setTimeout(_this._normalNotice, 1000);
+                    TodoTxtJs.Events.onLoadComplete(_this.options.storage());
                 };
 
-                reader.readAsText(file, 'UTF-8');
-            }
-        }
+                var onError = function (error) {
+                    _this.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
+                    Main._highlightNotice(true);
+                    _this.spinner(false);
+                    setTimeout(function () {
+                        return _this._normalNotice;
+                    }, 2000);
+                    TodoTxtJs.Events.onError("Error Loading (" + _this.options.storage() + ") : [" + error + "]");
+                };
 
-        $(document).ready(function() {
-            // Get jQuery events to support dataTransfer props
-            jQuery.event.props.push('dataTransfer');
-            self.$dropTarget = $("#fileUpload");
+                if (typeof (Storage) !== "undefined") {
+                    this._todoManager.removeAll();
+                    this.spinner(true);
+                    this.notice("Loading Todos from " + this.options.storage());
+                    this.options.storageInfo().load(onSuccess, onError);
+                }
+            };
 
-            self.$dropTarget.on('dragenter', dragEnter);
-            self.$dropTarget.on('dragover', dragOver);
-            self.$dropTarget.on('dragleave', dragLeave);
-            self.$dropTarget.on('drop', drop);
+            Main.prototype.addNewTodo = function () {
+                var todo = new TodoTxtJs.Todo(this.newTodoText());
+                if (this.options.addCreatedDate()) {
+                    if (!todo.createdDate()) {
+                        var date = new Date();
+                        todo.createdDate(DateTime.toISO8601Date(date));
+                    }
+                }
 
-            var $dropTargetChild = self.$dropTarget.find("span");
-            $dropTargetChild.on('dragenter', dragEnter);
-            $dropTargetChild.on('dragover', dragOver);
-            $dropTargetChild.on('dragleave', dragLeave);
-            $dropTargetChild.on('drop', drop);
-        });
-    }
+                TodoTxtJs.Events.onNew();
+                this._todoManager.add(todo);
+                this.newTodoText("");
+            };
 
-    function Exporting()
-    {
-        var self = this;
-        self.exportText = ko.observable("");
+            Main.prototype.newTodoAutoCompleteValues = function () {
+                var result = [];
+                var contexts = this._todoManager.allContexts();
+                var projects = this._todoManager.allProjects();
 
-        self.buildExportText = function ()
-        {
-            var todos = todoManager.exportToStringArray();
-            return todos.join("\n");
-        };
+                for (var i = 0; i < contexts.length; i++) {
+                    result.push("@" + contexts[i]);
+                }
 
-        self.fillExportBox = function ()
-        {
-            self.exportText(self.buildExportText());
-        };
+                for (var j = 0; j < projects.length; j++) {
+                    result.push("+" + projects[j]);
+                }
 
-        self.download = function()
-        {
-            var data = "data:text;charset=utf-8,";
-            data += encodeURI(self.exportText());
+                return result;
+            };
 
-            window.location.href = data;
-        };
-    }
+            Main.prototype._getIsFiltered = function () {
+                return this.filters() && this.filters().length > 0;
+            };
 
-    self.importing = new Importing(self);
-    self.exporting = new Exporting(self);
+            Main.prototype.clearFilters = function () {
+                this.filters("");
+            };
 
-    ////////////////////////////////////////////////////////////////////////////
-    // Help
-    ////////////////////////////////////////////////////////////////////////////
+            Main.prototype.addFilterFromElement = function (newFilter) {
+                var filterText = $(newFilter).text();
+                if (this.filters().indexOf(filterText.toLowerCase()) > -1) {
+                    return;
+                }
 
-    self.onClick_ShowHelp = function (data, event)
-    {
-        self.showHelp(!self.showHelp());
-    };
+                var result = this.filters().trim();
+                if (this.filters().length > 0) {
+                    result += " ";
+                }
+                result += filterText;
+                this.filters(result);
+            };
 
-    ////////////////////////////////////////////////////////////////////////////
-    // Filters
-    ////////////////////////////////////////////////////////////////////////////
+            Main.prototype.addFilter = function (newFilter) {
+                if (this.filters().indexOf(newFilter.toLowerCase()) > -1) {
+                    return;
+                }
 
-    self.filters = ko.observable("");
-    self.showCompleted = ko.observable(false);
-    self.showShortUrls = ko.observable(true);
-    self.showCreatedDate = ko.observable(true);
+                var result = this.filters().trim();
+                if (this.filters().length > 0) {
+                    result += " ";
+                }
+                result += newFilter;
+                this.filters(result);
+            };
 
-    self.filtered = ko.computed(function ()
-    {
-        return self.filters() && self.filters().length > 0;
-    });
+            ////////////////////////////////////////////////////////////////////////////
+            // Options
+            ////////////////////////////////////////////////////////////////////////////
+            Main.prototype.toggleToolbox = function (element) {
+                var selected = false;
+                var menuItem = $(element).parent();
+                this.options.save();
+                if (menuItem.hasClass("selected")) {
+                    if (menuItem[0].id === 'options') {
+                        this.options.save();
+                    }
+                    selected = true;
+                } else {
+                    if (menuItem[0].id === 'export') {
+                        this.exporting.fillExportBox();
+                    }
+                }
 
-    self.clearFilters = function ()
-    {
-        self.filters("");
-    };
+                $(".menuItem").removeClass("selected");
+                $(".menuItem .toolbox").hide();
 
-    self.addFilterFromElement = function(newFilter)
-    {
-        var filterText = $(newFilter).text();
-        if (self.filters().indexOf(filterText.toLowerCase()) > -1)
-        {
-            return;
-        }
+                if (!selected) {
+                    menuItem.addClass("selected");
+                    $(".toolbox", menuItem).show();
+                }
+            };
 
-        var result = self.filters().trim();
-        if (self.filters().length > 0)
-        {
-            result += " ";
-        }
-        result += filterText;
-        self.filters(result);
-    };
+            Main.prototype.isDisplayed = function (todo) {
+                if (!this.showCompleted() && todo.completed()) {
+                    return false;
+                }
 
-    self.addFilter = function(newFilter)
-    {
-        if (self.filters().indexOf(newFilter.toLowerCase()) > -1)
-        {
-            return;
-        }
+                var testText = todo.text().toLowerCase();
+                var filters = this.filters().split(/\s/);
+                var result = true;
+                if (this.filtered()) {
+                    for (var i = 0; i < filters.length && result; i++) {
+                        result = testText.indexOf(filters[i].toLowerCase()) >= 0;
+                    }
+                }
 
-        var result = self.filters().trim();
-        if (self.filters().length > 0)
-        {
-            result += " ";
-        }
-        result += newFilter;
-        self.filters(result);
-    };
+                return result;
+            };
 
-    ////////////////////////////////////////////////////////////////////////////
-    // Display
-    ////////////////////////////////////////////////////////////////////////////
+            Main.prototype.onClick_ShowHelp = function (data, event) {
+                this.showHelp(!this.showHelp());
+            };
 
-    self.isDisplayed = function (todo)
-    {
-        if (!self.showCompleted() && todo.completed())
-        {
-            return false;
-        }
+            Main._highlightNotice = function (isError) {
+                var notice = $("#notice");
+                notice.addClass("notice-highlight");
 
-        var testText = todo.text().toLowerCase();
-        var filters = self.filters().split(/\s/);
-        var result = true;
-        if (self.filtered())
-        {
-            for (var i = 0; i < filters.length && result; i++)
-            {
-                result = testText.indexOf(filters[i].toLowerCase()) >= 0;
-            }
-        }
+                if (isError) {
+                    notice.addClass("notice-error");
+                } else {
+                    notice.removeClass("notice-error");
+                }
+            };
 
-        return result;
-    };
+            Main.prototype._getAllTodos = function () {
+                return this._todoManager.all();
+            };
 
-    ////////////////////////////////////////////////////////////////////////////
-    // TODO Management
-    ////////////////////////////////////////////////////////////////////////////
+            Main.prototype._getAllProjects = function () {
+                var hash = {};
+                for (var i = 0; i < this.allTodos().length; i++) {
+                    if (this.isDisplayed(this.allTodos()[i])) {
+                        var projects = this.allTodos()[i].projects();
+                        for (var j = 0; j < projects.length; j++) {
+                            hash[projects[j]] = true;
+                        }
+                    }
+                }
 
-    self.newTodoText = ko.observable("");
+                var result = [];
+                for (var name in hash) {
+                    if (hash.hasOwnProperty(name)) {
+                        result.push(name);
+                    }
+                }
 
-    self.addNewTodo = function ()
-    {
-        var todo = new TodoTxtJs.Todo(self.newTodoText());
-        if (self.options.addCreatedDate())
-        {
-            if (!todo.createdDate())
-            {
-                var date = new Date();
-                todo.createdDate(DateTime.toISO8601Date(date));
-            }
-        }
+                return result.sort();
+            };
 
-        TodoTxtJs.Events.onNew();
-        todoManager.add(todo);
-        self.newTodoText("");
-    };
+            Main.prototype._getAllContexts = function () {
+                var hash = {};
+                for (var i = 0; i < this.allTodos().length; i++) {
+                    if (this.isDisplayed(this.allTodos()[i])) {
+                        var contexts = this.allTodos()[i].contexts();
+                        for (var j = 0; j < contexts.length; j++) {
+                            hash[contexts[j]] = true;
+                        }
+                    }
+                }
 
-    self.spinner = ko.observable(false);
+                var result = [];
+                for (var name in hash) {
+                    if (hash.hasOwnProperty(name)) {
+                        result.push(name);
+                    }
+                }
 
-    self.save = function ()
-    {
-        highlightNotice();
-        self.notice("Saving Todos to " + self.options.storage());
-        self.spinner(true);
+                return result.sort();
+            };
 
-        function onSuccess()
-        {
-            self.lastUpdated("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
-            self.notice("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
-            self.spinner(false);
-            setTimeout(normalNotice, 1000);
-            TodoTxtJs.Events.onSaveComplete(self.options.storage());
-        }
+            Main._split = function (val) {
+                return val.split(/\s+/);
+            };
 
-        function onError(error)
-        {
-            self.notice("Error: [" + error  +  "]");
-            self.lastUpdated("Error: [" + error  +  "]");
-            highlightNotice(true);
-            setTimeout(normalNotice, 2000);
-            self.spinner(false);
-            TodoTxtJs.Events.onError("Error Saving (" + self.options.storage() + ") : [" + error + "]");
-        }
+            Main.prototype._extractLast = function (term) {
+                return Main._split(term).pop();
+            };
 
-        self.options.storageInfo().save(self.exporting.buildExportText(), onSuccess, onError);
-    };
+            Main.prototype._InitializeKeyboardShortCuts = function () {
+                $(document).bind('keydown', 'n', function (event) {
+                    event.preventDefault();
+                    $(".addTodo Input").focus();
+                });
 
-    self.load = function ()
-    {
-        highlightNotice();
-        self.options.load();
+                $(document).bind('keydown', '?', function (event) {
+                    event.preventDefault();
+                    this.onClick_ShowHelp();
+                });
+            };
 
-        function onSuccess(data)
-        {
-            todoManager.loadFromStringArray(data);
-            self.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
-            self.spinner(false);
-            setTimeout(normalNotice, 1000);
-            TodoTxtJs.Events.onLoadComplete(self.options.storage());
-        }
+            Main.prototype._InitializeAutoComplete = function () {
+                var _self = this;
+                $("#newTodoInput").bind("keydown", function (event) {
+                    if (event.keyCode === $.ui.keyCode.TAB && $(this).data("ui-autocomplete").menu.active) {
+                        event.preventDefault();
+                    }
+                }).autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        // delegate back to autocomplete, but extract the last term
+                        response(($.ui.autocomplete).filter(_self.newTodoAutoCompleteValues(), _self._extractLast(request.term)));
+                    },
+                    focus: function () {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        var terms = Main._split(this.value);
 
-        function onError(error)
-        {
-            self.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
-            highlightNotice(true);
-            self.spinner(false);
-            setTimeout(normalNotice, 2000);
-            TodoTxtJs.Events.onError("Error Loading (" + self.options.storage() + ") : [" + error + "]");
-        }
-        if (typeof(Storage) !== "undefined")
-        {
-            todoManager.removeAll();
-            self.spinner(true);
-            self.notice("Loading Todos from " + self.options.storage());
-            self.options.storageInfo().load(onSuccess, onError);
-        }
-    };
+                        // remove the current input
+                        terms.pop();
 
-    $(window).unload(self.save);
+                        // add the selected item
+                        terms.push(ui.item.value);
 
-    self.lastUpdated = ko.observable(undefined);
-    self.notice = ko.observable(undefined);
-    self.refresh = function ()
-    {
-        self.load();
-    };
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push("");
+                        _self.newTodoText(terms.join(" "));
+                        return false;
+                    }
+                });
 
-    self.pageReady = ko.observable(false);
-    $(document).ready(function ()
-    {
-        self.pageReady(true);
-    });
+                $("#filters").bind("keydown", function (event) {
+                    if (event.keyCode === $.ui.keyCode.TAB && $(this).data("ui-autocomplete").menu.active) {
+                        event.preventDefault();
+                    }
+                }).autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        // delegate back to autocomplete, but extract the last term
+                        response(($.ui.autocomplete).filter(_self.newTodoAutoCompleteValues(), _self._extractLast(request.term)));
+                    },
+                    focus: function () {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        var terms = Main._split(this.value);
 
-    self.removeTodo = function(element)
-    {
-        var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
-        TodoTxtJs.Events.onRemove();
-        todoManager.remove(index);
-    };
+                        // remove the current input
+                        terms.pop();
 
-    //////////////////////////////////////////////////////////
-    // Effects
-    //////////////////////////////////////////////////////////
-    function highlightNotice(isError)
-    {
-        var notice = $("#notice");
-        notice.addClass("notice-highlight");
+                        // add the selected item
+                        terms.push(ui.item.value);
 
-        if (isError)
-        {
-            notice.addClass("notice-error");
-        }
-        else
-        {
-            notice.removeClass("notice-error");
-        }
-    }
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push("");
+                        _self.filters(terms.join(" "));
+                        return false;
+                    }
+                });
+            };
+            return Main;
+        })();
+        View.Main = Main;
+    })(TodoTxtJs.View || (TodoTxtJs.View = {}));
+    var View = TodoTxtJs.View;
+})(TodoTxtJs || (TodoTxtJs = {}));
 
-    function normalNotice()
-    {
-        var notice = $("#notice");
-        notice.find("#notice-text").effect("transfer", { to: $("#target") }, 1000);
-        notice.removeClass("notice-highlight");
-        self.lastUpdated(self.notice());
-        self.notice("");
-    }
-
-    //////////////////////////////////////////////////////////
-    // Keyboard shortcuts
-    //////////////////////////////////////////////////////////
-
-    $(document).bind('keydown', 'n', function(event)
-    {
-        event.preventDefault();
-        $(".addTodo Input").focus();
-    });
-
-    $(document).bind('keydown', '?', function(event)
-    {
-        event.preventDefault();
-        self.onClick_ShowHelp();
-    });
-
-    function newTodoAutoCompleteValues()
-    {
-        var result = [];
-        var contexts = todoManager.allContexts();
-        var projects = todoManager.allProjects();
-
-        for (var i = 0; i < contexts.length; i++)
-        {
-            result.push("@" + contexts[i]);
-        }
-
-        for (var j = 0; j < projects.length; j++)
-        {
-            result.push("+" + projects[j]);
-        }
-
-        return result;
-    }
-
-    self.load();
-
-    function split( val ) {
-      return val.split( /\s+/ );
-    }
-    function extractLast( term ) {
-      return split( term ).pop();
-    }
-
-    $( "#newTodoInput" )
-      // don't navigate away from the field on tab when selecting an item
-      .bind( "keydown", function( event ) {
-        if ( event.keyCode === $.ui.keyCode.TAB &&
-            $( this ).data( "ui-autocomplete" ).menu.active ) {
-          event.preventDefault();
-        }
-      })
-      .autocomplete({
-        minLength: 1,
-        source: function( request, response ) {
-          // delegate back to autocomplete, but extract the last term
-          response( $.ui.autocomplete.filter(
-            newTodoAutoCompleteValues(), extractLast( request.term ) ) );
-        },
-        focus: function() {
-          // prevent value inserted on focus
-          return false;
-        },
-        select: function( event, ui ) {
-          var terms = split( this.value );
-          // remove the current input
-          terms.pop();
-          // add the selected item
-          terms.push( ui.item.value );
-          // add placeholder to get the comma-and-space at the end
-          terms.push( "" );
-          self.newTodoText(terms.join( " " ));
-          return false;
-        }
-      });
-
-    $( "#filters" )
-        // don't navigate away from the field on tab when selecting an item
-        .bind( "keydown", function( event ) {
-                   if ( event.keyCode === $.ui.keyCode.TAB &&
-                       $( this ).data( "ui-autocomplete" ).menu.active ) {
-                       event.preventDefault();
-                   }
-               })
-        .autocomplete({
-                          minLength: 1,
-                          source: function( request, response ) {
-                              // delegate back to autocomplete, but extract the last term
-                              response( $.ui.autocomplete.filter(
-                                  newTodoAutoCompleteValues(), extractLast( request.term ) ) );
-                          },
-                          focus: function() {
-                              // prevent value inserted on focus
-                              return false;
-                          },
-                          select: function( event, ui ) {
-                              var terms = split( this.value );
-                              // remove the current input
-                              terms.pop();
-                              // add the selected item
-                              terms.push( ui.item.value );
-                              // add placeholder to get the comma-and-space at the end
-                              terms.push( "" );
-                              self.filters(terms.join( " " ));
-                              return false;
-                          }
-                      });
-}
-
-var todoTxtView = new TodoTxtViewModel();
+var todoTxtView = new TodoTxtJs.View.Main();
 ko.applyBindings(todoTxtView, document.head);
 ko.applyBindings(todoTxtView);
+//@ sourceMappingURL=todotxt.js.map

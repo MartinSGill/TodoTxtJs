@@ -25,8 +25,6 @@
 /// <reference path="../storage/storage_browser.ts" />
 /// <reference path="../storage/storage_dropbox.ts" />
 
-declare var todoTxtView : any;
-
 module TodoTxtJs.View
 {
     export class Options
