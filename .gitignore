@@ -1,2 +1,4 @@
 output/*
+src/js/**/*.js
+src/js/**/*.map
 src/js/dropbox_key.js
