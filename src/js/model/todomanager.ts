@@ -147,17 +147,19 @@ module TodoTxtJs
             return left.index < right.index ? -1 : 1;
         }
 
+        public addFromStringArray(newData : string[]) : void
+        {
+            for (var i = 0; i < newData.length; i++)
+            {
+                var obj = newData[i];
+                this.add(obj);
+            }
+        }
+
         public loadFromStringArray(newData : string[]) : void
         {
-            if (newData)
-            {
-                this.removeAll();
-                for (var i = 0; i < newData.length; i++)
-                {
-                    var obj = newData[i];
-                    this.add(obj);
-                }
-            }
+            this.removeAll();
+            this.addFromStringArray(newData);
         }
 
         public exportToStringArray() : string[]

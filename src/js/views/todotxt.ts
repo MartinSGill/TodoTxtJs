@@ -56,6 +56,7 @@ module TodoTxtJs.View
         public showCreatedDate: KnockoutObservable<boolean>;
         public filtered: KnockoutComputed<boolean>;
 
+
         public newTodoText: KnockoutObservable<string>;
         public spinner: KnockoutObservable<boolean>;
         public lastUpdated: KnockoutObservable<string>;
@@ -425,7 +426,6 @@ module TodoTxtJs.View
                 event.preventDefault();
                 this.onClick_ShowHelp();
             });
-
         }
 
         private _InitializeAutoComplete() : void
@@ -498,6 +498,6 @@ module TodoTxtJs.View
     }
 }
 
-var todoTxtView = new TodoTxtJs.View.Main();
+var todoTxtView : TodoTxtJs.View.Main = new TodoTxtJs.View.Main();
 ko.applyBindings(todoTxtView, document.head);
 ko.applyBindings(todoTxtView);

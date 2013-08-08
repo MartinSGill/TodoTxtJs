@@ -30,7 +30,7 @@ You'll need to use a command-line for most of this.
 *  Install dependencies (defined in package.json)
 
 ```PowerShell
-    PS> npm install -dev
+    PS> npm install
 ```
 
 *  Install grunt (globally)

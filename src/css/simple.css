@@ -690,3 +690,7 @@ form
     font-size: 1em;
   }
 
+.__floatLeft
+{
+    float: left;
+}

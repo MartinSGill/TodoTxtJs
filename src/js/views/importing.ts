@@ -31,12 +31,16 @@ module TodoTxtJs.View
 {
     export class Importing
     {
+        public appendImport: KnockoutObservable<boolean>;
+
         private _dropTarget:any;
         private _entered : number;
         private _todoManager: TodoManager;
 
         constructor(todoManager:TodoManager)
         {
+            this.appendImport = ko.observable<boolean>(false);
+
             this._dropTarget = null;
             this._entered = 0;
             this._todoManager = todoManager;
@@ -77,14 +81,14 @@ module TodoTxtJs.View
 
         private dragOver = (event) : void =>
         {
-            event.dataTransfer.dropEffect = "link";
+            event.dataTransfer.dropEffect = "copy";
             event.preventDefault();
         };
 
         private drop = (event) : void =>
         {
             event.preventDefault();
-            this._dropTarget.removeClass("dropOver");
+            this._dropTarget.removeClass("dragOver");
 
             var files = event.dataTransfer.files;
 
@@ -95,9 +99,13 @@ module TodoTxtJs.View
 
                 reader.onloadend = (event): void =>
                 {
-                    this._todoManager.removeAll();
+                    if (!this.appendImport())
+                    {
+                        this._todoManager.removeAll();
+                    }
+
                     var todos = (<any>event.target).result.match(/^(.+)$/mg);
-                    this._todoManager.loadFromStringArray(todos);
+                    this._todoManager.addFromStringArray(todos);
                 };
 
                 reader.readAsText(file, 'UTF-8');

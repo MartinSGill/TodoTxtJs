@@ -32,8 +32,8 @@ module TodoTxtJs.StorageProviders
         public description:string = "Stores your Todos in '/Todo/todo.txt' in your dropbox account.";
         public controls = {
             storage: true,
-            exports: false,
-            imports: false
+            exports: true,
+            imports: true
         };
 
         load(onSuccess? : (Object) => void, onError?: (string) => void) : void

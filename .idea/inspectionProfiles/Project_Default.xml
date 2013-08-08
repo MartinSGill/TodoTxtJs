@@ -210,7 +210,7 @@
     <inspection_tool class="JSFieldCanBeLocal" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="SourceFiles" level="WARNING" enabled="true" />
     </inspection_tool>
-    <inspection_tool class="JSHint" enabled="false" level="ERROR" enabled_by_default="true">
+    <inspection_tool class="JSHint" enabled="true" level="ERROR" enabled_by_default="true">
       <scope name="SourceFiles" level="ERROR" enabled="true" />
     </inspection_tool>
     <inspection_tool class="JSImplicitlyInternalDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
