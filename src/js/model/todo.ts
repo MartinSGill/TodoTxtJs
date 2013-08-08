@@ -42,7 +42,7 @@ module TodoTxtJs
 
         private _priority:string = null;
         private _createDate:string = null;
-        private _completed:bool = false;
+        private _completed:boolean = false;
         private _completedDate:string = null;
         private _contents:string = null;
         private _projects:string[] = [];
@@ -133,7 +133,7 @@ module TodoTxtJs
                         this.parse();
                         return this._completed;
                     },
-                    write: (value:bool)=>
+                    write: (value:boolean)=>
                     {
                         this._completed = value;
                         if (this._completed)

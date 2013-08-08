@@ -64,6 +64,7 @@ module TodoTxtJs.View
 
         private _todoManager: TodoManager;
 
+
         constructor()
         {
             this._todoManager = new TodoTxtJs.TodoManager();
@@ -118,7 +119,6 @@ module TodoTxtJs.View
             this.load();
         }
 
-
         public save = () : void =>
         {
             Main._highlightNotice();
@@ -132,7 +132,7 @@ module TodoTxtJs.View
                 this.spinner(false);
                 setTimeout(this._normalNotice, 1000);
                 TodoTxtJs.Events.onSaveComplete(this.options.storage());
-            }
+            };
 
             var onError = (error) =>
             {
@@ -142,7 +142,7 @@ module TodoTxtJs.View
                 setTimeout(this._normalNotice, 2000);
                 this.spinner(false);
                 TodoTxtJs.Events.onError("Error Saving (" + this.options.storage() + ") : [" + error + "]");
-            }
+            };
 
             this.options.storageInfo().save(this.exporting.buildExportText(), onSuccess, onError);
         };

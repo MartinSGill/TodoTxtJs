@@ -16,7 +16,7 @@ Caveats
 
 * Test this on Windows only, but should work on *nix systems as well.
 * The Error "error TS2140: 'this' cannot be referenced in initializers in a class body." is currently
-  expected. See: http://goo.gl/qlBi1w
+  expected. See: http://goo.gl/qlBi1w and grunt hasn't been updated to the latest typescript yet.
 * Examples below assume you're using powershell.
 
 
@@ -34,6 +34,11 @@ You'll need to use a command-line for most of this.
 *  Install grunt-cli
 
     PS> npm install grunt-cli -g
+
+* (opional) If you have the Visual Studio TypeScript plugin installed (and in your path)
+   then you can skip this step. Otherwise, you need to install typescript:
+
+    PS> npm install typescript -g
 
 *  Ensure you are in the "build" folder.
    Compile typescript files

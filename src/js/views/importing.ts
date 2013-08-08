@@ -41,7 +41,7 @@ module TodoTxtJs.View
             this._entered = 0;
             this._todoManager = todoManager;
 
-            $(document).ready(function() {
+            $(document).ready(()=> {
                 // Get jQuery events to support dataTransfer props
                 (<any>jQuery).event.props.push('dataTransfer');
                 this._dropTarget = $("#fileUpload");
@@ -58,14 +58,14 @@ module TodoTxtJs.View
             });
         }
 
-        private dragEnter(event) : void
+        private dragEnter = (event) : void =>
         {
             this._entered++;
             event.preventDefault();
             this._dropTarget.addClass("dragOver");
-        }
+        };
 
-        private dragLeave(event) : void
+        private dragLeave = (event) : void =>
         {
             this._entered--;
             event.stopPropagation();
@@ -73,15 +73,15 @@ module TodoTxtJs.View
             {
                 this._dropTarget.removeClass("dragOver");
             }
-        }
+        };
 
-        private dragOver(event) : void
+        private dragOver = (event) : void =>
         {
             event.dataTransfer.dropEffect = "link";
             event.preventDefault();
-        }
+        };
 
-        private drop(event) : void
+        private drop = (event) : void =>
         {
             event.preventDefault();
             this._dropTarget.removeClass("dropOver");
@@ -93,7 +93,7 @@ module TodoTxtJs.View
                 var file = files[0];
                 var reader = new FileReader();
 
-                reader.onloadend = function (event)
+                reader.onloadend = (event): void =>
                 {
                     this._todoManager.removeAll();
                     var todos = (<any>event.target).result.match(/^(.+)$/mg);
@@ -102,6 +102,6 @@ module TodoTxtJs.View
 
                 reader.readAsText(file, 'UTF-8');
             }
-        }
+        };
     } // class Importing
 }

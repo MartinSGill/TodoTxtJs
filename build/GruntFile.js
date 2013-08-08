@@ -42,10 +42,11 @@ module.exports = function (grunt) {
         typescript: {
             base: {
                 src: ['../src/**/*.ts'],
-                dest: '../src/js/todotxtjs.min.js',
+                dest: '../src/js/app.js',
                 options: {
-                    module: 'amd',
-                    target: 'es5'
+                    module: 'commonjs',
+                    target: 'es5',
+                    sourcemap: true
                 }
             }
         },

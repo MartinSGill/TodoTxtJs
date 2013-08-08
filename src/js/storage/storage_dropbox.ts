@@ -80,7 +80,7 @@ module TodoTxtJs.StorageProviders
                               }, onError);
         }
 
-        private _authenticating:bool = false;
+        private _authenticating:boolean = false;
 
         private authenticate(onSuccess, onError)
         {
