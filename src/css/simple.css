@@ -254,6 +254,14 @@ form
     width: 99%;
 }
 
+.exportTextArea
+{
+    display: block;
+    overflow-y: visible;
+    height: 300px;
+    width: 99%;
+}
+
 .toolbox > span
 {
     clear: both;
