@@ -24,6 +24,7 @@
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../storage/storage_browser.ts" />
 /// <reference path="../storage/storage_dropbox.ts" />
+/// <reference path="../utils/events.ts" />
 
 module TodoTxtJs.View
 {
@@ -40,6 +41,9 @@ module TodoTxtJs.View
         public showStorageControls: KnockoutComputed<boolean>;
         public showImport: KnockoutComputed<boolean>;
         public showExport: KnockoutComputed<boolean>;
+
+        public saveOnChange: KnockoutObservable<boolean>;
+        public saveOnChangeDescription: KnockoutObservable<string>;
 
         constructor()
         {
@@ -83,6 +87,9 @@ module TodoTxtJs.View
                           return this.storageInfo().controls.exports;
                       }
                    });
+
+            this.saveOnChange = ko.observable<boolean>(true);
+            this.saveOnChangeDescription = ko.observable<string>("Save changes immediatly after you add/remove/edit a Todo.");
         }
 
         public save() : void

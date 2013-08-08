@@ -36,7 +36,12 @@ module TodoTxtJs.StorageProviders
             imports: true
         };
 
-        load(onSuccess? : (Object) => void, onError?: (string) => void) : void
+        constructor()
+        {
+
+        }
+
+        public load = (onSuccess? : (Object) => void, onError?: (string) => void) : void =>
         {
             this.authenticate(function(client)
                               {
@@ -55,11 +60,11 @@ module TodoTxtJs.StorageProviders
                                       onSuccess(todos);
                                   });
                               }, onError);
-        }
+        };
 
-        save(data : Object, onSuccess? : () => void, onError?: (string) => void) : void
+        public save = (data : Object, onSuccess? : () => void, onError?: (string) => void) : void =>
         {
-            this.authenticate(function(client)
+            this.authenticate((client) =>
                               {
                                   client.writeFile('Todo/todo.txt', data, function(error, data){
                                       if (error)
@@ -78,11 +83,11 @@ module TodoTxtJs.StorageProviders
                                       }
                                   });
                               }, onError);
-        }
+        };
 
         private _authenticating:boolean = false;
 
-        private authenticate(onSuccess, onError)
+        private authenticate = (onSuccess, onError) =>
         {
             // Prevent other requests while authenticating
             // e.g. the save triggered on page close (i.e. when redirecting to authenticate!)
@@ -96,7 +101,7 @@ module TodoTxtJs.StorageProviders
                                             });
 
             client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
-            client.authenticate(function(error, client) {
+            client.authenticate((error, client) => {
                                     if (error)
                                     {
                                         onError(error);
@@ -107,7 +112,7 @@ module TodoTxtJs.StorageProviders
                                     onSuccess(client);
                                 }
             );
-        }
+        };
     }
 }
 

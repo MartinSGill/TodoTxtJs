@@ -70,6 +70,7 @@ ko.bindingHandlers.todo = {
                         {
                             toggle(false);
                             ko.utils.unwrapObservable(valueAccessor()).text(input.val());
+                            todoTxtView.saveOnChange();
                         }
 
                         // ESC

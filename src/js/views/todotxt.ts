@@ -94,7 +94,6 @@ module TodoTxtJs.View
             this.newTodoText = ko.observable<string>("");
             this.spinner = ko.observable<boolean>(false);
 
-
             this.lastUpdated = ko.observable<string>(undefined);
             this.notice = ko.observable<string>(undefined);
             this.pageReady = ko.observable<boolean>(false);
@@ -112,6 +111,7 @@ module TodoTxtJs.View
             var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
             TodoTxtJs.Events.onRemove();
             this._todoManager.remove(index);
+            this.saveOnChange();
         }
 
         public refresh() : void
@@ -194,6 +194,17 @@ module TodoTxtJs.View
             TodoTxtJs.Events.onNew();
             this._todoManager.add(todo);
             this.newTodoText("");
+            this.saveOnChange();
+        }
+
+        public saveOnChange()
+        {
+            console.log("saveOnChange");
+            if (this.options.saveOnChange())
+            {
+                console.log("saveOnChange_saving");
+                this.save();
+            }
         }
 
         private newTodoAutoCompleteValues() : string[]
