@@ -9,6 +9,6 @@ $tsfiles | ForEach-Object {
     $js = Join-Path $dir ($base + ".js")
     $map = Join-Path $dir ($base + ".js.map")
 
-    if (Test-Path $js) { Remove-Item $js -WhatIf }
-    if (Test-Path $map) { Remove-Item $map -WhatIf }
+    if (Test-Path $js) { Remove-Item $js }
+    if (Test-Path $map) { Remove-Item $map }
 }
