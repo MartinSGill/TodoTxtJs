@@ -22,7 +22,7 @@
  ******************************************************************************/
 
 
-// Go to the dropbox site and create a new app
+// Go to the dropbox site and create a new "Core API" app (Permission Type: Full Dropbox)
 // Go to https://dl-web.dropbox.com/spa/pjlfdak1tmznswp/api_keys.js/public/index.html
 // (Thanks to John-Kim Murphy for finding the updated link)
 //
