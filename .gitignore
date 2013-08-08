@@ -1,4 +1,7 @@
-output/*
+build/node_modules/
 src/js/**/*.js
 src/js/**/*.map
+src/js/*.map
+src/js/*.js
 src/js/dropbox_key.js
+*.swp

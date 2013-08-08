@@ -21,19 +21,17 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-declare module TodoTxtJs
+interface IDropboxApi
 {
-    export var Dropbox : IDropboxApi;
-    export var dropbox_key: any;
-
-    export interface IDropboxApi
-    {
-        Client(options: Object) : void;
-        Drivers: IDropboxDrivers;
-    }
-
-    export interface IDropboxDrivers
-    {
-        Redirect(options: Object) : void;
-    }
+    Client(options: Object) : void;
+    Drivers: IDropboxDrivers;
 }
+
+interface IDropboxDrivers
+{
+    Redirect(options: Object) : void;
+}
+
+declare var Dropbox : IDropboxApi;
+declare var dropbox_key: string;
+

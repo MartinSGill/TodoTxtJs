@@ -407,6 +407,7 @@ var TodoTxtJs;
     var View = TodoTxtJs.View;
 })(TodoTxtJs || (TodoTxtJs = {}));
 
+var dropbox_key;
 var todoTxtView = new TodoTxtJs.View.Main();
 ko.applyBindings(todoTxtView, document.head);
 ko.applyBindings(todoTxtView);

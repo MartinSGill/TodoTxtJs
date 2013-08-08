@@ -27,27 +27,36 @@ You'll need to use a command-line for most of this.
 
 *  Install NodeJS
 
-*  Install grunt
+*  Install dependencies (defined in package.json)
 
+```PowerShell
+    PS> npm install -dev
+```
+
+*  Install grunt (globally)
+
+```PowerShell
     PS> npm install grunt -g
+```
 
-*  Install grunt-cli
+*  Install grunt-cli (globally)
 
+```PowerShell
     PS> npm install grunt-cli -g
-
-* (opional) If you have the Visual Studio TypeScript plugin installed (and in your path)
-   then you can skip this step. Otherwise, you need to install typescript:
-
-    PS> npm install typescript -g
+```
 
 *  Ensure you are in the "build" folder.
    Compile typescript files
 
+```PowerShell
     PS> grunt typescript
+```
 
-*  (optional) watch typescript files for changes
+*  (optional) watch typescript files for changes & start web-server
 
+```PowerShell
     PS> grunt
+```
 
 This will also open your browser to a local server that servers the TodoTxtJS project ready to be used.
 If you want to use dropbox to save/load your files, then you'll need to create your own dropbox API key.

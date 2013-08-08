@@ -76,14 +76,14 @@ var TodoTxtJs;
                     return;
                 }
                 this._authenticating = true;
-                var client = new TodoTxtJs.Dropbox.Client({
+                var client = new Dropbox.Client({
                     // Read the getting started document
                     // or just read sample_dropbox_key.js
-                    key: TodoTxtJs.dropbox_key,
+                    key: dropbox_key,
                     sandbox: false
                 });
 
-                client.authDriver(new TodoTxtJs.Dropbox.Drivers.Redirect({ rememberUser: true }));
+                client.authDriver(new Dropbox.Drivers.Redirect({ rememberUser: true }));
                 client.authenticate(function (error, client) {
                     if (error) {
                         onError(error);

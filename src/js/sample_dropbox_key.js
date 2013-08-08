@@ -29,4 +29,4 @@
 // Use this to create an encoded version of your web-key
 // Put the generated key in the string below here.
 // Then rename this file to dropbox_key.js
-dropbox_key = '';
+var dropbox_key = '';
