@@ -1,7 +1,7 @@
 TodoTxtJs
 =========
 
-A Javascript web app implementation of TodoTxt.
+A Typescript/Javascript web app implementation of TodoTxt.
 
 Check out the [live version](http://todo.martinsgill.co.uk) to see it in action.
 
@@ -9,6 +9,7 @@ Purpose
 -------
 
 The principle purpose of this project is two-fold.
+
 1. To provide a means for me to learn and practice writing web-apps.
 2. To provide me with a way to easily edit my Todos from any computer.
 
