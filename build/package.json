@@ -1,0 +1,21 @@
+{
+  "name": "build",
+  "version": "0.0.0",
+  "description": "build system for TodoTxtJs",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-open": "~0.2.1",
+    "grunt-typescript": "~0.2.2",
+    "typescript": "~0.9.1",
+    "grunt-contrib-watch": "~0.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Martin Gill",
+  "license": "MIT"
+}

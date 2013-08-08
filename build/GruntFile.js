@@ -1,5 +1,6 @@
 /*******************************************************************************
  * Copyright (C) 2013 Martin Gill
+ *     based on a blog post by Jesse Freeman (http://goo.gl/jUiLsK)
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,11 +23,43 @@
  ******************************************************************************/
 
 
-// Go to the dropbox site and create a new app
-// Go to https://dl-web.dropbox.com/spa/pjlfdak1tmznswp/api_keys.js/public/index.html
-// (Thanks to John-Kim Murphy for finding the updated link)
-//
-// Use this to create an encoded version of your web-key
-// Put the generated key in the string below here.
-// Then rename this file to dropbox_key.js
-dropbox_key = '';
+module.exports = function (grunt) {
+    grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-open');
+
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        connect: {
+            server: {
+                options: {
+                    port: 60000,
+                    base: '../src/'
+                }
+            }
+        },
+        typescript: {
+            base: {
+                src: ['../src/**/*.ts'],
+                dest: '../src/js/todotxtjs.min.js',
+                options: {
+                    module: 'amd',
+                    target: 'es5'
+                }
+            }
+        },
+        watch: {
+            files: '../src/**/*.ts',
+            tasks: ['typescript']
+        },
+        open: {
+            dev: {
+                path: 'http://localhost:60000/todotxt.html'
+            }
+        }
+    });
+
+    grunt.registerTask('default', ['connect', 'open', 'watch']);
+
+};

@@ -27,6 +27,7 @@
 
 module TodoTxtJs.View
 {
+
     export class Options
     {
 
