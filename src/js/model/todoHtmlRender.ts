@@ -25,7 +25,6 @@
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../model/todo.ts" />
-
 module TodoTxtJs
 {
     export function todoHtmlContentsRenderer(contents:string, options) : string

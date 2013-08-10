@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{D3AAA15F-72FE-40C3-A460-1A1015A7F30C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>TodoTxtJs</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:18167/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptOutFile>src/js/app.js</TypeScriptOutFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptOutFile>src/js/app.js</TypeScriptOutFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="build\GruntFile.js" />
+    <Content Include="src\.htaccess" />
+    <Content Include="src\js\app.js.map">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
+    <Content Include="src\js\app.min.js">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
+    <Content Include="src\js\model\todo.js">
+      <DependentUpon>todo.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\model\todo.js.map">
+      <DependentUpon>todo.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\model\todoHtmlRender.js">
+      <DependentUpon>todoHtmlRender.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\model\todomanager.js.map">
+      <DependentUpon>todomanager.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\storage\IStorageProvider.js.map">
+      <DependentUpon>IStorageProvider.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\storage\storage_browser.js.map">
+      <DependentUpon>storage_browser.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\storage\storage_dropbox.js.map">
+      <DependentUpon>storage_dropbox.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\utils\datetime.js.map">
+      <DependentUpon>datetime.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\utils\events.js.map">
+      <DependentUpon>events.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\views\exporting.js.map">
+      <DependentUpon>exporting.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\views\importing.js.map">
+      <DependentUpon>importing.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\views\options.js.map">
+      <DependentUpon>options.ts</DependentUpon>
+    </Content>
+    <Content Include="src\js\views\todotxt.js.map">
+      <DependentUpon>todotxt.ts</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\css\simple.css" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\images\todotxt_js_logo.png" />
+    <Content Include="src\images\todotxt_js_logo_128x128.png" />
+    <Content Include="src\images\todotxt_js_logo_16x16.png" />
+    <Content Include="src\images\todotxt_js_logo_32x32.png" />
+    <Content Include="src\images\todotxt_js_logo_64x64.png" />
+    <Content Include="src\js\app.js" />
+    <Content Include="src\js\bindings\binding_todo.js" />
+    <Content Include="src\js\defs\dropbox.d.ts" />
+    <Content Include="src\js\defs\jquery.d.ts" />
+    <Content Include="src\js\defs\jqueryui.d.ts" />
+    <Content Include="src\js\defs\knockout.d.ts" />
+    <Content Include="src\js\dropbox_key.js" />
+    <Content Include="src\js\events.js" />
+    <Content Include="src\js\lib\jquery.hotkeys.js" />
+    <Content Include="src\js\model\todo.js">
+      <DependentUpon>todo.js</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\model\todo.ts" />
+    <TypeScriptCompile Include="src\js\model\todoHtmlRender.ts" />
+    <Content Include="src\js\model\todomanager.js">
+      <DependentUpon>todomanager.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\model\todomanager.ts" />
+    <Content Include="src\js\sample_dropbox_key.js" />
+    <Content Include="src\js\storage\IStorageProvider.js">
+      <DependentUpon>IStorageProvider.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\storage\IStorageProvider.ts" />
+    <Content Include="src\js\storage\storage_browser.js">
+      <DependentUpon>storage_browser.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\storage\storage_browser.ts" />
+    <Content Include="src\js\storage\storage_dropbox.js">
+      <DependentUpon>storage_dropbox.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\storage\storage_dropbox.ts" />
+    <Content Include="src\js\utils\datetime.js">
+      <DependentUpon>datetime.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\utils\datetime.ts" />
+    <Content Include="src\js\utils\events.js">
+      <DependentUpon>events.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\utils\events.ts" />
+    <Content Include="src\js\views\exporting.js">
+      <DependentUpon>exporting.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\views\exporting.ts" />
+    <Content Include="src\js\views\importing.js">
+      <DependentUpon>importing.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\views\importing.ts" />
+    <Content Include="src\js\views\options.js">
+      <DependentUpon>options.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\views\options.ts" />
+    <Content Include="src\js\views\todotxt.js">
+      <DependentUpon>todotxt.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="src\js\views\todotxt.ts" />
+    <Content Include="src\todotxt.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="build\clean.ps1" />
+    <Content Include="build\package.json" />
+    <Content Include="build\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\images\html\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\js\app.min.js.map">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\js\model\todoHtmlRender.js.map">
+      <DependentUpon>todoHtmlRender.ts</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
+</Project>

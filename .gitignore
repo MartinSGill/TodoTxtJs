@@ -1,7 +1,19 @@
+# NodeJs modules needed to build
 build/node_modules/
+
+# General exclusion for Javascript files under source.
 src/js/**/*.js
 src/js/**/*.map
 src/js/*.map
 src/js/*.js
 src/js/dropbox_key.js
+
+# Vim Swap File
 *.swp
+
+# Visual Studio Stuff
+*.suo
+*.ncrunchsolution
+*.user
+bin/
+obj/
