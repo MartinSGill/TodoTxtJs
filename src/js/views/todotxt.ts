@@ -485,7 +485,10 @@ module TodoTxtJs.View
          */
         private _getRenderOptions() : any
         {
-            return { shortUrls : this.showShortUrls() };
+            var result = new ContentRenderOptions();
+            result.shortUrls = this.showShortUrls();
+
+            return result;
         }
 
         /**

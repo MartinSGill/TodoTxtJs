@@ -27,57 +27,102 @@
 /// <reference path="../model/todo.ts" />
 module TodoTxtJs
 {
-    export function todoHtmlContentsRenderer(contents:string, options) : string
-    export function todoHtmlContentsRenderer(contents:Todo, options) : string
-    export function todoHtmlContentsRenderer(contents:any, options) : string
+    export class ContentRenderOptions
     {
-        contents = ko.utils.unwrapObservable(contents);
-        if (!options)
+        public shortUrls: boolean = true;
+    }
+
+    export class ContentRender
+    {
+        //constructor() { throw "Static: Cannot new this class"; }
+
+        public static render(contents: string, options: ContentRenderOptions): string
+        public static render(contents: Todo, options: ContentRenderOptions): string
+        public static render(contents: any, options: ContentRenderOptions): string
         {
-            options = { shortUrls : false };
+            contents = ko.utils.unwrapObservable(contents);
+
+            if (!options || !(options instanceof ContentRenderOptions))
+            {
+                throw "ContentRenderOptions required.";
+            }
+
+            if (!contents)
+            {
+                return "";
+            }
+            else if (contents instanceof Todo)
+            {
+                return ContentRender._toHtml(contents.contents(), options);
+            }
+            else if (typeof (contents) !== "string")
+            {
+                throw "Contents should be a string";
+            }
+
+            return ContentRender._toHtml(contents, options);
         }
 
-        if (!contents)
+        private static _renderContexts(contents: string, options: ContentRenderOptions): string
         {
-            return undefined;
+            var formattedMessage = contents;
+            var contextRegex = /(?:\W|^)(@)([\S_]+[A-Za-z0-9_](?!\S))/ig;
+            formattedMessage = formattedMessage.replace(contextRegex,
+                ' <span class="todo-view-contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span><span class="todo-view-context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>');
+            return formattedMessage;
         }
 
-        if (contents instanceof Todo)
+        private static _renderProjects(contents: string, options: ContentRenderOptions): string
         {
-            return toHtml(contents.contents());
+            var formattedMessage = contents;
+            var projectRegex = /(?:\W|^)(\+)([\S_]+[A-Za-z0-9_](?!\S))/ig;
+            formattedMessage = formattedMessage.replace(projectRegex,
+                ' <span class="todo-view-projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="todo-view-project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
+            return formattedMessage;
         }
 
-        if (typeof(contents) !== "string")
+        private static _renderUrls(contents: string, options: ContentRenderOptions): string
         {
-            throw "Contents should be a string";
+            var formattedMessage = contents;
+            var urlRegex = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
+            if (options.shortUrls)
+            {
+                formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_short" href="$1" target="_blank"><abbr title="$1">Link</abbr></a>');
+            }
+            else
+            {
+                formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_full" href="$1" target="_blank">$1</a>');
+            }
+            return formattedMessage;
         }
 
-        return toHtml(contents);
+        private static _renderMetadata(contents: string, options: ContentRenderOptions): string
+        {
+            var formattedMessage = contents;
+            var metadataRegex = /(?:\W|^)([A-Za-z_-][\w\-]+):([\w\-]+)(?=\s|$)/g;
 
-        function toHtml(contents)
+            var replacement = "";
+            replacement += '<span class="todo-metadata">';
+            replacement += '  <span class="todo-metadata-name">$1</span>';
+            replacement += '  <span class="todo-metadata-seperator">:</span>';
+            replacement += '  <span class="todo-metadata-value">$2</span>';
+            replacement += '</span>';
+
+            formattedMessage = formattedMessage.replace(metadataRegex, replacement);
+
+            return formattedMessage;
+        }
+
+        private static _toHtml(contents: string, options: ContentRenderOptions)
         {
             var formattedMessage = contents;
 
             if (formattedMessage)
             {
-                // TODO: Need to find a better way of doing this.
-                var contextRegex = /(?:\W|^)(@)([\S_]+[A-Za-z0-9_](?!\S))/ig;
-                formattedMessage = formattedMessage.replace(contextRegex,
-                                                            ' <span class="todo-view-contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span><span class="todo-view-context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>');
-
-                var projectRegex = /(?:\W|^)(\+)([\S_]+[A-Za-z0-9_](?!\S))/ig;
-                formattedMessage = formattedMessage.replace(projectRegex,
-                                                            ' <span class="todo-view-projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="todo-view-project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
-
-                var urlRegex = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
-                if (options.shortUrls)
-                {
-                    formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_short" href="$1" target="_blank"><abbr title="$1">Link</abbr></a>');
-                }
-                else
-                {
-                    formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_full" href="$1" target="_blank">$1</a>');
-                }
+                formattedMessage = ContentRender._renderContexts(formattedMessage, options);
+                formattedMessage = ContentRender._renderProjects(formattedMessage, options);
+                formattedMessage = ContentRender._renderUrls(formattedMessage, options);
+                formattedMessage = ContentRender._renderMetadata(formattedMessage, options);
             }
 
             return formattedMessage;

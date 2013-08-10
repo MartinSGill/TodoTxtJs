@@ -215,7 +215,7 @@ module TodoTxtJs
             {
                 result.push(
                     {
-                        name: match[1],
+                        name: match[1].toLowerCase(),
                         value: match[2]
                     });
 
