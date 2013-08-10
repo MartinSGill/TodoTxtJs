@@ -198,26 +198,20 @@
     * Todo
     **********************************
  -->
-<table class="mainLayout">
-    <tr>
-        <td>
-            <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }">
-            </section>
-        </td>
-        <td>
-            <section class="todo-view-list">
-                <h3>Contexts</h3>
-                <ul data-bind="foreach: contexts">
-                    <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
-                </ul>
-                <h3>Projects</h3>
-                <ul data-bind="foreach: projects">
-                    <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
-                </ul>
-            </section>
-        </td>
-    </tr>
-</table>
+<section id="main">
+    <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }">
+    </section>
+    <section class="todo-view-list">
+        <h3>Contexts</h3>
+        <ul data-bind="foreach: contexts">
+            <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
+        </ul>
+        <h3>Projects</h3>
+        <ul data-bind="foreach: projects">
+            <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
+        </ul>
+    </section>
+</section>
 <section id="help" data-bind="visible: showHelp">
     <h1>
         Welcome To TodoTxtJs
