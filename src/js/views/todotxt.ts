@@ -101,14 +101,14 @@ module TodoTxtJs.View
             this.pageReady = ko.observable<boolean>(false);
             $(document).ready( ()=> { this.pageReady(true); });
 
-            this._InitializeAutoComplete();
-            this._InitializeKeyboardShortCuts();
+            this._initializeAutoComplete();
+            this._initializeKeyboardShortCuts();
 
             $(window).unload(this.save);
             this.load();
         }
 
-        public removeTodo(element)
+        public removeTodo(element:HTMLElement) : void
         {
             var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
             TodoTxtJs.Events.onRemove();
@@ -116,6 +116,9 @@ module TodoTxtJs.View
             this.saveOnChange();
         }
 
+        /**
+         * Alias for load.
+         */
         public refresh() : void
         {
             this.load();
@@ -149,7 +152,7 @@ module TodoTxtJs.View
             this.options.storageInfo().save(this.exporting.buildExportText(), onSuccess, onError);
         };
 
-        public load()
+        public load() : void
         {
             Main._highlightNotice();
             this.options.load();
@@ -181,7 +184,7 @@ module TodoTxtJs.View
             }
         }
 
-        public addNewTodo()
+        public addNewTodo() : void
         {
             var todo = new TodoTxtJs.Todo(this.newTodoText());
             if (this.options.addCreatedDate())
@@ -199,7 +202,11 @@ module TodoTxtJs.View
             this.saveOnChange();
         }
 
-        public saveOnChange()
+        /**
+         * Uses the save on change option to determine if
+         * the current contents should be saved.
+         */
+        public saveOnChange() : void
         {
             console.log("saveOnChange");
             if (this.options.saveOnChange())
@@ -216,53 +223,27 @@ module TodoTxtJs.View
             return true;
         };
 
-        private newTodoAutoCompleteValues() : string[]
-        {
-            var result = [];
-            var contexts = this._todoManager.allContexts();
-            var projects = this._todoManager.allProjects();
-
-            for (var i = 0; i < contexts.length; i++)
-            {
-                result.push("@" + contexts[i]);
-            }
-
-            for (var j = 0; j < projects.length; j++)
-            {
-                result.push("+" + projects[j]);
-            }
-
-            return result;
-        }
-
-        private _getIsFiltered() : boolean
-        {
-            return this.filters() && this.filters().length > 0;
-        }
-
         public clearFilters() : void
         {
             this.filters("");
         }
 
-        public addFilterFromElement(newFilter)
+        /**
+         * Adds a new filter term to the filters list, using the
+         * text of the specified HTMLElement.
+         * @param newFilter The HTMLElement that contains the new filter value.
+         */
+        public addFilterFromElement(newFilter: HTMLElement) : void
         {
             var filterText = $(newFilter).text();
-            if (this.filters().indexOf(filterText.toLowerCase()) > -1)
-            {
-                return;
-            }
-
-            var result = this.filters().trim();
-            if (this.filters().length > 0)
-            {
-                result += " ";
-            }
-            result += filterText;
-            this.filters(result);
+            this.addFilter(filterText);
         }
 
-        public addFilter(newFilter : string)
+        /**
+         * Adds a new filter term to the filters list.
+         * @param newFilter The text of the new filter.
+         */
+        public addFilter(newFilter : string) : void
         {
             if (this.filters().indexOf(newFilter.toLowerCase()) > -1)
             {
@@ -278,11 +259,11 @@ module TodoTxtJs.View
             this.filters(result);
         }
 
-        ////////////////////////////////////////////////////////////////////////////
-        // Options
-        ////////////////////////////////////////////////////////////////////////////
-
-        public toggleToolbox(element) : void
+        /**
+         * Method to manage the showing/hiding of menu item toolboxs.
+         * @param element The item that was toggled by the user.
+         */
+        public toggleToolbox(element : HTMLElement) : void
         {
             var selected = false;
             var menuItem = $(element).parent();
@@ -314,7 +295,13 @@ module TodoTxtJs.View
             }
         }
 
-        public isDisplayed(todo : Todo)
+        /**
+         * Determines if the given Todo object should be visible.
+         * based on the current filter settings.
+         * @param todo The todo object to inspect.
+         * @returns true if the Todo should be visible.
+         */
+        public isDisplayed(todo : Todo) : boolean
         {
             if (!this.showCompleted() && todo.completed())
             {
@@ -335,11 +322,16 @@ module TodoTxtJs.View
             return result;
         }
 
-        public onClick_ShowHelp(data?, event?)
+        public onClick_ShowHelp(data? : any, event? : Event) : boolean
         {
             this.showHelp(!this.showHelp());
+            return false;
         }
 
+        /**
+         * Displays a notification to the user.
+         * @param isError true if this is an error message.
+         */
         private static _highlightNotice(isError? : boolean) : void
         {
             var notice = $("#notice");
@@ -355,6 +347,45 @@ module TodoTxtJs.View
             }
         }
 
+        /**
+         * Splits a list of terms into individual terms.
+         * @param val the list of terms.
+         */
+        private static _split(val:string ) : string[]
+        {
+            return val.split( /\s+/ );
+        }
+
+        /**
+         * An array of all possible auto-complete values.
+         */
+        private _newTodoAutoCompleteValues() : string[]
+        {
+            var result = [];
+            var contexts = this._todoManager.allContexts();
+            var projects = this._todoManager.allProjects();
+
+            for (var i = 0; i < contexts.length; i++)
+            {
+                result.push("@" + contexts[i]);
+            }
+
+            for (var j = 0; j < projects.length; j++)
+            {
+                result.push("+" + projects[j]);
+            }
+
+            return result;
+        }
+
+        private _getIsFiltered() : boolean
+        {
+            return this.filters() && this.filters().length > 0;
+        }
+
+        /**
+         * Moves (animates) the notification to its resting "normal" position.
+         */
         private _normalNotice = () : void =>
         {
             var notice = $("#notice");
@@ -423,17 +454,17 @@ module TodoTxtJs.View
             return result.sort();
         }
 
-        private static _split(val:string ) : string[]
-        {
-            return val.split( /\s+/ );
-        }
-
+        /**
+         * Extracts the last term in a list of terms.
+         * @param term the list of terms to process.
+         * @returns the last term in the list.
+         */
         private _extractLast(term:string) : string
         {
             return Main._split( term ).pop();
         }
 
-        private _InitializeKeyboardShortCuts()
+        private _initializeKeyboardShortCuts()
         {
             $(document).bind('keydown', 'n', function(event)
             {
@@ -448,12 +479,19 @@ module TodoTxtJs.View
             });
         }
 
+        /**
+         * Get the options for rendering the HTML contents of the todo.
+         * @returns an options object.
+         */
         private _getRenderOptions() : any
         {
             return { shortUrls : this.showShortUrls() };
         }
 
-        private _InitializeAutoComplete() : void
+        /**
+         * Initializes the auto-complete functionality.
+         */
+        private _initializeAutoComplete() : void
         {
             var _self = this;
             $( "#newTodoInput" )
@@ -469,7 +507,7 @@ module TodoTxtJs.View
                                   source: function( request, response ) {
                                       // delegate back to autocomplete, but extract the last term
                                       response( (<any>$.ui.autocomplete).filter(
-                                          _self.newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
+                                          _self._newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
                                   },
                                   focus: function() {
                                       // prevent value inserted on focus
@@ -501,7 +539,7 @@ module TodoTxtJs.View
                                   source: function( request, response ) {
                                       // delegate back to autocomplete, but extract the last term
                                       response( (<any>$.ui.autocomplete).filter(
-                                          _self.newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
+                                          _self._newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
                                   },
                                   focus: function() {
                                       // prevent value inserted on focus
