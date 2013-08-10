@@ -67,8 +67,12 @@ module TodoTxtJs
         {
             var formattedMessage = contents;
             var contextRegex = /(?:\W|^)(@)([\S_]+[A-Za-z0-9_](?!\S))/ig;
-            formattedMessage = formattedMessage.replace(contextRegex,
-                ' <span class="todo-view-contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span><span class="todo-view-context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>');
+
+            var replacement = "";
+            replacement += ' <span class="todo-view-contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span>';
+            replacement += '<span class="todo-view-context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>';
+
+            formattedMessage = formattedMessage.replace(contextRegex, replacement);
             return formattedMessage;
         }
 
@@ -76,9 +80,14 @@ module TodoTxtJs
         {
             var formattedMessage = contents;
             var projectRegex = /(?:\W|^)(\+)([\S_]+[A-Za-z0-9_](?!\S))/ig;
-            formattedMessage = formattedMessage.replace(projectRegex,
-                ' <span class="todo-view-projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span><span class="todo-view-project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>');
+
+            var replacement = "";
+            replacement += ' <span class="todo-view-projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span>';
+            replacement += '<span class="todo-view-project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>';
+
+            formattedMessage = formattedMessage.replace(projectRegex, replacement);
             return formattedMessage;
+            
         }
 
         private static _renderUrls(contents: string, options: ContentRenderOptions): string
@@ -93,6 +102,23 @@ module TodoTxtJs
             {
                 formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_full" href="$1" target="_blank">$1</a>');
             }
+            return formattedMessage;
+        }
+
+        private static _renderDueDate(contents: string, options: ContentRenderOptions): string
+        {
+            var formattedMessage = contents;
+            var metadataRegex = /(due):(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/ig;
+
+            var replacement = "";
+            replacement += '<span class="todo-metadata todo-due-date todo-due-date_past">';
+            replacement += '  <span class="todo-metadata-name">$1</span>';
+            replacement += '  <span class="todo-metadata-seperator">:</span>';
+            replacement += '  <span class="todo-metadata-value">$2</span>';
+            replacement += '</span>';
+
+            formattedMessage = formattedMessage.replace(metadataRegex, replacement);
+
             return formattedMessage;
         }
 
@@ -122,6 +148,7 @@ module TodoTxtJs
                 formattedMessage = ContentRender._renderContexts(formattedMessage, options);
                 formattedMessage = ContentRender._renderProjects(formattedMessage, options);
                 formattedMessage = ContentRender._renderUrls(formattedMessage, options);
+                formattedMessage = ContentRender._renderDueDate(formattedMessage, options);
                 formattedMessage = ContentRender._renderMetadata(formattedMessage, options);
             }
 

@@ -650,6 +650,27 @@ form
 	padding-left: 2px;
 }
 
+.todo-due-date
+{
+
+}
+
+.todo-due-date_past
+{
+    background-color: red;
+}
+
+.todo-due-date_near
+{
+    background-color: orangered;
+}
+
+.todo-due-date_far
+{
+    background-color: green;
+}
+
+
 .todo-view-link_short
 {
 	text-decoration: none;
