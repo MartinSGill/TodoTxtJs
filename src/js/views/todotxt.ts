@@ -56,6 +56,7 @@ module TodoTxtJs.View
         public showCreatedDate: KnockoutObservable<boolean>;
         public filtered: KnockoutComputed<boolean>;
 
+        public renderOptions: KnockoutComputed<any>;
 
         public newTodoText: KnockoutObservable<string>;
         public spinner: KnockoutObservable<boolean>;
@@ -88,8 +89,9 @@ module TodoTxtJs.View
             this.showCompleted = ko.observable<boolean>(false);
             this.showShortUrls = ko.observable<boolean>(true);
             this.showCreatedDate = ko.observable<boolean>(true);
-
             this.filtered = ko.computed({owner: this, read: this._getIsFiltered });
+
+            this.renderOptions = ko.computed({owner:this, read: this._getRenderOptions });
 
             this.newTodoText = ko.observable<string>("");
             this.spinner = ko.observable<boolean>(false);
@@ -444,6 +446,11 @@ module TodoTxtJs.View
                 event.preventDefault();
                 this.onClick_ShowHelp();
             });
+        }
+
+        private _getRenderOptions() : any
+        {
+            return { shortUrls : this.showShortUrls() };
         }
 
         private _InitializeAutoComplete() : void
