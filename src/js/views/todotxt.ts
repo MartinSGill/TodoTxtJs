@@ -207,6 +207,13 @@ module TodoTxtJs.View
             }
         }
 
+        public onCompleteClick = (data, event) : boolean =>
+        {
+            this.saveOnChange();
+            // Ensure event is processed by other handlers as well
+            return true;
+        };
+
         private newTodoAutoCompleteValues() : string[]
         {
             var result = [];

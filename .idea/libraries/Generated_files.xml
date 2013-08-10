@@ -2,10 +2,6 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/src/js/views/importing.js" />
-        <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
-        <item url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
-        <item url="file://$PROJECT_DIR$/src/js/views/options.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
       </sourceFilesUrls>
     </properties>

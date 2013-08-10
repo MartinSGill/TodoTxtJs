@@ -267,7 +267,7 @@
             <div class="todo-view-display">
                 <span class="todo-view-index" data-bind="text: index"></span>
                 <label>
-                    <input type="checkbox" data-bind="checked: completed"/>
+                    <input type="checkbox" data-bind="checked: completed, click: $root.onCompleteClick"/>
                 </label>
                 <span data-bind="css: { completed: completed }">
                     <span class="todo-view-completedFlag" data-bind="visible: completed">x</span>
