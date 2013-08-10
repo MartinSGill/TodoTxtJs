@@ -634,6 +634,8 @@ form
 {
 	display: table-cell;
 	font-size: smaller;
+    font-family: sans-serif;
+    font-weight: bold;
     text-transform: lowercase;
     font-variant: small-caps;
 	padding-right: 2px;
@@ -648,6 +650,7 @@ form
 {
     background-color: ivory;
 	padding-left: 2px;
+    color: black;
 }
 
 .todo-due-date
@@ -662,12 +665,13 @@ form
 
 .todo-due-date_near
 {
-    background-color: orangered;
+    background-color: orange;
 }
 
 .todo-due-date_far
 {
     background-color: green;
+    color: white;
 }
 
 

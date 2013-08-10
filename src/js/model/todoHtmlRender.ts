@@ -105,19 +105,42 @@ module TodoTxtJs
             return formattedMessage;
         }
 
+        private static _dueDateDistanceStyle(dueDate: string): string
+        {
+            var distance = DateTime.distance(dueDate);
+            if (distance <= 0)
+            {
+                return "todo-due-date_past";
+            }
+            else if (distance < 3)
+            {
+                return "todo-due-date_near";
+            }
+            else
+            {
+                return "todo-due-date_far";
+            }
+        }
+
         private static _renderDueDate(contents: string, options: ContentRenderOptions): string
         {
             var formattedMessage = contents;
-            var metadataRegex = /(due):(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/ig;
+            var dueDateRegex = /(due):(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/ig;
+            // Presumes there will only ever be one due date in a todo entry
+            var match = dueDateRegex.exec(formattedMessage);
+            var date = null;
+            if (match)
+            {
+                date = match[2];
+                var replacement = "";
+                replacement += '<span class="todo-metadata todo-due-date ' + ContentRender._dueDateDistanceStyle(date) + '">';
+                replacement += '  <span class="todo-metadata-name">$1</span>';
+                replacement += '  <span class="todo-metadata-seperator">:</span>';
+                replacement += '  <span class="todo-metadata-value">$2</span>';
+                replacement += '</span>';
 
-            var replacement = "";
-            replacement += '<span class="todo-metadata todo-due-date todo-due-date_past">';
-            replacement += '  <span class="todo-metadata-name">$1</span>';
-            replacement += '  <span class="todo-metadata-seperator">:</span>';
-            replacement += '  <span class="todo-metadata-value">$2</span>';
-            replacement += '</span>';
-
-            formattedMessage = formattedMessage.replace(metadataRegex, replacement);
+                formattedMessage = formattedMessage.replace(dueDateRegex, replacement);
+            }
 
             return formattedMessage;
         }

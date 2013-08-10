@@ -59,4 +59,32 @@ module DateTime
         result += leadingZero(date.getSeconds());
         return result;
     }
+
+    export function distance(date: Date, other?: Date): number
+    export function distance(date: string, other?: Date): number
+    export function distance(date: any, other?: Date): number
+    {
+        if (date instanceof Date)
+        {
+            // Hurray!
+        }
+        else if (typeof(date) === "string")
+        {
+            date = new Date(date);
+        }
+        else
+        {
+            throw "Invalid Date";
+        }
+
+        if (!other)
+        {
+            other = new Date();
+        }
+
+        var difference = (<Date>date).valueOf() - other.valueOf();
+        var millisecPerDay = 86400000;
+        var result = Math.round(difference / millisecPerDay);
+        return result;
+    }
 }
