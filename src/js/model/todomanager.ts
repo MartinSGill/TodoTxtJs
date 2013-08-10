@@ -141,8 +141,8 @@ module TodoTxtJs
             // Due date is more important than priority
             if (left.dueDate() || right.dueDate())
             {
-                if (!left.dueDate()) return -1;
-                if (!right.dueDate()) return 1;
+                if (!left.dueDate()) return 1;
+                if (!right.dueDate()) return -1;
 
                 if (left.dueDate() !== right.dueDate())
                 {
