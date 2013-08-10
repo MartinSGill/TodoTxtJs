@@ -750,3 +750,8 @@ form
 {
 	float: right;
 }
+
+.__tt
+{
+	font-family: consolas, courier, sans-serif;
+}

@@ -46,6 +46,7 @@ module TodoTxtJs
         public contexts: KnockoutComputed<string[]>;
         public text : KnockoutComputed<string>;
         public metadata: KnockoutComputed<Array<ITodoMetadata>>;
+        public dueDate: KnockoutComputed<Date>;
 
         private _priority:string = null;
         private _createDate:string = null;
@@ -203,23 +204,56 @@ module TodoTxtJs
                         return this._contents;
                     }
                 });
+
+            this.metadata = ko.computed(
+                {
+                    owner: this,
+                    read: (): Array<ITodoMetadata> =>
+                    {
+                        this._parse();
+                        return this._metadata;
+                    }
+                });
+
+            this.dueDate = ko.computed(
+                {
+                    owner: this,
+                    read: (): Date =>
+                    {
+                        var result = undefined;
+                        var dateRegex = /(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/;
+                        var metadata = this.metadata();
+                        var length = metadata.length;
+                        for (var i = 0; i < length; i++)
+                        {
+                            var pair = metadata[i];
+                            if (pair.name === "due" && dateRegex.test(pair.value))
+                            {
+                                result = new Date(pair.value);
+                                break; // stop at first valid due date.
+                            }
+                        }
+
+                        return result;
+                    }
+                });
         }
 
         private static _findMetadata(text : string) : Array<ITodoMetadata>
         {
             var result : Array<ITodoMetadata> = [];
 
-            var regexp : RegExp = /(?:\W|^)([A-Za-z_-][\w\-]+):(.+)(?=\s|$)/mg;
-            var match : any = regexp.exec(text);
+            var metadataRegex = /(?:\W|^)([A-Za-z_-][\w\-]+):([\w\-]+)(?=\s|$)/g;
+            var match : any = metadataRegex.exec(text);
             while (match != null)
             {
-                result.push(
-                    {
-                        name: match[1].toLowerCase(),
-                        value: match[2]
-                    });
+                var data = {
+                    name: match[1].toLowerCase(),
+                    value: match[2]
+                };
+                result.push(data);
 
-                match = regexp.exec(text);
+                match = metadataRegex.exec(text);
             }
 
             return result;

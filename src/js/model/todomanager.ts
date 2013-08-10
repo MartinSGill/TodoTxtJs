@@ -138,6 +138,19 @@ module TodoTxtJs
                 }
             }
 
+            // Due date is more important than priority
+            if (left.dueDate() || right.dueDate())
+            {
+                if (!left.dueDate()) return -1;
+                if (!right.dueDate()) return 1;
+
+                if (left.dueDate() !== right.dueDate())
+                {
+                    return left.dueDate() < right.dueDate() ? -1 : 1;
+                }
+            }
+            
+            // Now we check on priority
             if (left.priorityScore() !== right.priorityScore())
             {
                 return left.priorityScore() < right.priorityScore() ? -1 : 1;

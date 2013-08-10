@@ -60,6 +60,14 @@ module DateTime
         return result;
     }
 
+    /**
+     * Compares two dates and gives the distance between them
+     * in days. Negative means the date has passed.
+     *
+     * @param date The date of interest.
+     * @param other The date to compare to, defaults to now.
+     * @remarks Not overly accurate atm.
+     */
     export function distance(date: Date, other?: Date): number
     export function distance(date: string, other?: Date): number
     export function distance(date: any, other?: Date): number
@@ -84,7 +92,6 @@ module DateTime
 
         var difference = (<Date>date).valueOf() - other.valueOf();
         var millisecPerDay = 86400000;
-        var result = Math.round(difference / millisecPerDay);
-        return result;
+        return Math.round(difference / millisecPerDay);
     }
 }

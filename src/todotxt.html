@@ -227,6 +227,8 @@
         <li>You can specify a <span class="todo-view-project">+Project</span> with the <span class="todo-view-project">+</span> symbol.</li>
         <li>You can specify a <span class="todo-view-context">@Context</span> with the <span class="todo-view-context">@</span> symbol.</li>
         <li>You can have as many Projects and Contexts as you like.</li>
+        <li>URLs are recognised and will open in a new tab if you click on them.</li>
+        <li>You can optionally add a due date. <span class="__tt">due:2013-01-02</span>. </li>
     </ul>
     <h2>
         Features
@@ -234,10 +236,46 @@
     <ul>
         <li>Click on the text in any todo to edit it.</li>
         <li>Click on a <span class="todo-view-context">@Context</span> or <span class="todo-view-project">+Project</span> (in text or on right side) to filter on it.</li>
+        <li>This also works on '(<span class="todo-view-priority-A">A</span>)' priorites.</li>
         <li>If you have a DropBox account, you can save your Todos into that.</li>
         <li>Select DropBox in the Options and once you close the options again you'll be synced to DropBox.</li>
         <li>You can mark a Todo as completed by click on the checkbox at its left.</li>
         <li>Completed Todos are hidden by default. Click on 'Show Completed' to see them.</li>
+        <li>Due Date colour indicates proximiy:
+            <ul>
+                <li>
+                    <span class="todo-metadata todo-due-date todo-due-date_past">
+                        <span class="todo-metadata-name" style="color: black">due</span>
+                        <span class="todo-metadata-seperator">:</span>
+                        <span class="todo-metadata-value">2013-02-01</span>
+                    </span>
+                    Overdue, or due within 24 hours
+                </li>
+                <li>
+                    <span class="todo-metadata todo-due-date todo-due-date_near">
+                        <span class="todo-metadata-name" style="color: black">due</span>
+                        <span class="todo-metadata-seperator">:</span>
+                        <span class="todo-metadata-value">2013-02-01</span>
+                    </span>
+                    Due soon (a few days).
+                </li>
+                <li>
+                    <span class="todo-metadata todo-due-date todo-due-date_far">
+                        <span class="todo-metadata-name" style="color: white">due</span>
+                        <span class="todo-metadata-seperator">:</span>
+                        <span class="todo-metadata-value">2013-02-01</span>
+                    </span>
+                    Not due for a while.
+                </li>
+            </ul>
+        </li>
+        <li>If your todo list contains meta-data fields, these are highlighted:
+            <span class="todo-metadata">
+                <span class="todo-metadata-name" style="color: black">key</span>
+                <span class="todo-metadata-seperator">:</span>
+                <span class="todo-metadata-value">value</span>
+            </span>
+        </li>
         <li>Visit <a href="http://www.todotxt.com">Todotxt.com</a> for more details on the format and for other tools.</li>
     </ul>
 </section>

@@ -4,6 +4,7 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/exporting.js" />
+        <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
         <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todo.js" />
@@ -12,6 +13,7 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/exporting.js" />
+      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todo.js" />
