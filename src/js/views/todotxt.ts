@@ -70,7 +70,7 @@ module TodoTxtJs.View
         {
             this._todoManager = new TodoTxtJs.TodoManager();
 
-            this.version = ko.observable<string>("1.0.0");
+            this.version = ko.observable<string>("1.0.1");
             this.title = ko.observable<string>("TodoTxtJs");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.observableArray([]);
