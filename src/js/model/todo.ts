@@ -27,18 +27,25 @@
 
 module TodoTxtJs
 {
+    export interface ITodoMetadata
+    {
+        name: string;
+        value: string;
+    }
+
     export class Todo
     {
         public index:number = 0;
-        public createdDate;
-        public priority;
-        public priorityScore;
-        public completed;
-        public completedDate;
-        public contents;
-        public projects;
-        public contexts;
-        public text;
+        public createdDate: KnockoutComputed<string>;
+        public priority: KnockoutComputed<string>;
+        public priorityScore: KnockoutComputed<number>;
+        public completed: KnockoutComputed<boolean>;
+        public completedDate: KnockoutComputed<string>;
+        public contents: KnockoutComputed<string>;
+        public projects: KnockoutComputed<string[]>;
+        public contexts: KnockoutComputed<string[]>;
+        public text : KnockoutComputed<string>;
+        public metadata: KnockoutComputed<Array<ITodoMetadata>>;
 
         private _priority:string = null;
         private _createDate:string = null;
@@ -47,7 +54,9 @@ module TodoTxtJs
         private _contents:string = null;
         private _projects:string[] = [];
         private _contexts:string[] = [];
-        private _text;
+        private _metadata: Array<ITodoMetadata> = [];
+
+        private _text: KnockoutObservable<string>;
 
         constructor(source:string)
         {
@@ -57,63 +66,63 @@ module TodoTxtJs
             }
 
             this._text = ko.observable<string>(source);
-            this.initialiseComputedProperties();
+            this._initialiseComputedProperties();
 
-            this.parse();
+            this._parse();
         }
 
-        private initialiseComputedProperties() : void
+        private _initialiseComputedProperties() : void
         {
             this.text = ko.computed<string>(
             {
                 owner: this,
-                read: ()=>
+                read: () : string =>
                 {
                     return this._text();
                 },
                 write: (value:string)=>
                 {
                     this._text(value);
-                    this.parse();
+                    this._parse();
                 }
             });
 
             this.createdDate = ko.computed<string>(
             {
                 owner: this,
-                read: ()=>
+                read: () : string =>
                 {
-                    this.parse();
+                    this._parse();
                     return this._createDate;
                 },
                 write: (value:string)=>
                 {
                     this._createDate = value;
-                    this.render();
+                    this._render();
                 }
             });
 
             this.priority = ko.computed<string>(
             {
                 owner: this,
-                read: ()=>
+                read: () : string =>
                 {
-                    this.parse();
+                    this._parse();
                     return this._priority;
                 },
                 write: (value:string)=>
                 {
                     this._priority = value;
-                    this.render();
+                    this._render();
                 }
             });
 
             this.priorityScore = ko.computed(
                 {
                     owner: this,
-                    read: ()=>
+                    read: () : number =>
                     {
-                        this.parse();
+                        this._parse();
                         if (this._priority)
                         {
                             return this._priority.charCodeAt(0) - 64;
@@ -125,12 +134,12 @@ module TodoTxtJs
                     }
                 });
 
-            this.completed = ko.computed(
+            this.completed = ko.computed<boolean>(
                 {
                     owner: this,
-                    read: ()=>
+                    read: () : boolean =>
                     {
-                        this.parse();
+                        this._parse();
                         return this._completed;
                     },
                     write: (value:boolean)=>
@@ -146,31 +155,31 @@ module TodoTxtJs
                             this._completedDate = undefined;
                         }
 
-                        this.render();
+                        this._render();
                     }
                 });
 
             this.completedDate = ko.computed<string>(
             {
                 owner: this,
-                read: ()=>
+                read: () : string =>
                 {
-                    this.parse();
+                    this._parse();
                     return this._completedDate;
                 },
                 write: (value:string)=>
                 {
                     this._completedDate = value;
-                    this.render();
+                    this._render();
                 }
             });
 
             this.projects = ko.computed(
                 {
                     owner: this,
-                    read: ()=>
+                    read: () : string[] =>
                     {
-                        this.parse();
+                        this._parse();
                         return this._projects;
                     }
                 });
@@ -178,9 +187,9 @@ module TodoTxtJs
             this.contexts = ko.computed(
                 {
                     owner: this,
-                    read: ()=>
+                    read: () : string[] =>
                     {
-                        this.parse();
+                        this._parse();
                         return this._contexts;
                     }
                 });
@@ -188,12 +197,32 @@ module TodoTxtJs
             this.contents = ko.computed(
                 {
                     owner: this,
-                    read: ()=>
+                    read: () : string =>
                     {
-                        this.parse();
+                        this._parse();
                         return this._contents;
                     }
                 });
+        }
+
+        private static _findMetadata(text : string) : Array<ITodoMetadata>
+        {
+            var result : Array<ITodoMetadata> = [];
+
+            var regexp : RegExp = /(?:\W|^)([A-Za-z_-][\w\-]+):(.+)(?=\s|$)/mg;
+            var match : any = regexp.exec(text);
+            while (match != null)
+            {
+                result.push(
+                    {
+                        name: match[1],
+                        value: match[2]
+                    });
+
+                match = regexp.exec(text);
+            }
+
+            return result;
         }
 
         /**
@@ -202,7 +231,7 @@ module TodoTxtJs
          * @param flag The flag character to search for (e.g. @ or +)
          * @return Array of lowercase matches, or undefined
          */
-        private static findFlags(text, flag) : string[]
+        private static _findFlags(text, flag) : string[]
         {
             flag = flag.replace(/[\-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
             var regex = new RegExp("(?:\\W|^)" + flag + "([\\S_]+[A-Za-z0-9_](?!\\S))", 'g');
@@ -224,7 +253,7 @@ module TodoTxtJs
          *          can correctly do change detection and prevent it being called
          *          unnecessarily.
          */
-        private parse() : void
+        private _parse() : void
         {
             // Matches:
             // 1: Completed ( == 'x' )
@@ -274,12 +303,13 @@ module TodoTxtJs
                     this._contents = match[5];
                 }
 
-                this._projects = Todo.findFlags(this._contents, '+');
-                this._contexts = Todo.findFlags(this._contents, '@');
+                this._projects = Todo._findFlags(this._contents, '+');
+                this._contexts = Todo._findFlags(this._contents, '@');
+                this._metadata = Todo._findMetadata(this._contents);
             }
         }
 
-        private render() : void
+        private _render(): void
         {
             var result = '';
             if (this._completed)
