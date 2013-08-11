@@ -3,15 +3,19 @@ TodoTxtJs
 
 A Typescript/Javascript web app implementation of TodoTxt.
 
+Where?
+------
+
 Check out the [live version](http://todo.martinsgill.co.uk) to see it in action.
 
-Purpose
--------
+Why?
+----
 
 The principle purpose of this project is two-fold.
 
 1. To provide a means for me to learn and practice writing web-apps.
 2. To provide me with a way to easily edit my Todos from any computer.
+3. To remain compatible with the [Android app](https://play.google.com/store/apps/details?id=com.todotxt.todotxttouch)
 
 Additionally:
 
@@ -19,25 +23,35 @@ Additionally:
 * To keep me entertained.
 * To contribute back to the open source community that I've long benefited from.
 
-Features
---------
+What?
+-----
 
 * Uses the excellent and simple [TodoTxt](http://www.todotxt.com) format
 * Fully editable Todos.
 * Quick Filters: Click on Priority / Project / Context to quickly filter.
-* Save to Local Browser Storage, or Sync with your DropBox.
-* Sorts by completed-state, completed-date, priority, file order.
-* Preserves item order in Todo.txt file.
+* Filter on anything
+* Save to Local Browser Storage, or Sync with your Dropbox account.
+* Due date support
+* see in app Help (?) for more...
 
-Libraries Used
---------------
+When?
+-----
+
+* v1.2 - Themes support
+* v1.1 - Support for due-date and metadata.
+* v1.0 - Most features in place. Fully usable.
+
+How?
+----
 
 With thanks to their authors.
 
+* [Typescript](http://http://www.typescriptlang.org/)
 * [KnockoutJS](http://www.knockoutjs.com)
 * [jQuery](http://jquery.com)
 * [jQuery.hotkeys](https://github.com/jeresig/jquery.hotkeys/)
 * [dropbox.js](https://github.com/dropbox/dropbox-js)
+* and anyone else I've missed.
 
 License
 -------

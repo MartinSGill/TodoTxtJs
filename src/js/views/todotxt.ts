@@ -43,8 +43,7 @@ module TodoTxtJs.View
         public projects: KnockoutComputed<string[]>;
         public contexts: KnockoutComputed<string[]>;
 
-        public newPriorityFilter : KnockoutObservable<string>;
-        public showHelp: KnockoutObservable<boolean>;
+        public newPriorityFilter: KnockoutObservable<string>;
 
         public options: Options;
         public importing: Importing;
@@ -70,7 +69,7 @@ module TodoTxtJs.View
         {
             this._todoManager = new TodoTxtJs.TodoManager();
 
-            this.version = ko.observable<string>("1.1.0");
+            this.version = ko.observable<string>("1.2.0");
             this.title = ko.observable<string>("TodoTxtJs");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.observableArray([]);
@@ -78,7 +77,6 @@ module TodoTxtJs.View
             this.contexts = ko.computed({owner: this, read: this._getAllContexts});
 
             this.newPriorityFilter = ko.observable(undefined);
-            this.showHelp = ko.observable<boolean>(false);
 
             this.options = new Options();
 

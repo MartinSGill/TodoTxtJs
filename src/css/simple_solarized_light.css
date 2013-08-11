@@ -787,6 +787,70 @@ form
  * jQueryUI overrides
  *********************************************/
 
+.ui-widget-content
+{
+    border: 1px solid #586e75;
+    background: #fdf6e3 url(images/ui-bg_flat_75_FFFFFF_40x100.png) 50% 50% repeat-x;
+    color: #586e75;
+}
+
+.ui-widget-content a
+{
+	color: #586e75;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header
+{
+    border: 1px solid #586e75;
+    background: #b58900 url(images/ui-bg_highlight-soft_75_edef85_1x100.png) 50% 50% repeat-x;
+    color: #eee8d5;
+}
+
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-widget-header a
+{
+	color: #eee8d5;
+}
+
+.ui-state-default a:visited
+{
+    color: #586e75;
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
+{
+	border: 1px solid #268bd2;
+	background: #268bd2 url(images/ui-bg_glass_75_c1e5ff_1x400.png) 50% 50% repeat-x;
+	color: #eee8d5;
+}
+
+.ui-state-hover a,
+.ui-state-hover a:hover,
+.ui-state-hover a:link,
+.ui-state-hover a:visited {
+	color: #eee8d5;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+	border: 1px solid #586e75;
+	background: #fdf6e3 url(images/ui-bg_glass_65_fffff0_1x400.png) 50% 50% repeat-x;
+	color: #eee8d5;
+}
+
+.ui-state-active a,
+.ui-state-active a:link,
+.ui-state-active a:visited {
+	color: #eee8d5;
+}
 
 /* ui-dialog: The outer container of the dialog. */
 .ui-dialog
