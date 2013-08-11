@@ -11,7 +11,7 @@ Check out the [live version](http://todo.martinsgill.co.uk) to see it in action.
 Why?
 ----
 
-The principle purpose of this project is two-fold.
+The principle purpose of this project is:
 
 1. To provide a means for me to learn and practice writing web-apps.
 2. To provide me with a way to easily edit my Todos from any computer.
