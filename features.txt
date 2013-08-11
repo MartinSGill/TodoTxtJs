@@ -1,10 +1,17 @@
-﻿(A) A simple todotxt file for testing TodoTxtJs features
-(B) A todo with @context
-(C) A todo with +project
-(D) 2013-01-01 Todo with start date
+﻿(A) Priority A
+(B) Priority B
+(C) Priority C
+(D) Priority D
+(E) Priority E
+(F) Priority Other
+A simple todotxt file for testing TodoTxtJs features
+A todo with @context
+A todo with +project
+2013-01-01 Todo with create date
+Todo with due date: due:2013-01-01 
+Todo with metadata meta:data key:value
+Todo URL http://example.com/hello/there/world
+2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01
+x 2013-01-01 2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01
 x 2013-01-01 (E) Completed todo
-(F) Todo with due date: due:2013-01-01 
-(G) Todo URL http://example.com/hello/there/world
-(H) 2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01
-x 2013-01-01 (I) 2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01
 

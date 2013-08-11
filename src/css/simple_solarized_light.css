@@ -25,10 +25,27 @@
 
 body
 {
-	background-color: ivory;
-	color: black;
+	background-color: #fdf6e3;
+	color: #586e75;
 	margin-left: 40px;
 	margin-right: 40px;
+}
+
+input
+{
+	background-color: #fdf6e3;
+	color: #586e75;
+}
+
+a:link, a:visited
+{
+	color: #6c71c4;
+}
+
+textarea
+{
+	background-color: #fdf6e3;
+	color: #586e75;
 }
 
 .pageHeading
@@ -150,13 +167,13 @@ form
 	padding-right: 5px;
 	min-width: 50px;
 	height: 20px;
-	background-color: #b8beff;
+	background-color: #6c71c4;
 	border-style: solid;
-	border-color: #c1e5ff;
+	border-color: #073642;
 	border-width: thin;
 	text-align: center;
 	vertical-align: middle;
-	color: black;
+	color: #eee8d5;
 	text-decoration: none;
 	position: relative;
 }
@@ -168,13 +185,13 @@ form
 
 .menuItem a:hover
 {
-	background-color: #c1e5ff;
-	color: blue;
+	background-color: #268bd2;
+	color: #d33682;
 }
 
 .menuItem.selected a
 {
-	background-color: #c1e5ff;
+	background-color: #268bd2;
 	height: 25px;
 	z-index: 5001;
 }
@@ -208,12 +225,12 @@ form
 		width: 40%;
 		padding: 3px;
 		border-radius: 10px;
-		background-color: #ffd57a;
+		background-color: #b58900;
 	}
 
 .notice-error > span
 {
-	background-color: #e97072;
+	background-color: #dc322f;
 }
 
 #target
@@ -228,7 +245,7 @@ form
 
 .ui-effects-transfer
 {
-	border: 1px dotted black;
+	border: 1px dotted #edef85;
 }
 
 .toolbox
@@ -239,7 +256,8 @@ form
 	top: 26px;
 	right: 2px;
 	width: 40%;
-	background-color: #c1e5ff;
+	background-color: #268bd2;
+	color: #eee8d5;
 	padding: 3px;
 	display: none;
 }
@@ -273,8 +291,8 @@ form
 
 .toolbox-warning
 {
-	background: #8b0000;
-	color: white;
+	background: #dc322f;
+	color: #586e75;
 }
 
 .toolbox-tip
@@ -302,7 +320,7 @@ form
 .toolbox-option-item
 {
 	width: 100%;
-	border-bottom: silver thin solid;
+	border-bottom: #657b83 thin solid;
 	padding: 1px;
 }
 
@@ -335,10 +353,11 @@ form
 .addTodo
 {
 	clear: both;
-	border: 1px solid silver;
+	border: 1px solid #586e75;
 	border-radius: 5px;
 	padding: 5px;
-	background-color: #EDEF85;
+	background-color: #b58900;
+	color: #eee8d5;
 }
 
 	.addTodo input
@@ -354,11 +373,12 @@ form
 {
 	margin-top: 5px;
 	margin-bottom: 5px;
-	border: 1px solid silver;
+	border: 1px solid #586e75;
 	border-radius: 5px;
 	padding: 5px;
 	height: 25px;
-	background-color: #E1E1FF;
+	background-color: #2aa198;
+	color: #eee8d5;
 }
 
 .quickFilter
@@ -375,11 +395,6 @@ form
 .quickFilter-label
 {
 	padding-right: 5px;
-}
-
-.todo:hover
-{
-	background-color: #fffda4;
 }
 
 /*******************************************************
@@ -401,7 +416,7 @@ form
 {
 	display: inline-block;
 	padding-right: 2px;
-	border-left-color: #a7ade9;
+	border-left-color: #6c71c4;
 	border-left-style: dotted;
 	border-left-width: thin;
 }
@@ -418,11 +433,11 @@ form
 	.deleteButton a
 	{
 		display: inline-table;
-		background-color: silver;
+		background-color: #93a1a1;
 		height: 0.8em;
 		width: 1.2em;
 		font-size: 12pt;
-		color: black;
+		color: #586e75;
 		border-radius: 50px;
 		font-family: sans-serif;
 		font-weight: bold;
@@ -434,7 +449,7 @@ form
 
 		.deleteButton a:hover
 		{
-			color: red;
+			color: #dc322f;
 		}
 
 .deleteTodo
@@ -452,6 +467,11 @@ form
 /*******************************************************
 * Todos
 ******************************************************/
+.todo:hover
+{
+	background-color: #eee8d5;
+}
+
 .todo-view-edit
 {
 	width: 100%;
@@ -474,7 +494,7 @@ form
 .todo-view
 {
 	padding: 5px;
-	border: ridge thin silver;
+	border: ridge thin #586e75;
 	border-radius: 5px;
 	font-size: 1.4em;
 	display: table-cell;
@@ -524,34 +544,34 @@ form
 	font-weight: bold;
 	font-size: 1.2em;
 	font-family: sans-serif;
-	color: #59955C;
-	text-shadow: 1px 1px 3px #000000;
+	color: #859900;
+	text-shadow: 1px 1px 3px #073642;
 	cursor: pointer;
 }
 
 .todo-view-priority-A
 {
-	color: #FF4848;
+	color: #dc322f;
 }
 
 .todo-view-priority-B
 {
-	color: #9A03FE;
+	color: #cb4b16;
 }
 
 .todo-view-priority-C
 {
-	color: #2966B8;
+	color: #b58900;
 }
 
 .todo-view-priority-D
 {
-	color: #06DCFB;
+	color: #6c71c4;
 }
 
 .todo-view-priority-E
 {
-	color: #01F33E;
+	color: #268bd2;
 }
 
 .todo-view-message
@@ -561,14 +581,14 @@ form
 
 .todo-view-createDate
 {
-	color: #59955C;
+	color: #2aa198;
 	font-size: smaller;
 	font-family: sans-serif;
 }
 
 .todo-view-completedDate
 {
-	color: #5f5f5f;
+	color: #586e75;
 	font-size: smaller;
 	font-family: sans-serif;
 }
@@ -576,13 +596,13 @@ form
 .todo-view-projectFlag
 {
 	margin-left: 0.3em;
-	color: #9A03FE;
+	color: #d33682;
 	cursor: pointer;
 }
 
 .todo-view-project
 {
-	color: #9A03FE;
+	color: #d33682;
 	font-family: sans-serif;
 	font-size: 1.0em;
 	cursor: pointer;
@@ -591,13 +611,13 @@ form
 .todo-view-contextFlag
 {
 	margin-left: 0.3em;
-	color: #2966B8;
+	color: #268bd2;
 	cursor: pointer;
 }
 
 .todo-view-context
 {
-	color: #2966B8;
+	color: #268bd2;
 	font-family: sans-serif;
 	font-size: 1.0em;
 	cursor: pointer;
@@ -605,7 +625,7 @@ form
 
 .todo-view-completed
 {
-	background-color: silver;
+	background-color: #002b36;
 }
 
 .todo-view-link_full
@@ -617,7 +637,7 @@ form
 	display: inline-table;
 	font-size: smaller;
 	vertical-align: text-bottom;
-    background-color: #b8beff;
+    background-color: #2aa198;
     border-radius: 5px;
 	padding: 2px;
     margin-left: 4px;
@@ -647,9 +667,9 @@ form
 
 .todo-metadata-value
 {
-    background-color: ivory;
+    background-color: #fdf6e3;
 	padding-left: 2px;
-    color: black;
+    color: #586e75;
 }
 
 .todo-due-date
@@ -659,30 +679,37 @@ form
 
 .todo-due-date_past
 {
-    background-color: red;
+    background-color: #dc322f;
+	color: #586e75;
 }
 
 .todo-due-date_near
 {
-    background-color: orange;
+    background-color: #b58900;
+	color: #586e75;
 }
 
 .todo-due-date_far
 {
-    background-color: green;
-    color: white;
+    background-color: 859900;
+	color: #586e75;
 }
 
 
-.todo-view-link_short
+.todo-view-link_short, .todo-view-link_short:link, .todo-view-link_short:visited
 {
 	text-decoration: none;
-	background-color: mediumpurple;
-	color: ivory;
+	background-color: #6c71c4;
+	color: #586e75;
 	border-radius: 4px;
 	padding-left: 2px;
 	padding-right: 2px;
 	font-variant: small-caps;
+}
+
+.todo-view-link_short abbr
+{
+	color: #586e75;
 }
 
 .hidden
@@ -698,7 +725,7 @@ form
 .uploadTarget
 {
 	display: table-cell;
-	border: black dashed medium;
+	border: #eee8d5 dashed medium;
 	vertical-align: middle;
 	text-align: center;
 	padding-left: 10px;
@@ -709,7 +736,7 @@ form
 
 .dragOver
 {
-	border-color: red;
+	border-color: #dc322f;
 	font-weight: bold;
 }
 
@@ -764,7 +791,7 @@ form
 .ui-dialog
 {
     padding: 0;
-    background-color: ivory;
+    background-color: #fdf6e3;
 }
 
 /* ui-dialog-titlebar: The title bar containing the dialog's title and close button. */
@@ -796,7 +823,6 @@ form
 /* ui-dialog-buttonpane: The pane that contains the dialog's buttons. This will only be present if the buttons option is set. */
 .ui-dialog-buttonpane
 {
-    background-color: #E1E1FF;
 }
 
 /* ui-dialog-buttonset: The container around the buttons themselves. */

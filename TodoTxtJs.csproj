@@ -60,6 +60,10 @@
     <Content Include=".gitignore" />
     <Content Include="build\GruntFile.js" />
     <Content Include="src\.htaccess" />
+    <Content Include="src\css\generate\simple_template.css" />
+    <Content Include="src\css\simple_default.css" />
+    <Content Include="src\css\simple_solarized_dark.css" />
+    <Content Include="src\images\dropbox-logos_dropbox-logotype-black-trimmed.png" />
     <Content Include="src\js\app.js.map">
       <DependentUpon>app.js</DependentUpon>
     </Content>
@@ -107,7 +111,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\css\simple.css" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\images\todotxt_js_logo.png" />
     <Content Include="src\images\todotxt_js_logo_128x128.png" />
@@ -191,6 +194,21 @@
     <Content Include="src\js\model\todoHtmlRender.js.map">
       <DependentUpon>todoHtmlRender.ts</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\css\generate\default.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\css\generate\generate.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\css\generate\solarized_dark.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\css\generate\solarized_light.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\css\generate\README.md" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
 </Project>
