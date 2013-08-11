@@ -29,7 +29,7 @@ module TodoTxtJs.StorageProviders
     export class DropboxStorage implements IStorageProvider
     {
         public name:string = "Dropbox";
-        public description:string = "Stores your Todos in '/Todo/todo.txt' in your dropbox account.";
+        public description:string = "Stores your Todos in '/Todo/todo.txt' in your Dropbox account.";
         public controls = {
             storage: true,
             exports: true,

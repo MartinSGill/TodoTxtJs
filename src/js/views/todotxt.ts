@@ -322,9 +322,24 @@ module TodoTxtJs.View
             return result;
         }
 
-        public onClick_ShowHelp(data? : any, event? : Event) : boolean
+        public onClick_ShowHelp(data?: any, event?: Event): boolean
         {
-            this.showHelp(!this.showHelp());
+            var width = Math.round(window.innerWidth * 0.8);
+            var height = Math.round(window.innerHeight * 0.8);
+            //this.showHelp(!this.showHelp());
+            $("#help").dialog({
+                modal: true,
+                buttons: {
+                    Ok: function () { $(this).dialog("close"); }
+                },
+                minHeight: 400,
+                maxHeight: height,
+                height: "auto",
+                minWidth: 800,
+                maxWidth: width,
+                auto: "auto"
+            });
+
             return false;
         }
 

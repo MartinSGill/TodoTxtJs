@@ -166,7 +166,6 @@ form
 	min-width: 20px;
 }
 
-
 .menuItem a:hover
 {
 	background-color: #c1e5ff;
@@ -714,7 +713,7 @@ form
 	font-weight: bold;
 }
 
-#help
+/*#help
 {
 	border: #FF9900 solid 3px;
 	color: #c3ab00;
@@ -731,7 +730,7 @@ form
 	position: fixed;
 	top: 150px;
 	left: 450px;
-}
+}*/
 
 .ui-autocomplete
 {
@@ -754,4 +753,54 @@ form
 .__tt
 {
 	font-family: consolas, courier, sans-serif;
+}
+
+/*********************************************
+ * jQueryUI overrides
+ *********************************************/
+
+
+/* ui-dialog: The outer container of the dialog. */
+.ui-dialog
+{
+    padding: 0;
+    background-color: ivory;
+}
+
+/* ui-dialog-titlebar: The title bar containing the dialog's title and close button. */
+.ui-dialog-titlebar
+{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+/* ui-dialog-title: The container around the textual title of the dialog. */
+.ui-dialog-title
+{
+
+}
+
+/* ui-dialog-titlebar-close: The dialog's close button. */
+.ui-dialog-titlebar-close
+{
+
+}
+
+/* ui-dialog-content: The container around the dialog's content. This is also the element the widget was instantiated with. */
+.ui-dialog-content
+{
+
+}
+
+/* ui-dialog-buttonpane: The pane that contains the dialog's buttons. This will only be present if the buttons option is set. */
+.ui-dialog-buttonpane
+{
+    background-color: #E1E1FF;
+}
+
+/* ui-dialog-buttonset: The container around the buttons themselves. */
+.ui-dialog-buttonset
+{
+
 }

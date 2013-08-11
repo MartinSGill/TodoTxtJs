@@ -212,36 +212,43 @@
         </ul>
     </section>
 </section>
-<section id="help" data-bind="visible: showHelp">
+<section id="help" data-bind="visible: showHelp" title="Help">
     <h1>
         Welcome To TodoTxtJs
     </h1>
     <p>
         This is a Todo Manager based on the TodoTxt format. Click on the text in any todo to edit it or see how it's formatted.
-        <br/>
-        To close this window just click the help '?' button again.
     </p>
     <h2>Format</h2>
     <ul>
-        <li>You can have priorities just use '(<span class="todo-view-priority-A">A</span>)' at the beginning of the line. </li>
-        <li>You can specify a <span class="todo-view-project">+Project</span> with the <span class="todo-view-project">+</span> symbol.</li>
-        <li>You can specify a <span class="todo-view-context">@Context</span> with the <span class="todo-view-context">@</span> symbol.</li>
+        <li>You can have priorities. Type (<span class="__tt todo-view-priority-A">A</span>) at the beginning of the line. Any capital letter is a valid priority. </li>
+        <li>You can specify a <span class="__tt todo-view-project">+Project</span> with the <span class="__tt todo-view-project">+</span> symbol.</li>
+        <li>You can specify a <span class="__tt todo-view-context">@Context</span> with the <span class="__tt todo-view-context">@</span> symbol.</li>
         <li>You can have as many Projects and Contexts as you like.</li>
         <li>URLs are recognised and will open in a new tab if you click on them.</li>
         <li>You can optionally add a due date. <span class="__tt">due:2013-01-02</span>. </li>
+        <li>You can also review <a href="https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format" target="_blank">the full format specifications</a>.</li>
     </ul>
     <h2>
         Features
     </h2>
     <ul>
+        <li>Todos are sorted in the following order: due-date, priority, position-in-file.</li>
         <li>Click on the text in any todo to edit it.</li>
+        <li>You can mark a Todo as completed by click on the checkbox at its left.</li>
+        <ul><li>Completed Todos are hidden by default. Click on 'Show Completed' to see them.</li></ul>
         <li>Click on a <span class="todo-view-context">@Context</span> or <span class="todo-view-project">+Project</span> (in text or on right side) to filter on it.</li>
         <li>This also works on '(<span class="todo-view-priority-A">A</span>)' priorites.</li>
-        <li>If you have a DropBox account, you can save your Todos into that.</li>
-        <li>Select DropBox in the Options and once you close the options again you'll be synced to DropBox.</li>
-        <li>You can mark a Todo as completed by click on the checkbox at its left.</li>
-        <li>Completed Todos are hidden by default. Click on 'Show Completed' to see them.</li>
-        <li>Due Date colour indicates proximiy:
+        <li>If you have a <img src="images/dropbox-logos_dropbox-logotype-black-trimmed.png" height="20px" width="70px" alt="Dropbox"> account, you can save your Todos into that.</li>
+        <ul>
+            <li>Select Dropbox in the Options and once you close the options box again you'll be synced to Dropbox.</li>
+            <li>This uses the same file as the
+                <a href="https://play.google.com/store/apps/details?id=com.todotxt.todotxttouch" target="_blank">Android</a>
+                and
+                <a href="http://itunes.apple.com/us/app/todo.txt-touch/id491342186?ls=1&mt=8" target="_blank">iOS</a>
+                apps, allowing you to access your Todos from anywhere.</li>
+        </ul>
+        <li>Due Date colour indicates proximity:
             <ul>
                 <li>
                     <span class="todo-metadata todo-due-date todo-due-date_past">
@@ -276,7 +283,12 @@
                 <span class="todo-metadata-value">value</span>
             </span>
         </li>
-        <li>Visit <a href="http://www.todotxt.com">Todotxt.com</a> for more details on the format and for other tools.</li>
+    </ul>
+    <h2>Addendum</h2>
+    <ul>
+        <li>Bugs?, Questions?, Suggestions? <a href="https://github.com/MartinSGill/TodoTxtJs/issues/new" target="_blank">Please log an issue in GitHub</a>.</li>
+        <li>Visit <a href="http://www.todotxt.com">Todotxt.com</a> for more details on the format.</li>
+        <li>TodoTxt.com also has links to Android, iOS, CLI and GUI apps supporting the format.</li>
     </ul>
 </section>
 <footer>
