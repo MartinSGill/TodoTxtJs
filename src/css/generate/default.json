@@ -45,7 +45,7 @@
     "todo-context-text": "#2966B8",
     "todo-completed-background": "silver",
     "todo-metadata": "#e1e1ff",
-    "todo-metadata-text": "white",
+    "todo-metadata-text": "black",
     "todo-dueDate-past": "red",
     "todo-dueDate-past-text": "black",
     "todo-dueDate-near": "orange",

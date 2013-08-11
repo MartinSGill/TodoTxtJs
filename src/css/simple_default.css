@@ -651,6 +651,7 @@ form
 
 .todo-metadata-name
 {
+	color: black;
 	display: table-cell;
 	font-size: smaller;
     font-family: sans-serif;

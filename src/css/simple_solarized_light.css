@@ -169,7 +169,7 @@ form
 	height: 20px;
 	background-color: #6c71c4;
 	border-style: solid;
-	border-color: #073642;
+	border-color: #268bd2;
 	border-width: thin;
 	text-align: center;
 	vertical-align: middle;
@@ -186,7 +186,7 @@ form
 .menuItem a:hover
 {
 	background-color: #268bd2;
-	color: #d33682;
+	color: #eee8d5;
 }
 
 .menuItem.selected a
@@ -651,6 +651,7 @@ form
 
 .todo-metadata-name
 {
+	color: #eee8d5;
 	display: table-cell;
 	font-size: smaller;
     font-family: sans-serif;
@@ -680,19 +681,19 @@ form
 .todo-due-date_past
 {
     background-color: #dc322f;
-	color: #586e75;
+	color: #eee8d5;
 }
 
 .todo-due-date_near
 {
     background-color: #b58900;
-	color: #586e75;
+	color: #eee8d5;
 }
 
 .todo-due-date_far
 {
-    background-color: 859900;
-	color: #586e75;
+    background-color: #859900;
+	color: #eee8d5;
 }
 
 
@@ -700,7 +701,7 @@ form
 {
 	text-decoration: none;
 	background-color: #6c71c4;
-	color: #586e75;
+	color: #eee8d5;
 	border-radius: 4px;
 	padding-left: 2px;
 	padding-right: 2px;
@@ -709,7 +710,7 @@ form
 
 .todo-view-link_short abbr
 {
-	color: #586e75;
+	color: #eee8d5;
 }
 
 .hidden

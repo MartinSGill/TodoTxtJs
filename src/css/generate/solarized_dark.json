@@ -25,7 +25,7 @@
     "filters-separator": "#6c71c4",
 
     "delete-button-text": "#073642",
-    "delete-button-background": "#eee8d5",
+    "delete-button-background": "#93a1a1",
     "delete-button-text-hover": "#dc322f",
     
     "todo-hover": "#073642",
@@ -45,15 +45,15 @@
     "todo-context-text": "#268bd2",
     "todo-completed-background": "#002b36",
     "todo-metadata": "#2aa198",
-    "todo-metadata-text": "#586e75",
+    "todo-metadata-text": "#eee8d5",
     "todo-dueDate-past": "#dc322f",
-    "todo-dueDate-past-text": "#586e75",
+    "todo-dueDate-past-text": "#eee8d5",
     "todo-dueDate-near": "#b58900",
-    "todo-dueDate-near-text": "#586e75",
-    "todo-dueDate-far": "859900",
-    "todo-dueDate-far-text": "#586e75",
+    "todo-dueDate-near-text": "#93a1a1",
+    "todo-dueDate-far": "#859900",
+    "todo-dueDate-far-text": "#eee8d5",
     "todo-shortLink-background": "#6c71c4",
-    "todo-shortLink-text": "#586e75",
+    "todo-shortLink-text": "#eee8d5",
 
     "import-border": "#eee8d5",
     "import-border-hover": "#dc322f"
