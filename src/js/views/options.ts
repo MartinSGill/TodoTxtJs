@@ -28,6 +28,11 @@
 
 module TodoTxtJs.View
 {
+    export interface IThemeDefinition
+    {
+        name: string;
+        file: string;
+    }
 
     export class Options
     {
@@ -44,6 +49,13 @@ module TodoTxtJs.View
 
         public saveOnChange: KnockoutObservable<boolean>;
         public saveOnChangeDescription: KnockoutObservable<string>;
+
+        public theme: KnockoutComputed<IThemeDefinition>;
+        public themeDescription: string = "The theme to use for this page.";
+        public themes: IThemeDefinition[];
+        public themeUrl: KnockoutComputed<string>;
+
+        public themeName: KnockoutObservable<string>;
 
         constructor()
         {
@@ -90,6 +102,36 @@ module TodoTxtJs.View
 
             this.saveOnChange = ko.observable<boolean>(true);
             this.saveOnChangeDescription = ko.observable<string>("Save changes immediatly after you add/remove/edit a Todo.");
+
+            this.themes = [
+                { name: "Original", file: "simple_default.css" },
+                { name: "Solarized Dark", file: "simple_solarized_dark.css" },
+                { name: "Solarized Light", file: "simple_solarized_light.css" }
+            ];
+
+            this.themeName = ko.observable<string>(this.themes[0].name);
+            this.theme = ko.computed({
+                owner: this,
+                read: ()=>
+                {
+                    for (var i = 0; i < this.themes.length; i++)
+                    {
+                        if (this.themes[i].name === this.themeName())
+                        {
+                            return this.themes[i];
+                        }
+                    }
+
+                    return undefined;
+                }
+            });
+            this.themeUrl = ko.computed({
+                owner: this,
+                read: ()=>
+                {
+                    return "css/" + this.theme().file;
+                }
+            });
         }
 
         public save() : void
@@ -100,6 +142,7 @@ module TodoTxtJs.View
                 oldOptions = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
             }
 
+            // Just write out everything, it's during loading we're selective
             window.localStorage["TodoTxtJsOptions"] = ko.toJSON(this);
             if (oldOptions.storage !== this.storage())
             {
@@ -112,6 +155,10 @@ module TodoTxtJs.View
             if (window.localStorage["TodoTxtJsOptions"])
             {
                 var options = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
+
+                // Only load actual options, so we don't break the view model
+
+                // Storage
                 if (options.hasOwnProperty("storage"))
                 {
                     for (var i = 0; i < this.storageOptions().length; i++)
@@ -124,9 +171,31 @@ module TodoTxtJs.View
                     }
                 }
 
-                if (options.hasOwnProperty(("addCreatedDate")))
+                // Create Date
+                if (options.hasOwnProperty("addCreatedDate"))
                 {
                     this.addCreatedDate(options.addCreatedDate);
+                }
+
+                // Auto-save
+                if (options.hasOwnProperty("saveOnChange"))
+                {
+                    this.saveOnChange(options.saveOnChange);
+                }
+
+                // Theme
+                if (options.hasOwnProperty("themeName"))
+                {
+                    // Make sure always have a theme, even if the 
+                    // saved option is nonsense.
+                    for (var i = 0; i < this.themes.length; i++)
+                    {
+                        if (this.themes[i].name === options.themeName)
+                        {
+                            this.themeName(options.themeName);
+                            break;
+                        }
+                    }
                 }
             }
         }

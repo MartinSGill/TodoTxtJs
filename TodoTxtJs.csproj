@@ -182,9 +182,7 @@
     <Content Include="build\package.json" />
     <Content Include="build\README.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\images\html\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="src\js\app.min.js.map">
       <DependentUpon>app.js</DependentUpon>

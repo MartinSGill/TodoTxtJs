@@ -27,7 +27,7 @@
     <meta charset="utf-8"/>
     <title data-bind="text: title"></title>
     <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <link rel="stylesheet" href="css/simple_default.css" />
+    <link rel="stylesheet" href="css/simple_default.css" data-bind="attr: { href: options.themeUrl() }" />
 </head>
 <body>
 <section class="page-splashScreen" data-bind="css: { hidden: pageReady}">
@@ -61,6 +61,19 @@
                         <div class="toolbox-help">
                             This Option will be saved and applied when you close the options.
                         </div>
+                    </div>
+                    <div class="toolbox-option-item">
+                        <label class="toolbox-option-item-label">Theme</label>
+                            <span class="toolbox-option-item-value">
+                                    <label>
+                                        <select data-bind="options: themes,
+                                               optionsText: 'name',
+                                               value: themeName,
+                                               optionsValue: 'name'">
+                                        </select>
+                                    </label>
+                            </span>
+                        <span class="toolbox-option-item-description" data-bind="text: themeDescription"></span>
                     </div>
                     <div class="toolbox-option-item">
                         <label class="toolbox-option-item-label">Save on change</label>
