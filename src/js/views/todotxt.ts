@@ -325,7 +325,18 @@ module TodoTxtJs.View
             {
                 for (var i = 0; i < filters.length && result; i++)
                 {
-                    result = testText.indexOf(filters[i].toLowerCase()) >= 0;
+                    // Special filters
+                    switch (filters[i])
+                    {
+                        case "-@":
+                            result = (todo.contexts().length == 0);
+                            break;
+                        case "-+":
+                            result = (todo.projects().length == 0);
+                            break;
+                        default:
+                            result = testText.indexOf(filters[i].toLowerCase()) >= 0;
+                    }
                 }
             }
 
