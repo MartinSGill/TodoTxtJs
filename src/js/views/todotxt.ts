@@ -85,6 +85,8 @@ module TodoTxtJs.View
             this.exporting = new Exporting(this._todoManager);
 
             this.filters = ko.observable<string>("");
+            this.filters.subscribe((newValue: string) => { Main.setQueryString("filter", newValue); });
+
             this.showCompleted = ko.observable<boolean>(false);
             this.showShortUrls = ko.observable<boolean>(true);
             this.showCreatedDate = ko.observable<boolean>(true);
@@ -105,6 +107,8 @@ module TodoTxtJs.View
 
             $(window).unload(this.save);
             this.load();
+
+            this._applyQueryString();
         }
 
         public removeTodo(element:HTMLElement) : void
@@ -547,10 +551,9 @@ module TodoTxtJs.View
             return result;
         }
 
-
-        public static getQueryString(name)
+        private static _parseQueryString()
         {
-            function parseParams()
+            if (!Main._queryStringParams)
             {
                 var params = {},
                     e,
@@ -569,13 +572,57 @@ module TodoTxtJs.View
                     params[d(e[1])] = value;
                 }
 
-                return params;
+                Main._queryStringParams = params;
+            }
+        }
+
+        private static _writeQueryString()
+        {
+            var queryString = "?";
+            var location = window.location.href;
+            location = location.replace(/(\?.*)/, "");
+            for (name in Main._queryStringParams)
+            {
+                if (Main._queryStringParams.hasOwnProperty(name))
+                {
+                    var nameUri = encodeURIComponent(name);
+                    var value = Main._queryStringParams[name]
+                    if (value !== "")
+                    {
+                        var valueUri = encodeURIComponent(value);
+                        queryString += nameUri + '=' + valueUri;
+                    }
+                }
             }
 
-            if (!Main._queryStringParams)
-                Main._queryStringParams = parseParams();
+            var newLocation = location + queryString;
 
+            if (history)
+            {
+                history.replaceState(null, null, newLocation);
+            }
+        }
+
+        public static setQueryString(name: string, value:any)
+        {
+            Main._parseQueryString();
+            Main._queryStringParams[name] = value;
+            Main._writeQueryString();
+        }
+
+        public static getQueryString(name)
+        {
+            Main._parseQueryString();
             return Main._queryStringParams[name];
+        }
+
+        private _applyQueryString()
+        {
+            var filters = Main.getQueryString("filter");
+            if (filters && filters !== "")
+            {
+                this.filters(filters);
+            }
         }
 
         /**
