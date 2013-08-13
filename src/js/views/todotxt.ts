@@ -64,6 +64,7 @@ module TodoTxtJs.View
         public pageReady: KnockoutObservable<boolean>;
 
         private _todoManager: TodoManager;
+        private static _queryStringParams: any;
 
         constructor()
         {
@@ -153,7 +154,14 @@ module TodoTxtJs.View
         public load() : void
         {
             Main._highlightNotice();
-            this.options.load();
+            if (Main.getQueryString("defaults"))
+            {
+                this.options.save();
+            }
+            else
+            {
+                this.options.load();
+            }
 
             var onSuccess = (data) : void =>
             {
@@ -539,6 +547,37 @@ module TodoTxtJs.View
             return result;
         }
 
+
+        public static getQueryString(name)
+        {
+            function parseParams()
+            {
+                var params = {},
+                    e,
+                    a = /\+/g,  // Regex for replacing addition symbol with a space
+                    r = /([^&=]+)=?([^&]*)/g,
+                    d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+                    q = window.location.search.substring(1);
+
+                while (e = r.exec(q))
+                {
+                    var value: any = d(e[2]);
+                    if (value === "")
+                    {
+                        value = true;
+                    }
+                    params[d(e[1])] = value;
+                }
+
+                return params;
+            }
+
+            if (!Main._queryStringParams)
+                Main._queryStringParams = parseParams();
+
+            return Main._queryStringParams[name];
+        }
+
         /**
          * Initializes the auto-complete functionality.
          */
@@ -610,6 +649,7 @@ module TodoTxtJs.View
                               });
         }
     }
+
 }
 
 var todoTxtView : TodoTxtJs.View.Main = new TodoTxtJs.View.Main();
