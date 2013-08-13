@@ -350,7 +350,7 @@ module TodoTxtJs.View
             $("#optionsDialog").dialog({
                 modal: true,
                 buttons: {
-                    Close: function ()
+                    Done: function ()
                     {
                         self.options.save();
                         oldStorage = self.options.storageInfo();
