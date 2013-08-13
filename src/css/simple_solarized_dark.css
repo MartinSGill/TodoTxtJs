@@ -341,14 +341,25 @@ form
 
 .options-table
 {
+    display: table;
+    width: 100%;
+}
+
+.options-entry
+{
     display: table-row;
     width: 100%;
+}
+
+.options-entry:not(:first-of-type) .options-value
+{
+    border-top: thin dotted #586e75;
 }
 
 .options-name
 {
     display:table-cell;
-    width: 100px;
+    width: 110px;
     text-align: right;
     padding-right: 2px;
 }

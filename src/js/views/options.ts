@@ -144,7 +144,7 @@ module TodoTxtJs.View
 
             // Just write out everything, it's during loading we're selective
             window.localStorage["TodoTxtJsOptions"] = ko.toJSON(this);
-            if (oldOptions.storage !== this.storage())
+            if (oldOptions.storage !== this.storage() && todoTxtView) 
             {
                 todoTxtView.load();
             }
