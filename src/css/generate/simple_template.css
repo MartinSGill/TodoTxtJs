@@ -312,38 +312,64 @@ form
  * Options
  ******************************************************/
 
-.toolBox-options
+.options
 {
-	width: 500px;
+    font-size: 16px;
+    font-family: 'Times New Roman', serif;
 }
 
-.toolbox-option-item
+.options input, .options select
 {
-	width: 100%;
-	border-bottom: $menu-hr$ thin solid;
-	padding: 1px;
+    font-family: 'Times New Roman', serif;
 }
 
-
-.toolbox-option-item-label
+.options-group
 {
-	display: inline-block;
-	font-family: "Courier New", monospace;
-	text-align: right;
-	width: 150px;
+	border: 1px solid $filters-border$;
+    margin-bottom: 15px;
 }
 
-.toolbox-option-item-value
+.options-group h1
 {
-	display: inline-block;
+    font-family: Verdana, sans-serif;
+    margin-top: 0;
+    padding: 2px;
+    font-size: 1em;
+    background-color: $filters-background$;
+	color: $filters-text$;
 }
 
-.toolbox-option-item-description
+.options-table
 {
-	display: block;
-	font-style: italic;
-	font-size: 0.8em;
-	text-align: right;
+    display: table-row;
+    width: 100%;
+}
+
+.options-name
+{
+    display:table-cell;
+    width: 100px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.options-value
+{
+    display: table-cell;
+    width: 150px;
+}
+
+.options-decription
+{
+    display: table-cell;
+    width: 100%;
+}
+
+.options-warning
+{
+    color: $menu-warning-text$;
+    color: $menu-warning-background$;
+    font-style: italic;
 }
 
 /*******************************************************

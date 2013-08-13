@@ -69,7 +69,7 @@ module TodoTxtJs.View
         {
             this._todoManager = new TodoTxtJs.TodoManager();
 
-            this.version = ko.observable<string>("1.2.0");
+            this.version = ko.observable<string>("1.2.1");
             this.title = ko.observable<string>("TodoTxtJs");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.observableArray([]);
@@ -336,6 +336,41 @@ module TodoTxtJs.View
                 minWidth: 800,
                 maxWidth: width,
                 auto: "auto"
+            });
+
+            return false;
+        }
+
+        public onClick_ShowOptions(data?: any, event?: Event): boolean
+        {
+            var width = Math.round(window.innerWidth * 0.8);
+            var height = Math.round(window.innerHeight * 0.8);
+            var self = this;
+            var oldStorage = this.options.storageInfo();
+            $("#optionsDialog").dialog({
+                modal: true,
+                buttons: {
+                    Close: function ()
+                    {
+                        self.options.save();
+                        oldStorage = self.options.storageInfo();
+                        $(this).dialog("close");
+                    }
+                },
+                close: function (event, ui)
+                {
+                    // Undo storage change
+                    if (oldStorage.name != self.options.storageInfo().name)
+                    {
+                        self.options.storageInfo(oldStorage);
+                    }
+                },
+                maxHeight: height,
+                height: "auto",
+                minWidth: 800,
+                maxWidth: width,
+                auto: "auto",
+                closeOnEscape: true
             });
 
             return false;

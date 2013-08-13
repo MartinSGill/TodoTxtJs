@@ -42,59 +42,9 @@
             </a>
         </li>
         <li class="menuItem" id="options">
-            <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+            <a href="#" data-bind="click: onClick_ShowOptions" id="showOptions">
                 Options
             </a>
-            <div data-bind="with: options">
-                <div class="toolbox toolBox-options">
-                    <div class="toolbox-option-item">
-                        <label class="toolbox-option-item-label">Storage</label>
-                            <span class="toolbox-option-item-value">
-                                    <label>
-                                        <select data-bind="options: storageOptions,
-                                               optionsText: 'name',
-                                               value: storageInfo">
-                                        </select>
-                                    </label>
-                            </span>
-                        <span class="toolbox-option-item-description" data-bind="text: storageInfo().description"></span>
-                        <div class="toolbox-help">
-                            This Option will be saved and applied when you close the options.
-                        </div>
-                    </div>
-                    <div class="toolbox-option-item">
-                        <label class="toolbox-option-item-label">Theme</label>
-                            <span class="toolbox-option-item-value">
-                                    <label>
-                                        <select data-bind="options: themes,
-                                               optionsText: 'name',
-                                               value: themeName,
-                                               optionsValue: 'name'">
-                                        </select>
-                                    </label>
-                            </span>
-                        <span class="toolbox-option-item-description" data-bind="text: themeDescription"></span>
-                    </div>
-                    <div class="toolbox-option-item">
-                        <label class="toolbox-option-item-label">Save on change</label>
-                            <span class="toolbox-option-item-value">
-                                <label>
-                                    <input type="checkbox" data-bind="checked: saveOnChange"/>
-                                </label>
-                            </span>
-                        <span class="toolbox-option-item-description" data-bind="text: saveOnChangeDescription"></span>
-                    </div>
-                    <div class="toolbox-option-item">
-                        <label class="toolbox-option-item-label">Add Start Date</label>
-                            <span class="toolbox-option-item-value">
-                                <label>
-                                    <input type="checkbox" data-bind="checked: addCreatedDate"/>
-                                </label>
-                            </span>
-                        <span class="toolbox-option-item-description" data-bind="text: addCreatedDateDescription"></span>
-                    </div>
-                </div>
-            </div>
         </li>
         <li class="menuItem" data-bind="visible: options.showImport" id="import">
             <a href="#" onClick="todoTxtView.toggleToolbox(this)">
@@ -211,22 +161,84 @@
     * Todo
     **********************************
  -->
-<section id="main">
-    <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }">
+    <section id="main">
+        <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }">
+        </section>
+        <section class="todo-view-list">
+            <h3>Contexts</h3>
+            <ul data-bind="foreach: contexts">
+                <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
+            </ul>
+            <h3>Projects</h3>
+            <ul data-bind="foreach: projects">
+                <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
+            </ul>
+        </section>
     </section>
-    <section class="todo-view-list">
-        <h3>Contexts</h3>
-        <ul data-bind="foreach: contexts">
-            <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
-        </ul>
-        <h3>Projects</h3>
-        <ul data-bind="foreach: projects">
-            <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
-        </ul>
+    <section id="optionsDialog" class="options hidden" title="Options">
+        <div data-bind="with: options">
+            <div class="options-group">
+                <h1 autofocus="yes">Storage</h1>
+                <div class="options-table">
+                    <div class="options-name">
+                        Save Location
+                    </div>
+                    <div class="options-value">
+                        <label>
+                            <select data-bind="options: storageOptions,
+                                            optionsText: 'name',
+                                            value: storageInfo">
+                            </select>
+                        </label>
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: storageInfo().description"></span>
+                        <div class="options-warning">
+                            As this can cause the page to reload, this setting will not be changed until you click 'Done'.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="options-group">
+                <h1>Behaviour</h1>
+                <div class="options-table">
+                    <div class="options-name">
+                        Create Date
+                    </div>
+                    <div class="options-value">
+                        <label>
+                            <input type="checkbox" data-bind="checked: saveOnChange" />
+                        </label>
+                    </div>
+                    <div class="options-description">
+                    <span data-bind="text: addCreatedDateDescription"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="options-group">
+                <h1>Display</h1>
+                <div class="options-table">
+                    <div class="options-name">
+                        Theme
+                    </div>
+                    <div class="options-value">
+                        <label>
+                            <select data-bind="options: themes,
+                                                optionsText: 'name',
+                                                value: themeName,
+                                                optionsValue: 'name'">
+                            </select>
+                        </label>
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: themeDescription"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-</section>
 <section id="help" class="hidden" title="Help">
-    <h1>
+    <h1 autofocus="yes">
         Welcome To TodoTxtJs
     </h1>
     <p>
