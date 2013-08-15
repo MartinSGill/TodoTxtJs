@@ -599,7 +599,7 @@ module TodoTxtJs.View
         {
             var queryString = "?";
             var location = window.location.href;
-            location = location.replace(/(\?.*)/, "");
+            location = location.replace(/([#?].*)/, "");
             for (name in Main._queryStringParams)
             {
                 if (Main._queryStringParams.hasOwnProperty(name))
