@@ -415,13 +415,25 @@ form
 	padding: 5px;
 	height: 25px;
 	background-color: #2aa198;
-	color: #eee8d5;
+        display: block;
+}
+.filter-options-table
+{
+    display: table;
+    width: 100%;
+}
+
+.filter-options-row
+{
+    display: table-row;
+    width: 100%;
 }
 
 .quickFilter
 {
-	display: block;
-	float: right;
+	display: table-cell;
+    width: auto;
+    text-align: right;
 }
 
 .quickFilter-input
@@ -440,8 +452,8 @@ form
 
 .display-options
 {
-	display: block;
-	float: left;
+	display: table-cell;
+    width: 33%;
 }
 
 .display-options-label
@@ -456,6 +468,15 @@ form
 	border-left-color: #6c71c4;
 	border-left-style: dotted;
 	border-left-width: thin;
+}
+
+.display-options-sort
+{
+    display: table-cell;
+    margin-left: 100px;
+    margin-right: auto;
+    text-align: center;
+    width: 33%;
 }
 
 /*******************************************************

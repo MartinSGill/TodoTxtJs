@@ -126,34 +126,48 @@
     **********************************
  -->
 <section class="filters">
-    <div class="display-options">
-        <label class="display-options-label label">Show:</label>
-        <div class="display-options-item">
-            <label>
-                <input type="checkbox" data-bind="checked: showCompleted"/>
-                Completed
-            </label>
+    <div class="filter-options-table">
+        <div class="filter-options-row">
+            <div class="display-options">
+                <label class="display-options-label label">Show:</label>
+                <div class="display-options-item">
+                    <label>
+                        <input type="checkbox" data-bind="checked: showCompleted"/>
+                        Completed
+                    </label>
+                </div>
+                <div class="display-options-item">
+                    <label>
+                        <input type="checkbox" data-bind="checked: showCreatedDate"/>
+                        Create-Date
+                    </label>
+                </div>
+                <div class="display-options-item">
+                    <label>
+                        <input type="checkbox" data-bind="checked: showShortUrls"/>
+                        Shorten URLs
+                    </label>
+                </div>
+            </div>
+            <div class="display-options-sort">
+                <label>
+                    Sort by
+                    <select data-bind="value: primarySort, options: sortTypes"></select>
+                </label>
+                <label>
+                    then
+                    <select data-bind="value: secondarySort, options: sortTypes"></select>
+                </label>
+            </div>
+            <div class="quickFilter">
+                <label for="filters" class="quickFilter-label label">Filter:</label><input class="quickFilter-input"
+                                                                                           id="filters"
+                                                                                           type="text"
+                                                                                           data-bind="value: filters, valueUpdate: 'afterkeydown'"
+                                                                                           title="Example: +Project @Context (A)" />
+                <div class="deleteButton"><a href="" data-bind="click: clearFilters">x</a></div>
+            </div>
         </div>
-        <div class="display-options-item">
-            <label>
-                <input type="checkbox" data-bind="checked: showCreatedDate"/>
-                Create-Date
-            </label>
-        </div>
-        <div class="display-options-item">
-            <label>
-                <input type="checkbox" data-bind="checked: showShortUrls"/>
-                Shorten URLs
-            </label>
-        </div>
-    </div>
-    <div class="quickFilter">
-        <label for="filters" class="quickFilter-label label">Filter:</label><input class="quickFilter-input"
-                                                                                   id="filters"
-                                                                                   type="text"
-                                                                                   data-bind="value: filters, valueUpdate: 'afterkeydown'"
-                                                                                   title="Example: +Project @Context (A)" />
-        <div class="deleteButton"><a href="" data-bind="click: clearFilters">x</a></div>
     </div>
 </section>
 <!--

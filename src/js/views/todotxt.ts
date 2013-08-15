@@ -55,6 +55,10 @@ module TodoTxtJs.View
         public showCreatedDate: KnockoutObservable<boolean>;
         public filtered: KnockoutComputed<boolean>;
 
+        public sortTypes: string[] = ["None", "Due Date", "Priority", "Create Date"];
+        public primarySort: KnockoutObservable<string>;
+        public secondarySort: KnockoutObservable<string>;
+
         public renderOptions: KnockoutComputed<any>;
 
         public newTodoText: KnockoutObservable<string>;
@@ -90,9 +94,12 @@ module TodoTxtJs.View
             this.showCompleted = ko.observable<boolean>(false);
             this.showShortUrls = ko.observable<boolean>(true);
             this.showCreatedDate = ko.observable<boolean>(true);
-            this.filtered = ko.computed({owner: this, read: this._getIsFiltered });
+            this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
 
-            this.renderOptions = ko.computed({owner:this, read: this._getRenderOptions });
+            this.primarySort = ko.observable(this.sortTypes[1]);
+            this.secondarySort = ko.observable(this.sortTypes[2]);
+
+            this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 
             this.newTodoText = ko.observable<string>("");
             this.spinner = ko.observable<boolean>(false);
@@ -100,7 +107,8 @@ module TodoTxtJs.View
             this.lastUpdated = ko.observable<string>(undefined);
             this.notice = ko.observable<string>(undefined);
             this.pageReady = ko.observable<boolean>(false);
-            $(document).ready( ()=> { this.pageReady(true); });
+            $(document).ready(() => { this.pageReady(true); });
+
 
             this._initializeAutoComplete();
             this._initializeKeyboardShortCuts();
@@ -233,7 +241,7 @@ module TodoTxtJs.View
             return true;
         };
 
-        public clearFilters() : void
+        public clearFilters(): void
         {
             this.filters("");
         }
