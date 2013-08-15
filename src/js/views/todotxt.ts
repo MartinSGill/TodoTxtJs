@@ -96,8 +96,8 @@ module TodoTxtJs.View
             this.showCreatedDate = ko.observable<boolean>(true);
             this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
 
-            this.primarySort = ko.observable(this.sortTypes[1]);
-            this.secondarySort = ko.observable(this.sortTypes[2]);
+            this.primarySort = ko.observable(this.sortTypes[0]);
+            this.secondarySort = ko.observable(this.sortTypes[1]);
 
             this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 

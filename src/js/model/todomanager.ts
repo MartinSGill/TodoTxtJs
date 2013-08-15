@@ -124,6 +124,93 @@ module TodoTxtJs
             this._data.push(todo);
         }
 
+        /**
+         * Compares two Todo due dates.
+         * @param left The "left" todo
+         * @param right The "right" todo
+         * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
+         */
+        private static _compareDueDate(left: Todo, right: Todo): number
+        {
+            if (left.dueDate() || right.dueDate())
+            {
+                if (!left.dueDate()) return 1;
+                if (!right.dueDate()) return -1;
+
+                if (left.dueDate() !== right.dueDate())
+                {
+                    return left.dueDate() < right.dueDate() ? -1 : 1;
+                }
+            }
+            return 0;
+        }
+
+        /**
+         * Compares two Todo create dates.
+         * @param left The "left" todo
+         * @param right The "right" todo
+         * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
+         */
+        private static _compareCreateDate(left: Todo, right: Todo): number
+        {
+            if (left.createdDate() || right.createdDate())
+            {
+                if (!left.createdDate()) return 1;
+                if (!right.createdDate()) return -1;
+
+                if (left.createdDate() !== right.createdDate())
+                {
+                    return left.createdDate() < right.createdDate() ? -1 : 1;
+                }
+            }
+            return 0;
+        }
+
+        /**
+         * Compares two Todo priorities.
+         * @param left The "left" todo
+         * @param right The "right" todo
+         * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
+         */
+        private static _comparePriority(left: Todo, right: Todo): number
+        {
+            // Now we check on priority
+            if (left.priorityScore() !== right.priorityScore())
+            {
+                return left.priorityScore() < right.priorityScore() ? -1 : 1;
+            }
+            return 0;
+        }
+
+        /**
+         * Compares two Todo based on the given criteria
+         * @param left The "left" todo
+         * @param right The "right" todo
+         * @param sortType @see sortTypes;
+         * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
+         * @private
+         */
+        private static _compareTodo(left: Todo, right: Todo, sortType: string): number
+        {
+            switch (sortType)
+            {
+                case "Due Date":
+                    return TodoManager._compareDueDate(left, right);
+                    break;
+                case "Create Date":
+                    return TodoManager._compareCreateDate(left, right);
+                    break;
+                case "Priority":
+                    return TodoManager._comparePriority(left, right);
+                    break;
+                case "None":
+                    return 0;
+                default:
+                    console.warn("Unkown Sort Type: " + sortType);
+                    return 0;
+            }
+        }
+
         private sorter(left, right)
         {
             if (left.completed() !== right.completed())
@@ -138,23 +225,15 @@ module TodoTxtJs
                 }
             }
 
-            // Due date is more important than priority
-            if (left.dueDate() || right.dueDate())
-            {
-                if (!left.dueDate()) return 1;
-                if (!right.dueDate()) return -1;
+            var result = 0;
 
-                if (left.dueDate() !== right.dueDate())
-                {
-                    return left.dueDate() < right.dueDate() ? -1 : 1;
-                }
-            }
-            
-            // Now we check on priority
-            if (left.priorityScore() !== right.priorityScore())
-            {
-                return left.priorityScore() < right.priorityScore() ? -1 : 1;
-            }
+            // Due date is more important than priority
+            result = TodoManager._compareTodo(left, right, "Due Date");
+            if (result !== 0) return result;
+
+            // Due date is more important than priority
+            result = TodoManager._compareTodo(left, right, "Priority");
+            if (result !== 0) return result;
 
             // Run out of significant values so use file order.
             return left.index < right.index ? -1 : 1;

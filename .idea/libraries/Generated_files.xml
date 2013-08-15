@@ -4,6 +4,7 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/options.js" />
+        <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
@@ -11,6 +12,7 @@
       <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
+      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
