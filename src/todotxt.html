@@ -128,7 +128,7 @@
 <section class="filters">
     <div class="filter-options-table">
         <div class="filter-options-row">
-            <div class="display-options">
+            <div class="display-options" data-bind="with: displayOptions">
                 <label class="display-options-label label">Show:</label>
                 <div class="display-options-item">
                     <label>
@@ -149,7 +149,7 @@
                     </label>
                 </div>
             </div>
-            <div class="display-options-sort">
+            <div class="display-options-sort" data-bind="with: displayOptions">
                 <label>
                     Sort by
                     <select data-bind="value: primarySort, options: sortTypes"></select>
@@ -374,7 +374,7 @@
                         <span data-bind="text: priority, attr: { 'class': 'todo-view-priority-' + priority() }, click: function(data,event) { todoTxtView.addFilter('(' + priority() + ')'); return true; }"></span>
                     </span>
                     <span class="todo-view-priorityBrace" data-bind="visible: priority !== null">)</span>
-                    <span class="todo-view-createDate" data-bind="visible: createdDate() !== null && $root.showCreatedDate(), text: createdDate"></span>
+                    <span class="todo-view-createDate" data-bind="visible: createdDate() !== null && $root.displayOptions.showCreatedDate(), text: createdDate"></span>
                     <span class="todo-view-message" data-bind="html: TodoTxtJs.ContentRender.render(contents, $root.renderOptions())"></span>
                 </span>
             </div>

@@ -29,6 +29,7 @@
 /// <reference path="../model/todo.ts" />
 /// <reference path="../model/todomanager.ts" />
 /// <reference path="../views/options.ts" />
+/// <reference path="../views/displayOptions.ts" />
 /// <reference path="../views/importing.ts" />
 /// <reference path="../views/exporting.ts" />
 
@@ -45,20 +46,13 @@ module TodoTxtJs.View
 
         public newPriorityFilter: KnockoutObservable<string>;
 
+        public displayOptions: DisplayOptions;
         public options: Options;
         public importing: Importing;
         public exporting: Exporting;
 
         public filters: KnockoutObservable<string>;
         public filtered: KnockoutComputed<boolean>;
-
-        public showCompleted: KnockoutObservable<boolean>;
-        public showShortUrls: KnockoutObservable<boolean>;
-        public showCreatedDate: KnockoutObservable<boolean>;
-
-        public primarySort: KnockoutComputed<string>;
-        public secondarySort: KnockoutComputed<string>;
-        public sortTypes: string[];
 
         public renderOptions: KnockoutComputed<any>;
 
@@ -84,7 +78,9 @@ module TodoTxtJs.View
 
             this.newPriorityFilter = ko.observable(undefined);
 
+            this.displayOptions = new DisplayOptions(this._todoManager);
             this.options = new Options();
+            this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 
             this.importing = new Importing(this._todoManager);
             this.exporting = new Exporting(this._todoManager);
@@ -93,39 +89,6 @@ module TodoTxtJs.View
             this.filters.subscribe((newValue: string) => { Main.setQueryString("filter", newValue); });
             this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
 
-            this.showCompleted = ko.observable<boolean>(false);
-            this.showShortUrls = ko.observable<boolean>(true);
-            this.showCreatedDate = ko.observable<boolean>(true);
-
-            this.primarySort = ko.computed<string>(
-                {
-                    owner: this,
-                    read: ():string =>
-                    {
-                        return this._todoManager.primarySort();
-                    },
-                    write: (newValue: string)=>
-                    {
-                        this._todoManager.primarySort(newValue);
-                    }
-                });
-
-            this.secondarySort = ko.computed<string>(
-                {
-                    owner: this,
-                    read: ():string =>
-                    {
-                        return this._todoManager.secondarySort();
-                    },
-                    write: (newValue: string)=>
-                    {
-                        this._todoManager.secondarySort(newValue);
-                    }
-                });
-
-            this.sortTypes = this._todoManager.sortTypes;
-
-            this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 
             this.newTodoText = ko.observable<string>("");
             this.spinner = ko.observable<boolean>(false);
@@ -134,7 +97,6 @@ module TodoTxtJs.View
             this.notice = ko.observable<string>(undefined);
             this.pageReady = ko.observable<boolean>(false);
             $(document).ready(() => { this.pageReady(true); });
-
 
             this._initializeAutoComplete();
             this._initializeKeyboardShortCuts();
@@ -187,6 +149,7 @@ module TodoTxtJs.View
             };
 
             this.options.storageInfo().save(this.exporting.buildExportText(), onSuccess, onError);
+            this.displayOptions.save();
         };
 
         public load() : void
@@ -195,10 +158,12 @@ module TodoTxtJs.View
             if (Main.getQueryString("defaults"))
             {
                 this.options.save();
+                this.displayOptions.save();
             }
             else
             {
                 this.options.load();
+                this.displayOptions.load();
             }
 
             var onSuccess = (data) : void =>
@@ -345,9 +310,9 @@ module TodoTxtJs.View
          * @param todo The todo object to inspect.
          * @returns true if the Todo should be visible.
          */
-        public isDisplayed(todo : Todo) : boolean
+        public isDisplayed(todo: Todo): boolean
         {
-            if (!this.showCompleted() && todo.completed())
+            if (!this.displayOptions.showCompleted() && todo.completed())
             {
                 return false;
             }
@@ -591,7 +556,7 @@ module TodoTxtJs.View
         private _getRenderOptions() : any
         {
             var result = new ContentRenderOptions();
-            result.shortUrls = this.showShortUrls();
+            result.shortUrls = this.displayOptions.showShortUrls();
 
             return result;
         }

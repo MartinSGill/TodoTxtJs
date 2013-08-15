@@ -97,6 +97,10 @@
     <Content Include="src\js\utils\events.js.map">
       <DependentUpon>events.ts</DependentUpon>
     </Content>
+    <TypeScriptCompile Include="src\js\views\displayOptions.ts" />
+    <Content Include="src\js\views\displayOptions.js">
+      <DependentUpon>displayOptions.ts</DependentUpon>
+    </Content>
     <Content Include="src\js\views\exporting.js.map">
       <DependentUpon>exporting.ts</DependentUpon>
     </Content>
@@ -182,7 +186,11 @@
     <Content Include="build\package.json" />
     <Content Include="build\README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="src\js\views\displayOptions.js.map">
+      <DependentUpon>displayOptions.ts</DependentUpon>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="src\js\app.min.js.map">
       <DependentUpon>app.js</DependentUpon>
