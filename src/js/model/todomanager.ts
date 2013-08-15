@@ -31,6 +31,16 @@ module TodoTxtJs
         private _nextIndex = 0;
         private _data = ko.observableArray([]);
 
+        public sortTypes: string[] = ["None", "Due Date", "Priority", "Create Date"];
+        public primarySort: KnockoutObservable<string>;
+        public secondarySort: KnockoutObservable<string>;
+
+        constructor()
+        {
+            this.primarySort = ko.observable(this.sortTypes[1]);
+            this.secondarySort = ko.observable(this.sortTypes[2]);
+        }
+
         public all()
         {
             return this._data().sort(this.sorter);
@@ -211,7 +221,7 @@ module TodoTxtJs
             }
         }
 
-        private sorter(left, right)
+        private sorter = (left, right): number =>
         {
             if (left.completed() !== right.completed())
             {
@@ -228,11 +238,11 @@ module TodoTxtJs
             var result = 0;
 
             // Due date is more important than priority
-            result = TodoManager._compareTodo(left, right, "Due Date");
+            result = TodoManager._compareTodo(left, right, this.primarySort());
             if (result !== 0) return result;
 
             // Due date is more important than priority
-            result = TodoManager._compareTodo(left, right, "Priority");
+            result = TodoManager._compareTodo(left, right, this.secondarySort());
             if (result !== 0) return result;
 
             // Run out of significant values so use file order.

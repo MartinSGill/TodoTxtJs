@@ -50,14 +50,15 @@ module TodoTxtJs.View
         public exporting: Exporting;
 
         public filters: KnockoutObservable<string>;
+        public filtered: KnockoutComputed<boolean>;
+
         public showCompleted: KnockoutObservable<boolean>;
         public showShortUrls: KnockoutObservable<boolean>;
         public showCreatedDate: KnockoutObservable<boolean>;
-        public filtered: KnockoutComputed<boolean>;
 
-        public sortTypes: string[] = ["None", "Due Date", "Priority", "Create Date"];
-        public primarySort: KnockoutObservable<string>;
-        public secondarySort: KnockoutObservable<string>;
+        public primarySort: KnockoutComputed<string>;
+        public secondarySort: KnockoutComputed<string>;
+        public sortTypes: string[];
 
         public renderOptions: KnockoutComputed<any>;
 
@@ -74,8 +75,8 @@ module TodoTxtJs.View
         {
             this._todoManager = new TodoTxtJs.TodoManager();
 
-            this.version = ko.observable<string>("1.2.3");
             this.title = ko.observable<string>("TodoTxtJs");
+            this.version = ko.observable<string>("1.3.0");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.observableArray([]);
             this.projects = ko.computed({owner: this, read: this._getAllProjects});
@@ -90,14 +91,39 @@ module TodoTxtJs.View
 
             this.filters = ko.observable<string>("");
             this.filters.subscribe((newValue: string) => { Main.setQueryString("filter", newValue); });
+            this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
 
             this.showCompleted = ko.observable<boolean>(false);
             this.showShortUrls = ko.observable<boolean>(true);
             this.showCreatedDate = ko.observable<boolean>(true);
-            this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
 
-            this.primarySort = ko.observable(this.sortTypes[0]);
-            this.secondarySort = ko.observable(this.sortTypes[1]);
+            this.primarySort = ko.computed<string>(
+                {
+                    owner: this,
+                    read: ():string =>
+                    {
+                        return this._todoManager.primarySort();
+                    },
+                    write: (newValue: string)=>
+                    {
+                        this._todoManager.primarySort(newValue);
+                    }
+                });
+
+            this.secondarySort = ko.computed<string>(
+                {
+                    owner: this,
+                    read: ():string =>
+                    {
+                        return this._todoManager.secondarySort();
+                    },
+                    write: (newValue: string)=>
+                    {
+                        this._todoManager.secondarySort(newValue);
+                    }
+                });
+
+            this.sortTypes = this._todoManager.sortTypes;
 
             this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 
