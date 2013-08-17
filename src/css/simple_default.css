@@ -413,9 +413,8 @@ form
 	border: 1px solid silver;
 	border-radius: 5px;
 	padding: 5px;
-	height: 25px;
 	background-color: #e1e1ff;
-        display: block;
+    display: block;
 }
 .filter-options-table
 {
@@ -434,11 +433,13 @@ form
 	display: table-cell;
     width: auto;
     text-align: right;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .quickFilter-input
 {
-	width: 300px;
+	width: 200px;
 }
 
 .quickFilter-label
