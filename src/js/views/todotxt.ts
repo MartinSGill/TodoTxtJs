@@ -38,7 +38,7 @@ module TodoTxtJs.View
     export class Main
     {
         public version : KnockoutObservable<string>;
-        public title : KnockoutObservable<string>;
+        public title : KnockoutComputed<string>;
         public allTodos: KnockoutComputed<Todo[]>;
         public priorities: KnockoutObservableArray<string>;
         public projects: KnockoutComputed<string[]>;
@@ -62,6 +62,7 @@ module TodoTxtJs.View
         public notice: KnockoutObservable<string>;
         public pageReady: KnockoutObservable<boolean>;
 
+        private _title: KnockoutObservable<string>;
         private _todoManager: TodoManager;
         private static _queryStringParams: any;
 
@@ -69,7 +70,7 @@ module TodoTxtJs.View
         {
             this._todoManager = new TodoTxtJs.TodoManager();
 
-            this.title = ko.observable<string>("TodoTxtJs");
+            this._title = ko.observable<string>("TodoTxtJs");
             this.version = ko.observable<string>("1.3.1");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.observableArray([]);
@@ -88,7 +89,15 @@ module TodoTxtJs.View
             this.filters = ko.observable<string>("");
             this.filters.subscribe((newValue: string) => { Main.setQueryString("filter", newValue); });
             this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
-
+            this.title = ko.computed(
+                {
+                    owner: this,
+                    read: ()=>
+                    {
+                        if (!this.filtered()) return this._title();
+                        else return this._title() + " (filtered)";
+                    }
+                });
 
             this.newTodoText = ko.observable<string>("");
             this.spinner = ko.observable<boolean>(false);
@@ -463,7 +472,7 @@ module TodoTxtJs.View
 
         private _getIsFiltered() : boolean
         {
-            return this.filters() && this.filters().length > 0;
+            return (this.filters() && this.filters().length > 0);
         }
 
         /**
