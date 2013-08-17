@@ -560,6 +560,12 @@ form
 	width: 100%;
 }
 
+.todo-view-display
+{
+    text-indent: -30px;
+    padding-left: 35px;
+}
+
 .todo-view-list
 {
 	min-width: 150px;
@@ -636,6 +642,7 @@ form
 .todo-view-message
 {
 	cursor: pointer;
+    text-indent: 0;
 }
 
 .todo-view-createDate
