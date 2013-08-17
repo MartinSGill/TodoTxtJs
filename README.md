@@ -32,11 +32,15 @@ What?
 * Filter on anything
 * Save to Local Browser Storage, or Sync with your Dropbox account.
 * Due date support
-* see in app Help (?) for more...
+* see in app Help (?) for more capabilities
+* or the [Wiki](https://github.com/MartinSGill/TodoTxtJs/wiki) for in-depth information
 
 When?
 -----
 
+These include only headline feature changes. See the commits for full details.
+
+* v1.3 - Custom Sorting
 * v1.2 - Themes support
 * v1.1 - Support for due-date and metadata.
 * v1.0 - Most features in place. Fully usable.
