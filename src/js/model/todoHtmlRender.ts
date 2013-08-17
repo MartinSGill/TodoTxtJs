@@ -87,7 +87,7 @@ module TodoTxtJs
 
             formattedMessage = formattedMessage.replace(projectRegex, replacement);
             return formattedMessage;
-            
+
         }
 
         private static _renderUrls(contents: string, options: ContentRenderOptions): string
@@ -131,12 +131,12 @@ module TodoTxtJs
             var date = null;
             if (match)
             {
-                date = match[2];
+                date = new Date(match[2]);
                 var replacement = "";
                 replacement += '<span class="todo-metadata todo-due-date ' + ContentRender._dueDateDistanceStyle(date) + '">';
                 replacement += '  <span class="todo-metadata-name">$1</span>';
                 replacement += '  <span class="todo-metadata-seperator">:</span>';
-                replacement += '  <span class="todo-metadata-value">$2</span>';
+                replacement += '  <span class="todo-metadata-value">' + DateTime.dateToInformalString(date) + '</span>';
                 replacement += '</span>';
 
                 formattedMessage = formattedMessage.replace(dueDateRegex, replacement);

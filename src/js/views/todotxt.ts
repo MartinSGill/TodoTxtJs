@@ -115,6 +115,19 @@ module TodoTxtJs.View
             this.saveOnChange();
         }
 
+        public formatDate(date:string):string
+        {
+            if (date)
+            {
+                var _date = new Date(date);
+                return DateTime.dateToInformalString(_date);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         /**
          * Alias for load.
          */

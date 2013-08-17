@@ -236,7 +236,7 @@
                         </div>
                         <div class="options-value">
                             <label>
-                                <input type="checkbox" data-bind="checked: saveOnChange" />
+                                <input type="checkbox" data-bind="checked: addCreatedDate" />
                             </label>
                         </div>
                         <div class="options-description">
@@ -369,13 +369,13 @@
                 </label>
                 <span data-bind="css: { completed: completed }">
                     <span class="todo-view-completedFlag" data-bind="visible: completed">x</span>
-                    <span class="todo-view-completedDate" data-bind="text: completedDate(), visible: completed"></span>
+                    <span class="todo-view-completedDate" data-bind="text: $root.formatDate(completedDate()), visible: completed"></span>
                     <span class="todo-view-priorityBrace" data-bind="visible: priority !== null">(</span>
                     <span class="todo-view-priority" data-bind="visible: priority != null">
                         <span data-bind="text: priority, attr: { 'class': 'todo-view-priority-' + priority() }, click: function(data,event) { todoTxtView.addFilter('(' + priority() + ')'); return true; }"></span>
                     </span>
                     <span class="todo-view-priorityBrace" data-bind="visible: priority !== null">)</span>
-                    <span class="todo-view-createDate" data-bind="visible: createdDate() !== null && $root.displayOptions.showCreatedDate(), text: createdDate"></span>
+                    <span class="todo-view-createDate" data-bind="visible: createdDate() !== null && $root.displayOptions.showCreatedDate(), text: $root.formatDate(createdDate())"></span>
                     <span class="todo-view-message" data-bind="html: TodoTxtJs.ContentRender.render(contents, $root.renderOptions())"></span>
                 </span>
             </div>
