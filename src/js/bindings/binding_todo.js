@@ -26,7 +26,7 @@ ko.bindingHandlers.todo = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
         var template = $(element);
         var viewer = template.find(".todo-view-display");
-        var trigger = template.find(".todo-view-message");
+        var trigger = template.find(".todo-view-message, .todo-view-createDate");
         var editor = template.find(".todo-view-edit");
         var input = template.find(".todo-view-edit input");
 

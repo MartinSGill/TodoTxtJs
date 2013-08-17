@@ -650,6 +650,7 @@ form
 	color: $todo-createDate$;
 	font-size: smaller;
 	font-family: sans-serif;
+    cursor: pointer;
 }
 
 .todo-view-completedDate

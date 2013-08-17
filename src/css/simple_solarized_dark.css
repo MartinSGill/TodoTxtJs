@@ -650,6 +650,7 @@ form
 	color: #2aa198;
 	font-size: smaller;
 	font-family: sans-serif;
+    cursor: pointer;
 }
 
 .todo-view-completedDate
