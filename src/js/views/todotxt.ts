@@ -40,7 +40,7 @@ module TodoTxtJs.View
         public version : KnockoutObservable<string>;
         public title : KnockoutComputed<string>;
         public allTodos: KnockoutComputed<Todo[]>;
-        public priorities: KnockoutObservableArray<string>;
+        public priorities: KnockoutComputed<string[]>;
         public projects: KnockoutComputed<string[]>;
         public contexts: KnockoutComputed<string[]>;
 
@@ -71,9 +71,9 @@ module TodoTxtJs.View
             this._todoManager = new TodoTxtJs.TodoManager();
 
             this._title = ko.observable<string>("TodoTxtJs");
-            this.version = ko.observable<string>("1.3.1");
+            this.version = ko.observable<string>("1.3.2");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
-            this.priorities = ko.observableArray([]);
+            this.priorities = ko.computed({owner: this, read: this._getAllPriorities});
             this.projects = ko.computed({owner: this, read: this._getAllProjects});
             this.contexts = ko.computed({owner: this, read: this._getAllContexts});
 
@@ -267,6 +267,10 @@ module TodoTxtJs.View
         public addFilterFromElement(newFilter: HTMLElement) : void
         {
             var filterText = $(newFilter).text();
+            if (filterText.length == 1)
+            {
+                filterText = '(' + filterText + ')';
+            }
             this.addFilter(filterText);
         }
 
@@ -490,6 +494,30 @@ module TodoTxtJs.View
         private _getAllTodos() : Todo[]
         {
             return this._todoManager.all();
+        }
+
+        private _getAllPriorities() : string[]
+        {
+            var hash = {};
+            for (var i = 0; i < this.allTodos().length; i++)
+            {
+                if (this.isDisplayed(this.allTodos()[i]))
+                {
+                    var priority = this.allTodos()[i].priority();
+                    hash[priority] = true;
+                }
+            }
+
+            var result = [];
+            for(var name in hash)
+            {
+                if (hash.hasOwnProperty(name))
+                {
+                    result.push(name);
+                }
+            }
+
+            return result.sort();
         }
 
         private _getAllProjects() : string[]

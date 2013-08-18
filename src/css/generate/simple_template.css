@@ -586,6 +586,20 @@ form
 		padding-left: 10px;
 	}
 
+.todo-view-sidebar-priorities
+{
+    list-style: none;
+    color: $todo-priority-default$;
+}
+
+.todo-view-sidebar-priorities li
+{
+    display: inline;
+    font-family: sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .todo-view-index
 {
 	display: none;

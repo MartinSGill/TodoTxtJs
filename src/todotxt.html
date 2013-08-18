@@ -181,6 +181,12 @@
         <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
         <!-- /ko -->
         <section class="todo-view-sidebar">
+            <h3>Priorities</h3>
+            <ul data-bind="foreach: priorities" class="todo-view-sidebar-priorities">
+                <li data-bind="text: $data, attr: { 'class': 'todo-view-priority-' + $data }"
+                    onclick="todoTxtView.addFilterFromElement(this)"
+                    class="todo-view-priority todo-view-sidebar-priority"></li>
+            </ul>
             <h3>Contexts</h3>
             <ul data-bind="foreach: contexts">
                 <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
