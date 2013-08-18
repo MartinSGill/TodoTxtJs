@@ -23,6 +23,7 @@
 
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../defs/jquery.d.ts" />
+/// <reference path="../model/todomanager.ts" />
 module TodoTxtJs.View
 {
     interface IDisplayStorage

@@ -50,6 +50,9 @@ module TodoTxtJs.View
         public saveOnChange: KnockoutObservable<boolean>;
         public saveOnChangeDescription: KnockoutObservable<string>;
 
+        public swapSidebarPosition: KnockoutObservable<boolean>;
+        public swapSidebarPositionDescription: KnockoutObservable<string>;
+
         public theme: KnockoutComputed<IThemeDefinition>;
         public themeDescription: string = "The theme to use for this page.";
         public themes: IThemeDefinition[];
@@ -103,6 +106,9 @@ module TodoTxtJs.View
             this.saveOnChange = ko.observable<boolean>(true);
             this.saveOnChangeDescription = ko.observable<string>("Save changes immediatly after you add/remove/edit a Todo.");
 
+            this.swapSidebarPosition = ko.observable<boolean>(false);
+            this.swapSidebarPositionDescription = ko.observable<string>("Place the sidebar on the left of the Todo list.");
+
             this.themes = [
                 { name: "Original", file: "simple_default.css" },
                 { name: "Solarized Dark", file: "simple_solarized_dark.css" },
@@ -144,7 +150,7 @@ module TodoTxtJs.View
 
             // Just write out everything, it's during loading we're selective
             window.localStorage["TodoTxtJsOptions"] = ko.toJSON(this);
-            if (oldOptions.storage !== this.storage() && todoTxtView) 
+            if (oldOptions.storage !== this.storage() && todoTxtView)
             {
                 todoTxtView.load();
             }
@@ -186,7 +192,7 @@ module TodoTxtJs.View
                 // Theme
                 if (options.hasOwnProperty("themeName"))
                 {
-                    // Make sure always have a theme, even if the 
+                    // Make sure always have a theme, even if the
                     // saved option is nonsense.
                     for (var i = 0; i < this.themes.length; i++)
                     {
@@ -196,6 +202,12 @@ module TodoTxtJs.View
                             break;
                         }
                     }
+                }
+
+                // swap Sidebar
+                if (options.hasOwnProperty("swapSidebarPosition"))
+                {
+                    this.swapSidebarPosition(options.swapSidebarPosition);
                 }
             }
         }
