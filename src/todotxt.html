@@ -180,7 +180,7 @@
         <!-- ko if: !$root.options.swapSidebarPosition() -->
         <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
         <!-- /ko -->
-        <section class="todo-view-list">
+        <section class="todo-view-sidebar">
             <h3>Contexts</h3>
             <ul data-bind="foreach: contexts">
                 <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
@@ -355,6 +355,22 @@
             </span>
         </li>
     </ul>
+    <h2>Privacy</h2>
+    <p>
+        Once this page (Javascript App) has been loaded no further communication with the hosting server is
+        done, except for CSS (style) files and images etc.
+    </p>
+    <p>
+        Your Todos are saved either directly in your browser's local storage, or on Dropbox and their content
+        are never seen by this App's server.
+    </p>
+    <p>
+        Google Analytics are used to track usage and errors. The content of your Todos are never sent anywhere
+        only the fact that you created/deleted/loaded/saved a todo, never its content.
+    </p>
+        If you want to verify this yourself, the source code is available for you to review, and you can check
+        the network traffic using the tools provided with your browser.
+    </p>
     <h2>Addendum</h2>
     <ul>
         <li>Bugs?, Questions?, Suggestions? <a href="https://github.com/MartinSGill/TodoTxtJs/issues/new" target="_blank">Please log an issue in GitHub</a>.</li>

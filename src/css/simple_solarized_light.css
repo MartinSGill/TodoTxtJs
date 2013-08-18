@@ -566,19 +566,19 @@ form
     padding-left: 35px;
 }
 
-.todo-view-list
+.todo-view-sidebar
 {
 	min-width: 150px;
 	display: table-cell;
 	padding-left: 5px;
 }
 
-	.todo-view-list h3
+	.todo-view-sidebar h3
 	{
 		margin: 0;
 	}
 
-	.todo-view-list ul
+	.todo-view-sidebar ul
 	{
 		margin: 0;
 		list-style-position: outside;
