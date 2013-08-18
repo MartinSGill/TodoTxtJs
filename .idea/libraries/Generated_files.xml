@@ -6,6 +6,7 @@
         <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
+        <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/options.js" />
       </sourceFilesUrls>
     </properties>
@@ -15,6 +16,11 @@
       <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
+      <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
+      <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
+      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
+      <root url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
+      <root url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
     </CLASSES>

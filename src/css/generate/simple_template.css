@@ -351,23 +351,22 @@ form
     width: 100%;
 }
 
-.options-entry:not(:first-of-type) .options-value
-{
-    border-top: thin dotted $filters-border$;
-}
 
 .options-name
 {
+    width: 125px;
     display:table-cell;
-    width: 110px;
-    text-align: right;
     padding-right: 2px;
+    font-weight: bold;
+
 }
 
 .options-value
 {
     display: table-cell;
     width: 150px;
+    text-align: right;
+    padding-right: 5px;
 }
 
 .options-decription
@@ -378,7 +377,7 @@ form
 
 .options-warning
 {
-    color: $menu-warning-text$;
+
     color: $menu-warning-background$;
     font-style: italic;
 }
