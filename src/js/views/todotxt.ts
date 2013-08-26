@@ -496,7 +496,7 @@ module TodoTxtJs.View
             return this._todoManager.all();
         }
 
-        private _getAllPriorities() : string[]
+        private _getAllPriorities(): string[]
         {
             var hash = {};
             for (var i = 0; i < this.allTodos().length; i++)
@@ -504,7 +504,10 @@ module TodoTxtJs.View
                 if (this.isDisplayed(this.allTodos()[i]))
                 {
                     var priority = this.allTodos()[i].priority();
-                    hash[priority] = true;
+                    if (priority)
+                    {
+                        hash[priority] = true;
+                    }
                 }
             }
 
