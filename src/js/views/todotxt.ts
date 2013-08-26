@@ -216,9 +216,15 @@ module TodoTxtJs.View
             }
         }
 
-        public addNewTodo() : void
+        public addNewTodo(): void
         {
-            var todo = new TodoTxtJs.Todo(this.newTodoText());
+            var source = this.newTodoText();
+            if (source == null || source.trim().length == 0)
+            {
+                return;
+            }
+
+            var todo = new TodoTxtJs.Todo(source);
             if (this.options.addCreatedDate())
             {
                 if (!todo.createdDate())
