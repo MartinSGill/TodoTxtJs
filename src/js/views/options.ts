@@ -43,6 +43,9 @@ module TodoTxtJs.View
         public addCreatedDate : KnockoutObservable<boolean>;
         public addCreatedDateDescription : KnockoutObservable<string>;
 
+        public removeCompletePriority: KnockoutObservable<boolean>;
+        public removeCompletePriorityDescription: KnockoutObservable<string>;
+
         public showStorageControls: KnockoutComputed<boolean>;
         public showImport: KnockoutComputed<boolean>;
         public showExport: KnockoutComputed<boolean>;
@@ -63,10 +66,10 @@ module TodoTxtJs.View
         constructor()
         {
             this.storageOptions = ko.observableArray([
-                                                         new TodoTxtJs.StorageProviders.BrowserStorage(),
-                                                         new TodoTxtJs.StorageProviders.DropboxStorage()
-                                                     ]
-            );
+                new TodoTxtJs.StorageProviders.BrowserStorage(),
+                new TodoTxtJs.StorageProviders.DropboxStorage()
+            ]);
+
             this.storageInfo = ko.observable(this.storageOptions()[0]);
             this.storage = ko.computed({
                        owner: this,
@@ -78,6 +81,9 @@ module TodoTxtJs.View
 
             this.addCreatedDate = ko.observable<boolean>(false);
             this.addCreatedDateDescription = ko.observable<string>("Automatically add a start date to new TODOs.");
+
+            this.removeCompletePriority = ko.observable<boolean>(false);
+            this.removeCompletePriorityDescription = ko.observable<string>("Compatibility with official apps. Removes the priority from a Todo when it's marked as completed.");
 
             this.showStorageControls = ko.computed({
                        owner: this,
@@ -181,6 +187,12 @@ module TodoTxtJs.View
                 if (options.hasOwnProperty("addCreatedDate"))
                 {
                     this.addCreatedDate(options.addCreatedDate);
+                }
+
+                // Remove Completed Priority
+                if (options.hasOwnProperty("removeCompletePriority"))
+                {
+                    this.removeCompletePriority(options.removeCompletePriority);
                 }
 
                 // Auto-save

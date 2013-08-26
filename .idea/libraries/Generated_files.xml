@@ -2,27 +2,23 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
-        <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
-        <item url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
-        <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
-        <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/options.js" />
+        <item url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
+        <item url="file://$PROJECT_DIR$/src/js/model/todo.js" />
+        <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
+        <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
+        <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
-      <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
-      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
-      <root url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
-      <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
-      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
+      <root url="file://$PROJECT_DIR$/src/js/model/todo.js" />
+      <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
-      <root url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
-      <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
+      <root url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

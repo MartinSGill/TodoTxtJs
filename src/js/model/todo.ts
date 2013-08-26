@@ -24,6 +24,9 @@
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
+/// <reference path="../views/todotxt.ts" />
+
+var todoTxtView : TodoTxtJs.View.Main;
 
 module TodoTxtJs
 {
@@ -121,7 +124,7 @@ module TodoTxtJs
             this.priorityScore = ko.computed(
                 {
                     owner: this,
-                    read: () : number =>
+                    read: (): number =>
                     {
                         this._parse();
                         if (this._priority)
@@ -148,6 +151,10 @@ module TodoTxtJs
                         this._completed = value;
                         if (this._completed)
                         {
+                            if (todoTxtView.options.removeCompletePriority())
+                            {
+                                this._priority = null;
+                            }
                             TodoTxtJs.Events.onComplete();
                             this._completedDate = DateTime.toISO8601Date(new Date());
                         }

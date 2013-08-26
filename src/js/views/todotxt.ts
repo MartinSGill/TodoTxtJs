@@ -27,6 +27,7 @@
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../model/todo.ts" />
+/// <reference path="../model/todoHtmlRender.ts" />
 /// <reference path="../model/todomanager.ts" />
 /// <reference path="../views/options.ts" />
 /// <reference path="../views/displayOptions.ts" />
@@ -71,7 +72,7 @@ module TodoTxtJs.View
             this._todoManager = new TodoTxtJs.TodoManager();
 
             this._title = ko.observable<string>("TodoTxtJs");
-            this.version = ko.observable<string>("1.3.3");
+            this.version = ko.observable<string>("1.3.4");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.computed({owner: this, read: this._getAllPriorities});
             this.projects = ko.computed({owner: this, read: this._getAllProjects});
@@ -606,7 +607,7 @@ module TodoTxtJs.View
          * Get the options for rendering the HTML contents of the todo.
          * @returns an options object.
          */
-        private _getRenderOptions() : any
+        private _getRenderOptions(): any
         {
             var result = new ContentRenderOptions();
             result.shortUrls = this.displayOptions.showShortUrls();
