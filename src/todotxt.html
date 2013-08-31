@@ -315,7 +315,12 @@
         <li>You can specify a <span class="__tt todo-view-context">@Context</span> with the <span class="__tt todo-view-context">@</span> symbol.</li>
         <li>You can have as many Projects and Contexts as you like.</li>
         <li>URLs are recognised and will open in a new tab if you click on them.</li>
-        <li>You can optionally add a due date. <span class="__tt">due:2013-01-02</span>. </li>
+        <li>You can optionally add a due date. <span class="__tt">due:2013-01-02</span>.
+            <ul>
+                <li>Also supports informal dates e.g.: "today"; "tomorrow"; "sunday"; "5d" (in 5 days); "2w" (in 2 weeks)</li>
+                <li>Informal dates will always be converted to an actual date.</li>
+            </ul>
+        </li>
         <li>You can also review <a href="https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format" target="_blank">the full format specifications</a>.</li>
     </ul>
     <h2>
@@ -343,7 +348,7 @@
                     <span class="todo-metadata todo-due-date todo-due-date_past">
                         <span class="todo-metadata-name" style="color: black">due</span>
                         <span class="todo-metadata-seperator">:</span>
-                        <span class="todo-metadata-value">2013-02-01</span>
+                        <span class="todo-metadata-value">Today</span>
                     </span>
                     Overdue, or due within 24 hours
                 </li>
@@ -351,7 +356,7 @@
                     <span class="todo-metadata todo-due-date todo-due-date_near">
                         <span class="todo-metadata-name" style="color: black">due</span>
                         <span class="todo-metadata-seperator">:</span>
-                        <span class="todo-metadata-value">2013-02-01</span>
+                        <span class="todo-metadata-value">Tomorrow</span>
                     </span>
                     Due soon (a few days).
                 </li>
@@ -359,7 +364,7 @@
                     <span class="todo-metadata todo-due-date todo-due-date_far">
                         <span class="todo-metadata-name" style="color: white">due</span>
                         <span class="todo-metadata-seperator">:</span>
-                        <span class="todo-metadata-value">2013-02-01</span>
+                        <span class="todo-metadata-value">2015-01-01</span>
                     </span>
                     Not due for a while.
                 </li>

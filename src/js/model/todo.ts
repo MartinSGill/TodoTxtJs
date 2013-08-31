@@ -24,9 +24,6 @@
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
-/// <reference path="../views/todotxt.ts" />
-
-var todoTxtView : TodoTxtJs.View.Main;
 
 module TodoTxtJs
 {
@@ -229,15 +226,19 @@ module TodoTxtJs
                     {
                         var result = undefined;
                         var dateRegex = /(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/;
+
                         var metadata = this.metadata();
                         var length = metadata.length;
                         for (var i = 0; i < length; i++)
                         {
                             var pair = metadata[i];
-                            if (pair.name === "due" && dateRegex.test(pair.value))
+                            if (pair.name === "due")
                             {
-                                result = new Date(pair.value);
-                                break; // stop at first valid due date.
+                                if (dateRegex.test(pair.value))
+                                {
+                                    result = new Date(pair.value);
+                                    break; // stop at first valid due date.
+                                }
                             }
                         }
 
@@ -246,7 +247,7 @@ module TodoTxtJs
                 });
         }
 
-        private static _findMetadata(text : string) : Array<ITodoMetadata>
+        private _findMetadata(text : string) : Array<ITodoMetadata>
         {
             var result : Array<ITodoMetadata> = [];
 
@@ -258,12 +259,76 @@ module TodoTxtJs
                     name: match[1].toLowerCase(),
                     value: match[2]
                 };
+
+                data = Todo._processKnownMetadata(data);
+                if (data.value !== match[2])
+                {
+                    this._contents = this._contents.replace(match[1] + ":" + match[2], Todo._metadataToString(data));
+                }
                 result.push(data);
 
                 match = metadataRegex.exec(text);
             }
 
             return result;
+        }
+
+        private static _metadataToString(data: ITodoMetadata): string
+        {
+            return data.name + ":" + data.value;
+        }
+
+        private static _processKnownMetadata(data: ITodoMetadata): ITodoMetadata
+        {
+            switch (data.name)
+            {
+                case "due":
+                    return Todo._processMetadataDueDate(data);
+                default:
+                    return data;
+            }
+        }
+
+        private static _processMetadataDueDate(data: ITodoMetadata): ITodoMetadata
+        {
+            var dateRegex = /(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/;
+            var relativeRegex = /(\d+)(d|w)?/;
+
+            if (data.name === "due")
+            {
+                if (dateRegex.test(data.value))
+                {
+                    // Do nothing, already correct date
+                }
+                else if (relativeRegex.test(data.value))
+                {
+                    var match = relativeRegex.exec(data.value);
+                    var days: number = parseInt(match[1]);
+
+                    if (match[2] && match[2] == "w")
+                    {
+                        days = days * 7;
+                    }
+
+                    var date = DateTime.relativeDayToDate(days);
+                    data.value = DateTime.toISO8601Date(date);
+                }
+                else
+                {
+                    // try for informal day
+                    try
+                    {
+                        var date = DateTime.informalDayToDate(data.value);
+                        data.value = DateTime.toISO8601Date(date);
+                    }
+                    catch (e)
+                    {
+                        // invalid, do nothing
+                    }
+                }
+            }
+
+            return data;
         }
 
         /**
@@ -346,7 +411,7 @@ module TodoTxtJs
 
                 this._projects = Todo._findFlags(this._contents, '+');
                 this._contexts = Todo._findFlags(this._contents, '@');
-                this._metadata = Todo._findMetadata(this._contents);
+                this._metadata = this._findMetadata(this._contents);
             }
         }
 

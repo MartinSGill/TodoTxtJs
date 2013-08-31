@@ -155,6 +155,9 @@ module TodoTxtJs
 
             switch(_informal)
             {
+                case "today":
+                    days = 0;
+                    break;
                 case "yesterday":
                     days = -1;
                     break;
