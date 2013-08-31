@@ -24,6 +24,7 @@
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../defs/jquery.d.ts" />
 /// <reference path="../defs/jqueryui.d.ts" />
+/// <reference path="../defs/jquery.jgrowl.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../model/todo.ts" />
@@ -60,7 +61,6 @@ module TodoTxtJs.View
         public newTodoText: KnockoutObservable<string>;
         public spinner: KnockoutObservable<boolean>;
         public lastUpdated: KnockoutObservable<string>;
-        public notice: KnockoutObservable<string>;
         public pageReady: KnockoutObservable<boolean>;
 
         private _title: KnockoutObservable<string>;
@@ -101,15 +101,14 @@ module TodoTxtJs.View
                 });
 
             this.newTodoText = ko.observable<string>("");
-            this.spinner = ko.observable<boolean>(false);
 
             this.lastUpdated = ko.observable<string>(undefined);
-            this.notice = ko.observable<string>(undefined);
             this.pageReady = ko.observable<boolean>(false);
             $(document).ready(() => { this.pageReady(true); });
 
             this._initializeAutoComplete();
             this._initializeKeyboardShortCuts();
+            this._initializeNotifications();
 
             $(window).unload(this.save);
             this.load();
@@ -148,26 +147,19 @@ module TodoTxtJs.View
 
         public save = () : void =>
         {
-            Main._highlightNotice();
-            this.notice("Saving Todos to " + this.options.storage());
-            this.spinner(true);
+            $.jGrowl("Saving to " + this.options.storage() + "...");
 
-            var onSuccess = ()=>
+            var onSuccess = () =>
             {
                 this.lastUpdated("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
-                this.notice("Last Saved: " + DateTime.toISO8601DateTime(new Date()));
-                this.spinner(false);
-                setTimeout(this._normalNotice, 1000);
+                $.jGrowl("Saved");
                 TodoTxtJs.Events.onSaveComplete(this.options.storage());
             };
 
             var onError = (error) =>
             {
-                this.notice("Error: [" + error  +  "]");
+                $.jGrowl(error, { header: "Error Saving", sticky: true });
                 this.lastUpdated("Error: [" + error  +  "]");
-                Main._highlightNotice(true);
-                setTimeout(this._normalNotice, 2000);
-                this.spinner(false);
                 TodoTxtJs.Events.onError("Error Saving (" + this.options.storage() + ") : [" + error + "]");
             };
 
@@ -177,7 +169,6 @@ module TodoTxtJs.View
 
         public load() : void
         {
-            Main._highlightNotice();
             if (Main.getQueryString("defaults"))
             {
                 this.options.save();
@@ -191,27 +182,22 @@ module TodoTxtJs.View
 
             var onSuccess = (data) : void =>
             {
+                this._todoManager.removeAll();
                 this._todoManager.loadFromStringArray(data);
-                this.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
-                this.spinner(false);
-                setTimeout(this._normalNotice, 1000);
+                this.lastUpdated("Last Loaded: " + DateTime.toISO8601DateTime(new Date()));
+                $.jGrowl("Loaded Sucessfully");
                 TodoTxtJs.Events.onLoadComplete(this.options.storage());
             };
 
             var onError = (error) : void =>
             {
-                this.notice("Loaded " + DateTime.toISO8601DateTime(new Date()));
-                Main._highlightNotice(true);
-                this.spinner(false);
-                setTimeout(()=> this._normalNotice, 2000);
+                $.jGrowl(error, { header: "Error loading", sticky: true });
                 TodoTxtJs.Events.onError("Error Loading (" + this.options.storage() + ") : [" + error + "]");
             };
 
             if (typeof(Storage) !== "undefined")
             {
-                this._todoManager.removeAll();
-                this.spinner(true);
-                this.notice("Loading Todos from " + this.options.storage());
+                $.jGrowl("Loading from " + this.options.storage() + "...");
                 this.options.storageInfo().load(onSuccess, onError);
             }
         }
@@ -432,25 +418,6 @@ module TodoTxtJs.View
         }
 
         /**
-         * Displays a notification to the user.
-         * @param isError true if this is an error message.
-         */
-        private static _highlightNotice(isError? : boolean) : void
-        {
-            var notice = $("#notice");
-            notice.addClass("notice-highlight");
-
-            if (isError)
-            {
-                notice.addClass("notice-error");
-            }
-            else
-            {
-                notice.removeClass("notice-error");
-            }
-        }
-
-        /**
          * Splits a list of terms into individual terms.
          * @param val the list of terms.
          */
@@ -486,19 +453,7 @@ module TodoTxtJs.View
             return (this.filters() && this.filters().length > 0);
         }
 
-        /**
-         * Moves (animates) the notification to its resting "normal" position.
-         */
-        private _normalNotice = () : void =>
-        {
-            var notice = $("#notice");
-            notice.find("#notice-text").effect("transfer", { to: $("#target") }, 1000);
-            notice.removeClass("notice-highlight");
-            this.lastUpdated(this.notice());
-            this.notice("");
-        };
-
-        private _getAllTodos() : Todo[]
+        private _getAllTodos(): Todo[]
         {
             return this._todoManager.all();
         }
@@ -774,6 +729,11 @@ module TodoTxtJs.View
                                       return false;
                                   }
                               });
+        }
+
+        private _initializeNotifications(): void
+        {
+            $.jGrowl.defaults.position = 'bottom-right';
         }
     }
 

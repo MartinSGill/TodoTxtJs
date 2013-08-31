@@ -975,3 +975,28 @@ form
 {
 
 }
+
+/*********************************************
+ * jGrowl overrides
+ *********************************************/
+
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer
+{
+	background-color: $notice-background$;
+	background-image: none;
+	color: $notice-text$;
+	opacity: 100;
+	-moz-opacity: 100;
+	width: 350px;
+}
+
+div.jGrowl div.jGrowl-notification div.jGrowl-header
+{
+	font-size: 16pt;
+	color: $notice-error$;
+}
+
+div.jGrowl-message
+{
+	font-size: 14pt;
+}

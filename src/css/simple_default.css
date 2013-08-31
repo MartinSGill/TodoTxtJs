@@ -225,12 +225,12 @@ form
 		width: 40%;
 		padding: 3px;
 		border-radius: 10px;
-		background-color: #ffd57a;
+		background-color: $notice$;
 	}
 
 .notice-error > span
 {
-	background-color: #e97072;
+	background-color: #FF4848;
 }
 
 #target
@@ -245,7 +245,7 @@ form
 
 .ui-effects-transfer
 {
-	border: 1px dotted black;
+	border: 1px dotted $notice-outline$;
 }
 
 .toolbox
@@ -974,4 +974,29 @@ form
 .ui-dialog-buttonset
 {
 
+}
+
+/*********************************************
+ * jGrowl overrides
+ *********************************************/
+
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer
+{
+	background-color: black;
+	background-image: none;
+	color: ivory;
+	opacity: 100;
+	-moz-opacity: 100;
+	width: 350px;
+}
+
+div.jGrowl div.jGrowl-notification div.jGrowl-header
+{
+	font-size: 16pt;
+	color: #FF4848;
+}
+
+div.jGrowl-message
+{
+	font-size: 14pt;
 }

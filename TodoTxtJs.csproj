@@ -63,6 +63,7 @@
     <Content Include="src\css\generate\simple_template.css" />
     <Content Include="src\css\simple_default.css" />
     <Content Include="src\css\simple_solarized_dark.css" />
+    <Content Include="src\css\simple_solarized_light.css" />
     <Content Include="src\images\dropbox-logos_dropbox-logotype-black-trimmed.png" />
     <Content Include="src\js\app.js.map">
       <DependentUpon>app.js</DependentUpon>
@@ -70,6 +71,7 @@
     <Content Include="src\js\app.min.js">
       <DependentUpon>app.js</DependentUpon>
     </Content>
+    <Content Include="src\js\defs\jquery.jgrowl.d.ts" />
     <Content Include="src\js\model\todo.js">
       <DependentUpon>todo.ts</DependentUpon>
     </Content>
@@ -215,6 +217,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\css\generate\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
 </Project>
