@@ -40,6 +40,7 @@ When?
 
 These include only headline feature changes. See the commits for full details.
 
+* v1.4 - Support for informal dates, New Notification UI
 * v1.3 - Custom Sorting
 * v1.2 - Themes support
 * v1.1 - Support for due-date and metadata.
