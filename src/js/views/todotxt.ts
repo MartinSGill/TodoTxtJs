@@ -596,17 +596,27 @@ module TodoTxtJs.View
 
         private _initializeKeyboardShortCuts()
         {
+            var _this = this;
             $(document).bind('keydown', 'n', function(event)
             {
                 event.preventDefault();
                 $(".addTodo Input").focus();
             });
 
-            $(document).bind('keydown', '?', function(event)
+            function help(event)
             {
                 event.preventDefault();
-                this.onClick_ShowHelp();
-            });
+                if ($("#help").is(":visible"))
+                {
+                    $("#help").dialog("close");
+                }
+                else
+                {
+                    _this.onClick_ShowHelp();
+                }
+            }
+
+            $(document).bind('keydown', 'shift+/', help);
         }
 
         /**
