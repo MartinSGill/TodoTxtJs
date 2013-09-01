@@ -263,12 +263,12 @@ module TodoTxtJs
             // Later this week
             if (_weekday > _other.getDay())
             {
-                result = _weekday - _other.getDay() + 1;
+                result = _weekday - _other.getDay();
             }
             // Next week
             else
             {
-                result = _weekday + (6 - _other.getDay()) + 1;
+                result = _weekday + (6 - _other.getDay());
             }
 
             return result;
