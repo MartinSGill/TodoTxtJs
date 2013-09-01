@@ -87,9 +87,9 @@ declare module Dropbox
 
     interface ClientWriteFileOptions
     {
-        lastVersionTag: string;
-        parentRev: string;
-        noOverwrite: boolean;
+        lastVersionTag?: string;
+        parentRev?: string;
+        noOverwrite?: boolean;
     }
 
     class ApiError
@@ -127,6 +127,14 @@ declare module Dropbox
 
         public readFile(path: string, options: ClientReadFileOptions, callback: (error: ApiError, contents: string, metadata: File.Stat, rangeInfo: Http.RangeInfo) => void): XMLHttpRequest;
         public writeFile(path: string, data: any, options: ClientWriteFileOptions, callback: (error: ApiError, metadata: File.Stat) => void): XMLHttpRequest;
+
+        public static ERROR: number;
+        public static RESET: number;
+        public static PARAM_SET: number;
+        public static PARAM_LOADED: number;
+        public static AUTHORIZED: number;
+        public static DONE: number;
+        public static SIGNED_OUT: number;
     }
 
     module Drivers

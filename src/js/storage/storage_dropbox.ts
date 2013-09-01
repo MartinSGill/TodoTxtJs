@@ -28,64 +28,88 @@ module TodoTxtJs.StorageProviders
 {
     export class DropboxStorage implements IStorageProvider
     {
-        public name:string = "Dropbox";
-        public description:string = "Stores your Todos in '/Todo/todo.txt' in your Dropbox account.";
+        public name: string = "Dropbox";
+        public description: string = "Stores your Todos in '/Todo/todo.txt' in your Dropbox account.";
         public controls = {
             storage: true,
             exports: true,
             imports: true
         };
 
+        private _versionTag: string;
+        private _client: Dropbox.Client;
+
         constructor()
         {
+            this._client = new Dropbox.Client({
+                // Read the getting started document
+                // or just read sample_dropbox_key.js
+                key: dropbox_key,
+                sandbox: false
+            });
 
+            this._client.authDriver(new Dropbox.Drivers.Redirect({ rememberUser: true }));
         }
 
-        public load = (onSuccess? : (Object) => void, onError?: (string) => void) : void =>
+        public load = (onSuccess?: (Object) => void, onError?: (string) => void): void =>
         {
-            this.authenticate(function(client)
-                              {
-                                  client.readFile('Todo/todo.txt', function(error, data){
-                                      if (error)
-                                      {
-                                          var errorMsg = JSON.parse(error.responseText).error;
-                                          if (onError)
-                                          {
-                                              onError(errorMsg);
-                                          }
-                                          return;
-                                      }
-
-                                      var todos = data.match(/^(.+)$/mg);
-                                      onSuccess(todos);
-                                  });
-                              }, onError);
+            var self = this;
+            this.authenticate(()=>
+            {
+                this._client.readFile('Todo/todo.txt', null, (error: Dropbox.ApiError, data: any, stat: Dropbox.File.Stat) =>
+                {
+                    this._onFileRead(error, data, stat, onSuccess, onError)
+                });
+            }, onError);
         };
 
-        public save = (data : Object, onSuccess? : () => void, onError?: (string) => void) : void =>
+        public save = (data: Object, onSuccess?: () => void, onError?: (string) => void): void =>
         {
-            this.authenticate((client) =>
-                              {
-                                  client.writeFile('Todo/todo.txt', data, function(error, data){
-                                      if (error)
-                                      {
-                                          var errorMsg = JSON.parse(error.responseText).error;
-                                          if (onError)
-                                          {
-                                              onError(errorMsg);
-                                          }
-                                          return;
-                                      }
+            this.authenticate(() =>
+            {
+                this._client.writeFile('Todo/todo.txt', data, { lastVersionTag: this._versionTag, noOverwrite: false }, function (error, data)
+                {
+                    if (error)
+                    {
+                        var errorMsg = JSON.parse(error.responseText).error;
+                        if (onError)
+                        {
+                            onError(errorMsg);
+                        }
+                        return;
+                    }
 
-                                      if (onSuccess)
-                                      {
-                                          onSuccess();
-                                      }
-                                  });
-                              }, onError);
+                    if (onSuccess)
+                    {
+                        onSuccess();
+                    }
+                });
+            }, onError);
         };
 
-        private _authenticating:boolean = false;
+        private _onFileRead = (error: Dropbox.ApiError,
+            data: any,
+            stat: Dropbox.File.Stat,
+            onSuccess: (todos: string[]) => void,
+            onError: (error: string) => void)
+            : void =>
+        {
+            if (error)
+            {
+                var errorMsg = JSON.parse(error.responseText).error;
+                if (onError)
+                {
+                    onError(errorMsg);
+                }
+                return;
+            }
+
+            this._versionTag = stat.versionTag;
+            var todos = data.match(/^(.+)$/mg);
+            onSuccess(todos);
+        }
+
+        private _authenticating: boolean = false;
 
         private authenticate = (onSuccess, onError) =>
         {
@@ -93,25 +117,26 @@ module TodoTxtJs.StorageProviders
             // e.g. the save triggered on page close (i.e. when redirecting to authenticate!)
             if (this._authenticating) { return; }
             this._authenticating = true;
-            var client = new Dropbox.Client({
-                                                // Read the getting started document
-                                                // or just read sample_dropbox_key.js
-                                                key: dropbox_key,
-                                                sandbox: false
-                                            });
 
-            client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
-            client.authenticate((error, client) => {
-                                    if (error)
-                                    {
-                                        onError(error);
-                                        return;
-                                    }
+            if (this._client.isAuthenticated())
+            {
+                onSuccess();
+                return;
+            }
+            else
+            {
+                this._client.authenticate((error) =>
+                {
+                    if (error)
+                    {
+                        onError(error);
+                        return;
+                    }
 
-                                    this._authenticating = false;
-                                    onSuccess(client);
-                                }
-            );
+                    this._authenticating = false;
+                    onSuccess();
+                });
+            }
         };
     }
 }
