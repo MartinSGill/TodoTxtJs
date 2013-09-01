@@ -263,7 +263,7 @@ module TodoTxtJs
                 data = Todo._processKnownMetadata(data);
                 if (data.value !== match[2])
                 {
-                    this._contents = this._contents.replace(match[1] + ":" + match[2], Todo._metadataToString(data));
+                    this.text(this.text().replace(match[1] + ":" + match[2], Todo._metadataToString(data)));
                 }
                 result.push(data);
 
