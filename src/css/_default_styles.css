@@ -1,0 +1,5 @@
+NameError: variable @page-background is undefined in F:\Projects\TodoTxt\TodoTxtJs\master\src\css\_default_styles.less on line 28, column 21:
+27 {
+28   background-color: @page-background;
+29   color: @page-text;
+
