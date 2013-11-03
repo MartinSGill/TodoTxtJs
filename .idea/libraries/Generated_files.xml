@@ -4,6 +4,7 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/src/js/views/options.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
+        <item url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todo.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
@@ -12,9 +13,9 @@
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
-      <root url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/options.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
+      <root url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todo.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       <root url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />

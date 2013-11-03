@@ -29,7 +29,7 @@ module TodoTxtJs
         mon = 1,
         tue = 2,
         wed = 3,
-        thur = 4,
+        thurs = 4,
         fri = 5,
         sat = 6,
         sunday = 0,
@@ -83,7 +83,7 @@ module TodoTxtJs
         public static distance(date: any, other?: Date): number
         {
             var left: Date;
-            var right: Date;
+            var right: Date = other;
 
             if (date instanceof Date)
             {
@@ -211,7 +211,7 @@ module TodoTxtJs
          * @param date The date to normalise.
          * @returns {Date}
          */
-        private static normaliseDate(date: Date)
+        public static normaliseDate(date: Date)
         {
             var result = new Date(date.valueOf());
             result.setHours(0);
@@ -255,25 +255,25 @@ module TodoTxtJs
                 throw "invalid type for weekday";
             }
 
-            var _days = 0;
             var _other: Date;
             other ? _other = DateTime.normaliseDate(other) : _other = DateTime.today();
             var result: number = 0;
 
-            // Later this week
-            if (_weekday > _other.getDay())
+            if (_weekday == _other.getDay())
+            {
+                result = 7;
+            }
+            else if (_weekday < _other.getDay())
+            {
+                result = (_weekday + 7) - _other.getDay();
+            }
+            else // _weekday > _other.getDay()
             {
                 result = _weekday - _other.getDay();
-            }
-            // Next week
-            else
-            {
-                result = _weekday + (6 - _other.getDay());
             }
 
             return result;
         }
-
 
         /**
          * Adds a leading zero to a string if it needs it.
