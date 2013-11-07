@@ -107,11 +107,11 @@ module TodoTxtJs.StorageProviders
             this._versionTag = stat.versionTag;
             var todos = data.match(/^(.+)$/mg);
             onSuccess(todos);
-        }
+        };
 
         private _authenticating: boolean = false;
 
-        private authenticate = (onSuccess, onError) =>
+        private authenticate = (onSuccess, onError): void =>
         {
             // Prevent other requests while authenticating
             // e.g. the save triggered on page close (i.e. when redirecting to authenticate!)
@@ -121,6 +121,7 @@ module TodoTxtJs.StorageProviders
             if (this._client.isAuthenticated())
             {
                 onSuccess();
+                this._authenticating = false;
                 return;
             }
             else

@@ -11,6 +11,7 @@
     "grunt-typescript": "~0.2.2",
     "typescript": "~0.9.1",
     "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-less": "~0.8.1",
     "grunt-cli": "~0.1.9"
   },
   "scripts": {

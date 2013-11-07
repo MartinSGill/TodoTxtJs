@@ -28,38 +28,60 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-open');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        connect: {
-            server: {
-                options: {
-                    port: 60000,
-                    base: '../src/'
-                }
-            }
-        },
-        typescript: {
-            base: {
-                src: ['../src/**/*.ts'],
-                dest: '../src/js/app.js',
-                options: {
-                    module: 'commonjs',
-                    target: 'es5',
-                    sourcemap: true
-                }
-            }
-        },
-        watch: {
-            files: '../src/**/*.ts',
-            tasks: ['typescript']
-        },
-        open: {
-            dev: {
-                path: 'http://localhost:60000/todotxt.html'
-            }
-        }
-    });
+                         pkg: grunt.file.readJSON('package.json'),
+                         connect: {
+                             server: {
+                                 options: {
+                                     port: 60000,
+                                     base: '../src/'
+                                 }
+                             }
+                         },
+                         typescript: {
+                             base: {
+                                 src: ['../src/**/*.ts'],
+                                 dest: '../src/js/app.js',
+                                 options: {
+                                     module: 'commonjs',
+                                     target: 'es5',
+                                     sourcemap: true,
+                                     fullSourceMapPath: true
+                                 }
+                             }
+                         },
+                         less: {
+                             production: {
+                                 options: {
+                                     yuicompress: true
+                                 },
+                                 files: {
+                                     "../src/css/simple_default.css": "../src/css/simple_default.less",
+                                     "../src/css/simple_solarized_dark.css": "../src/css/simple_solarized_dark.less",
+                                     "../src/css/simple_solarized_light.css": "../src/css/simple_solarized_light.less"
+                                 }
+                             }
+                         },
+                         watch: {
+                             typescript:
+                             {
+                                files: '../src/**/*.ts',
+                                tasks: ['typescript']
+                             },
+                             less:
+                             {
+                                 files: '../src/**/*.less',
+                                 tasks: ['less']
+                             }
+                         },
+                         open: {
+                             dev: {
+                                 path: 'http://localhost:60000/todotxt.html'
+                             }
+                         }
+                     });
 
     grunt.registerTask('default', ['connect', 'open', 'watch']);
 
