@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="IStorageProvider.ts" />
+/// <reference path="IStorageProvider.d.ts" />
 
 module TodoTxtJs.StorageProviders
 {

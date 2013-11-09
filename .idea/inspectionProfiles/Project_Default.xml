@@ -34,15 +34,15 @@
     </inspection_tool>
     <inspection_tool class="AccessToNonThreadSafeStaticFieldFromInstance" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
-        <option name="nonThreadSafeTypes" value="" />
         <option name="nonThreadSafeClasses">
           <value />
         </option>
+        <option name="nonThreadSafeTypes" value="" />
       </scope>
-      <option name="nonThreadSafeTypes" value="" />
       <option name="nonThreadSafeClasses">
         <value />
       </option>
+      <option name="nonThreadSafeTypes" value="" />
     </inspection_tool>
     <inspection_tool class="AccessToStaticFieldLockedOnInstance" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false" />
@@ -1606,10 +1606,12 @@
       <scope name="Project Files" level="WARNING" enabled="false">
         <option name="m_countConstantFields" value="false" />
         <option name="m_considerStaticFinalFieldsConstant" value="false" />
+        <option name="myCountEnumConstants" value="false" />
         <option name="m_limit" value="10" />
       </scope>
       <option name="m_countConstantFields" value="false" />
       <option name="m_considerStaticFinalFieldsConstant" value="false" />
+      <option name="myCountEnumConstants" value="false" />
       <option name="m_limit" value="10" />
     </inspection_tool>
     <inspection_tool class="FieldHasSetterButNoGetter" enabled="true" level="WARNING" enabled_by_default="false">
@@ -2709,9 +2711,11 @@
       <scope name="Project Files" level="WARNING" enabled="false">
         <option name="m_limit" value="20" />
         <option name="ignoreGettersAndSetters" value="false" />
+        <option name="ignoreOverridingMethods" value="false" />
       </scope>
       <option name="m_limit" value="20" />
       <option name="ignoreGettersAndSetters" value="false" />
+      <option name="ignoreOverridingMethods" value="false" />
     </inspection_tool>
     <inspection_tool class="MethodCoupling" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
@@ -3688,21 +3692,21 @@
     </inspection_tool>
     <inspection_tool class="PublicMethodNotExposedInInterface" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
-        <option name="onlyWarnIfContainingClassImplementsAnInterface" value="false" />
         <option name="ignorableAnnotations">
           <value />
         </option>
+        <option name="onlyWarnIfContainingClassImplementsAnInterface" value="false" />
       </scope>
       <scope name="Main Files" level="WARNING" enabled="false">
-        <option name="onlyWarnIfContainingClassImplementsAnInterface" value="false" />
         <option name="ignorableAnnotations">
           <value />
         </option>
+        <option name="onlyWarnIfContainingClassImplementsAnInterface" value="false" />
       </scope>
-      <option name="onlyWarnIfContainingClassImplementsAnInterface" value="false" />
       <option name="ignorableAnnotations">
         <value />
       </option>
+      <option name="onlyWarnIfContainingClassImplementsAnInterface" value="false" />
     </inspection_tool>
     <inspection_tool class="PublicMethodWithoutLogging" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
@@ -5427,27 +5431,27 @@
     </inspection_tool>
     <inspection_tool class="UtilityClassWithoutPrivateConstructor" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
-        <option name="ignoreClassesWithOnlyMain" value="false" />
         <option name="ignorableAnnotations">
           <value />
         </option>
+        <option name="ignoreClassesWithOnlyMain" value="false" />
       </scope>
       <scope name="Project Files" level="WARNING" enabled="false">
-        <option name="ignoreClassesWithOnlyMain" value="false" />
         <option name="ignorableAnnotations">
           <value />
         </option>
+        <option name="ignoreClassesWithOnlyMain" value="false" />
       </scope>
       <scope name="Main Files" level="WARNING" enabled="false">
-        <option name="ignoreClassesWithOnlyMain" value="false" />
         <option name="ignorableAnnotations">
           <value />
         </option>
+        <option name="ignoreClassesWithOnlyMain" value="false" />
       </scope>
-      <option name="ignoreClassesWithOnlyMain" value="false" />
       <option name="ignorableAnnotations">
         <value />
       </option>
+      <option name="ignoreClassesWithOnlyMain" value="false" />
     </inspection_tool>
     <inspection_tool class="VarargParameter" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false" />

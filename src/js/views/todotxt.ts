@@ -384,7 +384,7 @@ module TodoTxtJs.View
             return result;
         }
 
-        public onClick_ShowHelp(data?: any, event?: Event): boolean
+        public onClick_ShowHelp(/*data?: any, event?: Event*/): boolean
         {
             var width = Math.round(window.innerWidth * 0.8);
             var height = Math.round(window.innerHeight * 0.8);
@@ -405,7 +405,7 @@ module TodoTxtJs.View
             return false;
         }
 
-        public onClick_ShowOptions(data?: any, event?: Event): boolean
+        public onClick_ShowOptions(/*data?: any, event?: Event*/): boolean
         {
             var width = Math.round(window.innerWidth * 0.8);
             var height = Math.round(window.innerHeight * 0.8);
@@ -421,7 +421,7 @@ module TodoTxtJs.View
                         $(this).dialog("close");
                     }
                 },
-                close: function (event, ui)
+                close: function (/* event, ui */)
                 {
                     // Undo storage change
                     if (oldStorage.name != self.options.storageInfo().name)
@@ -598,9 +598,10 @@ module TodoTxtJs.View
             function help(event)
             {
                 event.preventDefault();
-                if ($("#help").is(":visible"))
+                var help = $("#help");
+                if (help.is(":visible"))
                 {
-                    $("#help").dialog("close");
+                    help.dialog("close");
                 }
                 else
                 {
@@ -653,12 +654,12 @@ module TodoTxtJs.View
             var queryString = "?";
             var location = window.location.href;
             location = location.replace(/([#?].*)/, "");
-            for (name in Main._queryStringParams)
+            for (var name in Main._queryStringParams)
             {
                 if (Main._queryStringParams.hasOwnProperty(name))
                 {
                     var nameUri = encodeURIComponent(name);
-                    var value = Main._queryStringParams[name]
+                    var value = Main._queryStringParams[name];
                     if (value !== "")
                     {
                         var valueUri = encodeURIComponent(value);
@@ -713,16 +714,19 @@ module TodoTxtJs.View
                        })
                 .autocomplete({
                                   minLength: 1,
-                                  source: function( request, response ) {
+                                  source: function(request: { term:string }, response: (data:any) => void)
+                                  {
                                       // delegate back to autocomplete, but extract the last term
                                       response( (<any>$.ui.autocomplete).filter(
                                           _self._newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
                                   },
-                                  focus: function() {
+                                  focus: function()
+                                  {
                                       // prevent value inserted on focus
                                       return false;
                                   },
-                                  select: function( event, ui ) {
+                                  select: function( event: Event, ui: any )
+                                  {
                                       var terms = Main._split( this.value );
                                       // remove the current input
                                       terms.pop();
@@ -745,16 +749,19 @@ module TodoTxtJs.View
                        })
                 .autocomplete({
                                   minLength: 1,
-                                  source: function( request, response ) {
+                                  source: function(request: { term:string }, response: (data:any) => void)
+                                  {
                                       // delegate back to autocomplete, but extract the last term
-                                      response( (<any>$.ui.autocomplete).filter(
+                                      response((<any>$.ui.autocomplete).filter(
                                           _self._newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
                                   },
-                                  focus: function() {
+                                  focus: function()
+                                  {
                                       // prevent value inserted on focus
                                       return false;
                                   },
-                                  select: function( event, ui ) {
+                                  select: function(event: Event, ui)
+                                  {
                                       var terms = Main._split( this.value );
                                       // remove the current input
                                       terms.pop();

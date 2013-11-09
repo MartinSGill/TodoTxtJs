@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="IStorageProvider.ts" />
+/// <reference path="IStorageProvider.d.ts" />
 /// <reference path="../defs/dropbox.d.ts" />
 
 module TodoTxtJs.StorageProviders
@@ -53,7 +53,6 @@ module TodoTxtJs.StorageProviders
 
         public load = (onSuccess?: (Object) => void, onError?: (string) => void): void =>
         {
-            var self = this;
             this.authenticate(()=>
             {
                 this._client.readFile('Todo/todo.txt', null, (error: Dropbox.ApiError, data: any, stat: Dropbox.File.Stat) =>
@@ -67,7 +66,7 @@ module TodoTxtJs.StorageProviders
         {
             this.authenticate(() =>
             {
-                this._client.writeFile('Todo/todo.txt', data, { lastVersionTag: this._versionTag, noOverwrite: false }, function (error, data)
+                this._client.writeFile('Todo/todo.txt', data, { lastVersionTag: this._versionTag, noOverwrite: false }, function (error/*, data*/)
                 {
                     if (error)
                     {
@@ -96,7 +95,7 @@ module TodoTxtJs.StorageProviders
         {
             if (error)
             {
-                var errorMsg = JSON.parse(error.responseText).error;
+                var errorMsg: string = <any>(JSON.parse(error.responseText)).error;
                 if (onError)
                 {
                     onError(errorMsg);
@@ -122,7 +121,6 @@ module TodoTxtJs.StorageProviders
             {
                 onSuccess();
                 this._authenticating = false;
-                return;
             }
             else
             {

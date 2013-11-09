@@ -108,8 +108,8 @@ module TodoTxtJs
             right = DateTime.normaliseDate(right);
 
             var difference = left.valueOf() - right.valueOf();
-            var millisecPerDay = 86400000;
-            return Math.round(difference / millisecPerDay);
+            var milliSecPerDay = 86400000;
+            return Math.round(difference / milliSecPerDay);
         }
 
         public static dateToInformalString(date: Date) : string
@@ -150,7 +150,7 @@ module TodoTxtJs
         {
             var _informal = informal.toLowerCase();
             var _other: Date;
-            other ? _other = DateTime.normaliseDate(other) : _other = DateTime.today();
+            _other = (other instanceof Date) ? DateTime.normaliseDate(other) : DateTime.today();
             var days = 0;
 
             switch(_informal)
@@ -187,19 +187,18 @@ module TodoTxtJs
         public static relativeDayToDate(days: number, other?: Date ) : Date;
         public static relativeDayToDate(days: any, other?: Date) : Date
         {
-            var days: number;
             if (typeof days === "string")
             {
-                days = parseInt(days)
+                days = parseInt(<string>days)
             }
             else if (typeof days === "number")
             {
-                days = days;
+                days = <number>days;
             }
             else { throw "Invalid Type"; }
 
             var _other;
-            other ? _other = DateTime.normaliseDate(other) : _other = DateTime.today();
+            _other = other instanceof Date ? DateTime.normaliseDate(other) : DateTime.today();
             var result = new Date(_other.valueOf());
             result.setDate( result.getDate() + days );
             return result;
@@ -256,7 +255,7 @@ module TodoTxtJs
             }
 
             var _other: Date;
-            other ? _other = DateTime.normaliseDate(other) : _other = DateTime.today();
+            _other = (other instanceof Date) ? DateTime.normaliseDate(other) : DateTime.today();
             var result: number = 0;
 
             if (_weekday == _other.getDay())

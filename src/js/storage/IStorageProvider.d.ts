@@ -21,13 +21,13 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-module TodoTxtJs.StorageProviders
+declare module TodoTxtJs.StorageProviders
 {
     export interface IStorageProviderControls
     {
-        storage:boolean;
-        exports:boolean;
-        imports:boolean;
+        storage: boolean;
+        exports: boolean;
+        imports: boolean;
     }
 
     export interface IStorageProvider

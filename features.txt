@@ -7,8 +7,15 @@
 A simple todotxt file for testing TodoTxtJs features
 A todo with @context
 A todo with +project
+A todo with different case @Context
+A todo with different case +Project
 2013-01-01 Todo with create date
 Todo with due date: due:2013-01-01 
+Todo due Tomorrow: due:tomorrow
+Todo due Today: due:today
+Todo due Yesterday: due:yesterday
+Todo due Monday: due:monday
+Todo due Sunday: due:wed
 Todo with metadata meta:data key:value
 Todo URL http://example.com/hello/there/world
 2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01

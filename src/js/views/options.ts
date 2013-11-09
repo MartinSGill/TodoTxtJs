@@ -22,9 +22,11 @@
  ******************************************************************************/
 
 /// <reference path="../defs/knockout.d.ts" />
+/// <reference path="../storage/IStorageProvider.d.ts" />
 /// <reference path="../storage/storage_browser.ts" />
 /// <reference path="../storage/storage_dropbox.ts" />
 /// <reference path="../utils/events.ts" />
+/// <reference path="todotxt.ts" />
 
 module TodoTxtJs.View
 {
@@ -60,7 +62,7 @@ module TodoTxtJs.View
         public swapSidebarPositionDescription: KnockoutObservable<string>;
 
         public theme: KnockoutComputed<IThemeDefinition>;
-        public themeDescription: string = "The theme to use for this page.";
+        public themeDescription: KnockoutObservable<string>;
         public themes: IThemeDefinition[];
         public themeUrl: KnockoutComputed<string>;
 
@@ -128,6 +130,7 @@ module TodoTxtJs.View
             ];
 
             this.themeName = ko.observable<string>(this.themes[0].name);
+            this.themeDescription = ko.observable<string>("The theme to use for this page.");
             this.theme = ko.computed({
                 owner: this,
                 read: ()=>
@@ -172,7 +175,7 @@ module TodoTxtJs.View
         {
             if (window.localStorage["TodoTxtJsOptions"])
             {
-                var options = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
+                var options: any = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
 
                 // Only load actual options, so we don't break the view model
 
@@ -192,25 +195,25 @@ module TodoTxtJs.View
                 // Create Date
                 if (options.hasOwnProperty("addCreatedDate"))
                 {
-                    this.addCreatedDate(options.addCreatedDate);
+                    this.addCreatedDate(<boolean>options.addCreatedDate);
                 }
 
                 // Remove Completed Priority
                 if (options.hasOwnProperty("removeCompletePriority"))
                 {
-                    this.removeCompletePriority(options.removeCompletePriority);
+                    this.removeCompletePriority(<boolean>options.removeCompletePriority);
                 }
 
                 // Auto-save
                 if (options.hasOwnProperty("saveOnChange"))
                 {
-                    this.saveOnChange(options.saveOnChange);
+                    this.saveOnChange(<boolean>options.saveOnChange);
                 }
 
                 // Case Sensitive
                 if (options.hasOwnProperty("caseSensitive"))
                 {
-                    this.caseSensitive(options.caseSensitive);
+                    this.caseSensitive(<boolean>options.caseSensitive);
                 }
 
                 // Theme
@@ -220,9 +223,9 @@ module TodoTxtJs.View
                     // saved option is nonsense.
                     for (var i = 0; i < this.themes.length; i++)
                     {
-                        if (this.themes[i].name === options.themeName)
+                        if (this.themes[i].name === <string>options.themeName)
                         {
-                            this.themeName(options.themeName);
+                            this.themeName(<string>options.themeName);
                             break;
                         }
                     }
@@ -231,7 +234,7 @@ module TodoTxtJs.View
                 // swap Sidebar
                 if (options.hasOwnProperty("swapSidebarPosition"))
                 {
-                    this.swapSidebarPosition(options.swapSidebarPosition);
+                    this.swapSidebarPosition(<boolean>options.swapSidebarPosition);
                 }
             }
         }

@@ -24,6 +24,7 @@
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
+/// <reference path="../views/todotxt.ts" />
 
 module TodoTxtJs
 {
@@ -224,8 +225,8 @@ module TodoTxtJs
                     owner: this,
                     read: (): Date =>
                     {
-                        var result = undefined;
-                        var dateRegex = /(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/;
+                        var result: Date = undefined;
+                        var dateRegex = /((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01]))/;
 
                         var metadata = this.metadata();
                         var length = metadata.length;
@@ -291,7 +292,7 @@ module TodoTxtJs
 
         private static _processMetadataDueDate(data: ITodoMetadata): ITodoMetadata
         {
-            var dateRegex = /(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/;
+            var dateRegex = /((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01]))/;
             var relativeRegex = /(\d+)(d|w)?/;
 
             if (data.name === "due")

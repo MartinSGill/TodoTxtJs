@@ -20,7 +20,6 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../model/todo.ts" />
 
@@ -235,10 +234,8 @@ module TodoTxtJs
                 }
             }
 
-            var result = 0;
-
             // Due date is more important than priority
-            result = TodoManager._compareTodo(left, right, this.primarySort());
+            var result = TodoManager._compareTodo(left, right, this.primarySort());
             if (result !== 0) return result;
 
             // Due date is more important than priority

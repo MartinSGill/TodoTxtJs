@@ -21,7 +21,6 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-
 ko.bindingHandlers.todo = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
         var template = $(element);

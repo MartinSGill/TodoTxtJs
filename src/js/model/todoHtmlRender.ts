@@ -20,11 +20,11 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-
 /// <reference path="../defs/knockout.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../model/todo.ts" />
+
 module TodoTxtJs
 {
     export class ContentRenderOptions
@@ -63,7 +63,7 @@ module TodoTxtJs
             return ContentRender._toHtml(contents, options);
         }
 
-        private static _renderContexts(contents: string, options: ContentRenderOptions): string
+        private static _renderContexts(contents: string): string
         {
             var formattedMessage = contents;
             var contextRegex = /(?:\W|^)(@)([\S_]+[A-Za-z0-9_](?!\S))/ig;
@@ -76,7 +76,7 @@ module TodoTxtJs
             return formattedMessage;
         }
 
-        private static _renderProjects(contents: string, options: ContentRenderOptions): string
+        private static _renderProjects(contents: string): string
         {
             var formattedMessage = contents;
             var projectRegex = /(?:\W|^)(\+)([\S_]+[A-Za-z0-9_](?!\S))/ig;
@@ -105,7 +105,7 @@ module TodoTxtJs
             return formattedMessage;
         }
 
-        private static _dueDateDistanceStyle(dueDate: string): string
+        private static _dueDateDistanceStyle(dueDate: Date): string
         {
             var distance = DateTime.distance(dueDate);
             if (distance <= 0)
@@ -122,16 +122,17 @@ module TodoTxtJs
             }
         }
 
-        private static _renderDueDate(contents: string, options: ContentRenderOptions): string
+        private static _renderDueDate(contents: string): string
         {
             var formattedMessage = contents;
-            var dueDateRegex = /(due):(((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])))/ig;
+            var dueDateRegex = /(due):((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01]))/ig;
             // Presumes there will only ever be one due date in a todo entry
             var match = dueDateRegex.exec(formattedMessage);
-            var date = null;
+            var date: Date = null;
             if (match)
             {
                 date = new Date(match[2]);
+
                 var replacement = "";
                 replacement += '<span class="todo-metadata todo-due-date ' + ContentRender._dueDateDistanceStyle(date) + '">';
                 replacement += '  <span class="todo-metadata-name">$1</span>';
@@ -145,7 +146,7 @@ module TodoTxtJs
             return formattedMessage;
         }
 
-        private static _renderMetadata(contents: string, options: ContentRenderOptions): string
+        private static _renderMetadata(contents: string): string
         {
             var formattedMessage = contents;
             var metadataRegex = /(?:\W|^)([A-Za-z_-][\w\-]+):([\w\-]+)(?=\s|$)/g;
@@ -168,11 +169,11 @@ module TodoTxtJs
 
             if (formattedMessage)
             {
-                formattedMessage = ContentRender._renderContexts(formattedMessage, options);
-                formattedMessage = ContentRender._renderProjects(formattedMessage, options);
+                formattedMessage = ContentRender._renderContexts(formattedMessage);
+                formattedMessage = ContentRender._renderProjects(formattedMessage);
                 formattedMessage = ContentRender._renderUrls(formattedMessage, options);
-                formattedMessage = ContentRender._renderDueDate(formattedMessage, options);
-                formattedMessage = ContentRender._renderMetadata(formattedMessage, options);
+                formattedMessage = ContentRender._renderDueDate(formattedMessage);
+                formattedMessage = ContentRender._renderMetadata(formattedMessage);
             }
 
             return formattedMessage;
