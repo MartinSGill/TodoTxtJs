@@ -247,7 +247,7 @@ module TodoTxtJs
 
             // Run out of significant values so use file order.
             return left.index < right.index ? -1 : 1;
-        }
+        };
 
         public addFromStringArray(newData : string[]) : void
         {

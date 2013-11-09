@@ -72,7 +72,7 @@ module TodoTxtJs.View
             this._todoManager = new TodoTxtJs.TodoManager();
 
             this._title = ko.observable<string>("TodoTxtJs");
-            this.version = ko.observable<string>("1.4.3");
+            this.version = ko.observable<string>("1.4.4");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.computed({owner: this, read: this._getAllPriorities});
             this.projects = ko.computed({owner: this, read: this._getAllProjects});
@@ -180,7 +180,7 @@ module TodoTxtJs.View
                 this.displayOptions.load();
             }
 
-            var onSuccess = (data) : void =>
+            var onSuccess = (data): void =>
             {
                 this._todoManager.removeAll();
                 this._todoManager.loadFromStringArray(data);
@@ -189,7 +189,7 @@ module TodoTxtJs.View
                 TodoTxtJs.Events.onLoadComplete(this.options.storage());
             };
 
-            var onError = (error) : void =>
+            var onError = (error): void =>
             {
                 $.jGrowl(error, { header: "Error loading", sticky: true });
                 TodoTxtJs.Events.onError("Error Loading (" + this.options.storage() + ") : [" + error + "]");
@@ -336,7 +336,8 @@ module TodoTxtJs.View
                 return false;
             }
 
-            var testText = todo.text().toLowerCase();
+            var testText = todo.text();
+            var testTextLower = todo.text().toLowerCase();
             var filters = this.filters().split(/\s/);
             var result = true;
             if (this.filtered())
@@ -344,16 +345,38 @@ module TodoTxtJs.View
                 for (var i = 0; i < filters.length && result; i++)
                 {
                     // Special filters
-                    switch (filters[i])
+                    var filter = filters[i];
+                    switch (filter)
                     {
+                        // No Context Defined
                         case "-@":
                             result = (todo.contexts().length == 0);
                             break;
+
+                        // No Project Defined
                         case "-+":
                             result = (todo.projects().length == 0);
                             break;
+
+                        // Normal Filtering
                         default:
-                            result = testText.indexOf(filters[i].toLowerCase()) >= 0;
+                            // Deal with case-sensitive projects/contexts
+                            if (filter.match(/[@+].+/))
+                            {
+                                if (this.options.caseSensitive())
+                                {
+                                    result = testText.indexOf(filter) >= 0;
+                                }
+                                else
+                                {
+                                    result = testTextLower.indexOf(filter.toLowerCase()) >= 0;
+                                }
+                            }
+                            // Do all other filters as case insensitive
+                            else
+                            {
+                                result = testTextLower.indexOf(filter.toLowerCase()) >= 0;
+                            }
                     }
                 }
             }
@@ -493,9 +516,16 @@ module TodoTxtJs.View
                 if (this.isDisplayed(this.allTodos()[i]))
                 {
                     var projects = this.allTodos()[i].projects();
+                    var caseSensitive = this.options.caseSensitive();
+
                     for (var j = 0; j < projects.length; j++)
                     {
-                        hash[projects[j]] = true;
+                        var project = projects[j];
+                        if (!caseSensitive)
+                        {
+                            project = project.toLowerCase();
+                        }
+                        hash[project] = true;
                     }
                 }
             }
@@ -520,9 +550,16 @@ module TodoTxtJs.View
                 if (this.isDisplayed(this.allTodos()[i]))
                 {
                     var contexts = this.allTodos()[i].contexts();
+                    var caseSensitive = this.options.caseSensitive();
+
                     for (var j = 0; j < contexts.length; j++)
                     {
-                        hash[contexts[j]] = true;
+                        var context = contexts[j];
+                        if (!caseSensitive)
+                        {
+                            context = context.toLowerCase();
+                        }
+                        hash[context] = true;
                     }
                 }
             }

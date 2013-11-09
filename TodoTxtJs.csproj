@@ -60,7 +60,6 @@
     <Content Include=".gitignore" />
     <Content Include="build\GruntFile.js" />
     <Content Include="src\.htaccess" />
-    <Content Include="src\css\generate\simple_template.css" />
     <Content Include="src\css\simple_default.css" />
     <Content Include="src\css\simple_solarized_dark.css" />
     <Content Include="src\css\simple_solarized_light.css" />
@@ -99,6 +98,9 @@
     <Content Include="src\js\utils\events.js.map">
       <DependentUpon>events.ts</DependentUpon>
     </Content>
+    <Content Include="tests\karma.conf.js" />
+    <Content Include="tests\reality.tests.js" />
+    <Content Include="tests\utils.datatime.tests.js" />
     <TypeScriptCompile Include="src\js\views\displayOptions.ts" />
     <Content Include="src\js\views\displayOptions.js">
       <DependentUpon>displayOptions.ts</DependentUpon>
@@ -204,26 +206,21 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\css\generate\default.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="src\css\generate\generate.ps1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="src\css\generate\solarized_dark.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="src\css\generate\solarized_light.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="src\css\generate\README.md" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\css\simple_default.less" />
+    <Content Include="src\css\simple_solarized_dark.less" />
+    <Content Include="src\css\simple_solarized_light.less" />
+    <Content Include="src\css\_default_styles.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="tests\go.cmd" />
+    <Content Include="tests\setup.cmd" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
 </Project>

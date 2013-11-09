@@ -345,7 +345,7 @@ module TodoTxtJs
             var match = regex.exec(text);
             while (match !== null)
             {
-                result.push(match[1].toLowerCase());
+                result.push(match[1]);
                 match = regex.exec(text);
             }
 

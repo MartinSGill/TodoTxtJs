@@ -53,6 +53,9 @@ module TodoTxtJs.View
         public saveOnChange: KnockoutObservable<boolean>;
         public saveOnChangeDescription: KnockoutObservable<string>;
 
+        public caseSensitive: KnockoutObservable<boolean>;
+        public caseSensitiveDescription: KnockoutObservable<string>;
+
         public swapSidebarPosition: KnockoutObservable<boolean>;
         public swapSidebarPositionDescription: KnockoutObservable<string>;
 
@@ -110,7 +113,10 @@ module TodoTxtJs.View
                    });
 
             this.saveOnChange = ko.observable<boolean>(true);
-            this.saveOnChangeDescription = ko.observable<string>("Save changes immediatly after you add/remove/edit a Todo.");
+            this.saveOnChangeDescription = ko.observable<string>("Save changes immediately after you add/remove/edit a Todo.");
+
+            this.caseSensitive = ko.observable<boolean>(false);
+            this.caseSensitiveDescription = ko.observable<string>("Projects and Contexts are case-sensitive. This is how official apps behave.");
 
             this.swapSidebarPosition = ko.observable<boolean>(false);
             this.swapSidebarPositionDescription = ko.observable<string>("Place the sidebar on the left of the Todo list.");
@@ -199,6 +205,12 @@ module TodoTxtJs.View
                 if (options.hasOwnProperty("saveOnChange"))
                 {
                     this.saveOnChange(options.saveOnChange);
+                }
+
+                // Case Sensitive
+                if (options.hasOwnProperty("caseSensitive"))
+                {
+                    this.caseSensitive(options.caseSensitive);
                 }
 
                 // Theme

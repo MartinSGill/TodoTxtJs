@@ -194,6 +194,12 @@
     <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
     <!-- /ko -->
 </section>
+
+<!--
+    **********************************
+    * Options
+    **********************************
+ -->
 <section id="optionsDialog" class="options hidden" title="Options">
     <div data-bind="with: options">
         <div class="options-group">
@@ -258,6 +264,19 @@
                     </div>
                     <div class="options-description">
                         <span data-bind="text: removeCompletePriorityDescription"></span>
+                    </div>
+                </div>
+                <div class="options-entry">
+                    <div class="options-value">
+                        <label>
+                            <input type="checkbox" data-bind="checked: caseSensitive" />
+                        </label>
+                    </div>
+                    <div class="options-name">
+                        Case Sensitive
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: caseSensitiveDescription"></span>
                     </div>
                 </div>
             </div>
