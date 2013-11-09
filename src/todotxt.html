@@ -97,7 +97,7 @@
         </li>
     </ul>
     <div class="notice-lastupdated" data-bind="text: lastUpdated">
-        
+
     </div>
 </section>
 <div class="logo"></div>
@@ -155,12 +155,12 @@
             </div>
             <div class="quickFilter">
                 <label for="filters" class="quickFilter-label label">Filter: <input class="quickFilter-input"
-                           id="filters"
-                           type="text"
-                           data-bind="value: filters, valueUpdate: 'afterkeydown'"
-                           title="Example: +Project @Context (A)" />
-                    <div class="deleteButton"><a href="" data-bind="click: clearFilters">x</a></div>
+                                                                                    id="filters"
+                                                                                    type="text"
+                                                                                    data-bind="value: filters, valueUpdate: 'afterkeydown'"
+                                                                                    title="Example: +Project @Context (A)" />
                 </label>
+                <div class="deleteButton"><a href="" data-bind="click: clearFilters">x</a></div>
             </div>
         </div>
     </div>
@@ -170,95 +170,95 @@
     * Todo
     **********************************
  -->
-    <section id="main">
-        <!-- ko if: !$root.options.swapSidebarPosition() -->
-        <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
-        <!-- /ko -->
-        <section class="todo-view-sidebar">
-            <h3>Priorities</h3>
-            <ul data-bind="foreach: priorities" class="todo-view-sidebar-priorities">
-                <li data-bind="text: $data, attr: { 'class': 'todo-view-priority-' + $data }"
-                    onclick="todoTxtView.addFilterFromElement(this)"
-                    class="todo-view-priority todo-view-sidebar-priority"></li>
-            </ul>
-            <h3>Contexts</h3>
-            <ul data-bind="foreach: contexts">
-                <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
-            </ul>
-            <h3>Projects</h3>
-            <ul data-bind="foreach: projects">
-                <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
-            </ul>
-        </section>
-        <!-- ko if: $root.options.swapSidebarPosition() -->
-        <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
-        <!-- /ko -->
+<section id="main">
+    <!-- ko if: !$root.options.swapSidebarPosition() -->
+    <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
+    <!-- /ko -->
+    <section class="todo-view-sidebar">
+        <h3>Priorities</h3>
+        <ul data-bind="foreach: priorities" class="todo-view-sidebar-priorities">
+            <li data-bind="text: $data, attr: { 'class': 'todo-view-priority-' + $data }"
+                onclick="todoTxtView.addFilterFromElement(this)"
+                class="todo-view-priority todo-view-sidebar-priority"></li>
+        </ul>
+        <h3>Contexts</h3>
+        <ul data-bind="foreach: contexts">
+            <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
+        </ul>
+        <h3>Projects</h3>
+        <ul data-bind="foreach: projects">
+            <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
+        </ul>
     </section>
-    <section id="optionsDialog" class="options hidden" title="Options">
-        <div data-bind="with: options">
-            <div class="options-group">
-                <h1 autofocus="yes">Storage</h1>
-                <div class="options-table">
-                    <div class="options-entry">
-                        <div class="options-value">
-                            <label>
-                                <select data-bind="options: storageOptions, optionsText: 'name', value: storageInfo">
-                                </select>
-                            </label>
-                        </div>
-                        <div class="options-name">
-                            Save Location
-                        </div>
-                        <div class="options-description">
-                            <span data-bind="text: storageInfo().description"></span>
-                            <div class="options-warning">
-                                As this can cause the page to reload, this setting will not be changed until you click 'Done'.
-                            </div>
-                        </div>
+    <!-- ko if: $root.options.swapSidebarPosition() -->
+    <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
+    <!-- /ko -->
+</section>
+<section id="optionsDialog" class="options hidden" title="Options">
+    <div data-bind="with: options">
+        <div class="options-group">
+            <h1 autofocus="yes">Storage</h1>
+            <div class="options-table">
+                <div class="options-entry">
+                    <div class="options-value">
+                        <label>
+                            <select data-bind="options: storageOptions, optionsText: 'name', value: storageInfo">
+                            </select>
+                        </label>
                     </div>
-                    <div class="options-entry">
-                        <div class="options-value">
-                            <label>
-                                <input type="checkbox" data-bind="checked: saveOnChange" />
-                            </label>
-                        </div>
-                        <div class="options-name">
-                            Save on Change
-                        </div>
-                        <div class="options-description">
-                            <span data-bind="text: saveOnChangeDescription"></span>
+                    <div class="options-name">
+                        Save Location
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: storageInfo().description"></span>
+                        <div class="options-warning">
+                            As this can cause the page to reload, this setting will not be changed until you click 'Done'.
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="options-group">
-                <h1>Behaviour</h1>
-                <div class="options-table">
-                    <div class="options-entry">
-                        <div class="options-value">
-                            <label>
-                                <input type="checkbox" data-bind="checked: addCreatedDate" />
-                            </label>
-                        </div>
-                        <div class="options-name">
-                            Create Date
-                        </div>
-                        <div class="options-description">
-                            <span data-bind="text: addCreatedDateDescription"></span>
-                        </div>
+                <div class="options-entry">
+                    <div class="options-value">
+                        <label>
+                            <input type="checkbox" data-bind="checked: saveOnChange" />
+                        </label>
                     </div>
-                    <div class="options-entry">
-                        <div class="options-value">
-                            <label>
-                                <input type="checkbox" data-bind="checked: removeCompletePriority" />
-                            </label>
-                        </div>
-                        <div class="options-name">
-                            Remove priority when complete
-                        </div>
-                        <div class="options-description">
-                            <span data-bind="text: removeCompletePriorityDescription"></span>
-                        </div>
+                    <div class="options-name">
+                        Save on Change
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: saveOnChangeDescription"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="options-group">
+            <h1>Behaviour</h1>
+            <div class="options-table">
+                <div class="options-entry">
+                    <div class="options-value">
+                        <label>
+                            <input type="checkbox" data-bind="checked: addCreatedDate" />
+                        </label>
+                    </div>
+                    <div class="options-name">
+                        Create Date
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: addCreatedDateDescription"></span>
+                    </div>
+                </div>
+                <div class="options-entry">
+                    <div class="options-value">
+                        <label>
+                            <input type="checkbox" data-bind="checked: removeCompletePriority" />
+                        </label>
+                    </div>
+                    <div class="options-name">
+                        Remove priority when complete
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: removeCompletePriorityDescription"></span>
+                    </div>
                 </div>
             </div>
             <div class="options-group">
@@ -294,7 +294,8 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 <section id="help" class="hidden" title="Help">
     <h1 autofocus="yes">
         Welcome To TodoTxtJs
@@ -323,11 +324,11 @@
     <ul>
         <li>Todos are sorted in the following order: due-date, priority, position-in-file.</li>
         <li>Click on the text in any todo to edit it.</li>
-        <li>You can mark a Todo as completed by click on the checkbox at its left.</li>
-        <ul><li>Completed Todos are hidden by default. Click on 'Show Completed' to see them.</li></ul>
+        <li>You can mark a Todo as completed by click on the checkbox at its left.
+        <ul><li>Completed Todos are hidden by default. Click on 'Show Completed' to see them.</li></ul></li>
         <li>Click on a <span class="todo-view-context">@Context</span> or <span class="todo-view-project">+Project</span> (in text or on right side) to filter on it.</li>
         <li>This also works on '(<span class="todo-view-priority-A">A</span>)' priorites.</li>
-        <li>If you have a <img src="images/dropbox-logos_dropbox-logotype-black-trimmed.png" height="20px" width="70px" alt="Dropbox"> account, you can save your Todos into that.</li>
+        <li>If you have a <img src="images/dropbox-logos_dropbox-logotype-black-trimmed.png" height="20px" width="70px" alt="Dropbox"> account, you can save your Todos into that.
         <ul>
             <li>Select Dropbox in the Options and once you close the options box again you'll be synced to Dropbox.</li>
             <li>This uses the same file as the
@@ -335,7 +336,7 @@
                 and
                 <a href="http://itunes.apple.com/us/app/todo.txt-touch/id491342186?ls=1&mt=8" target="_blank">iOS</a>
                 apps, allowing you to access your Todos from anywhere.</li>
-        </ul>
+        </ul></li>
         <li>Due Date colour indicates proximity:
             <ul>
                 <li>
@@ -385,8 +386,9 @@
         Google Analytics are used to track usage and errors. The content of your Todos are never sent anywhere
         only the fact that you created/deleted/loaded/saved a todo, never its content.
     </p>
-        If you want to verify this yourself, the source code is available for you to review, and you can check
-        the network traffic using the tools provided with your browser.
+    <p>
+    If you want to verify this yourself, the source code is available for you to review, and you can check
+    the network traffic using the tools provided with your browser.
     </p>
     <h2>Addendum</h2>
     <ul>
