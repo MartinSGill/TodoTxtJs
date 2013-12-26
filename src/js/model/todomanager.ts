@@ -28,7 +28,7 @@ module TodoTxtJs
     export class TodoManager
     {
         private _nextIndex = 0;
-        private _data = ko.observableArray([]);
+        private _data = ko.observableArray<Todo>([]);
 
         public sortTypes: string[] = ["None", "Due Date", "Priority", "Create Date"];
         public primarySort: KnockoutObservable<string>;
@@ -220,7 +220,7 @@ module TodoTxtJs
             }
         }
 
-        private sorter = (left, right): number =>
+        private sorter = (left: Todo, right: Todo): number =>
         {
             if (left.completed() !== right.completed())
             {
@@ -263,8 +263,8 @@ module TodoTxtJs
 
         public exportToStringArray() : string[]
         {
-            var sorted = ko.observableArray(this._data());
-            sorted.sort(function(left, right) { return left.index - right.index; });
+            var sorted = ko.observableArray<Todo>(this._data());
+            sorted.sort((left, right)=> left.index - right.index);
 
             var result:string[] = [];
             for (var i = 0; i < sorted().length; i++)

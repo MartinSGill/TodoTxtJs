@@ -476,7 +476,7 @@ module TodoTxtJs.View
             return (this.filters() && this.filters().length > 0);
         }
 
-        private _getAllTodos(): Todo[]
+        private _getAllTodos(): Array<Todo>
         {
             return this._todoManager.all();
         }

@@ -52,7 +52,7 @@ declare module TodoTxtJs.StorageProviders
          * @param onSuccess Callback on successful load. Contains the loaded todos.
          * @param onError Callback on failed load.
          */
-        load(onSuccess? : (Object) => void, onError?: (string) => void) : void;
+        load(onSuccess? : (object) => void, onError?: (string) => void) : void;
 
         /**
          * Saves Todos to the provider.

@@ -83,9 +83,6 @@
     <Content Include="src\js\model\todomanager.js.map">
       <DependentUpon>todomanager.ts</DependentUpon>
     </Content>
-    <Content Include="src\js\storage\IStorageProvider.js.map">
-      <DependentUpon>IStorageProvider.ts</DependentUpon>
-    </Content>
     <Content Include="src\js\storage\storage_browser.js.map">
       <DependentUpon>storage_browser.ts</DependentUpon>
     </Content>
@@ -101,6 +98,7 @@
     <Content Include="tests\karma.conf.js" />
     <Content Include="tests\reality.tests.js" />
     <Content Include="tests\utils.datatime.tests.js" />
+    <TypeScriptCompile Include="src\js\storage\IStorageProvider.d.ts" />
     <TypeScriptCompile Include="src\js\views\displayOptions.ts" />
     <Content Include="src\js\views\displayOptions.js">
       <DependentUpon>displayOptions.ts</DependentUpon>
@@ -144,10 +142,6 @@
     </Content>
     <TypeScriptCompile Include="src\js\model\todomanager.ts" />
     <Content Include="src\js\sample_dropbox_key.js" />
-    <Content Include="src\js\storage\IStorageProvider.js">
-      <DependentUpon>IStorageProvider.ts</DependentUpon>
-    </Content>
-    <TypeScriptCompile Include="src\js\storage\IStorageProvider.ts" />
     <Content Include="src\js\storage\storage_browser.js">
       <DependentUpon>storage_browser.ts</DependentUpon>
     </Content>
