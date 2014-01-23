@@ -21,10 +21,10 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../defs/knockout.d.ts" />
-/// <reference path="../defs/jquery.d.ts" />
-/// <reference path="../defs/jqueryui.d.ts" />
-/// <reference path="../defs/jquery.jgrowl.d.ts" />
+/// <reference path="../lib/knockout.d.ts" />
+/// <reference path="../lib/jquery.d.ts" />
+/// <reference path="../lib/jqueryui.d.ts" />
+/// <reference path="../lib/jquery.jgrowl.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../model/todo.ts" />
@@ -109,6 +109,7 @@ module TodoTxtJs.View
             this._initializeAutoComplete();
             this._initializeKeyboardShortCuts();
             this._initializeNotifications();
+
 
             $(window).unload(this.save);
             this.load();

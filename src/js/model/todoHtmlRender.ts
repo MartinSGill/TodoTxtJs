@@ -20,7 +20,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-/// <reference path="../defs/knockout.d.ts" />
+/// <reference path="../lib/knockout.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../model/todo.ts" />

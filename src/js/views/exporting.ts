@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../defs/knockout.d.ts" />
+/// <reference path="../lib/knockout.d.ts" />
 /// <reference path="../model/todomanager.ts" />
 
 module TodoTxtJs.View

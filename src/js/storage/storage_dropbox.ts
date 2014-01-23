@@ -22,7 +22,7 @@
  ******************************************************************************/
 
 /// <reference path="IStorageProvider.d.ts" />
-/// <reference path="../defs/dropbox.d.ts" />
+/// <reference path="../lib/dropbox.d.ts" />
 
 module TodoTxtJs.StorageProviders
 {
