@@ -2,6 +2,7 @@ TodoTxtJs
 =========
 
 A Typescript/Javascript web app implementation of TodoTxt.
+Don't forget to check out the [wiki](https://github.com/MartinSGill/TodoTxtJs/wiki) for more information.
 
 Where?
 ------
