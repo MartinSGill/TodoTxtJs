@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2013 Martin Gill
+ * Copyright (C) 2013-2014 Martin Gill
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,6 +24,7 @@
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../model/todo.ts" />
+/// <reference path="../model/regex.ts" />
 
 module TodoTxtJs
 {
@@ -149,8 +150,6 @@ module TodoTxtJs
         private static _renderMetadata(contents: string): string
         {
             var formattedMessage = contents;
-            var metadataRegex = /(?:\W|^)([A-Za-z_-][\w\-]+):([\w\-]+)(?=\s|$)/g;
-
             var replacement = "";
             replacement += '<span class="todo-metadata">';
             replacement += '  <span class="todo-metadata-name">$1</span>';
@@ -158,7 +157,7 @@ module TodoTxtJs
             replacement += '  <span class="todo-metadata-value">$2</span>';
             replacement += '</span>';
 
-            formattedMessage = formattedMessage.replace(metadataRegex, replacement);
+            formattedMessage = formattedMessage.replace(Regex.MetaData, replacement);
 
             return formattedMessage;
         }

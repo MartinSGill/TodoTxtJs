@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2013 Martin Gill
+ * Copyright (C) 2013-2014 Martin Gill
  *     based on a blog post by Jesse Freeman (http://goo.gl/jUiLsK)
  *
  * Permission is hereby granted, free of charge, to any person obtaining

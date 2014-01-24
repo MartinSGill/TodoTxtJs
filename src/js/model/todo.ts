@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2013 Martin Gill
+ * Copyright (C) 2013-2014 Martin Gill
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,6 +25,7 @@
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
 /// <reference path="../views/todotxt.ts" />
+/// <reference path="regex.ts" />
 
 module TodoTxtJs
 {
@@ -251,9 +252,8 @@ module TodoTxtJs
         private _findMetadata(text : string) : Array<ITodoMetadata>
         {
             var result : Array<ITodoMetadata> = [];
+            var match : any = Regex.MetaData.exec(text);
 
-            var metadataRegex = /(?:\W|^)([A-Za-z_-][\w\-]+):([\w\-]+)(?=\s|$)/g;
-            var match : any = metadataRegex.exec(text);
             while (match != null)
             {
                 var data = {
@@ -268,7 +268,7 @@ module TodoTxtJs
                 }
                 result.push(data);
 
-                match = metadataRegex.exec(text);
+                match = Regex.MetaData.exec(text);
             }
 
             return result;

@@ -1,5 +1,5 @@
 ﻿/*******************************************************************************
- * Copyright (C) 2013 Martin Gill
+ * Copyright (C) 2013-2014 Martin Gill
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -38,14 +38,14 @@ interface JGrowlOptions
     sticky?: boolean;
 
     /**
-     * Designates a class which is applied to the jGrowl container and controls it's position on the screen. 
-     *  By Default there are five options available, top-left, top-right, bottom-left, bottom-right, center. 
-     *  This must be changed in the defaults before the startup method is called. 
+     * Designates a class which is applied to the jGrowl container and controls it's position on the screen.
+     *  By Default there are five options available, top-left, top-right, bottom-left, bottom-right, center.
+     *  This must be changed in the defaults before the startup method is called.
      */
     position?: string;
 
-    /** 
-     * Designates whether a jGrowl notification should be appended to the container after all notifications, 
+    /**
+     * Designates whether a jGrowl notification should be appended to the container after all notifications,
      * or whether it should be prepended to the container before all notifications. Options are after or before.
      */
     glue?: string;
@@ -59,7 +59,7 @@ interface JGrowlOptions
     /** If the corners jQuery plugin is include this option specifies the curvature radius to be used for the notifications as they are created. */
     corners?: string;
 
-    /** 
+    /**
       * The frequency that jGrowl should check for messages to be scrubbed from the screen.
       * This must be changed in the defaults before the startup method is called.
       */
@@ -77,58 +77,58 @@ interface JGrowlOptions
     /** The easing method to be used with the animation for opening and closing a notification. */
     easing?: string;
 
-    /** 
-     * Whether or not the close-all button should be used when more then one notification appears on the screen. 
+    /**
+     * Whether or not the close-all button should be used when more then one notification appears on the screen.
      * Optionally this property can be set to a function which will be used as a callback when the close all button
-     * is clicked. This must be changed in the defaults before the startup method is called. 
+     * is clicked. This must be changed in the defaults before the startup method is called.
      */
     closer?: boolean;
 
-    /** 
+    /**
      * This content is used for the individual notification close links that are added to the corner of a notification.
      * This must be changed in the defaults before the startup method is called.
      */
     closeTemplate?: string;
 
     /**
-     * This content is used for the close-all link that is added to the bottom of a jGrowl container when it contains 
+     * This content is used for the close-all link that is added to the bottom of a jGrowl container when it contains
      * more than one notification. This must be changed in the defaults before the startup method is called.
      */
     closerTemplate?: string;
 
     /**
-     * Callback to be used before anything is done with the notification. This is intended to be used if the user 
+     * Callback to be used before anything is done with the notification. This is intended to be used if the user
      * would like to have some type of logging mechanism for all notifications passed to jGrowl. This callback receives
      * the notification's DOM context, the notifications message and it's option object.
      */
     log?: (dom: any, message: string, options: JGrowlOptions) => void;
 
     /**
-     * Callback to be used before a new notification is opened. This callback receives the notification's DOM context, 
+     * Callback to be used before a new notification is opened. This callback receives the notification's DOM context,
      * the notifications message and it's option object.
      */
     beforeOpen?: (dom: any, message: string, options: JGrowlOptions) => void;
 
     /**
-     * Callback to be used after a new notification is opened. This callback receives the notification's DOM context, 
+     * Callback to be used after a new notification is opened. This callback receives the notification's DOM context,
      * the notifications message and it's option object.
      */
     afterOpen?: (dom: any, message: string, options: JGrowlOptions) => void;
 
     /**
-     * Callback to be used when a new notification is opened. This callback receives the notification's DOM context, 
+     * Callback to be used when a new notification is opened. This callback receives the notification's DOM context,
      * the notifications message and it's option object.
      */
     open?: (dom: any, message: string, options: JGrowlOptions) => void;
 
     /**
-     * Callback to be used before a new notification is closed. This callback receives the notification's DOM context, 
+     * Callback to be used before a new notification is closed. This callback receives the notification's DOM context,
      * the notifications message and it's option object.
      */
     beforeClose?: (dom: any, message: string, options: JGrowlOptions) => void;
 
     /**
-     * Callback to be used when a new notification is closed. This callback receives the notification's DOM context, 
+     * Callback to be used when a new notification is closed. This callback receives the notification's DOM context,
      * the notifications message and it's option object.
      */
     close?: (dom: any, message: string, options: JGrowlOptions) => void;

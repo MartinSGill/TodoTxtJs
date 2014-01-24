@@ -1,5 +1,6 @@
 /*******************************************************************************
- * Copyright (C) 2013 Martin Gill
+ *
+ * Copyright (C) 2013-2014 Martin Gill
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -20,7 +21,6 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-
 
 // Go to the dropbox site and create a new "Core API" app (Permission Type: Full Dropbox)
 // Go to https://dl-web.dropbox.com/spa/pjlfdak1tmznswp/api_keys.js/public/index.html
