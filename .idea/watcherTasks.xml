@@ -21,7 +21,7 @@
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="C:/Program Files (x86)/Microsoft SDKs/TypeScript/tsc.exe" />
+      <option name="program" value="C:/Program Files (x86)/Microsoft SDKs/TypeScript/0.9/tsc.exe" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />

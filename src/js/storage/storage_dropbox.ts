@@ -66,7 +66,7 @@ module TodoTxtJs.StorageProviders
         {
             this.authenticate(() =>
             {
-                this._client.writeFile('Todo/todo.txt', data, { lastVersionTag: this._versionTag, noOverwrite: false }, function (error/*, data*/)
+                this._client.writeFile('Todo/todo.txt', data, { /*lastVersionTag: this._versionTag,*/ noOverwrite: false }, function (error/*, data*/)
                 {
                     if (error)
                     {

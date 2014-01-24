@@ -110,7 +110,6 @@ module TodoTxtJs.View
             this._initializeKeyboardShortCuts();
             this._initializeNotifications();
 
-
             $(window).unload(this.save);
             this.load();
 
