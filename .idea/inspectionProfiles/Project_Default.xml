@@ -2564,9 +2564,13 @@
       <scope name="Project Files" level="WARNING" enabled="false">
         <option name="REPORT_VARIABLES" value="true" />
         <option name="REPORT_PARAMETERS" value="true" />
+        <option name="REPORT_CATCH_PARAMETERS" value="true" />
+        <option name="REPORT_FOREACH_PARAMETERS" value="true" />
       </scope>
       <option name="REPORT_VARIABLES" value="true" />
       <option name="REPORT_PARAMETERS" value="true" />
+      <option name="REPORT_CATCH_PARAMETERS" value="true" />
+      <option name="REPORT_FOREACH_PARAMETERS" value="true" />
     </inspection_tool>
     <inspection_tool class="LocalVariableHidingMemberVariable" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
