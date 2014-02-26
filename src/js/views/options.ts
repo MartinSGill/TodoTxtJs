@@ -71,9 +71,18 @@ module TodoTxtJs.View
         constructor()
         {
             this.storageOptions = ko.observableArray([
-                new TodoTxtJs.StorageProviders.BrowserStorage(),
-                new TodoTxtJs.StorageProviders.DropboxStorage()
+                new TodoTxtJs.StorageProviders.BrowserStorage()
             ]);
+
+            // Ensure Dropbox key exists before attempting to load dropbox support
+            if (typeof (dropbox_key) !== 'undefined' && dropbox_key)
+            {
+                this.storageOptions.push(new TodoTxtJs.StorageProviders.DropboxStorage());
+            }
+            else
+            {
+                console.warn("Dropbox support disabled. No dropbox key found.");
+            }
 
             this.storageInfo = ko.observable(this.storageOptions()[0]);
             this.storage = ko.computed({
