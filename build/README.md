@@ -52,13 +52,13 @@ Getting Started
     ...\TodoTxtJs\build> npm install grunt-cli -g
 ```
 
-*   Initial Compile of Typescript files
+*   Initial Compile of Typescript and less script files
 
 ```PowerShell
-    ...\TodoTxtJs\build> grunt typescript
+    ...\TodoTxtJs\build> grunt typescript less
 ```
 
-Only `src/app.js` is actually needed by the webpage. `clean.ps1` removes unneeded *.js files.
+Only the generated `src/app.js` is actually needed by the webpage. `clean.ps1` removes unneeded *.js files.
 
 *  (optional) watch typescript files for changes & start web-server
 
