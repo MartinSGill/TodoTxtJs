@@ -83,6 +83,6 @@ module.exports = function (grunt) {
                          }
                      });
 
-    grunt.registerTask('default', ['connect', 'open', 'watch']);
-
+    grunt.registerTask('build', ['typescript', 'less']);
+    grunt.registerTask('default', ['build', 'connect', 'open', 'watch']);
 };
