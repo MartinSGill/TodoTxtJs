@@ -252,8 +252,9 @@ module TodoTxtJs
         private _findMetadata(text : string) : Array<ITodoMetadata>
         {
             var result : Array<ITodoMetadata> = [];
-            var match : any = Regex.MetaData.exec(text);
 
+
+            var match : any = Regex.MetaData.exec(text);
             while (match != null)
             {
                 var data = {
@@ -264,10 +265,10 @@ module TodoTxtJs
                 data = Todo._processKnownMetadata(data);
                 if (data.value !== match[2])
                 {
-                    this.text(this.text().replace(match[1] + ":" + match[2], Todo._metadataToString(data)));
+                    this._text(this.text().replace(match[1] + ":" + match[2], Todo._metadataToString(data)));
                 }
-                result.push(data);
 
+                result.push(data);
                 match = Regex.MetaData.exec(text);
             }
 
