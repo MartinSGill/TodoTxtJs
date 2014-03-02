@@ -11,7 +11,8 @@ src/js/**/*.map
 !src/js/sample_dropbox_key.js
 
 # Ignore generated CSS files
-src/css**/*.css
+src/css/**/*.css
+src/css/*.css
 
 ######################################################################
 # Generic stuff
