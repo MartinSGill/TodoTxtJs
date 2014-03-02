@@ -26,9 +26,8 @@
 /// <reference path="../storage/storage_browser.ts" />
 /// <reference path="../storage/storage_dropbox.ts" />
 /// <reference path="../utils/events.ts" />
-/// <reference path="todotxt.ts" />
 
-module TodoTxtJs.View
+module TodoTxtJs
 {
     export interface IThemeDefinition
     {
@@ -174,10 +173,6 @@ module TodoTxtJs.View
 
             // Just write out everything, it's during loading we're selective
             window.localStorage["TodoTxtJsOptions"] = ko.toJSON(this);
-            if (oldOptions.storage !== this.storage() && todoTxtView)
-            {
-                todoTxtView.load();
-            }
         }
 
         public load() : void

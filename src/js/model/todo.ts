@@ -24,8 +24,8 @@
 /// <reference path="../lib/knockout.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
-/// <reference path="../views/todotxt.ts" />
 /// <reference path="regex.ts" />
+/// <reference path="ModelFactory.ts" />
 
 module TodoTxtJs
 {
@@ -150,7 +150,7 @@ module TodoTxtJs
                         this._completed = value;
                         if (this._completed)
                         {
-                            if (todoTxtView.options.removeCompletePriority())
+                            if (ModelFactory.GetOptions().removeCompletePriority())
                             {
                                 this._priority = null;
                             }

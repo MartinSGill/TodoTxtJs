@@ -27,10 +27,11 @@
 /// <reference path="../lib/jquery.jgrowl.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
+/// <reference path="../model/ModelFactory.ts" />
 /// <reference path="../model/todo.ts" />
 /// <reference path="../model/todoHtmlRender.ts" />
 /// <reference path="../model/todomanager.ts" />
-/// <reference path="../views/options.ts" />
+/// <reference path="../model/options.ts" />
 /// <reference path="../views/displayOptions.ts" />
 /// <reference path="../views/importing.ts" />
 /// <reference path="../views/exporting.ts" />
@@ -81,7 +82,7 @@ module TodoTxtJs.View
             this.newPriorityFilter = ko.observable(undefined);
 
             this.displayOptions = new DisplayOptions(this._todoManager);
-            this.options = new Options();
+            this.options = ModelFactory.GetOptions();
             this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 
             this.importing = new Importing(this._todoManager);
@@ -417,6 +418,10 @@ module TodoTxtJs.View
                     Done: function ()
                     {
                         self.options.save();
+                        if (self.options.storageInfo().name !== oldStorage.name)
+                        {
+                            todoTxtView.load();
+                        }
                         oldStorage = self.options.storageInfo();
                         $(this).dialog("close");
                     }

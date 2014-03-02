@@ -2,8 +2,10 @@
 build/node_modules/
 
 # General exclusion for generated Javascript files under source.
-src/js**/*.js
-src/js**/*.map
+src/js/*.js
+src/js/*.map
+src/js/**/*.js
+src/js/**/*.map
 
 # Except for this one, which isn't generated
 !src/js/sample_dropbox_key.js
