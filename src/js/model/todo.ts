@@ -253,7 +253,6 @@ module TodoTxtJs
         {
             var result : Array<ITodoMetadata> = [];
 
-
             var match : any = Regex.MetaData.exec(text);
             while (match != null)
             {

@@ -21,6 +21,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
+/// <reference path="../lib/moment.d.ts" />
+
 module TodoTxtJs
 {
     enum Weekdays
@@ -50,10 +52,8 @@ module TodoTxtJs
          */
         public static toISO8601Date(date : Date) : string
         {
-            var result = date.getFullYear() + "-";
-            result += DateTime.leadingZero(date.getMonth() + 1) + "-";
-            result += DateTime.leadingZero(date.getDate());
-            return result;
+            var _moment = moment(date);
+            return _moment.format("YYYY-MM-DD");
         }
 
         /**
@@ -63,11 +63,8 @@ module TodoTxtJs
          */
         public static toISO8601DateTime(date : Date) : string
         {
-            var result = DateTime.toISO8601Date(date) + " ";
-            result += DateTime.leadingZero(date.getHours()) + ":";
-            result += DateTime.leadingZero(date.getMinutes()) + ":";
-            result += DateTime.leadingZero(date.getSeconds());
-            return result;
+            var _moment = moment(date);
+            return _moment.format("YYYY-MM-DD HH:mm:ss");
         }
 
         /**
@@ -82,16 +79,12 @@ module TodoTxtJs
         public static distance(date: string, other?: Date): number;
         public static distance(date: any, other?: Date): number
         {
-            var left: Date;
-            var right: Date = other;
+            var left: Moment;
+            var right: Moment = moment(other);
 
-            if (date instanceof Date)
+            if (date instanceof Date || (typeof(date) === "string"))
             {
-                left = date;
-            }
-            else if (typeof(date) === "string")
-            {
-                left = new Date(date);
+                left = moment(date);
             }
             else
             {
@@ -100,16 +93,10 @@ module TodoTxtJs
 
             if (!other)
             {
-                right = new Date();
+                right = moment();
             }
 
-
-            left = DateTime.normaliseDate(left);
-            right = DateTime.normaliseDate(right);
-
-            var difference = left.valueOf() - right.valueOf();
-            var milliSecPerDay = 86400000;
-            return Math.round(difference / milliSecPerDay);
+            return left.startOf('day').diff(right.startOf('day'), 'days');
         }
 
         public static dateToInformalString(date: Date) : string
@@ -150,7 +137,7 @@ module TodoTxtJs
         {
             var _informal = informal.toLowerCase();
             var _other: Date;
-            _other = (other instanceof Date) ? DateTime.normaliseDate(other) : DateTime.today();
+            _other = (other instanceof Date) ? moment(other).startOf('day').toDate() : DateTime.today();
             var days = 0;
 
             switch(_informal)
@@ -198,26 +185,9 @@ module TodoTxtJs
             else { throw "Invalid Type"; }
 
             var _other;
-            _other = other instanceof Date ? DateTime.normaliseDate(other) : DateTime.today();
-            var result = new Date(_other.valueOf());
-            result.setDate( result.getDate() + days );
-            return result;
-        }
-
-        /**
-         * Ensures that all Date objects that represent only a day
-         * value can be easily compared.
-         * @param date The date to normalise.
-         * @returns {Date}
-         */
-        public static normaliseDate(date: Date)
-        {
-            var result = new Date(date.valueOf());
-            result.setHours(0);
-            result.setMinutes(0);
-            result.setSeconds(0);
-            result.setMilliseconds(0);
-            return result;
+            _other = other instanceof Date ? moment(other).startOf('day') : moment().startOf('day');
+            var _result = _other.add('days', <number>days);
+            return _result.toDate();
         }
 
         /**
@@ -226,7 +196,7 @@ module TodoTxtJs
          */
         public static today() : Date
         {
-            return DateTime.normaliseDate(new Date());
+            return moment().startOf('day').toDate();
         }
 
         /**
@@ -255,7 +225,7 @@ module TodoTxtJs
             }
 
             var _other: Date;
-            _other = (other instanceof Date) ? DateTime.normaliseDate(other) : DateTime.today();
+            _other = (other instanceof Date) ? moment(other).startOf('day').toDate() : DateTime.today();
             var result: number = 0;
 
             if (_weekday == _other.getDay())
@@ -273,32 +243,5 @@ module TodoTxtJs
 
             return result;
         }
-
-        /**
-         * Adds a leading zero to a string if it needs it.
-         * @param value The value.
-         * @param count Number of leading zeros. Defaults to one.
-         * @returns {string}
-         */
-        private static leadingZero(value : number, count? : number) : string
-        {
-            if (!count)
-            {
-                count = 1;
-            }
-
-            var result = "";
-            if (value < count * 10)
-            {
-                for (var i = 0; i < count; i++)
-                {
-                    result += "0";
-                }
-            }
-
-            result += value;
-            return result;
-        }
-
     }
 }

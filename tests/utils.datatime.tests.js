@@ -296,361 +296,343 @@ test("utils.datetime.dateToInformalString - +7",
 );
 
 ////////////////////////////////////////////////////////////////////
-// today
+//  informalDayToDate
 ////////////////////////////////////////////////////////////////////
-test("utils.datetime.today",
+test("utils.datetime.informalDayToDate - today, default",
      function()
      {
          // Arrange
          var date = new Date();
-         var expected = TodoTxtJs.DateTime.normaliseDate(date);
+         var expected = moment(date).startOf('day').toDate();
+         var target = "today";
 
          // Act
-         var actual = TodoTxtJs.DateTime.today();
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target);
 
          // Assert
-         deepEqual(actual, expected, "Date not normalised.");
+         deepEqual(actual, expected, "Date not correct.");
      }
 );
 
-////////////////////////////////////////////////////////////////////
-//  informalDayToDate
-////////////////////////////////////////////////////////////////////
-//test("utils.datetime.informalDayToDate - today, default",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date();
-//         var expected = TodoTxtJs.DateTime.normaliseDate(date);
-//         var target = "today";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - today",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date();
-//         var expected = TodoTxtJs.DateTime.normaliseDate(date);
-//         var target = "today";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - today - strange capitalisation",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date();
-//         var expected = TodoTxtJs.DateTime.normaliseDate(date);
-//         var target = "ToDaY";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - nonsense",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date();
-//         var expected = TodoTxtJs.DateTime.normaliseDate(date);
-//         var target = "wibble";
-//
-//         // Act
-//         // Assert
-//         throws(function() { TodoTxtJs.DateTime.informalDayToDate(target, new Date()); }, "throws correctly");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - yesterday",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date();
-//         date.setDate(date.getDate() - 1);
-//         var expected = TodoTxtJs.DateTime.normaliseDate(date);
-//         var target = "yesterday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - tomorrow",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date();
-//         date.setDate(date.getDate() + 1);
-//         var expected = TodoTxtJs.DateTime.normaliseDate(date);
-//         var target = "tomorrow";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - monday, same day",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,21,0,0,0,0);
-//         var target = "monday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - monday, later day",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,12,0,0,0,0);
-//         var expected = new Date(2013,0,14,0,0,0,0);
-//         var target = "monday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - mon",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,12,0,0,0,0);
-//         var expected = new Date(2013,0,14,0,0,0,0);
-//         var target = "mon";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - tuesday",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,15,0,0,0,0);
-//         var target = "tuesday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - tue",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,15,0,0,0,0);
-//         var target = "tuesday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - wednesday",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,16,0,0,0,0);
-//         var target = "wednesday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - wed",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,16,0,0,0,0);
-//         var target = "wed";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - thursday",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,17,0,0,0,0);
-//         var target = "thursday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - thurs",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,17,0,0,0,0);
-//         var target = "thurs";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - friday",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,18,0,0,0,0);
-//         var target = "friday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - fri",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,18,0,0,0,0);
-//         var target = "fri";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - saturday",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,19,0,0,0,0);
-//         var target = "saturday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - sat",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,19,0,0,0,0);
-//         var target = "sat";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - sunday",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,20,0,0,0,0);
-//         var target = "sunday";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
-//
-//test("utils.datetime.informalDayToDate - sun",
-//     function()
-//     {
-//         // Arrange
-//         var date = new Date(2013,0,14,0,0,0,0);
-//         var expected = new Date(2013,0,20,0,0,0,0);
-//         var target = "sun";
-//
-//         // Act
-//         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
-//
-//         // Assert
-//         deepEqual(actual, expected, "Date not correct.");
-//     }
-//);
+test("utils.datetime.informalDayToDate - today",
+     function()
+     {
+         // Arrange
+         var date = new Date();
+         var expected = moment(date).startOf('day').toDate();
+         var target = "today";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - today - strange capitalisation",
+     function()
+     {
+         // Arrange
+         var date = new Date();
+         var expected = moment(date).startOf('day').toDate();
+         var target = "ToDaY";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - nonsense",
+     function()
+     {
+         // Arrange
+         var date = new Date();
+         var expected = moment(date).startOf('day').toDate();
+         var target = "wibble";
+
+         // Act
+         // Assert
+         throws(function() { TodoTxtJs.DateTime.informalDayToDate(target, new Date()); }, "throws correctly");
+     }
+);
+
+test("utils.datetime.informalDayToDate - yesterday",
+     function()
+     {
+         // Arrange
+         var date = new Date();
+         date.setDate(date.getDate() - 1);
+         var expected = moment(date).startOf('day').toDate();
+         var target = "yesterday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - tomorrow",
+     function()
+     {
+         // Arrange
+         var date = new Date();
+         date.setDate(date.getDate() + 1);
+         var expected = moment(date).startOf('day').toDate();
+         var target = "tomorrow";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, new Date());
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - monday, same day",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,21,0,0,0,0);
+         var target = "monday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - monday, later day",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,12,0,0,0,0);
+         var expected = new Date(2013,0,14,0,0,0,0);
+         var target = "monday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - mon",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,12,0,0,0,0);
+         var expected = new Date(2013,0,14,0,0,0,0);
+         var target = "mon";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - tuesday",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,15,0,0,0,0);
+         var target = "tuesday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - tue",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,15,0,0,0,0);
+         var target = "tuesday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - wednesday",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,16,0,0,0,0);
+         var target = "wednesday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - wed",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,16,0,0,0,0);
+         var target = "wed";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - thursday",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,17,0,0,0,0);
+         var target = "thursday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - thurs",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,17,0,0,0,0);
+         var target = "thurs";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - friday",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,18,0,0,0,0);
+         var target = "friday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - fri",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,18,0,0,0,0);
+         var target = "fri";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - saturday",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,19,0,0,0,0);
+         var target = "saturday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - sat",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,19,0,0,0,0);
+         var target = "sat";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - sunday",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,20,0,0,0,0);
+         var target = "sunday";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
+
+test("utils.datetime.informalDayToDate - sun",
+     function()
+     {
+         // Arrange
+         var date = new Date(2013,0,14,0,0,0,0);
+         var expected = new Date(2013,0,20,0,0,0,0);
+         var target = "sun";
+
+         // Act
+         var actual = TodoTxtJs.DateTime.informalDayToDate(target, date);
+
+         // Assert
+         deepEqual(actual, expected, "Date not correct.");
+     }
+);
 
 ////////////////////////////////////////////////////////////////////
 // weekdayToRelativeDay
@@ -937,7 +919,7 @@ test("utils.datetime.relativeDayToDate - default",
          var date = new Date();
          var days = 1;
          date.setDate(date.getDate() + days);
-         var expected = TodoTxtJs.DateTime.normaliseDate(date);
+         var expected = moment(date).startOf('day').toDate();
 
          // Act
          var actual = TodoTxtJs.DateTime.relativeDayToDate(days);
@@ -954,7 +936,7 @@ test("utils.datetime.relativeDayToDate - non default",
          var date = new Date();
          var days = 1;
          date.setDate(date.getDate() + days);
-         var expected = TodoTxtJs.DateTime.normaliseDate(date);
+         var expected = moment(date).startOf('day').toDate();
 
          // Act
          var actual = TodoTxtJs.DateTime.relativeDayToDate(days, new Date());
@@ -971,7 +953,7 @@ test("utils.datetime.relativeDayToDate - zero",
          var date = new Date();
          var days = 0;
          date.setDate(date.getDate() + days);
-         var expected = TodoTxtJs.DateTime.normaliseDate(date);
+         var expected = moment(date).startOf('day').toDate();
 
          // Act
          var actual = TodoTxtJs.DateTime.relativeDayToDate(days, new Date());
@@ -988,7 +970,7 @@ test("utils.datetime.relativeDayToDate - negative",
          var date = new Date();
          var days = -5;
          date.setDate(date.getDate() + days);
-         var expected = TodoTxtJs.DateTime.normaliseDate(date);
+         var expected = moment(date).startOf('day').toDate();
 
          // Act
          var actual = TodoTxtJs.DateTime.relativeDayToDate(days, new Date());
@@ -998,101 +980,3 @@ test("utils.datetime.relativeDayToDate - negative",
      }
 );
 
-////////////////////////////////////////////////////////////////////
-// normaliseDate
-////////////////////////////////////////////////////////////////////
-test("utils.datetime.normaliseDate - 1",
-     function()
-     {
-         // Arrange
-         var date = new Date(2000, 0 ,1 , 10 , 10 ,10, 100);
-         var expected = new Date(2000,0,1,0,0,0,0);
-
-         // Act
-         var actual = TodoTxtJs.DateTime.normaliseDate(date);
-
-         // Assert
-         deepEqual(actual, expected, "Date not normalised.");
-     }
-);
-
-test("utils.datetime.normaliseDate - 2",
-     function()
-     {
-         // Arrange
-         var date = new Date(2000, 0 ,1 , 0 , 0 , 0, 0);
-         var expected = new Date(2000,0,1,0,0,0,0);
-
-         // Act
-         var actual = TodoTxtJs.DateTime.normaliseDate(date);
-
-         // Assert
-         deepEqual(actual, expected, "Date not normalised.");
-     }
-);
-
-////////////////////////////////////////////////////////////////////
-// LeadingZero
-////////////////////////////////////////////////////////////////////
-test("utils.datetime.leadingZero - simple defaults",
-     function()
-     {
-         // Arrange
-         var subject = 1;
-         var expected = '01';
-
-         // Act
-         var actual = TodoTxtJs.DateTime.leadingZero(subject);
-
-         // Assert
-         strictEqual(actual, expected);
-     }
-);
-
-test("utils.datetime.leadingZero - simple",
-     function()
-     {
-         // Arrange
-         var subject = 1;
-         var zeros = 1;
-         var expected = '01';
-
-         // Act
-         var actual = TodoTxtJs.DateTime.leadingZero(subject, zeros);
-
-         // Assert
-         strictEqual(actual, expected);
-     }
-);
-
-test("utils.datetime.leadingZero - multiple leading zeros",
-     function()
-     {
-         // Arrange
-         var subject = 1;
-         var zeros = 5;
-         var expected = '000001';
-
-         // Act
-         var actual = TodoTxtJs.DateTime.leadingZero(subject, zeros);
-
-         // Assert
-         strictEqual(actual, expected);
-     }
-);
-
-test("utils.datetime.leadingZero - multiple leading zeros, big number",
-     function()
-     {
-         // Arrange
-         var subject = 12345;
-         var zeros = 5;
-         var expected = '12345';
-
-         // Act
-         var actual = TodoTxtJs.DateTime.leadingZero(subject, zeros);
-
-         // Assert
-         strictEqual(actual, expected);
-     }
-);
