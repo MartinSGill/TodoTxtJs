@@ -58,6 +58,7 @@ With thanks to their authors.
 * [jQuery](http://jquery.com)
 * [jQuery.hotkeys](https://github.com/jeresig/jquery.hotkeys/)
 * [dropbox.js](https://github.com/dropbox/dropbox-js)
+* [moment.js](http://momentjs.com)
 * and anyone else I've missed.
 
 License
