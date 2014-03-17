@@ -126,13 +126,15 @@ module TodoTxtJs
         private static _renderDueDate(contents: string): string
         {
             var formattedMessage = contents;
-            var dueDateRegex = /(due):((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01]))/ig;
             // Presumes there will only ever be one due date in a todo entry
-            var match = dueDateRegex.exec(formattedMessage);
+            var match = Regex.DueDate.exec(formattedMessage);
             var date: Date = null;
             if (match)
             {
-                date = new Date(match[2]);
+                var year = parseInt(match[3]);
+                var month = parseInt(match[4]) - 1; // Months are zero indexed for some odd reason.
+                var day = parseInt(match[5]);
+                date = new Date(year, month, day);
 
                 var replacement = "";
                 replacement += '<span class="todo-metadata todo-due-date ' + ContentRender._dueDateDistanceStyle(date) + '">';
@@ -141,7 +143,7 @@ module TodoTxtJs
                 replacement += '  <span class="todo-metadata-value">' + DateTime.dateToInformalString(date) + '</span>';
                 replacement += '</span>';
 
-                formattedMessage = formattedMessage.replace(dueDateRegex, replacement);
+                formattedMessage = formattedMessage.replace(Regex.DueDate, replacement);
             }
 
             return formattedMessage;
