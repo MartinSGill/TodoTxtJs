@@ -104,7 +104,7 @@ module TodoTxtJs.View
                         this._todoManager.removeAll();
                     }
 
-                    var todos = (<any>event.target).result.match(/^(.+)$/mg);
+                    var todos = (<any>event.target).result.split(/\r?\n/);
                     this._todoManager.addFromStringArray(todos);
                 };
 
