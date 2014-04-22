@@ -1,7 +1,8 @@
 ////////////////////////////////////////////////////////////////////
 // toISO8601Date
 ////////////////////////////////////////////////////////////////////
-test("utils.datetime.toISO8601Date - Valid String",
+module("DateTime");
+test("toISO8601Date - Valid String",
 function()
 {
     // Arrange
@@ -19,7 +20,7 @@ function()
 ////////////////////////////////////////////////////////////////////
 // toISO8601DateTime
 ////////////////////////////////////////////////////////////////////
-test("utils.datetime.toISO8601DateTime - Valid String",
+test("toISO8601DateTime - Valid String",
      function()
      {
          // Arrange
@@ -38,7 +39,7 @@ test("utils.datetime.toISO8601DateTime - Valid String",
 // distance
 ////////////////////////////////////////////////////////////////////
 
-test("utils.datetime.distance - defaults, today",
+test("distance - defaults, today",
      function()
      {
          // Arrange
@@ -53,7 +54,7 @@ test("utils.datetime.distance - defaults, today",
      }
 );
 
-test("utils.datetime.distance - today",
+test("distance - today",
      function()
      {
          // Arrange
@@ -68,7 +69,7 @@ test("utils.datetime.distance - today",
      }
 );
 
-test("utils.datetime.distance - negative",
+test("distance - negative",
      function()
      {
          // Arrange
@@ -84,7 +85,7 @@ test("utils.datetime.distance - negative",
      }
 );
 
-test("utils.datetime.distance - big positive",
+test("distance - big positive",
      function()
      {
          // Arrange
@@ -100,7 +101,7 @@ test("utils.datetime.distance - big positive",
      }
 );
 
-test("utils.datetime.distance - close days",
+test("distance - close days",
      function()
      {
          // Arrange
@@ -116,7 +117,7 @@ test("utils.datetime.distance - close days",
      }
 );
 
-test("utils.datetime.distance - close days",
+test("distance - close days",
      function()
      {
          // Arrange
@@ -134,7 +135,7 @@ test("utils.datetime.distance - close days",
 ////////////////////////////////////////////////////////////////////
 // DateToInformalString
 ////////////////////////////////////////////////////////////////////
-test("utils.datetime.dateToInformalString - today",
+test("dateToInformalString - today",
      function()
      {
          // Arrange
@@ -149,7 +150,7 @@ test("utils.datetime.dateToInformalString - today",
      }
 );
 
-test("utils.datetime.dateToInformalString - yesterday",
+test("dateToInformalString - yesterday",
      function()
      {
          // Arrange
@@ -165,7 +166,7 @@ test("utils.datetime.dateToInformalString - yesterday",
      }
 );
 
-test("utils.datetime.dateToInformalString - tomorrow",
+test("dateToInformalString - tomorrow",
      function()
      {
          // Arrange
@@ -183,7 +184,7 @@ test("utils.datetime.dateToInformalString - tomorrow",
 
 var weekdayArray = ['Sunday', 'Monday', 'Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-test("utils.datetime.dateToInformalString - -2",
+test("dateToInformalString - -2",
      function()
      {
          // Arrange
@@ -199,7 +200,7 @@ test("utils.datetime.dateToInformalString - -2",
      }
 );
 
-test("utils.datetime.dateToInformalString - +2",
+test("dateToInformalString - +2",
      function()
      {
          // Arrange
@@ -215,7 +216,7 @@ test("utils.datetime.dateToInformalString - +2",
      }
 );
 
-test("utils.datetime.dateToInformalString - +3",
+test("dateToInformalString - +3",
      function()
      {
          // Arrange
@@ -231,7 +232,7 @@ test("utils.datetime.dateToInformalString - +3",
      }
 );
 
-test("utils.datetime.dateToInformalString - +4",
+test("dateToInformalString - +4",
      function()
      {
          // Arrange
@@ -247,7 +248,7 @@ test("utils.datetime.dateToInformalString - +4",
      }
 );
 
-test("utils.datetime.dateToInformalString - +5",
+test("dateToInformalString - +5",
      function()
      {
          // Arrange
@@ -263,7 +264,7 @@ test("utils.datetime.dateToInformalString - +5",
      }
 );
 
-test("utils.datetime.dateToInformalString - +6",
+test("dateToInformalString - +6",
      function()
      {
          // Arrange
@@ -279,7 +280,7 @@ test("utils.datetime.dateToInformalString - +6",
      }
 );
 
-test("utils.datetime.dateToInformalString - +7",
+test("dateToInformalString - +7",
      function()
      {
          // Arrange
@@ -298,7 +299,7 @@ test("utils.datetime.dateToInformalString - +7",
 ////////////////////////////////////////////////////////////////////
 //  informalDayToDate
 ////////////////////////////////////////////////////////////////////
-test("utils.datetime.informalDayToDate - today, default",
+test("informalDayToDate - today, default",
      function()
      {
          // Arrange
@@ -314,7 +315,7 @@ test("utils.datetime.informalDayToDate - today, default",
      }
 );
 
-test("utils.datetime.informalDayToDate - today",
+test("informalDayToDate - today",
      function()
      {
          // Arrange
@@ -330,7 +331,7 @@ test("utils.datetime.informalDayToDate - today",
      }
 );
 
-test("utils.datetime.informalDayToDate - today - strange capitalisation",
+test("informalDayToDate - today - strange capitalisation",
      function()
      {
          // Arrange
@@ -346,7 +347,7 @@ test("utils.datetime.informalDayToDate - today - strange capitalisation",
      }
 );
 
-test("utils.datetime.informalDayToDate - nonsense",
+test("informalDayToDate - nonsense",
      function()
      {
          // Arrange
@@ -360,7 +361,7 @@ test("utils.datetime.informalDayToDate - nonsense",
      }
 );
 
-test("utils.datetime.informalDayToDate - yesterday",
+test("informalDayToDate - yesterday",
      function()
      {
          // Arrange
@@ -377,7 +378,7 @@ test("utils.datetime.informalDayToDate - yesterday",
      }
 );
 
-test("utils.datetime.informalDayToDate - tomorrow",
+test("informalDayToDate - tomorrow",
      function()
      {
          // Arrange
@@ -394,7 +395,7 @@ test("utils.datetime.informalDayToDate - tomorrow",
      }
 );
 
-test("utils.datetime.informalDayToDate - monday, same day",
+test("informalDayToDate - monday, same day",
      function()
      {
          // Arrange
@@ -410,7 +411,7 @@ test("utils.datetime.informalDayToDate - monday, same day",
      }
 );
 
-test("utils.datetime.informalDayToDate - monday, later day",
+test("informalDayToDate - monday, later day",
      function()
      {
          // Arrange
@@ -426,7 +427,7 @@ test("utils.datetime.informalDayToDate - monday, later day",
      }
 );
 
-test("utils.datetime.informalDayToDate - mon",
+test("informalDayToDate - mon",
      function()
      {
          // Arrange
@@ -442,7 +443,7 @@ test("utils.datetime.informalDayToDate - mon",
      }
 );
 
-test("utils.datetime.informalDayToDate - tuesday",
+test("informalDayToDate - tuesday",
      function()
      {
          // Arrange
@@ -458,7 +459,7 @@ test("utils.datetime.informalDayToDate - tuesday",
      }
 );
 
-test("utils.datetime.informalDayToDate - tue",
+test("informalDayToDate - tue",
      function()
      {
          // Arrange
@@ -474,7 +475,7 @@ test("utils.datetime.informalDayToDate - tue",
      }
 );
 
-test("utils.datetime.informalDayToDate - wednesday",
+test("informalDayToDate - wednesday",
      function()
      {
          // Arrange
@@ -490,7 +491,7 @@ test("utils.datetime.informalDayToDate - wednesday",
      }
 );
 
-test("utils.datetime.informalDayToDate - wed",
+test("informalDayToDate - wed",
      function()
      {
          // Arrange
@@ -506,7 +507,7 @@ test("utils.datetime.informalDayToDate - wed",
      }
 );
 
-test("utils.datetime.informalDayToDate - thursday",
+test("informalDayToDate - thursday",
      function()
      {
          // Arrange
@@ -522,7 +523,7 @@ test("utils.datetime.informalDayToDate - thursday",
      }
 );
 
-test("utils.datetime.informalDayToDate - thurs",
+test("informalDayToDate - thurs",
      function()
      {
          // Arrange
@@ -538,7 +539,7 @@ test("utils.datetime.informalDayToDate - thurs",
      }
 );
 
-test("utils.datetime.informalDayToDate - friday",
+test("informalDayToDate - friday",
      function()
      {
          // Arrange
@@ -554,7 +555,7 @@ test("utils.datetime.informalDayToDate - friday",
      }
 );
 
-test("utils.datetime.informalDayToDate - fri",
+test("informalDayToDate - fri",
      function()
      {
          // Arrange
@@ -570,7 +571,7 @@ test("utils.datetime.informalDayToDate - fri",
      }
 );
 
-test("utils.datetime.informalDayToDate - saturday",
+test("informalDayToDate - saturday",
      function()
      {
          // Arrange
@@ -586,7 +587,7 @@ test("utils.datetime.informalDayToDate - saturday",
      }
 );
 
-test("utils.datetime.informalDayToDate - sat",
+test("informalDayToDate - sat",
      function()
      {
          // Arrange
@@ -602,7 +603,7 @@ test("utils.datetime.informalDayToDate - sat",
      }
 );
 
-test("utils.datetime.informalDayToDate - sunday",
+test("informalDayToDate - sunday",
      function()
      {
          // Arrange
@@ -618,7 +619,7 @@ test("utils.datetime.informalDayToDate - sunday",
      }
 );
 
-test("utils.datetime.informalDayToDate - sun",
+test("informalDayToDate - sun",
      function()
      {
          // Arrange
@@ -637,7 +638,7 @@ test("utils.datetime.informalDayToDate - sun",
 ////////////////////////////////////////////////////////////////////
 // weekdayToRelativeDay
 ////////////////////////////////////////////////////////////////////
-test("utils.datetime.weekdayToRelativeDay - monday, same day",
+test("weekdayToRelativeDay - monday, same day",
      function()
      {
          // Arrange
@@ -653,7 +654,7 @@ test("utils.datetime.weekdayToRelativeDay - monday, same day",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - monday, same day, number",
+test("weekdayToRelativeDay - monday, same day, number",
      function()
      {
          // Arrange
@@ -669,7 +670,7 @@ test("utils.datetime.weekdayToRelativeDay - monday, same day, number",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - monday, later day",
+test("weekdayToRelativeDay - monday, later day",
      function()
      {
          // Arrange
@@ -685,7 +686,7 @@ test("utils.datetime.weekdayToRelativeDay - monday, later day",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - monday, later day, number",
+test("weekdayToRelativeDay - monday, later day, number",
      function()
      {
          // Arrange
@@ -701,7 +702,7 @@ test("utils.datetime.weekdayToRelativeDay - monday, later day, number",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - mon",
+test("weekdayToRelativeDay - mon",
      function()
      {
          // Arrange
@@ -717,7 +718,7 @@ test("utils.datetime.weekdayToRelativeDay - mon",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - tuesday",
+test("weekdayToRelativeDay - tuesday",
      function()
      {
          // Arrange
@@ -733,7 +734,7 @@ test("utils.datetime.weekdayToRelativeDay - tuesday",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - tue",
+test("weekdayToRelativeDay - tue",
      function()
      {
          // Arrange
@@ -749,7 +750,7 @@ test("utils.datetime.weekdayToRelativeDay - tue",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - wednesday",
+test("weekdayToRelativeDay - wednesday",
      function()
      {
          // Arrange
@@ -765,7 +766,7 @@ test("utils.datetime.weekdayToRelativeDay - wednesday",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - wed",
+test("weekdayToRelativeDay - wed",
      function()
      {
          // Arrange
@@ -781,7 +782,7 @@ test("utils.datetime.weekdayToRelativeDay - wed",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - thursday",
+test("weekdayToRelativeDay - thursday",
      function()
      {
          // Arrange
@@ -797,7 +798,7 @@ test("utils.datetime.weekdayToRelativeDay - thursday",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - thurs",
+test("weekdayToRelativeDay - thurs",
      function()
      {
          // Arrange
@@ -813,7 +814,7 @@ test("utils.datetime.weekdayToRelativeDay - thurs",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - friday",
+test("weekdayToRelativeDay - friday",
      function()
      {
          // Arrange
@@ -829,7 +830,7 @@ test("utils.datetime.weekdayToRelativeDay - friday",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - fri",
+test("weekdayToRelativeDay - fri",
      function()
      {
          // Arrange
@@ -845,7 +846,7 @@ test("utils.datetime.weekdayToRelativeDay - fri",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - saturday",
+test("weekdayToRelativeDay - saturday",
      function()
      {
          // Arrange
@@ -861,7 +862,7 @@ test("utils.datetime.weekdayToRelativeDay - saturday",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - sat",
+test("weekdayToRelativeDay - sat",
      function()
      {
          // Arrange
@@ -877,7 +878,7 @@ test("utils.datetime.weekdayToRelativeDay - sat",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - sunday",
+test("weekdayToRelativeDay - sunday",
      function()
      {
          // Arrange
@@ -893,7 +894,7 @@ test("utils.datetime.weekdayToRelativeDay - sunday",
      }
 );
 
-test("utils.datetime.weekdayToRelativeDay - sun",
+test("weekdayToRelativeDay - sun",
      function()
      {
          // Arrange
@@ -912,7 +913,7 @@ test("utils.datetime.weekdayToRelativeDay - sun",
 ////////////////////////////////////////////////////////////////////
 //  relativeDayToDate
 ////////////////////////////////////////////////////////////////////
-test("utils.datetime.relativeDayToDate - default",
+test("relativeDayToDate - default",
      function()
      {
          // Arrange
@@ -929,7 +930,7 @@ test("utils.datetime.relativeDayToDate - default",
      }
 );
 
-test("utils.datetime.relativeDayToDate - non default",
+test("relativeDayToDate - non default",
      function()
      {
          // Arrange
@@ -946,7 +947,7 @@ test("utils.datetime.relativeDayToDate - non default",
      }
 );
 
-test("utils.datetime.relativeDayToDate - zero",
+test("relativeDayToDate - zero",
      function()
      {
          // Arrange
@@ -963,7 +964,7 @@ test("utils.datetime.relativeDayToDate - zero",
      }
 );
 
-test("utils.datetime.relativeDayToDate - negative",
+test("relativeDayToDate - negative",
      function()
      {
          // Arrange

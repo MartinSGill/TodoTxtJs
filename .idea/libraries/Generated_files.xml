@@ -2,10 +2,19 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/src/js/model/regex.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/todo.js" />
+        <item url="file://$PROJECT_DIR$/src/js/model/todoHtmlRender.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/options.js" />
         <item url="file://$PROJECT_DIR$/src/js/views/todotxt.js" />
+        <item url="file://$PROJECT_DIR$/src/js/views/exporting.js" />
+        <item url="file://$PROJECT_DIR$/src/js/views/displayOptions.js" />
+        <item url="file://$PROJECT_DIR$/src/js/views/importing.js" />
+        <item url="file://$PROJECT_DIR$/src/js/storage/storage_dropbox.js" />
+        <item url="file://$PROJECT_DIR$/src/js/storage/storage_browser.js" />
+        <item url="file://$PROJECT_DIR$/src/js/utils/events.js" />
+        <item url="file://$PROJECT_DIR$/src/js/utils/datetime.js" />
         <item url="file://$PROJECT_DIR$/src/js/model/ModelFactory.js" />
       </sourceFilesUrls>
     </properties>

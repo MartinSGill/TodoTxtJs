@@ -18,6 +18,7 @@
     <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="knockout-2.2.1" level="application" />
     <orderEntry type="library" name="dropbox" level="application" />
+    <orderEntry type="library" name="QUnit" level="project" />
   </component>
 </module>
 

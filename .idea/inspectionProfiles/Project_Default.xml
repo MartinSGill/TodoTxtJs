@@ -2564,13 +2564,9 @@
       <scope name="Project Files" level="WARNING" enabled="false">
         <option name="REPORT_VARIABLES" value="true" />
         <option name="REPORT_PARAMETERS" value="true" />
-        <option name="REPORT_CATCH_PARAMETERS" value="true" />
-        <option name="REPORT_FOREACH_PARAMETERS" value="true" />
       </scope>
       <option name="REPORT_VARIABLES" value="true" />
       <option name="REPORT_PARAMETERS" value="true" />
-      <option name="REPORT_CATCH_PARAMETERS" value="true" />
-      <option name="REPORT_FOREACH_PARAMETERS" value="true" />
     </inspection_tool>
     <inspection_tool class="LocalVariableHidingMemberVariable" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
@@ -2618,11 +2614,11 @@
     </inspection_tool>
     <inspection_tool class="LoggerInitializedWithForeignClass" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">
-        <option name="loggerClassName" value="" />
-        <option name="loggerFactoryMethodName" value="" />
+        <option name="loggerClassName" value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger" />
+        <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger" />
       </scope>
-      <option name="loggerClassName" value="" />
-      <option name="loggerFactoryMethodName" value="" />
+      <option name="loggerClassName" value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger" />
+      <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger" />
     </inspection_tool>
     <inspection_tool class="LoggingConditionDisagreesWithLogStatement" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false" />
@@ -2704,12 +2700,7 @@
       <scope name="Project Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="MethodCanBeVariableArityMethod" enabled="true" level="WARNING" enabled_by_default="false">
-      <scope name="Project Files" level="WARNING" enabled="false">
-        <option name="ignoreByteAndShortArrayParameters" value="false" />
-        <option name="ignoreOverridingMethods" value="false" />
-      </scope>
-      <option name="ignoreByteAndShortArrayParameters" value="false" />
-      <option name="ignoreOverridingMethods" value="false" />
+      <scope name="Project Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="MethodCount" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false">

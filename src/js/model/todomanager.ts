@@ -40,6 +40,24 @@ module TodoTxtJs
             this.secondarySort = ko.observable(this.sortTypes[2]);
         }
 
+        /**
+         * Returns the todo at the specified position.
+         * Don't confuse this with the "index" of the
+         * todo itself.
+         *
+         * @param position Position in data array
+         * @returns {TodoTxtJs.Todo}
+         */
+        public getAt(position: number): Todo
+        {
+            if (position >= this._data().length || position < 0)
+            {
+                return null;
+            }
+
+            return this._data()[position];
+        }
+
         public all()
         {
             return this._data().sort(this.sorter);
@@ -118,11 +136,24 @@ module TodoTxtJs
             var todo: Todo;
             if (typeof(newTodo) === "string")
             {
+                if (newTodo.trim() == "")
+                {
+                    // Blank line
+                    this._nextIndex++;
+                    return;
+                }
+
                 todo = new Todo(newTodo);
             }
             else if (newTodo instanceof Todo)
             {
                 todo = newTodo;
+            }
+            else if (newTodo === null)
+            {
+                // Blank line
+                this._nextIndex++;
+                return;
             }
             else
             {
@@ -215,7 +246,7 @@ module TodoTxtJs
                 case "None":
                     return 0;
                 default:
-                    console.warn("Unkown Sort Type: " + sortType);
+                    console.warn("Unknown Sort Type: " + sortType);
                     return 0;
             }
         }
@@ -250,8 +281,7 @@ module TodoTxtJs
         {
             for (var i = 0; i < newData.length; i++)
             {
-                var obj = newData[i];
-                this.add(obj);
+                this.add(newData[i]);
             }
         }
 
@@ -266,10 +296,18 @@ module TodoTxtJs
             var sorted = ko.observableArray<Todo>(this._data());
             sorted.sort((left, right)=> left.index - right.index);
 
+            var nextIndex = 0;
             var result:string[] = [];
             for (var i = 0; i < sorted().length; i++)
             {
-                result.push(sorted()[i].text());
+                var todo = sorted()[i];
+                while (todo.index > nextIndex)
+                {
+                    nextIndex++;
+                    result.push("");
+                }
+                result.push(todo.text());
+                nextIndex++;
             }
 
             return result;
