@@ -175,26 +175,43 @@
     <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>
     <!-- /ko -->
     <section class="todo-view-sidebar">
-        <h3>Due</h3>
-        <ul>
-            <li class="listItem todo-due-sidebar-past" data-bind="visible: dueTodayCount" onclick="todoTxtView.addFilter('isDue:today')">Today (<span data-bind="text: dueTodayCount"></span>)</li>
-            <li class="listItem todo-due-sidebar-near" data-bind="visible: dueSoonCount" onclick="todoTxtView.addFilter('isDue:soon')">Soon (<span data-bind="text: dueSoonCount"></span>)</li>
-            <li class="listItem todo-due-sidebar-far" data-bind="visible: dueSomedayCount" onclick="todoTxtView.addFilter('isDue:someday')">Someday (<span data-bind="text: dueSomedayCount"></span>)</li>
-        </ul>
-        <h3>Priorities</h3>
-        <ul data-bind="foreach: priorities" class="todo-view-sidebar-priorities">
-            <li data-bind="text: $data, attr: { 'class': 'todo-view-priority-' + $data }"
-                onclick="todoTxtView.addFilterFromElement(this)"
-                class="todo-view-priority todo-view-sidebar-priority"></li>
-        </ul>
-        <h3>Contexts</h3>
-        <ul data-bind="foreach: contexts">
-            <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-context"></li>
-        </ul>
-        <h3>Projects</h3>
-        <ul data-bind="foreach: projects">
-            <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)" class="listItem todo-view-project"></li>
-        </ul>
+        <div data-bind="visible: (dueTodayCount() + dueSoonCount() + dueSomedayCount()) > 0">
+            <h3>Due</h3>
+            <ul>
+                <li class="listItem todo-due-sidebar-past" data-bind="visible: dueTodayCount"
+                    onclick="todoTxtView.addFilter('isDue:today')">Today (<span data-bind="text: dueTodayCount"></span>)
+                </li>
+                <li class="listItem todo-due-sidebar-near" data-bind="visible: dueSoonCount"
+                    onclick="todoTxtView.addFilter('isDue:soon')">Soon (<span data-bind="text: dueSoonCount"></span>)
+                </li>
+                <li class="listItem todo-due-sidebar-far" data-bind="visible: dueSomedayCount"
+                    onclick="todoTxtView.addFilter('isDue:someday')">Someday (<span
+                        data-bind="text: dueSomedayCount"></span>)
+                </li>
+            </ul>
+        </div>
+        <div data-bind="visible: priorities().length > 0">
+            <h3>Priorities</h3>
+            <ul data-bind="foreach: priorities" class="todo-view-sidebar-priorities">
+                <li data-bind="text: $data, attr: { 'class': 'todo-view-priority-' + $data }"
+                    onclick="todoTxtView.addFilterFromElement(this)"
+                    class="todo-view-priority todo-view-sidebar-priority"></li>
+            </ul>
+        </div>
+        <div data-bind="visible: contexts().length > 0">
+            <h3>Contexts</h3>
+            <ul data-bind="foreach: contexts">
+                <li data-bind="text: '@' + $data" onclick="todoTxtView.addFilterFromElement(this)"
+                    class="listItem todo-view-context"></li>
+            </ul>
+        </div>
+        <div data-bind="visible: projects().length > 0">
+            <h3>Projects</h3>
+            <ul data-bind="foreach: projects">
+                <li data-bind="text: '+' + $data" onclick="todoTxtView.addFilterFromElement(this)"
+                    class="listItem todo-view-project"></li>
+            </ul>
+        </div>
     </section>
     <!-- ko if: $root.options.swapSidebarPosition() -->
     <section class="todo-view" data-bind="template: { name: 'todo-template', foreach: allTodos }"> </section>

@@ -46,9 +46,9 @@ module TodoTxtJs.View
         public priorities: KnockoutComputed<string[]>;
         public projects: KnockoutComputed<string[]>;
         public contexts: KnockoutComputed<string[]>;
-        public dueToday: KnockoutComputed<number>;
-        public dueSoon: KnockoutComputed<number>;
-        public dueSomeday: KnockoutComputed<number>;
+        public dueTodayCount: KnockoutComputed<number>;
+        public dueSoonCount: KnockoutComputed<number>;
+        public dueSomedayCount: KnockoutComputed<number>;
 
         public newPriorityFilter: KnockoutObservable<string>;
 
@@ -82,9 +82,9 @@ module TodoTxtJs.View
             this.projects = ko.computed({owner: this, read: this._getAllProjects});
             this.contexts = ko.computed({owner: this, read: this._getAllContexts});
 
-            this.dueToday = ko.computed({owner: this, read: this._getDueToday});
-            this.dueSoon = ko.computed({owner: this, read: this._getDueSoon});
-            this.dueSomeday = ko.computed({owner: this, read: this._getDueSomeday});
+            this.dueTodayCount = ko.computed({owner: this, read: this._getDueTodayCount});
+            this.dueSoonCount = ko.computed({owner: this, read: this._getDueSoonCount});
+            this.dueSomedayCount = ko.computed({owner: this, read: this._getDueSomedayCount});
 
             this.newPriorityFilter = ko.observable(undefined);
 
@@ -366,6 +366,45 @@ module TodoTxtJs.View
                             result = (todo.projects().length == 0);
                             break;
 
+                        case "isDue:none":
+                            result = todo.dueDate() == null;
+                            break;
+
+                        case "isDue:today":
+                            if (todo.dueDate())
+                            {
+                                result = DateTime.distance(todo.dueDate()) <= 0;
+                            }
+                            else
+                            {
+                                result = false;
+                            }
+                            break;
+
+                        case "isDue:soon":
+                            if (todo.dueDate())
+                            {
+                                var distance = DateTime.distance(todo.dueDate());
+                                result = distance > 0 && distance <= 3;
+                            }
+                            else
+                            {
+                                result = false;
+                            }
+                            break;
+
+                        case "isDue:someday":
+                            if (todo.dueDate())
+                            {
+                                var distance = DateTime.distance(todo.dueDate());
+                                result = distance > 3;
+                            }
+                            else
+                            {
+                                result = false;
+                            }
+                            break;
+
                         // Normal Filtering
                         default:
                             // Deal with case-sensitive projects/contexts
@@ -588,13 +627,13 @@ module TodoTxtJs.View
             return result.sort();
         }
 
-        private _getDueToday(): number
+        private _getDueTodayCount(): number
         {
             var result = 0;
             for (var i = 0; i < this.allTodos().length; i++)
             {
                 var due = this.allTodos()[i].dueDate();
-                if (due)
+                if (this.isDisplayed(this.allTodos()[i]) && due)
                 {
                     var distance = DateTime.distance(due);
                     if (distance <= 0)
@@ -607,13 +646,13 @@ module TodoTxtJs.View
             return result;
         }
 
-        private _getDueSoon(): number
+        private _getDueSoonCount(): number
         {
             var result = 0;
             for (var i = 0; i < this.allTodos().length; i++)
             {
                 var due = this.allTodos()[i].dueDate();
-                if (due)
+                if (this.isDisplayed(this.allTodos()[i]) && due)
                 {
                     var distance = DateTime.distance(due);
                     if (distance > 0 && distance <= 3)
@@ -626,13 +665,13 @@ module TodoTxtJs.View
             return result;
         }
 
-        private _getDueSomeday(): number
+        private _getDueSomedayCount(): number
         {
             var result = 0;
             for (var i = 0; i < this.allTodos().length; i++)
             {
                 var due = this.allTodos()[i].dueDate();
-                if (due)
+                if (this.isDisplayed(this.allTodos()[i]) && due)
                 {
                     var distance = DateTime.distance(due);
                     if (distance > 3)

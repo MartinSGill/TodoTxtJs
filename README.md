@@ -30,7 +30,7 @@ What?
 
 * Uses the excellent and simple [TodoTxt](http://www.todotxt.com) format
 * Fully editable Todos.
-* Quick Filters: Click on Priority / Project / Context to quickly filter.
+* Quick Filters: Click on Priority / Project / Context / Due Date to quickly filter.
 * Filter on anything
 * Save to Local Browser Storage, or Sync with your Dropbox account.
 * Due date support
@@ -42,6 +42,7 @@ When?
 
 These include only headline feature changes. See the commits for full details.
 
+* v1.5 - Due Date filtering, preserving item index in file.
 * v1.4 - Support for informal dates, New Notification UI
 * v1.3 - Custom Sorting
 * v1.2 - Themes support
