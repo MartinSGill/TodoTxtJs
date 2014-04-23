@@ -177,9 +177,9 @@
     <section class="todo-view-sidebar">
         <h3>Due</h3>
         <ul>
-            <li class="listItem todo-due-sidebar-past" data-bind="visible: dueToday" onclick="todoTxtView.addFilter('isDue:today')">Today (<span data-bind="text: dueToday"></span>)</li>
-            <li class="listItem todo-due-sidebar-near" data-bind="visible: dueSoon" onclick="todoTxtView.addFilter('isDue:soon')">Soon (<span data-bind="text: dueSoon"></span>)</li>
-            <li class="listItem todo-due-sidebar-far" data-bind="visible: dueSomeday" onclick="todoTxtView.addFilter('isDue:someday')">Someday (<span data-bind="text: dueSomeday"></span>)</li>
+            <li class="listItem todo-due-sidebar-past" data-bind="visible: dueTodayCount" onclick="todoTxtView.addFilter('isDue:today')">Today (<span data-bind="text: dueTodayCount"></span>)</li>
+            <li class="listItem todo-due-sidebar-near" data-bind="visible: dueSoonCount" onclick="todoTxtView.addFilter('isDue:soon')">Soon (<span data-bind="text: dueSoonCount"></span>)</li>
+            <li class="listItem todo-due-sidebar-far" data-bind="visible: dueSomedayCount" onclick="todoTxtView.addFilter('isDue:someday')">Someday (<span data-bind="text: dueSomedayCount"></span>)</li>
         </ul>
         <h3>Priorities</h3>
         <ul data-bind="foreach: priorities" class="todo-view-sidebar-priorities">
