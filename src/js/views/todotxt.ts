@@ -46,6 +46,9 @@ module TodoTxtJs.View
         public priorities: KnockoutComputed<string[]>;
         public projects: KnockoutComputed<string[]>;
         public contexts: KnockoutComputed<string[]>;
+        public dueToday: KnockoutComputed<number>;
+        public dueSoon: KnockoutComputed<number>;
+        public dueSomeday: KnockoutComputed<number>;
 
         public newPriorityFilter: KnockoutObservable<string>;
 
@@ -78,6 +81,10 @@ module TodoTxtJs.View
             this.priorities = ko.computed({owner: this, read: this._getAllPriorities});
             this.projects = ko.computed({owner: this, read: this._getAllProjects});
             this.contexts = ko.computed({owner: this, read: this._getAllContexts});
+
+            this.dueToday = ko.computed({owner: this, read: this._getDueToday});
+            this.dueSoon = ko.computed({owner: this, read: this._getDueSoon});
+            this.dueSomeday = ko.computed({owner: this, read: this._getDueSomeday});
 
             this.newPriorityFilter = ko.observable(undefined);
 
@@ -579,6 +586,63 @@ module TodoTxtJs.View
             }
 
             return result.sort();
+        }
+
+        private _getDueToday(): number
+        {
+            var result = 0;
+            for (var i = 0; i < this.allTodos().length; i++)
+            {
+                var due = this.allTodos()[i].dueDate();
+                if (due)
+                {
+                    var distance = DateTime.distance(due);
+                    if (distance <= 0)
+                    {
+                        result++;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private _getDueSoon(): number
+        {
+            var result = 0;
+            for (var i = 0; i < this.allTodos().length; i++)
+            {
+                var due = this.allTodos()[i].dueDate();
+                if (due)
+                {
+                    var distance = DateTime.distance(due);
+                    if (distance > 0 && distance <= 3)
+                    {
+                        result++;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private _getDueSomeday(): number
+        {
+            var result = 0;
+            for (var i = 0; i < this.allTodos().length; i++)
+            {
+                var due = this.allTodos()[i].dueDate();
+                if (due)
+                {
+                    var distance = DateTime.distance(due);
+                    if (distance > 3)
+                    {
+                        result++;
+                    }
+                }
+            }
+
+            return result;
         }
 
         /**
