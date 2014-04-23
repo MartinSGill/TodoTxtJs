@@ -1,4 +1,5 @@
-﻿(A) Priority A
+﻿This is a test file that implements examples for almost all features. Use with "import/export" to test the application.
+(A) Priority A
 (B) Priority B
 (C) Priority C
 (D) Priority D
