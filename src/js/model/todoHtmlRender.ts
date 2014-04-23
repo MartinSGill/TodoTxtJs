@@ -37,8 +37,8 @@ module TodoTxtJs
     {
         //constructor() { throw "Static: Cannot new this class"; }
 
-        public static render(contents: string, options: ContentRenderOptions): string
-        public static render(contents: Todo, options: ContentRenderOptions): string
+        public static render(contents: string, options: ContentRenderOptions): string;
+        public static render(contents: Todo, options: ContentRenderOptions): string;
         public static render(contents: any, options: ContentRenderOptions): string
         {
             contents = ko.utils.unwrapObservable(contents);
