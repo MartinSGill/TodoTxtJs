@@ -127,7 +127,7 @@ module TodoTxtJs
         {
             var formattedMessage = contents;
             // Presumes there will only ever be one due date in a todo entry
-            var match = Regex.DueDate.exec(formattedMessage);
+            var match = Regex.dueDate.exec(formattedMessage);
             var date: Date = null;
             if (match)
             {
@@ -143,7 +143,7 @@ module TodoTxtJs
                 replacement += '  <span class="todo-metadata-value">' + DateTime.dateToInformalString(date) + '</span>';
                 replacement += '</span>';
 
-                formattedMessage = formattedMessage.replace(Regex.DueDate, replacement);
+                formattedMessage = formattedMessage.replace(Regex.dueDate, replacement);
             }
 
             return formattedMessage;
@@ -159,7 +159,7 @@ module TodoTxtJs
             replacement += '  <span class="todo-metadata-value">$2</span>';
             replacement += '</span>';
 
-            formattedMessage = formattedMessage.replace(Regex.MetaData, replacement);
+            formattedMessage = formattedMessage.replace(Regex.metaData, replacement);
 
             return formattedMessage;
         }

@@ -150,7 +150,7 @@ module TodoTxtJs
                         this._completed = value;
                         if (this._completed)
                         {
-                            if (ModelFactory.GetOptions().removeCompletePriority())
+                            if (ModelFactory.getOptions().removeCompletePriority())
                             {
                                 this._priority = null;
                             }
@@ -253,7 +253,7 @@ module TodoTxtJs
         {
             var result : Array<ITodoMetadata> = [];
 
-            var match : any = Regex.MetaData.exec(text);
+            var match : any = Regex.metaData.exec(text);
             while (match != null)
             {
                 var data = {
@@ -268,7 +268,7 @@ module TodoTxtJs
                 }
 
                 result.push(data);
-                match = Regex.MetaData.exec(text);
+                match = Regex.metaData.exec(text);
             }
 
             return result;

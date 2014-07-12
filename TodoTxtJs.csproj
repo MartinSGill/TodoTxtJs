@@ -59,18 +59,16 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="build\GruntFile.js" />
+    <Content Include="build\karma.conf.js" />
     <Content Include="src\.htaccess" />
     <Content Include="src\css\simple_default.css" />
     <Content Include="src\css\simple_solarized_dark.css" />
     <Content Include="src\css\simple_solarized_light.css" />
+    <Content Include="src\css\_default_styles.css" />
     <Content Include="src\images\dropbox-logos_dropbox-logotype-black-trimmed.png" />
     <Content Include="src\js\app.js.map">
       <DependentUpon>app.js</DependentUpon>
     </Content>
-    <Content Include="src\js\app.min.js">
-      <DependentUpon>app.js</DependentUpon>
-    </Content>
-    <Content Include="src\js\defs\jquery.jgrowl.d.ts" />
     <Content Include="src\js\model\todo.js">
       <DependentUpon>todo.ts</DependentUpon>
     </Content>
@@ -95,9 +93,18 @@
     <Content Include="src\js\utils\events.js.map">
       <DependentUpon>events.ts</DependentUpon>
     </Content>
-    <Content Include="tests\karma.conf.js" />
+    <Content Include="tests\model.todomanager.tests.js" />
     <Content Include="tests\reality.tests.js" />
     <Content Include="tests\utils.datatime.tests.js" />
+    <TypeScriptCompile Include="src\js\lib\dropbox.d.ts" />
+    <TypeScriptCompile Include="src\js\lib\jquery.d.ts" />
+    <TypeScriptCompile Include="src\js\lib\jquery.jgrowl.d.ts" />
+    <TypeScriptCompile Include="src\js\lib\jqueryui.d.ts" />
+    <TypeScriptCompile Include="src\js\lib\knockout.d.ts" />
+    <TypeScriptCompile Include="src\js\lib\moment.d.ts" />
+    <TypeScriptCompile Include="src\js\model\ModelFactory.ts" />
+    <TypeScriptCompile Include="src\js\model\options.ts" />
+    <TypeScriptCompile Include="src\js\model\regex.ts" />
     <TypeScriptCompile Include="src\js\storage\IStorageProvider.d.ts" />
     <TypeScriptCompile Include="src\js\views\displayOptions.ts" />
     <Content Include="src\js\views\displayOptions.js">
@@ -108,9 +115,6 @@
     </Content>
     <Content Include="src\js\views\importing.js.map">
       <DependentUpon>importing.ts</DependentUpon>
-    </Content>
-    <Content Include="src\js\views\options.js.map">
-      <DependentUpon>options.ts</DependentUpon>
     </Content>
     <Content Include="src\js\views\todotxt.js.map">
       <DependentUpon>todotxt.ts</DependentUpon>
@@ -125,10 +129,6 @@
     <Content Include="src\images\todotxt_js_logo_64x64.png" />
     <Content Include="src\js\app.js" />
     <Content Include="src\js\bindings\binding_todo.js" />
-    <Content Include="src\js\defs\dropbox.d.ts" />
-    <Content Include="src\js\defs\jquery.d.ts" />
-    <Content Include="src\js\defs\jqueryui.d.ts" />
-    <Content Include="src\js\defs\knockout.d.ts" />
     <Content Include="src\js\dropbox_key.js" />
     <Content Include="src\js\events.js" />
     <Content Include="src\js\lib\jquery.hotkeys.js" />
@@ -166,10 +166,6 @@
       <DependentUpon>importing.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="src\js\views\importing.ts" />
-    <Content Include="src\js\views\options.js">
-      <DependentUpon>options.ts</DependentUpon>
-    </Content>
-    <TypeScriptCompile Include="src\js\views\options.ts" />
     <Content Include="src\js\views\todotxt.js">
       <DependentUpon>todotxt.ts</DependentUpon>
     </Content>
@@ -190,11 +186,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\js\app.min.js.map">
-      <DependentUpon>app.js</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="src\js\model\todoHtmlRender.js.map">
       <DependentUpon>todoHtmlRender.ts</DependentUpon>
     </Content>
@@ -211,10 +202,6 @@
     <Content Include="src\css\simple_solarized_dark.less" />
     <Content Include="src\css\simple_solarized_light.less" />
     <Content Include="src\css\_default_styles.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="tests\go.cmd" />
-    <Content Include="tests\setup.cmd" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
 </Project>

@@ -19,8 +19,6 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/src/js/storage/IStorageProvider.d.js" />
-      <root url="file://$PROJECT_DIR$/src/js/storage/IStorageProvider.d.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/regex.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todomanager.js" />
       <root url="file://$PROJECT_DIR$/src/js/model/todo.js" />

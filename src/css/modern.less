@@ -1,0 +1,432 @@
+/*******************************************************************************
+ * Copyright (C) 2013-2014 Martin Gill
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
+
+@charset "utf-8";
+
+////////////////////////////////////////////////////////////////////////
+// Colours
+////////////////////////////////////////////////////////////////////////
+
+@page-background-color: white;
+@page-text-color: black;
+
+@options-color: paleturquoise;
+@help-color: palegreen;
+@import-color: palegoldenrod;
+@export-color: palevioletred;
+
+body
+{
+  background-color: @page-background-color;
+  color: @page-text-color;
+  margin: 0;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Modifiers
+////////////////////////////////////////////////////////////////////////
+
+.__floatLeft
+{
+  float: left;
+}
+
+.__floatRight
+{
+  float: right;
+}
+
+.__tt
+{
+  font-family: consolas, courier, monospace;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Splash Screen
+////////////////////////////////////////////////////////////////////////
+
+section.page-splashScreen
+{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: table;
+
+  p
+  {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 5em;
+    font-family: fantasy;
+    font-variant: small-caps;
+  }
+
+  p:before
+  {
+    content: "... ";
+  }
+
+  p:after
+  {
+    content: " ...";
+  }
+}
+
+section.hidden { display: none;  }
+
+////////////////////////////////////////////////////////////////////////
+// Toolbar
+////////////////////////////////////////////////////////////////////////
+section.toolbar
+{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  ul.menu
+  {
+    float: right;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: Verdana, sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+
+    #options a:hover
+    {
+      background-color: @options-color;
+    }
+
+    #import a:hover
+    {
+      background-color: @import-color;
+    }
+
+    #export a:hover
+    {
+      background-color: @export-color;
+    }
+
+    #showHelp
+    {
+      a:hover
+      {
+        background-color: @help-color;
+      }
+
+      a
+      {
+        min-width: 20px;
+      }
+    }
+
+    li.menuItem
+    {
+      a
+      {
+        background-color: white;
+        color: black;
+
+        float: right;
+        cursor: pointer;
+        margin-left: 2px;
+        margin-right: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+        min-width: 70px;
+        height: 30px;
+        line-height: 30px;
+        border-style: none;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+        position: relative;
+      }
+
+      .selected
+      {
+        a
+        {
+          background-color: red;
+          height: 25px;
+          z-index: 5001;
+        }
+      }
+    }
+  }
+
+  .notice
+  {
+    display: block;
+    position: absolute;
+    width: 100%;
+    text-align: right;
+  }
+
+  .notice-lastupdated
+  {
+    display: block;
+    float: right;
+    font-size: 0.8em;
+  }
+
+  .notice-highlight
+  {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .notice-highlight > span
+  {
+    display: inline-block;
+    width: 40%;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: red;
+  }
+
+  .notice-error > span
+  {
+    background-color: red;
+  }
+}
+
+div.logo
+{
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 32px;
+  height: 34px;
+  background: url('../images/todotxt_js_logo.png') no-repeat;
+  background-size: 32px 32px;
+}
+
+span.pageHeading
+{
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 50px;
+  color: white;
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 2em;
+  font-variant: small-caps;
+}
+section.addTodo { display: none; }
+section.filters { display: none; }
+section#main { display: none; }
+section#optionsDialog { display: none; }
+section#help
+{
+
+}
+
+footer
+{
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: small;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  a
+  {
+    color: palegoldenrod;
+    text-decoration: none;
+  }
+
+  a:hover
+  {
+    text-decoration: underline;
+  }
+}
+
+///////////////////////////////////////////////////////
+// Help Dialog
+///////////////////////////////////////////////////////
+
+.helpDialog .ui-widget-header
+{
+  background-color: @help-color;
+  font-variant: small-caps;
+}
+
+.helpDialog .ui-dialog-buttonpane
+{
+  background-color: @help-color;
+}
+
+///////////////////////////////////////////////////////
+// Options Dialog
+///////////////////////////////////////////////////////
+
+.optionsDialog .ui-widget-header
+{
+  background-color: @options-color;
+  font-variant: small-caps;
+}
+
+.optionsDialog .ui-dialog-buttonpane
+{
+  background-color: @options-color;
+}
+
+///////////////////////////////////////////////////////
+// jQueryUI overrides
+///////////////////////////////////////////////////////
+
+@add-border: black;
+@add-background: white;
+@add-text: black;
+
+@menu-border: black;
+@menu-background-hover: black;
+@menu-text: black;
+@menu-text-hover: white;
+
+.ui-widget-content
+{
+  border: 1px solid @add-border;
+  background: @page-background-color 50% 50% repeat-x;
+  color: @page-text-color;
+}
+
+.ui-widget-content a
+{
+  color: @page-text-color;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header
+{
+  border: none;
+  background: @add-background 50% 50% repeat-x;
+  color: @add-text;
+}
+
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-widget-header a
+{
+  color: @add-text;
+}
+
+.ui-state-default a:visited
+{
+  color: @page-text-color;
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
+{
+  border: none;
+  background: @menu-background-hover 50% 50% repeat-x;
+  color: @menu-text-hover;
+}
+
+.ui-state-hover a,
+.ui-state-hover a:hover,
+.ui-state-hover a:link,
+.ui-state-hover a:visited {
+  color: @menu-text-hover;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  border: none;
+  background: @page-background-color 50% 50% repeat-x;
+  color: @menu-text-hover;
+}
+
+.ui-state-active a,
+.ui-state-active a:link,
+.ui-state-active a:visited {
+  color: @menu-text-hover;
+}
+
+/* ui-dialog: The outer container of the dialog. */
+.ui-dialog
+{
+  padding: 0;
+  background-color: @page-background-color;
+}
+
+/* ui-dialog-titlebar: The title bar containing the dialog's title and close button. */
+.ui-dialog-titlebar
+{
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+/* ui-dialog-title: The container around the textual title of the dialog. */
+.ui-dialog-title
+{
+
+}
+
+/* ui-dialog-titlebar-close: The dialog's close button. */
+.ui-dialog-titlebar-close
+{
+}
+
+/* ui-dialog-content: The container around the dialog's content. This is also the element the widget was instantiated with. */
+.ui-dialog-content
+{
+
+}
+
+/* ui-dialog-buttonpane: The pane that contains the dialog's buttons. This will only be present if the buttons option is set. */
+.ui-dialog-buttonpane
+{
+  border: none;
+}
+
+/* ui-dialog-buttonset: The container around the buttons themselves. */
+.ui-dialog-buttonset
+{
+
+}

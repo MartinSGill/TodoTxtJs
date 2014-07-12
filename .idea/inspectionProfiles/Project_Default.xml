@@ -1308,10 +1308,6 @@
     <inspection_tool class="DoubleLiteralMayBeFloatLiteral" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="DoubleNegation" enabled="true" level="WARNING" enabled_by_default="true">
-      <scope name="Project Files" level="WARNING" enabled="true" />
-      <scope name="Main Files" level="WARNING" enabled="true" />
-    </inspection_tool>
     <inspection_tool class="DriverManagerGetConnection" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false" />
     </inspection_tool>

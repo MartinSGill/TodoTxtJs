@@ -89,7 +89,7 @@ module TodoTxtJs.View
             this.newPriorityFilter = ko.observable(undefined);
 
             this.displayOptions = new DisplayOptions(this._todoManager);
-            this.options = ModelFactory.GetOptions();
+            this.options = ModelFactory.getOptions();
             this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 
             this.importing = new Importing(this._todoManager);
@@ -437,6 +437,7 @@ module TodoTxtJs.View
             var height = Math.round(window.innerHeight * 0.8);
             //this.showHelp(!this.showHelp());
             $("#help").dialog({
+                dialogClass: "helpDialog",
                 modal: true,
                 buttons: {
                     Ok: function () { $(this).dialog("close"); }
@@ -446,7 +447,10 @@ module TodoTxtJs.View
                 height: "auto",
                 minWidth: 800,
                 maxWidth: width,
-                auto: "auto"
+                auto: "auto",
+                closeOnEscape: true,
+                draggable: false,
+                resizable: false
             });
 
             return false;
@@ -459,6 +463,7 @@ module TodoTxtJs.View
             var self = this;
             var oldStorage = this.options.storageInfo();
             $("#optionsDialog").dialog({
+                dialogClass: "optionsDialog",
                 modal: true,
                 buttons: {
                     Done: function ()
@@ -485,7 +490,9 @@ module TodoTxtJs.View
                 minWidth: 800,
                 maxWidth: width,
                 auto: "auto",
-                closeOnEscape: true
+                closeOnEscape: true,
+                draggable: false,
+                resizable: false
             });
 
             return false;
