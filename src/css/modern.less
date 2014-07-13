@@ -31,9 +31,11 @@
 @page-text-color: black;
 
 @options-color: paleturquoise;
-@help-color: palegreen;
-@import-color: palegoldenrod;
+@help-color: palegoldenrod;
+@import-color: palegreen;
 @export-color: palevioletred;
+
+@warning-color: red;
 
 body
 {
@@ -105,6 +107,7 @@ section.toolbar
   position: absolute;
   top: 0;
   width: 100%;
+  height: 42px;
   background: black;
   color: white;
   padding-top: 5px;
@@ -307,6 +310,110 @@ footer
 .optionsDialog .ui-dialog-buttonpane
 {
   background-color: @options-color;
+}
+
+///////////////////////////////////////////////////////
+// Import Dialog
+///////////////////////////////////////////////////////
+
+.importDialog .ui-widget-header
+{
+  background-color: @import-color;
+  font-variant: small-caps;
+}
+
+.importDialog .ui-dialog-buttonpane
+{
+  background-color: @import-color;
+}
+
+#importDialog
+{
+  .uploadTarget
+  {
+    width: 100%;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    font-variant: small-caps;
+    font-weight: bold;
+    border: medium dashed black;
+    margin-bottom: 5px;
+  }
+
+  .dragOver
+  {
+    border: medium solid green;
+    color: green;
+  }
+
+  .filePicker
+  {
+    width: 100%;
+    display: table;
+    margin: 0;
+    padding: 0;
+  }
+
+  label
+  {
+    display: table-cell;
+    width: 100%;
+    padding-right: 5px;
+  }
+
+  input[type=text]
+  {
+    background-color: lightgrey;
+    border: none;
+    width: 100%;
+  }
+
+  button
+  {
+    display: table-cell;
+    border: black thin solid;
+    background-color: white;
+    width: 100px;
+    font-variant: small-caps;
+    font-weight: bold;
+  }
+
+  .importAppendOption
+  {
+    label
+    {
+      display: inline;
+      float: right;
+      font-weight: bold;
+      font-variant: small-caps;
+      width: auto;
+    }
+
+    span
+    {
+      float: left;
+      display: inline;
+      font-size: smaller;
+      font-weight: bold;
+      color: @warning-color;
+    }
+  }
+}
+
+///////////////////////////////////////////////////////
+// Export Dialog
+///////////////////////////////////////////////////////
+
+.exportDialog .ui-widget-header
+{
+  background-color: @export-color;
+  font-variant: small-caps;
+}
+
+.exportDialog .ui-dialog-buttonpane
+{
+  background-color: @export-color;
 }
 
 ///////////////////////////////////////////////////////

@@ -32,18 +32,23 @@ module TodoTxtJs.View
     export class Importing
     {
         public appendImport: KnockoutObservable<boolean>;
+        public importDetails: KnockoutObservable<string>;
 
         private _dropTarget:any;
         private _entered : number;
         private _todoManager: TodoManager;
+        private _importData: Array<string>;
+        private _dialog: JQuery;
 
         constructor(todoManager:TodoManager)
         {
             this.appendImport = ko.observable<boolean>(false);
+            this.importDetails = ko.observable<string>("");
 
             this._dropTarget = null;
             this._entered = 0;
             this._todoManager = todoManager;
+            this._importData = [];
 
             $(document).ready(()=> {
                 // Get jQuery events to support dataTransfer props
@@ -60,6 +65,53 @@ module TodoTxtJs.View
                 $dropTargetChild.on('dragleave', this.dragLeave);
                 $dropTargetChild.on('drop', this.drop);
             });
+        }
+
+        public onClick_ShowDialog()
+        {
+            var height = Math.round(window.innerHeight * 0.8);
+            this._dialog = $("#importDialog").dialog({
+                dialogClass: "importDialog",
+                modal: true,
+                buttons: {
+                    Close: function () { $(this).dialog("close"); }
+                },
+                minHeight: 400,
+                maxHeight: height,
+                height: "auto",
+                minWidth: 450,
+                maxWidth: 450,
+                auto: "auto",
+                closeOnEscape: true,
+                draggable: false,
+                resizable: false
+            });
+
+            this._resetImportData();
+        }
+
+        public onClick_PickFile()
+        {
+
+        }
+
+        public onClick_Import()
+        {
+            if (!this.appendImport())
+            {
+                this._todoManager.removeAll();
+            }
+
+            this._todoManager.addFromStringArray(this._importData);
+            this._resetImportData();
+            this._dialog.dialog("close");
+        }
+
+        private _resetImportData()
+        {
+            this._enableImportButton(false);
+            this._importData = [];
+            this.importDetails("");
         }
 
         private dragEnter = (event) : void =>
@@ -89,6 +141,7 @@ module TodoTxtJs.View
         {
             event.preventDefault();
             this._dropTarget.removeClass("dragOver");
+            this._resetImportData();
 
             var files = event.dataTransfer.files;
 
@@ -99,17 +152,30 @@ module TodoTxtJs.View
 
                 reader.onloadend = (event): void =>
                 {
-                    if (!this.appendImport())
-                    {
-                        this._todoManager.removeAll();
-                    }
-
-                    var todos = (<any>event.target).result.split(/\r?\n/);
-                    this._todoManager.addFromStringArray(todos);
+                    this._importData = (<any>event.target).result.split(/\r?\n/);
+                    this.importDetails("Ready to import " + this._importData.length + " entries.");
+                    this._enableImportButton();
                 };
 
                 reader.readAsText(file, 'UTF-8');
             }
         };
+
+        private _enableImportButton(enable:boolean = true)
+        {
+            if (this._dialog)
+            {
+                var buttons = this._dialog.dialog("option", "buttons");
+                if (enable)
+                {
+                    buttons.Import = () => { this.onClick_Import(); };
+                }
+                else
+                {
+                    delete buttons.Import;
+                }
+                this._dialog.dialog("option", "buttons", buttons);
+            }
+        }
     } // class Importing
 }

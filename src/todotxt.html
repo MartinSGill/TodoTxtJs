@@ -47,43 +47,15 @@
                 Options
             </a>
         </li>
-        <li class="menuItem" data-bind="visible: options.showImport" id="import">
-            <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+        <li class="menuItem" data-bind="visible: options.showImport, click: onClick_ShowImport" id="import">
+            <a href="#">
                 Import
             </a>
-
-            <div data-bind="with: importing">
-                <div class="toolbox import">
-                    <div id="fileUpload" class="uploadTarget">
-                        <span>Drop your todo.txt file here.</span>
-                    </div>
-                    <div class="toolBox-footer">
-                        <label class="__floatLeft">
-                            <input type="checkbox" data-bind="checked: appendImport"/>
-                            Append
-                        </label>
-                        <span class="toolbox-warning" data-bind="visible: !appendImport()" >This will delete existing Todos.</span>
-                    </div>
-                </div>
-            </div>
         </li>
-        <li class="menuItem" data-bind="visible: options.showExport" id="export">
-            <a href="#" onClick="todoTxtView.toggleToolbox(this)">
+        <li class="menuItem" data-bind="visible: options.showExport, click: onClick_ShowExport" id="export">
+            <a href="#">
                 Export
             </a>
-
-            <div data-bind="with: exporting">
-                <div class="toolbox">
-                    <div class="toolBox-footer">
-                            <span class="toolbox-help">Copy the text and save it into a text file. Or
-                                <button data-bind="click: download">Download</button>
-                            </span>
-                    </div>
-                    <label>
-                        <textarea class="exportTextArea" data-bind="value: exportText"></textarea>
-                    </label>
-                </div>
-            </div>
         </li>
         <li class="menuItem" data-bind="click: save, visible: options.showStorageControls" id="save">
             <a href="#">
@@ -338,6 +310,48 @@
         </div>
     </div>
 </section>
+<!--
+    **********************************
+    * Import
+    **********************************
+ -->
+<section data-bind="with: importing" class="hidden" id="importDialog" title="Import">
+        <div id="fileUpload" class="uploadTarget">
+            <span>Drop your todo.txt file here.</span>
+        </div>
+        <div class="filePicker">
+            <label><input type="text" readonly></label><button data-bind="click: onClick_PickFile">Pick File</button>
+        </div>
+        <div class="importDetails" data-bind="text: importDetails">
+
+        </div>
+        <div class="importAppendOption">
+            <label>
+                <input type="checkbox" data-bind="checked: appendImport"/>
+                Append
+            </label>
+            <span class="warning" data-bind="visible: !appendImport()" >Delete existing entries</span>
+        </div>
+    </div>
+</section>
+<!--
+    **********************************
+    * Export
+    **********************************
+ -->
+<section data-bind="with: exporting" id="exportDialog" class="hidden" tile="Export">
+    <p>
+    <label>
+        <textarea class="exportTextArea" data-bind="value: exportText"></textarea>
+    </label>
+    </p>
+    <p>Copy the above text to the clipboard, or click "download", below.</p>
+</section>
+<!--
+    **********************************
+    * Help
+    **********************************
+ -->
 <section id="help" class="hidden" title="Help">
     <h1 autofocus="yes">
         Welcome To TodoTxtJs

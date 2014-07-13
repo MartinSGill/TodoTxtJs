@@ -63,7 +63,6 @@ module TodoTxtJs.View
         public renderOptions: KnockoutComputed<any>;
 
         public newTodoText: KnockoutObservable<string>;
-        public spinner: KnockoutObservable<boolean>;
         public lastUpdated: KnockoutObservable<string>;
         public pageReady: KnockoutObservable<boolean>;
 
@@ -429,6 +428,38 @@ module TodoTxtJs.View
             }
 
             return result;
+        }
+
+        public onClick_ShowImport(/*data?: any, event?: Event*/): boolean
+        {
+            this.importing.onClick_ShowDialog();
+            return false;
+        }
+
+        public onClick_ShowExport(/*data?: any, event?: Event*/): boolean
+        {
+            var width = Math.round(window.innerWidth * 0.8);
+            var height = Math.round(window.innerHeight * 0.8);
+            //this.showHelp(!this.showHelp());
+            $("#exportDialog").dialog({
+                dialogClass: "exportDialog",
+                modal: true,
+                buttons: {
+                    Download: function () { $(this).dialog("close"); },
+                    Close: function () { $(this).dialog("close"); }
+                },
+                minHeight: 400,
+                maxHeight: height,
+                height: "auto",
+                minWidth: 800,
+                maxWidth: width,
+                auto: "auto",
+                closeOnEscape: true,
+                draggable: false,
+                resizable: false
+            });
+
+            return false;
         }
 
         public onClick_ShowHelp(/*data?: any, event?: Event*/): boolean
