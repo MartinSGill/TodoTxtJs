@@ -170,7 +170,7 @@ module TodoTxtJs.View
                 TodoTxtJs.Events.onError("Error Saving (" + this.options.storage() + ") : [" + error + "]");
             };
 
-            this.options.storageInfo().save(this.exporting.buildExportText(), onSuccess, onError);
+            this.options.storageInfo().save(this.exporting.getExportText(), onSuccess, onError);
             this.displayOptions.save();
         };
 
@@ -295,42 +295,6 @@ module TodoTxtJs.View
         }
 
         /**
-         * Method to manage the showing/hiding of menu item toolboxs.
-         * @param element The item that was toggled by the user.
-         */
-        public toggleToolbox(element : HTMLElement) : void
-        {
-            var selected = false;
-            var menuItem = $(element).parent();
-            this.options.save();
-            if (menuItem.hasClass("selected"))
-            {
-
-                if (menuItem[0].id === 'options')
-                {
-                    this.options.save();
-                }
-                selected = true;
-            }
-            else
-            {
-                if (menuItem[0].id === 'export')
-                {
-                    this.exporting.fillExportBox();
-                }
-            }
-
-            $(".menuItem").removeClass("selected");
-            $(".menuItem .toolbox").hide();
-
-            if (!selected)
-            {
-                menuItem.addClass("selected");
-                $(".toolbox", menuItem).show();
-            }
-        }
-
-        /**
          * Determines if the given Todo object should be visible.
          * based on the current filter settings.
          * @param todo The todo object to inspect.
@@ -438,27 +402,7 @@ module TodoTxtJs.View
 
         public onClick_ShowExport(/*data?: any, event?: Event*/): boolean
         {
-            var width = Math.round(window.innerWidth * 0.8);
-            var height = Math.round(window.innerHeight * 0.8);
-            //this.showHelp(!this.showHelp());
-            $("#exportDialog").dialog({
-                dialogClass: "exportDialog",
-                modal: true,
-                buttons: {
-                    Download: function () { $(this).dialog("close"); },
-                    Close: function () { $(this).dialog("close"); }
-                },
-                minHeight: 400,
-                maxHeight: height,
-                height: "auto",
-                minWidth: 800,
-                maxWidth: width,
-                auto: "auto",
-                closeOnEscape: true,
-                draggable: false,
-                resizable: false
-            });
-
+            this.exporting.onClick_ShowDialog();
             return false;
         }
 

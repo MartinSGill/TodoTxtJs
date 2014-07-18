@@ -31,6 +31,7 @@ module TodoTxtJs.View
         public exportText: KnockoutObservable<string>;
 
         private _todoManager:TodoManager;
+        private _dialog: JQuery;
 
         constructor(todoManager:TodoManager)
         {
@@ -38,18 +39,42 @@ module TodoTxtJs.View
             this._todoManager = todoManager;
         }
 
-        public buildExportText() : string
+        public onClick_ShowDialog()
+        {
+            this._fillExportBox();
+            var width = Math.round(window.innerWidth * 0.8);
+            var height = Math.round(window.innerHeight * 0.8);
+            this._dialog = $("#exportDialog").dialog({
+                dialogClass: "exportDialog",
+                modal: true,
+                buttons: {
+                    Download: () => { this._download(); },
+                    Close: function () { $(this).dialog("close"); }
+                },
+                minHeight: 400,
+                maxHeight: height,
+                height: "auto",
+                minWidth: 800,
+                maxWidth: width,
+                auto: "auto",
+                closeOnEscape: true,
+                draggable: false,
+                resizable: false
+            });
+        }
+
+        public getExportText() : string
         {
             var todos : string[] = this._todoManager.exportToStringArray();
             return todos.join("\n");
         }
 
-        public fillExportBox() : void
+        public _fillExportBox() : void
         {
-            this.exportText(this.buildExportText());
+            this.exportText(this.getExportText());
         }
 
-        public download() : void
+        private _download() : void
         {
             var data = "data:text;charset=utf-8,";
             data += encodeURI(this.exportText());

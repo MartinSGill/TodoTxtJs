@@ -405,16 +405,37 @@ footer
 // Export Dialog
 ///////////////////////////////////////////////////////
 
-.exportDialog .ui-widget-header
+.exportDialog
 {
-  background-color: @export-color;
-  font-variant: small-caps;
+  height: 100%;
+
+  .ui-widget-header
+  {
+    background-color: @export-color;
+    font-variant: small-caps;
+  }
+
+  .ui-dialog-buttonpane
+  {
+    background-color: @export-color;
+  }
+
+  label textarea
+  {
+    height: 250px;
+    width: 100%;
+    background-color: lightgray;
+  }
+
+  p
+  {
+    font-size: smaller;
+    padding: 0;
+    margin: 0;
+  }
 }
 
-.exportDialog .ui-dialog-buttonpane
-{
-  background-color: @export-color;
-}
+
 
 ///////////////////////////////////////////////////////
 // jQueryUI overrides
@@ -432,6 +453,7 @@ footer
 .ui-widget-content
 {
   border: 1px solid @add-border;
+  border-radius: 0;
   background: @page-background-color 50% 50% repeat-x;
   color: @page-text-color;
 }
@@ -499,6 +521,11 @@ footer
 {
   padding: 0;
   background-color: @page-background-color;
+
+  button
+  {
+    border-radius: 0;
+  }
 }
 
 /* ui-dialog-titlebar: The title bar containing the dialog's title and close button. */
@@ -507,6 +534,7 @@ footer
   border-top: none;
   border-right: none;
   border-left: none;
+  border-radius: 0;
 }
 
 /* ui-dialog-title: The container around the textual title of the dialog. */

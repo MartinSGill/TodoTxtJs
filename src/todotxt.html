@@ -339,10 +339,10 @@
     * Export
     **********************************
  -->
-<section data-bind="with: exporting" id="exportDialog" class="hidden" tile="Export">
+<section data-bind="with: exporting" id="exportDialog" class="hidden" title="Export">
     <p>
     <label>
-        <textarea class="exportTextArea" data-bind="value: exportText"></textarea>
+        <textarea class="exportTextArea" data-bind="value: exportText" onclick="this.select()" readonly></textarea>
     </label>
     </p>
     <p>Copy the above text to the clipboard, or click "download", below.</p>
@@ -406,7 +406,7 @@
                 <li>
                     <span class="todo-metadata todo-due-date todo-due-date_near">
                         <span class="todo-metadata-name" style="color: black">due</span>
-                        <span class="todo-metadata-seperator">:</span>
+                        <span class="todo-metadata-separator">:</span>
                         <span class="todo-metadata-value">Tomorrow</span>
                     </span>
                     Due soon (a few days).
@@ -414,7 +414,7 @@
                 <li>
                     <span class="todo-metadata todo-due-date todo-due-date_far">
                         <span class="todo-metadata-name" style="color: white">due</span>
-                        <span class="todo-metadata-seperator">:</span>
+                        <span class="todo-metadata-separator">:</span>
                         <span class="todo-metadata-value">2015-01-01</span>
                     </span>
                     Not due for a while.
@@ -424,7 +424,7 @@
         <li>If your todo list contains meta-data fields, these are highlighted:
             <span class="todo-metadata">
                 <span class="todo-metadata-name" style="color: black">key</span>
-                <span class="todo-metadata-seperator">:</span>
+                <span class="todo-metadata-separator">:</span>
                 <span class="todo-metadata-value">value</span>
             </span>
         </li>
