@@ -1,5 +1,6 @@
 TodoTxtJs
 =========
+[![Build status](https://ci.appveyor.com/api/projects/status/0dpdxyr7lvxmavu2)](https://ci.appveyor.com/project/MartinSGill/todotxtjs)
 
 A Typescript/Javascript web app implementation of TodoTxt.
 
