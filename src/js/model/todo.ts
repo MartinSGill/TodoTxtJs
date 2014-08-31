@@ -37,7 +37,7 @@ module TodoTxtJs
 
     export class Todo
     {
-        public index:number = 0;
+        public index: number = 0;
         public createdDate: KnockoutComputed<string>;
         public priority: KnockoutComputed<string>;
         public priorityScore: KnockoutComputed<number>;

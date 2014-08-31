@@ -177,7 +177,11 @@ module TodoTxtJs
                 if (!left.dueDate()) return 1;
                 if (!right.dueDate()) return -1;
 
-                if (left.dueDate() !== right.dueDate())
+                if (
+                    left.dueDate().getFullYear() !== right.dueDate().getFullYear()
+                    && left.dueDate().getMonth() !== right.dueDate().getMonth()
+                    && left.dueDate().getDay() !== right.dueDate().getDay()
+                    )
                 {
                     return left.dueDate() < right.dueDate() ? -1 : 1;
                 }
@@ -265,11 +269,11 @@ module TodoTxtJs
                 }
             }
 
-            // Due date is more important than priority
+            //Primary Sort
             var result = TodoManager._compareTodo(left, right, this.primarySort());
             if (result !== 0) return result;
 
-            // Due date is more important than priority
+            // Secondary Sort
             result = TodoManager._compareTodo(left, right, this.secondarySort());
             if (result !== 0) return result;
 
