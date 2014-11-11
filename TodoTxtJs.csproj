@@ -82,7 +82,7 @@
       <DependentUpon>todo.ts</DependentUpon>
     </Content>
     <Content Include="src\js\model\todoHtmlRender.js">
-      <DependentUpon>todoHtmlRender.ts</DependentUpon>
+      <DependentUpon>contentRender.ts</DependentUpon>
     </Content>
     <Content Include="src\js\model\todomanager.js.map">
       <DependentUpon>todomanager.ts</DependentUpon>
@@ -142,7 +142,7 @@
       <DependentUpon>todo.js</DependentUpon>
     </Content>
     <TypeScriptCompile Include="src\js\model\todo.ts" />
-    <TypeScriptCompile Include="src\js\model\todoHtmlRender.ts" />
+    <TypeScriptCompile Include="src\js\model\contentRender.ts" />
     <Content Include="src\js\model\todomanager.js">
       <DependentUpon>todomanager.ts</DependentUpon>
     </Content>
@@ -198,7 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\js\model\todoHtmlRender.js.map">
-      <DependentUpon>todoHtmlRender.ts</DependentUpon>
+      <DependentUpon>contentRender.ts</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

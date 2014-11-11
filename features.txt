@@ -12,6 +12,9 @@ A todo with +project
 A todo with different case @Context
 A todo with different case +Project
 
+(A) Priority A due:today
+(B) Priority B due:today
+(C) Priority C due:today
 
 
 2013-01-01 Todo with create date
@@ -26,6 +29,7 @@ Todo due Monday: due:monday
 
 Todo due Sunday: due:wed
 Todo with metadata meta:data key:value
+Todo with funky metadata v:1.2.3
 Todo URL http://example.com/hello/there/world
 2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01
 x 2013-01-01 2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01

@@ -1989,6 +1989,7 @@
         <option name="REPORT_INCONSISTENT_PROPERTIES" value="true" />
         <option name="REPORT_DUPLICATED_PROPERTIES" value="true" />
       </scope>
+      <option name="Project Files" value="false" />
       <option name="REPORT_MISSING_TRANSLATIONS" value="true" />
       <option name="REPORT_INCONSISTENT_PROPERTIES" value="true" />
       <option name="REPORT_DUPLICATED_PROPERTIES" value="true" />

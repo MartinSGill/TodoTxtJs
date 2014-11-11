@@ -50,13 +50,14 @@ module TodoTxtJs
         public metadata: KnockoutComputed<Array<ITodoMetadata>>;
         public dueDate: KnockoutComputed<Date>;
 
-        private _priority:string = null;
-        private _createDate:string = null;
-        private _completed:boolean = false;
-        private _completedDate:string = null;
-        private _contents:string = null;
-        private _projects:string[] = [];
-        private _contexts:string[] = [];
+        private static _knownMetaData: string[] = ['due', 'http', 'https', 'ftp'];
+        private _priority: string = null;
+        private _createDate: string = null;
+        private _completed: boolean = false;
+        private _completedDate: string = null;
+        private _contents: string = null;
+        private _projects: string[] = [];
+        private _contexts: string[] = [];
         private _metadata: Array<ITodoMetadata> = [];
 
         private _text: KnockoutObservable<string>;
@@ -73,6 +74,19 @@ module TodoTxtJs
 
             this._parse();
         }
+
+        public static isKnownMetaData(metaData: ITodoMetadata): boolean
+        {
+            console.debug("Metadata Name: '" + metaData.name + "'")
+            if (this._knownMetaData.indexOf(metaData.name) >= 0)
+            {
+                console.debug("Metadata Name: '" + metaData.name + "' is known.")
+                return true;
+            }
+
+            return false;
+        }
+
 
         private _initialiseComputedProperties() : void
         {
@@ -260,6 +274,8 @@ module TodoTxtJs
                     name: match[1].toLowerCase(),
                     value: match[2]
                 };
+
+                console.debug("Found MetaData: (" + data.name + ") (" + data.value + ")");
 
                 data = Todo._processKnownMetadata(data);
                 if (data.value !== match[2])

@@ -35,8 +35,6 @@ module TodoTxtJs
 
     export class ContentRender
     {
-        //constructor() { throw "Static: Cannot new this class"; }
-
         public static render(contents: string, options: ContentRenderOptions): string;
         public static render(contents: Todo, options: ContentRenderOptions): string;
         public static render(contents: any, options: ContentRenderOptions): string
@@ -67,26 +65,24 @@ module TodoTxtJs
         private static _renderContexts(contents: string): string
         {
             var formattedMessage = contents;
-            var contextRegex = /(?:\W|^)(@)([\S_]+[A-Za-z0-9_](?!\S))/ig;
 
             var replacement = "";
             replacement += ' <span class="todo-view-contextFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$1</span>';
             replacement += '<span class="todo-view-context" onclick="event.stopPropagation(); todoTxtView.addFilter(\'@$2\')">$2</span>';
 
-            formattedMessage = formattedMessage.replace(contextRegex, replacement);
+            formattedMessage = formattedMessage.replace(Regex.Context, replacement);
             return formattedMessage;
         }
 
         private static _renderProjects(contents: string): string
         {
             var formattedMessage = contents;
-            var projectRegex = /(?:\W|^)(\+)([\S_]+[A-Za-z0-9_](?!\S))/ig;
 
             var replacement = "";
             replacement += ' <span class="todo-view-projectFlag" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$1</span>';
             replacement += '<span class="todo-view-project" onclick="event.stopPropagation(); todoTxtView.addFilter(\'+$2\')">$2</span>';
 
-            formattedMessage = formattedMessage.replace(projectRegex, replacement);
+            formattedMessage = formattedMessage.replace(Regex.Project, replacement);
             return formattedMessage;
 
         }
@@ -94,14 +90,13 @@ module TodoTxtJs
         private static _renderUrls(contents: string, options: ContentRenderOptions): string
         {
             var formattedMessage = contents;
-            var urlRegex = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
             if (options.shortUrls)
             {
-                formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_short" href="$1" target="_blank"><abbr title="$1">Link</abbr></a>');
+                formattedMessage = formattedMessage.replace(Regex.Url, '<a class="todo-view-link_short" href="$1" target="_blank"><abbr title="$1">Link</abbr></a>');
             }
             else
             {
-                formattedMessage = formattedMessage.replace(urlRegex, '<a class="todo-view-link_full" href="$1" target="_blank">$1</a>');
+                formattedMessage = formattedMessage.replace(Regex.Url, '<a class="todo-view-link_full" href="$1" target="_blank">$1</a>');
             }
             return formattedMessage;
         }
@@ -152,14 +147,28 @@ module TodoTxtJs
         private static _renderMetadata(contents: string): string
         {
             var formattedMessage = contents;
-            var replacement = "";
-            replacement += '<span class="todo-metadata">';
-            replacement += '  <span class="todo-metadata-name">$1</span>';
-            replacement += '  <span class="todo-metadata-seperator">:</span>';
-            replacement += '  <span class="todo-metadata-value">$2</span>';
-            replacement += '</span>';
-
-            formattedMessage = formattedMessage.replace(Regex.MetaData, replacement);
+            var match: any = Regex.MetaData.exec(contents);
+            while (match != null)
+            {
+                var data: ITodoMetadata = {
+                    name: match[1].toLowerCase(),
+                    value: match[2]
+                };
+                
+                //known metadata has it's own renderer
+                //so only render other meta data
+                if (!Todo.isKnownMetaData(data))
+                {
+                    var replacement = "";
+                    replacement += '<span class="todo-metadata">';
+                    replacement += '  <span class="todo-metadata-name">' + data.name + '</span>';
+                    replacement += '  <span class="todo-metadata-seperator">:</span>';
+                    replacement += '  <span class="todo-metadata-value">' + data.value + '</span>';
+                    replacement += '</span>';
+                    formattedMessage = formattedMessage.replace(match[0], replacement);
+                }
+                match = Regex.MetaData.exec(contents);
+            }
 
             return formattedMessage;
         }
@@ -173,8 +182,8 @@ module TodoTxtJs
                 formattedMessage = ContentRender._renderContexts(formattedMessage);
                 formattedMessage = ContentRender._renderProjects(formattedMessage);
                 formattedMessage = ContentRender._renderUrls(formattedMessage, options);
-                formattedMessage = ContentRender._renderDueDate(formattedMessage);
                 formattedMessage = ContentRender._renderMetadata(formattedMessage);
+                formattedMessage = ContentRender._renderDueDate(formattedMessage);
             }
 
             return formattedMessage;
