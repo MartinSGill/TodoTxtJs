@@ -32,7 +32,8 @@ module TodoTxtJs.StorageProviders
         controls = {
             storage: false,
             exports: true,
-            imports: true
+            imports: true,
+            logout: false
         };
 
         load(onSuccess? : (Object) => void, onError?: (string) => void) : void
@@ -47,6 +48,11 @@ module TodoTxtJs.StorageProviders
         save(data : Object, onSuccess? : () => void, onError?: (string) => void) : void
         {
             window.localStorage["todos"] = data;
+        }
+
+        logout(onSuccess? : (Object) => void, onError?: (string) => void) : void
+        {
+            // not supported
         }
     }
 }

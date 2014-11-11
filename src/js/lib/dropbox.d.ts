@@ -125,6 +125,9 @@ declare module Dropbox
         public authenticate(options: ClientAuthenticateOptions, callback: (error: ApiError, client: Client) => void): Client;
         public isAuthenticated(): boolean;
 
+        /** Options for signOut don't seem to work. not sure why not, as it's in the API docs **/
+        public signOut(callback?: (error: ApiError) => void): XMLHttpRequest;
+
         public readFile(path: string, options: ClientReadFileOptions, callback: (error: ApiError, contents: string, metadata: File.Stat, rangeInfo: Http.RangeInfo) => void): XMLHttpRequest;
         public writeFile(path: string, data: any, options: ClientWriteFileOptions, callback: (error: ApiError, metadata: File.Stat) => void): XMLHttpRequest;
 

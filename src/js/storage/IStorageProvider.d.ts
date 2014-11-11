@@ -28,6 +28,7 @@ declare module TodoTxtJs.StorageProviders
         storage: boolean;
         exports: boolean;
         imports: boolean;
+        logout: boolean;
     }
 
     export interface IStorageProvider
@@ -61,5 +62,12 @@ declare module TodoTxtJs.StorageProviders
          * @param onError Callback on failed save.
          */
         save(data : Object, onSuccess? : () => void, onError?: (string) => void) : void;
+
+        /**
+         * Disconnects (or logs out) a linked account. Disable by not enabling the logout control.
+         * @param onSuccess Callback on successful load. Contains the loaded todos.
+         * @param onError Callback on failed save.
+         */
+        logout(onSuccess? : (object) => void, onError?: (string) => void) : void;
     }
 }

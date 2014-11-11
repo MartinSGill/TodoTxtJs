@@ -76,7 +76,7 @@ module TodoTxtJs.View
             this._todoManager = new TodoTxtJs.TodoManager();
 
             this._title = ko.observable<string>("TodoTxtJs");
-            this.version = ko.observable<string>("1.5.0");
+            this.version = ko.observable<string>("1.6.0");
             this.allTodos = ko.computed({owner: this, read: this._getAllTodos});
             this.priorities = ko.computed({owner: this, read: this._getAllPriorities});
             this.projects = ko.computed({owner: this, read: this._getAllProjects});
@@ -210,6 +210,21 @@ module TodoTxtJs.View
             }
         }
 
+        public logout = () : void =>
+        {
+            this.options.storageInfo().logout(() =>
+            {
+                // Reset to browser storage, it will just try to log in again
+                // need to save options, or load will just use previous storage provider again.
+                var oldStore = this.options.storage()
+                this.options.storageInfo(this.options.storageOptions()[0]);
+                this.options.save();
+
+                $.jGrowl("You have been logged out of " + oldStore + ". Now using Browser storage.");
+                this.load();
+            } );
+        };
+
         public addNewTodo(): void
         {
             var source = this.newTodoText();
@@ -240,10 +255,8 @@ module TodoTxtJs.View
          */
         public saveOnChange() : void
         {
-            console.log("saveOnChange");
             if (this.options.saveOnChange())
             {
-                console.log("saveOnChange_saving");
                 this.save();
             }
         }

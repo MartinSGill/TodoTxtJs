@@ -33,7 +33,8 @@ module TodoTxtJs.StorageProviders
         public controls = {
             storage: true,
             exports: true,
-            imports: true
+            imports: true,
+            logout: true
         };
 
         private _versionTag: string;
@@ -137,6 +138,23 @@ module TodoTxtJs.StorageProviders
                 });
             }
         };
+
+        logout(onSuccess? : (Object) => void, onError?: (string) => void) : void
+        {
+            if (this._client.isAuthenticated()) {
+                var result = this._client.signOut((error) =>
+                {
+                    if (!error && onSuccess)
+                    {
+                        onSuccess(result);
+                    }
+                    else if (onError)
+                    {
+                        onError(error);
+                    }
+                } );
+            }
+        }
     }
 }
 

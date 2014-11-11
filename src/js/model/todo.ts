@@ -77,10 +77,8 @@ module TodoTxtJs
 
         public static isKnownMetaData(metaData: ITodoMetadata): boolean
         {
-            console.debug("Metadata Name: '" + metaData.name + "'")
             if (this._knownMetaData.indexOf(metaData.name) >= 0)
             {
-                console.debug("Metadata Name: '" + metaData.name + "' is known.")
                 return true;
             }
 
@@ -274,8 +272,6 @@ module TodoTxtJs
                     name: match[1].toLowerCase(),
                     value: match[2]
                 };
-
-                console.debug("Found MetaData: (" + data.name + ") (" + data.value + ")");
 
                 data = Todo._processKnownMetadata(data);
                 if (data.value !== match[2])
