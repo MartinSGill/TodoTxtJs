@@ -155,7 +155,14 @@ module TodoTxtJs.View
 
         public save = () : void =>
         {
-            $.jGrowl("Saving to " + this.options.storage() + "...");
+            var message = "Saving to " + this.options.storage();
+            if (this.options.storageInfo().path)
+            {
+                message += " (" + this.options.storageInfo().path() + ") ";
+            }
+            message += "...";
+
+            $.jGrowl(message);
 
             var onSuccess = () =>
             {
@@ -205,7 +212,14 @@ module TodoTxtJs.View
 
             if (typeof(Storage) !== "undefined")
             {
-                $.jGrowl("Loading from " + this.options.storage() + "...");
+                var message = "Loading from " + this.options.storage();
+                if (this.options.storageInfo().path)
+                {
+                    message += " (" + this.options.storageInfo().path() + ") ";
+                }
+                message += "...";
+
+                $.jGrowl(message);
                 this.options.storageInfo().load(onSuccess, onError);
             }
         }

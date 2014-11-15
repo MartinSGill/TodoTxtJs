@@ -36,6 +36,10 @@ module TodoTxtJs.StorageProviders
             logout: false
         };
 
+        // Not used
+        public path: KnockoutObservable<string>;
+        pathDescription = null;
+
         load(onSuccess? : (Object) => void, onError?: (string) => void) : void
         {
             if (window.localStorage["todos"])

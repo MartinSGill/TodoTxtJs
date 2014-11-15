@@ -231,6 +231,11 @@
 <section id="optionsDialog" class="options hidden" title="Options">
     <div data-bind="with: options">
         <div class="options-group">
+            <!--
+                **********************************
+                * Storage
+                **********************************
+             -->
             <h1 autofocus="yes">Storage</h1>
             <div class="options-table">
                 <div class="options-entry">
@@ -250,6 +255,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="options-entry" data-bind="visible: storageInfo().path != null">
+                    <div class="options-value">
+                        <label>
+                            <input type="text" data-bind="value: storagePath" />
+                        </label>
+                    </div>
+                    <div class="options-name">
+                        Location
+                    </div>
+                    <div class="options-description">
+                        <span data-bind="text: storagePathDescription"></span>
+                    </div>
+                </div>
                 <div class="options-entry">
                     <div class="options-value">
                         <label>
@@ -266,6 +284,11 @@
             </div>
         </div>
         <div class="options-group">
+            <!--
+                **********************************
+                * Behaviour
+                **********************************
+             -->
             <h1>Behaviour</h1>
             <div class="options-table">
                 <div class="options-entry">

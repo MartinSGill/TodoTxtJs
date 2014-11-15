@@ -37,6 +37,9 @@ module TodoTxtJs.StorageProviders
             logout: true
         };
 
+        public path: KnockoutObservable<string>;
+        public pathDescription: string = "The path to the file to use, from the root of your dropbox folder. Use forward-slashes for directories, e.g. 'Todo/todo.txt'. Don't forget to 'Save' or 'Load' only changing the path.";
+
         private _versionTag: string;
         private _client: Dropbox.Client;
 
@@ -49,6 +52,7 @@ module TodoTxtJs.StorageProviders
                 sandbox: false
             });
 
+            this.path = ko.observable<string>('Todo/todo.txt');
             this._client.authDriver(new Dropbox.Drivers.Redirect({ rememberUser: true }));
         }
 
@@ -56,7 +60,7 @@ module TodoTxtJs.StorageProviders
         {
             this.authenticate(()=>
             {
-                this._client.readFile('Todo/todo.txt', null, (error: Dropbox.ApiError, data: any, stat: Dropbox.File.Stat) =>
+                this._client.readFile(this.path(), null, (error: Dropbox.ApiError, data: any, stat: Dropbox.File.Stat) =>
                 {
                     this._onFileRead(error, data, stat, onSuccess, onError)
                 });
@@ -67,7 +71,7 @@ module TodoTxtJs.StorageProviders
         {
             this.authenticate(() =>
             {
-                this._client.writeFile('Todo/todo.txt', data, { /*lastVersionTag: this._versionTag,*/ noOverwrite: false }, function (error/*, data*/)
+                this._client.writeFile(this.path(), data, { /*lastVersionTag: this._versionTag,*/ noOverwrite: false }, function (error/*, data*/)
                 {
                     if (error)
                     {

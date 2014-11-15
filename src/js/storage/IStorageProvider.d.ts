@@ -49,6 +49,20 @@ declare module TodoTxtJs.StorageProviders
         controls: IStorageProviderControls;
 
         /**
+         * The location or path where the data is to be stored.
+         *
+         * @note not used, if NULL.
+         */
+        path: KnockoutObservable<string>;
+
+        /**
+         * This describes the Path to allow users to enter a valid value.
+         *
+         * @note not used, if NULL.
+         */
+        pathDescription: string;
+
+        /**
          * Load Todos from the provider.
          * @param onSuccess Callback on successful load. Contains the loaded todos.
          * @param onError Callback on failed load.

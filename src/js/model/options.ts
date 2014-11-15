@@ -41,6 +41,8 @@ module TodoTxtJs
         public storageOptions : KnockoutObservableArray<StorageProviders.IStorageProvider>;
         public storageInfo : KnockoutObservable<StorageProviders.IStorageProvider>;
         public storage : KnockoutComputed<string>;
+        public storagePath : KnockoutComputed<string>;
+        public storagePathDescription: KnockoutComputed<string>;
         public addCreatedDate : KnockoutObservable<boolean>;
         public addCreatedDateDescription : KnockoutObservable<string>;
 
@@ -84,13 +86,34 @@ module TodoTxtJs
             }
 
             this.storageInfo = ko.observable(this.storageOptions()[0]);
-            this.storage = ko.computed({
+            this.storage = ko.computed<string>({
                        owner: this,
                        read: () =>
                        {
                            return this.storageInfo().name;
                        }
                    });
+
+            this.storagePath = ko.computed({
+                owner: this,
+                read: () =>
+                {
+                    var result = this.storageInfo().path;
+                    return result ? result() : null;
+                },
+                write: (value: string) =>
+                {
+                    this.storageInfo().path(value);
+                }
+            });
+
+            this.storagePathDescription = ko.computed<string>({
+                owner: this,
+                read: () =>
+                {
+                    return this.storageInfo().pathDescription;
+                }
+            });
 
             this.addCreatedDate = ko.observable<boolean>(false);
             this.addCreatedDateDescription = ko.observable<string>("Automatically add a start date to new TODOs.");
@@ -182,7 +205,6 @@ module TodoTxtJs
                 var options: any = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
 
                 // Only load actual options, so we don't break the view model
-
                 // Storage
                 if (options.hasOwnProperty("storage"))
                 {
@@ -191,6 +213,10 @@ module TodoTxtJs
                         if (this.storageOptions()[i].name === options.storage)
                         {
                             this.storageInfo(this.storageOptions()[i]);
+                            if (options.storageInfo.path)
+                            {
+                                this.storageInfo().path(options.storageInfo.path);
+                            }
                             break;
                         }
                     }
