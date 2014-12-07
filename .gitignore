@@ -9,8 +9,8 @@ WebApp/src/js/**/*.map
 !WebApp/src/js/sample_dropbox_key.js
 
 # Ignore generated CSS files
-src/css/**/*.css
-src/css/*.css
+WebApp/src/css/**/*.css
+WebApp/src/css/*.css
 
 ######################################################################
 # Generic stuff
@@ -250,6 +250,3 @@ Session.vim
 *~
 
 
-
-WebApp/node_modules
-TodoTxtJsServer/node_modules
