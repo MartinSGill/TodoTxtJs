@@ -721,9 +721,8 @@ module TodoTxtJs.View
             return Main._split( term ).pop();
         }
 
-        private _initializeKeyboardShortCuts()
+        private _initializeKeyboardShortCuts = () =>
         {
-            var _this = this;
             $(document).bind('keydown', 'n', function(event)
             {
                 event.preventDefault();
@@ -740,12 +739,12 @@ module TodoTxtJs.View
                 }
                 else
                 {
-                    _this.onClick_ShowHelp();
+                    this.onClick_ShowHelp();
                 }
             }
 
             $(document).bind('keydown', 'shift+/', help);
-        }
+        };
 
         /**
          * Get the options for rendering the HTML contents of the todo.

@@ -36,14 +36,14 @@ module.exports = function (grunt) {
                              server: {
                                  options: {
                                      port: 60000,
-                                     base: '../src/'
+                                     base: './src/'
                                  }
                              }
                          },
                          typescript: {
                              base: {
-                                 src: ['../src/**/*.ts'],
-                                 dest: '../src/js/app.js',
+                                 src: ['./src/**/*.ts'],
+                                 dest: './src/js/app.js',
                                  options: {
                                      module: 'commonjs',
                                      target: 'es5',
@@ -58,21 +58,21 @@ module.exports = function (grunt) {
                                      yuicompress: true
                                  },
                                  files: {
-                                     "../src/css/simple_default.css": "../src/css/simple_default.less",
-                                     "../src/css/simple_solarized_dark.css": "../src/css/simple_solarized_dark.less",
-                                     "../src/css/simple_solarized_light.css": "../src/css/simple_solarized_light.less"
+                                     "../src/css/simple_default.css": "./src/css/simple_default.less",
+                                     "../src/css/simple_solarized_dark.css": "./src/css/simple_solarized_dark.less",
+                                     "../src/css/simple_solarized_light.css": "./src/css/simple_solarized_light.less"
                                  }
                              }
                          },
                          watch: {
                              typescript:
                              {
-                                files: '../src/**/*.ts',
+                                files: './src/**/*.ts',
                                 tasks: ['typescript']
                              },
                              less:
                              {
-                                 files: '../src/**/*.less',
+                                 files: './src/**/*.less',
                                  tasks: ['less']
                              }
                          },

@@ -2,12 +2,9 @@
   <library name="QUnit" type="javaScript">
     <properties>
       <option name="frameworkName" value="node_modules" />
-      <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/build/node_modules/qunitjs/qunit/qunit.js" />
-      </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/build/node_modules/qunitjs/qunit/qunit.js" />
+      <root url="file://$PROJECT_DIR$/WebApp/build/node_modules/qunitjs/qunit/qunit.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

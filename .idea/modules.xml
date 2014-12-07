@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/TodoTxtJsServer/TodoTxtJsServer.iml" filepath="$PROJECT_DIR$/TodoTxtJsServer/TodoTxtJsServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebApp/WebApp.iml" filepath="$PROJECT_DIR$/WebApp/WebApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/todotxtjs.iml" filepath="$PROJECT_DIR$/todotxtjs.iml" />
     </modules>
   </component>
 </project>
-
