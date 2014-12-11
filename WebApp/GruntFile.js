@@ -24,11 +24,16 @@
 
 
 module.exports = function (grunt) {
+
+    var version = grunt.option('version') || '1.6.0';
+
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     grunt.initConfig({
                          pkg: grunt.file.readJSON('package.json'),
@@ -80,9 +85,40 @@ module.exports = function (grunt) {
                              dev: {
                                  path: 'http://localhost:60000/todotxt.html'
                              }
+                         },
+                         uglify: {
+                             options: {
+                                 compress: {
+                                     global_defs: {
+                                         "DEBUG": false
+                                     },
+                                     dead_code: true
+                                 }
+                             },
+                             my_target: {
+                                 files: {
+                                     './src/js/app.min.js': ['./src/js/app.js']
+                                 }
+                             }
+                         },
+                         compress: {
+                             release: {
+                                 options: {
+                                     archive: '../out/todotxtjs.' + version + '.zip'
+                                 },
+                                 files: [
+                                     { expand: true, src: ['*'], cwd: 'src/', filter: 'isFile'},
+                                     { expand: true, src: ['.htaccess'], cwd: 'src/'},
+                                     { expand: true, src: ['js/app.min.js'], cwd: 'src/'},
+                                     { expand: true, src: ['js/sample_dropbox_key.js'], cwd: 'src/'},
+                                     { expand: true, src: ['css/*.css'], cwd: 'src/' },
+                                     { expand: true, src: ['images/*'], cwd: 'src/' }
+                                 ]
+                             }
                          }
                      });
 
+    grunt.registerTask('release', ['build', 'uglify', 'compress']);
     grunt.registerTask('build', ['typescript', 'less']);
     grunt.registerTask('default', ['build', 'connect', 'open', 'watch']);
 };

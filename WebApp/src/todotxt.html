@@ -518,15 +518,25 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 
     <!-- Local -->
-    <script src="js/lib/jquery.hotkeys.js" type="text/javascript"></script>
-    <script src="js/bindings/binding_todo.js" type="text/javascript"></script>
-    <script src="js/dropbox_key.js" type="text/javascript"></script>
-    <script src="js/app.js" type="text/javascript"></script>
-    <!--
-        Optional use if you want to react to events.
-        See utils/events.ts for examples of what's available.
-     -->
-    <script src="js/events.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.getScript('js/lib/jquery.hotkeys.js');
+            $.getScript('js/bindings/binding_todo.js');
+            $.getScript('js/dropbox_key.js').always(function(){
+                // Only Load after key has been loaded.
+
+                // Load Debug first, if it exists
+                $.getScript('js/app.js').fail(function(){
+                    // else release
+                    $.getScript('js/app.min.js');
+                });
+            });
+
+            // Optional use if you want to react to events.
+            // See utils/events.ts for examples of what's available.
+            $.getScript('js/events.js');
+        });
+    </script>
 </section>
 </body>
 </html>
