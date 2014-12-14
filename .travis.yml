@@ -1,10 +1,10 @@
- language: node_js
- node_js:
-   - "0.10"
+language: node_js
+node_js:
+  - "0.10"
 before_install:
-   - npm install -g grunt-cli
-   - npm install --prefix ./WebApp ./WebApp
-   - npm install --prefix ./TodoTxtJsServer ./TodoTxtJsServer
+  - npm install -g grunt-cli
+  - npm install --prefix ./WebApp ./WebApp
+  - npm install --prefix ./TodoTxtJsServer ./TodoTxtJsServer
 script:
-   - WebApp/node_modules/.bin/grunt --gruntfile ./WebApp/GruntFile.js release
-   - TodoTxtJsServer/node_modules/.bin/grunt --gruntfile ./TodoTxtJsServer/GruntFile.js release
+  - WebApp/node_modules/.bin/grunt --gruntfile ./WebApp/GruntFile.js release
+  - TodoTxtJsServer/node_modules/.bin/grunt --gruntfile ./TodoTxtJsServer/GruntFile.js release
