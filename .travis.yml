@@ -4,6 +4,4 @@
 before_script:
    - npm install -g grunt-cli
 install:
-   - npm install
-script:
-   - build.sh
+script: "./build.sh"
