@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+var winston = require('winston');
+var logger;
+if (process.env.DEBUG === 'TodoTxtJsServer')
+{
+    logger = new winston.Logger({
+                                      transports: [
+                                          new (winston.transports.Console)({level: 'debug'})
+                                      ]
+                                  });
+}
+else
+{
+    logger = new winston.Logger({
+                                      transports: [
+                                          new (winston.transports.Console)({level: 'info'})
+                                      ]
+
+                                  });
+}
+
+var app = require('../app');
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function()
+{
+    logger.info('Express server listening on port ' + server.address().port);
+    logger.debug('Debug On');
+});

@@ -111,6 +111,8 @@ module.exports = function (grunt) {
                                      { expand: true, src: ['.htaccess'], cwd: 'src/'},
                                      { expand: true, src: ['js/app.min.js'], cwd: 'src/'},
                                      { expand: true, src: ['js/sample_dropbox_key.js'], cwd: 'src/'},
+                                     { expand: true, src: ['js/bindings/binding_todo.js'], cwd: 'src/'},
+                                     { expand: true, src: ['js/lib/jquery.hotkeys.js'], cwd: 'src/'},
                                      { expand: true, src: ['css/*.css'], cwd: 'src/' },
                                      { expand: true, src: ['images/*'], cwd: 'src/' }
                                  ]

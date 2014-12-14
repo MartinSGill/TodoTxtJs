@@ -250,3 +250,10 @@ Session.vim
 *~
 
 
+
+TodoTxtJsServer/public/.htaccess
+TodoTxtJsServer/public/todotxt.html
+TodoTxtJsServer/public/css
+TodoTxtJsServer/public/favicon.ico
+TodoTxtJsServer/public/images
+TodoTxtJsServer/public/js
