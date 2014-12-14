@@ -1,8 +1,8 @@
 TodoTxtJs
 =========
-[![Build status](https://ci.appveyor.com/api/projects/status/0dpdxyr7lvxmavu2)](https://ci.appveyor.com/project/MartinSGill/todotxtjs)
-
 A Typescript/Javascript web app implementation of TodoTxt.
+
+[![Build Status](https://travis-ci.org/MartinSGill/TodoTxtJs.svg?branch=v1.6_server)](https://travis-ci.org/MartinSGill/TodoTxtJs)
 
 __Don't forget to check out the [wiki](https://github.com/MartinSGill/TodoTxtJs/wiki) for more information.__
 
