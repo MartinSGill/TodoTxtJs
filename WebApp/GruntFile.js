@@ -107,14 +107,14 @@ module.exports = function (grunt) {
                                      archive: '../out/todotxtjs.' + version + '.zip'
                                  },
                                  files: [
-                                     { expand: true, src: ['*'], cwd: 'src/', filter: 'isFile'},
-                                     { expand: true, src: ['.htaccess'], cwd: 'src/'},
-                                     { expand: true, src: ['js/app.min.js'], cwd: 'src/'},
-                                     { expand: true, src: ['js/sample_dropbox_key.js'], cwd: 'src/'},
-                                     { expand: true, src: ['js/bindings/binding_todo.js'], cwd: 'src/'},
-                                     { expand: true, src: ['js/lib/jquery.hotkeys.js'], cwd: 'src/'},
-                                     { expand: true, src: ['css/*.css'], cwd: 'src/' },
-                                     { expand: true, src: ['images/*'], cwd: 'src/' }
+                                     { expand: true, cwd: 'src/', src: ['*'], filter: 'isFile'},
+                                     { expand: true, cwd: 'src/', src: ['.htaccess'] },
+                                     { expand: true, cwd: 'src/', src: ['js/app.min.js']},
+                                     { expand: true, cwd: 'src/', src: ['js/sample_dropbox_key.js']},
+                                     { expand: true, cwd: 'src/', src: ['js/bindings/binding_todo.js']},
+                                     { expand: true, cwd: 'src/', src: ['js/lib/jquery.hotkeys.js']},
+                                     { expand: true, cwd: 'src/', src: ['css/*.css']},
+                                     { expand: true, cwd: 'src/', src: ['images/*']}
                                  ]
                              }
                          }
