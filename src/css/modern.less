@@ -39,6 +39,44 @@
 
 @warning-color: red;
 
+
+@todo-priority-default: #59955c;
+@todo-priority-shadow: #000000;
+@todo-priority-A: #FF4848;
+@todo-priority-B: #9A03FE;
+@todo-priority-C: #2966B8;
+@todo-priority-D: #06DCFB;
+@todo-priority-E: #01F33E;
+
+@todo-project-flag: #9a03fe;
+@todo-project-text: #9a03fe;
+@todo-context-flag: #2966B8;
+@todo-context-text: #2966B8;
+
+@todo-dueDate-past: red;
+@todo-dueDate-past-text: black;
+@todo-dueDate-near: orange;
+@todo-dueDate-near-text: black;
+@todo-dueDate-far: green;
+@todo-dueDate-far-text: white;
+
+@todo-hover: #fffda4;
+
+@todo-createDate: #59955C;
+
+@todo-completedDate: #5f5f5f;
+@todo-completed-background: silver;
+
+@todo-metadata: #e1e1ff;
+@todo-metadata-text: black;
+
+@todo-shortLink-background: mediumpurple;
+@todo-shortLink-text: black;
+
+////////////////////////////////////////////////////////////////////////
+// Mixins
+////////////////////////////////////////////////////////////////////////
+
 .font-heading
 {
   font-family: Verdana, sans-serif;
@@ -61,6 +99,11 @@
 @filter-top: @addTodo-top + @addTodo-height + (@addTodo-padding * 2);
 @filter-height: 18px;
 @filter-padding: 3px;
+
+@footer-height: 65px;
+
+@main-top: @filter-top + @filter-height + (@filter-padding * 2);
+@main-bottom: -1 * @footer-height;
 
 body
 {
@@ -87,10 +130,60 @@ body
 {
   font-family: consolas, courier, monospace;
 }
+.todo-view-priority-A
+{
+  color: @todo-priority-A;
+}
 
-////////////////////////////////////////////////////////////////////////
-// Delete Button
-////////////////////////////////////////////////////////////////////////
+.todo-view-priority-B
+{
+  color: @todo-priority-B;
+}
+
+.todo-view-priority-C
+{
+  color: @todo-priority-C;
+}
+
+.todo-view-priority-D
+{
+  color: @todo-priority-D;
+}
+
+.todo-view-priority-E
+{
+  color: @todo-priority-E;
+}
+
+.todo-view-projectFlag
+{
+  margin-left: 0.3em;
+  color: @todo-project-flag;
+  cursor: pointer;
+}
+
+.todo-view-project
+{
+  color: @todo-project-text;
+  font-family: sans-serif;
+  font-size: 1.0em;
+  cursor: pointer;
+}
+
+.todo-view-contextFlag
+{
+  margin-left: 0.3em;
+  color: @todo-context-flag;
+  cursor: pointer;
+}
+
+.todo-view-context
+{
+  color: @todo-context-text;
+  font-family: sans-serif;
+  font-size: 1.0em;
+  cursor: pointer;
+}
 
 ////////////////////////////////////////////////////////////////////////
 // Splash Screen
@@ -133,7 +226,7 @@ section.hidden { display: none;  }
 ////////////////////////////////////////////////////////////////////////
 section.toolbar
 {
-  position: absolute;
+  position: fixed;
   top: @toolbar-top;
   width: 100%;
   height: @toolbar-height;
@@ -256,7 +349,7 @@ section.toolbar
 div.logo
 {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 5px;
   width: 32px;
@@ -268,7 +361,7 @@ div.logo
 span.pageHeading
 {
   display: block;
-  position: absolute;
+  position: fixed;
   top: 6px;
   left: 50px;
   color: white;
@@ -283,7 +376,7 @@ span.pageHeading
 section.addTodo
 {
   top: @addTodo-top;
-  position: absolute;
+  position: fixed;
   clear: both;
   padding: @addTodo-padding;
   background-color: @add-color;
@@ -315,7 +408,7 @@ section.addTodo
 ///////////////////////////////////////////////////////
 section.filters
 {
-  position: absolute;
+  position: fixed;
   top: @filter-top;
   padding: @filter-padding;
   background-color: @filter-color;
@@ -427,29 +520,297 @@ section.filters
   }
 }
 
-
 ///////////////////////////////////////////////////////
-// TODO
+// Main
 ///////////////////////////////////////////////////////
 
-section#main { display: none; }
-section#optionsDialog { display: none; }
-section#help
-{
+section#main {
+  display: table;
+  width: 100%;
+  top: @main-top;
+  bottom: -@footer-height;
+  position: fixed;
+
+  border: 0 solid;
+  border-top-width: 5px;
+
+  .todo-view
+  {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.4em;
+    display: table-cell;
+    width: 100%;
+    overflow-y: auto;
+
+    .todo:hover
+    {
+      background-color: @todo-hover;
+    }
+
+    .todo-view-edit
+    {
+      width: 100%;
+      display: none;
+    }
+
+    .todo-view-edit input
+    {
+      width: 80%;
+      font-size: inherit;
+      margin-left: 25px;
+    }
+
+    .todo-view-edit .toolbox-tip
+    {
+      font-size: 0.6em;
+      float: right;
+    }
+
+    .todo-view-display
+    {
+      text-indent: -30px;
+      padding-left: 35px;
+    }
+
+    .todo-view-index
+    {
+      display: none;
+      width: 20px;
+      text-align: right;
+      font-size: 0.5em;
+    }
+
+    .todo-view-completedFlag
+    {
+      display: none;
+    }
+
+    .todo-view-priorityBrace
+    {
+      display: none;
+    }
+
+    .todo-view-priority
+    {
+      font-weight: bold;
+      font-size: 1.2em;
+      font-family: sans-serif;
+      color: @todo-priority-default;
+      text-shadow: 1px 1px 3px @todo-priority-shadow;
+      cursor: pointer;
+    }
+
+    .todo-view-message
+    {
+      cursor: pointer;
+      text-indent: 0;
+    }
+
+    .todo-view-createDate
+    {
+      color: @todo-createDate;
+      font-size: smaller;
+      font-family: sans-serif;
+      cursor: pointer;
+    }
+
+    .todo-view-completedDate
+    {
+      color: @todo-completedDate;
+      font-size: smaller;
+      font-family: sans-serif;
+    }
+
+    .todo-view-completed
+    {
+      background-color: @todo-completed-background;
+    }
+
+    .todo-view-link_full
+    {
+    }
+
+    .todo-metadata
+    {
+      display: inline-table;
+      font-size: smaller;
+      vertical-align: text-bottom;
+      background-color: @todo-metadata;
+      border-radius: 5px;
+      padding: 2px;
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
+    .todo-metadata:hover .todo-metadata-name
+    {
+      display: table-cell;
+    }
+
+    .todo-metadata-name
+    {
+      color: @todo-metadata-text;
+      display: table-cell;
+      font-size: smaller;
+      font-family: sans-serif;
+      font-weight: bold;
+      text-transform: lowercase;
+      font-variant: small-caps;
+      padding-right: 2px;
+    }
+
+    .todo-metadata-seperator
+    {
+      display: none;
+    }
+
+    .todo-metadata-value
+    {
+      background-color: @page-background-color;
+      padding-left: 2px;
+      color: @page-text-color;
+    }
+
+    .todo-due-date
+    {
+
+    }
+
+    .todo-due-date_past
+    {
+      background-color: @todo-dueDate-past;
+      color: @todo-dueDate-past-text;
+    }
+
+    .todo-due-date_near
+    {
+      background-color: @todo-dueDate-near;
+      color: @todo-dueDate-near-text;
+    }
+
+    .todo-due-date_far
+    {
+      background-color: @todo-dueDate-far;
+      color: @todo-dueDate-far-text;
+    }
+
+    .todo-view-link_short, .todo-view-link_short:link, .todo-view-link_short:visited
+    {
+      text-decoration: none;
+      background-color: @todo-shortLink-background;
+      color: @todo-shortLink-text;
+      border-radius: 4px;
+      padding-left: 2px;
+      padding-right: 2px;
+      font-variant: small-caps;
+    }
+
+    .todo-view-link_short abbr
+    {
+      color: @todo-shortLink-text;
+    }
+
+    .deleteButton
+    {
+      display: inline-table;
+
+      a
+      {
+        background: url('../images/delete.png') no-repeat;
+        background-size: 16px 14px;
+
+        width: 16px;
+        height: 16px;
+        padding-right: 5px;
+
+        color: transparent;
+        display: table-cell;
+        cursor: pointer;
+      }
+
+      a:hover
+      {
+        // TODO: not working
+        filter: invert(100%);
+      }
+    }
+  }
+
+  .todo-view-sidebar
+  {
+    min-width: 220px;
+    display: table-cell;
+    padding-left: 5px;
+
+    color: @page-background-color;
+    background-color: @page-text-color;
+
+    h3
+    {
+      margin: 0;
+    }
+
+    ul
+    {
+      margin: 0;
+      list-style-position: outside;
+      list-style-type: none;
+      padding-left: 10px;
+    }
+
+    .todo-view-sidebar-priorities
+    {
+      list-style: none;
+      color: @todo-priority-default;
+
+      li
+      {
+        display: inline;
+        font-family: sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+
+    .todo-due-sidebar-past
+    {
+      font-weight: bold;
+      color: @todo-dueDate-past;
+      cursor: pointer;
+    }
+
+    .todo-due-sidebar-near
+    {
+      font-weight: bold;
+      color: @todo-dueDate-near;
+      cursor: pointer;
+    }
+
+    .todo-due-sidebar-far
+    {
+      font-weight: bold;
+      color: @todo-dueDate-far;
+      cursor: pointer;
+    }
+
+  }
 
 }
 
+
+///////////////////////////////////////////////////////
+// Footer
+///////////////////////////////////////////////////////
 footer
 {
   background-color: black;
   color: white;
   text-align: center;
   font-size: small;
-  padding-top: 5px;
-  padding-bottom: 5px;
-
+  height: @footer-height;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 
   a
@@ -468,6 +829,11 @@ footer
 // Help Dialog
 ///////////////////////////////////////////////////////
 
+section#help
+{
+
+}
+
 .helpDialog .ui-widget-header
 {
   background-color: @help-color;
@@ -482,6 +848,7 @@ footer
 ///////////////////////////////////////////////////////
 // Options Dialog
 ///////////////////////////////////////////////////////
+section#optionsDialog { display: none; }
 
 .optionsDialog .ui-widget-header
 {
