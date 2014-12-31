@@ -678,7 +678,7 @@ module TodoTxtJs.View
 
         private _initializeKeyboardShortCuts()
         {
-            var _this = this;
+            var self = this;
             $(document).bind('keydown', 'n', function(event)
             {
                 event.preventDefault();
@@ -695,7 +695,7 @@ module TodoTxtJs.View
                 }
                 else
                 {
-                    _this.onClick_ShowHelp();
+                    self.onClick_ShowHelp();
                 }
             }
 

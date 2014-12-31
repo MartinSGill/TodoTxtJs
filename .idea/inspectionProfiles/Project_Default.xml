@@ -1985,6 +1985,7 @@
         <option name="REPORT_INCONSISTENT_PROPERTIES" value="true" />
         <option name="REPORT_DUPLICATED_PROPERTIES" value="true" />
       </scope>
+      <option name="Project Files" value="false" />
       <option name="REPORT_MISSING_TRANSLATIONS" value="true" />
       <option name="REPORT_INCONSISTENT_PROPERTIES" value="true" />
       <option name="REPORT_DUPLICATED_PROPERTIES" value="true" />
@@ -3907,18 +3908,7 @@
       <scope name="Project Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="false">
-      <scope name="Project Files" level="WARNING" enabled="false">
-        <option name="ignoredIdentifiers">
-          <value>
-            <list size="0" />
-          </value>
-        </option>
-      </scope>
-      <option name="ignoredIdentifiers">
-        <value>
-          <list size="0" />
-        </value>
-      </option>
+      <scope name="Project Files" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="PyUnusedLocalInspection" enabled="true" level="WEAK WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WEAK WARNING" enabled="false">

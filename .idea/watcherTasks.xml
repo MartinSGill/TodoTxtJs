@@ -21,7 +21,7 @@
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="C:/Program Files (x86)/Microsoft SDKs/TypeScript/0.9/tsc.exe" />
+      <option name="program" value="$PROJECT_DIR$/WebApp/build/node_modules/.bin/tsc.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />
@@ -47,7 +47,7 @@
       </option>
       <option name="outputFromStdout" value="true" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="$USER_HOME$/AppData/Roaming/npm/lessc.cmd" />
+      <option name="program" value="$PROJECT_DIR$/build/node_modules/.bin/lessc.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />
@@ -55,4 +55,3 @@
     </TaskOptions>
   </component>
 </project>
-

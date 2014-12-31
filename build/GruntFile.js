@@ -58,6 +58,7 @@ module.exports = function (grunt) {
                                      yuicompress: true
                                  },
                                  files: {
+                                     "../src/css/modern.css": "../src/css/modern.less",
                                      "../src/css/simple_default.css": "../src/css/simple_default.less",
                                      "../src/css/simple_solarized_dark.css": "../src/css/simple_solarized_dark.less",
                                      "../src/css/simple_solarized_light.css": "../src/css/simple_solarized_light.less"
