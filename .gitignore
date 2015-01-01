@@ -12,6 +12,19 @@ WebApp/src/js/**/*.map
 WebApp/src/css/**/*.css
 WebApp/src/css/*.css
 
+# Server (WebApp Mirror)
+
+TodoTxtJsServer/public/.htaccess
+TodoTxtJsServer/public/todotxt.html
+TodoTxtJsServer/public/css
+TodoTxtJsServer/public/favicon.ico
+TodoTxtJsServer/public/images
+TodoTxtJsServer/public/js
+
+# Build Output
+
+out
+
 ######################################################################
 # Generic stuff
 ######################################################################
@@ -249,11 +262,3 @@ Session.vim
 .netrwhist
 *~
 
-
-
-TodoTxtJsServer/public/.htaccess
-TodoTxtJsServer/public/todotxt.html
-TodoTxtJsServer/public/css
-TodoTxtJsServer/public/favicon.ico
-TodoTxtJsServer/public/images
-TodoTxtJsServer/public/js
