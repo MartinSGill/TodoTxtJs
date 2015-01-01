@@ -28,24 +28,24 @@ module TodoTxtJs
 {
     export class ModelFactory
     {
-        private static optionsInstance: Options = null;
-        public static GetOptions() : Options
+        private static _optionsInstance: Options = null;
+        public static getOptions() : Options
         {
-            if (this.optionsInstance === null)
+            if (this._optionsInstance === null)
             {
-                this.optionsInstance = new Options();
+                this._optionsInstance = new Options();
             }
-            return this.optionsInstance;
+            return this._optionsInstance;
         }
 
-        private static todoManagerInstance: TodoManager = null;
-        public static GetTodoManager() : TodoManager
+        private static _todoManagerInstance: TodoManager = null;
+        public static getTodoManager() : TodoManager
         {
-            if (this.todoManagerInstance === null)
+            if (this._todoManagerInstance === null)
             {
-                this.todoManagerInstance = new TodoManager();
+                this._todoManagerInstance = new TodoManager();
             }
-            return this.todoManagerInstance;
+            return this._todoManagerInstance;
         }
     }
 }

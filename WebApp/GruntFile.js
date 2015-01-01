@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (C) 2013-2014 Martin Gill
- *     based on a blog post by Jesse Freeman (http://goo.gl/jUiLsK)
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -63,6 +62,7 @@ module.exports = function (grunt) {
                                      yuicompress: true
                                  },
                                  files: {
+                                     "./src/css/modern.css": "./src/css/modern.less",
                                      "./src/css/simple_default.css": "./src/css/simple_default.less",
                                      "./src/css/simple_solarized_dark.css": "./src/css/simple_solarized_dark.less",
                                      "./src/css/simple_solarized_light.css": "./src/css/simple_solarized_light.less"

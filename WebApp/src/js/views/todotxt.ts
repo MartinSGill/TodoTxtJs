@@ -63,7 +63,6 @@ module TodoTxtJs.View
         public renderOptions: KnockoutComputed<any>;
 
         public newTodoText: KnockoutObservable<string>;
-        public spinner: KnockoutObservable<boolean>;
         public lastUpdated: KnockoutObservable<string>;
         public pageReady: KnockoutObservable<boolean>;
 
@@ -178,7 +177,7 @@ module TodoTxtJs.View
                 TodoTxtJs.Events.onError("Error Saving (" + this.options.storage() + ") : [" + error + "]");
             };
 
-            this.options.storageInfo().save(this.exporting.buildExportText(), onSuccess, onError);
+            this.options.storageInfo().save(this.exporting.getExportText(), onSuccess, onError);
             this.displayOptions.save();
         };
 
@@ -323,42 +322,6 @@ module TodoTxtJs.View
         }
 
         /**
-         * Method to manage the showing/hiding of menu item toolboxs.
-         * @param element The item that was toggled by the user.
-         */
-        public toggleToolbox(element : HTMLElement) : void
-        {
-            var selected = false;
-            var menuItem = $(element).parent();
-            this.options.save();
-            if (menuItem.hasClass("selected"))
-            {
-
-                if (menuItem[0].id === 'options')
-                {
-                    this.options.save();
-                }
-                selected = true;
-            }
-            else
-            {
-                if (menuItem[0].id === 'export')
-                {
-                    this.exporting.fillExportBox();
-                }
-            }
-
-            $(".menuItem").removeClass("selected");
-            $(".menuItem .toolbox").hide();
-
-            if (!selected)
-            {
-                menuItem.addClass("selected");
-                $(".toolbox", menuItem).show();
-            }
-        }
-
-        /**
          * Determines if the given Todo object should be visible.
          * based on the current filter settings.
          * @param todo The todo object to inspect.
@@ -458,12 +421,25 @@ module TodoTxtJs.View
             return result;
         }
 
+        public onClick_ShowImport(/*data?: any, event?: Event*/): boolean
+        {
+            this.importing.onClick_ShowDialog();
+            return false;
+        }
+
+        public onClick_ShowExport(/*data?: any, event?: Event*/): boolean
+        {
+            this.exporting.onClick_ShowDialog();
+            return false;
+        }
+
         public onClick_ShowHelp(/*data?: any, event?: Event*/): boolean
         {
             var width = Math.round(window.innerWidth * 0.8);
             var height = Math.round(window.innerHeight * 0.8);
             //this.showHelp(!this.showHelp());
             $("#help").dialog({
+                dialogClass: "helpDialog",
                 modal: true,
                 buttons: {
                     Ok: function () { $(this).dialog("close"); }
@@ -473,7 +449,10 @@ module TodoTxtJs.View
                 height: "auto",
                 minWidth: 800,
                 maxWidth: width,
-                auto: "auto"
+                auto: "auto",
+                closeOnEscape: true,
+                draggable: false,
+                resizable: false
             });
 
             return false;
@@ -486,6 +465,7 @@ module TodoTxtJs.View
             var self = this;
             var oldStorage = this.options.storageInfo();
             $("#optionsDialog").dialog({
+                dialogClass: "optionsDialog",
                 modal: true,
                 buttons: {
                     Done: function ()
@@ -512,7 +492,9 @@ module TodoTxtJs.View
                 minWidth: 800,
                 maxWidth: width,
                 auto: "auto",
-                closeOnEscape: true
+                closeOnEscape: true,
+                draggable: false,
+                resizable: false
             });
 
             return false;

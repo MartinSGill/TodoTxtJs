@@ -37,7 +37,6 @@ module TodoTxtJs
 
     export class Options
     {
-
         public storageOptions : KnockoutObservableArray<StorageProviders.IStorageProvider>;
         public storageInfo : KnockoutObservable<StorageProviders.IStorageProvider>;
         public storage : KnockoutComputed<string>;
@@ -156,6 +155,7 @@ module TodoTxtJs
 
             this.themes = [
                 { name: "Original", file: "simple_default.css" },
+                { name: "Modern", file: "modern.css" },
                 { name: "Solarized Dark", file: "simple_solarized_dark.css" },
                 { name: "Solarized Light", file: "simple_solarized_light.css" }
             ];
@@ -206,9 +206,10 @@ module TodoTxtJs
 
                 // Only load actual options, so we don't break the view model
                 // Storage
+                var i;
                 if (options.hasOwnProperty("storage"))
                 {
-                    for (var i = 0; i < this.storageOptions().length; i++)
+                    for (i = 0; i < this.storageOptions().length; i++)
                     {
                         if (this.storageOptions()[i].name === options.storage)
                         {
@@ -251,7 +252,7 @@ module TodoTxtJs
                 {
                     // Make sure always have a theme, even if the
                     // saved option is nonsense.
-                    for (var i = 0; i < this.themes.length; i++)
+                    for (i = 0; i < this.themes.length; i++)
                     {
                         if (this.themes[i].name === <string>options.themeName)
                         {

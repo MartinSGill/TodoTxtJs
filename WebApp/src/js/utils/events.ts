@@ -27,7 +27,7 @@ module TodoTxtJs
     {
         constructor() { throw new Error("Static class, cannot 'new'."); }
 
-        private static subscribers = {};
+        private static _subscribers = {};
 
         /**
          * Subscribe to events.
@@ -36,18 +36,18 @@ module TodoTxtJs
          */
         public static subscribe(eventName:string, callback : () => void) : void
         {
-            if (!Events.subscribers.hasOwnProperty(eventName))
+            if (!Events._subscribers.hasOwnProperty(eventName))
             {
-                Events.subscribers[eventName] = [];
+                Events._subscribers[eventName] = [];
             }
-            Events.subscribers[eventName].push(callback);
+            Events._subscribers[eventName].push(callback);
         }
 
-        private static publishSimpleEvent(name: string, value?: any) : void
+        private static _publishSimpleEvent(name: string, value?: any) : void
         {
-            if (Events.subscribers.hasOwnProperty(name))
+            if (Events._subscribers.hasOwnProperty(name))
             {
-                var subs = Events.subscribers[name];
+                var subs = Events._subscribers[name];
                 for (var i:number = 0, length = subs.length; i < length; i++)
                 {
                     subs[i](value);
@@ -57,9 +57,9 @@ module TodoTxtJs
 
         public static onError(error : string) : void
         {
-            if (Events.subscribers.hasOwnProperty(name))
+            if (Events._subscribers.hasOwnProperty(name))
             {
-                var subs = Events.subscribers[name];
+                var subs = Events._subscribers[name];
                 for (var i:number = 0, length = subs.length; i < length; i++)
                 {
                     subs[i](error);
@@ -72,7 +72,7 @@ module TodoTxtJs
          */
         public static onComplete() : void
         {
-            Events.publishSimpleEvent("onComplete");
+            Events._publishSimpleEvent("onComplete");
         }
 
         /**
@@ -80,7 +80,7 @@ module TodoTxtJs
          */
         public static onNew() : void
         {
-            Events.publishSimpleEvent("onNew");
+            Events._publishSimpleEvent("onNew");
         }
 
         /**
@@ -88,7 +88,7 @@ module TodoTxtJs
          */
         public static onRemove() : void
         {
-            Events.publishSimpleEvent("onRemove");
+            Events._publishSimpleEvent("onRemove");
         }
 
         /**
@@ -96,7 +96,7 @@ module TodoTxtJs
          */
         public static onLoadComplete(type: string) : void
         {
-            Events.publishSimpleEvent("onLoadComplete", type);
+            Events._publishSimpleEvent("onLoadComplete", type);
         }
 
         /**
@@ -104,7 +104,7 @@ module TodoTxtJs
          */
         public static onSaveComplete(type: string) : void
         {
-            Events.publishSimpleEvent("onSaveComplete", type)
+            Events._publishSimpleEvent("onSaveComplete", type)
         }
     }
 }
