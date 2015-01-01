@@ -265,7 +265,7 @@ module TodoTxtJs
         {
             var result : Array<ITodoMetadata> = [];
 
-            var match : any = Regex.metaData.exec(text);
+            var match : any = Regex.MetaData.exec(text);
             while (match != null)
             {
                 var data = {
@@ -280,7 +280,7 @@ module TodoTxtJs
                 }
 
                 result.push(data);
-                match = Regex.metaData.exec(text);
+                match = Regex.MetaData.exec(text);
             }
 
             return result;

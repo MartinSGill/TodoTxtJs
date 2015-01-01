@@ -88,7 +88,7 @@ module TodoTxtJs.View
             this.newPriorityFilter = ko.observable(undefined);
 
             this.displayOptions = new DisplayOptions(this._todoManager);
-            this.options = ModelFactory.GetOptions();
+            this.options = ModelFactory.getOptions();
             this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
 
             this.importing = new Importing(this._todoManager);
@@ -229,7 +229,7 @@ module TodoTxtJs.View
             {
                 // Reset to browser storage, it will just try to log in again
                 // need to save options, or load will just use previous storage provider again.
-                var oldStore = this.options.storage()
+                var oldStore = this.options.storage();
                 this.options.storageInfo(this.options.storageOptions()[0]);
                 this.options.save();
 
