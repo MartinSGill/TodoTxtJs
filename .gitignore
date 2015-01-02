@@ -5,12 +5,15 @@ WebApp/src/js/*.map
 WebApp/src/js/**/*.js
 WebApp/src/js/**/*.map
 
+WebApp/src/app.*
+
 # Except for this one, which isn't generated
 !WebApp/src/js/sample_dropbox_key.js
 
 # Ignore generated CSS files
 WebApp/src/css/**/*.css
 WebApp/src/css/*.css
+WebApp/src/css/*.map
 
 # Server (WebApp Mirror)
 

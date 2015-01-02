@@ -3,7 +3,7 @@
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$/TodoTxtJsServer" libraries="{TodoTxtJsServer node_modules}" />
     <file url="file://$PROJECT_DIR$/WebApp" libraries="{WebApp node_modules}" />
-    <file url="PROJECT" libraries="{QUnit, dropbox, jquery-2.0.0, jquery-ui, jquery.jgrowl, knockout-2.2.1, moment}" />
+    <file url="PROJECT" libraries="{dropbox, jquery-2.0.0, jquery-ui, jquery.jgrowl, knockout-2.2.1, moment}" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>

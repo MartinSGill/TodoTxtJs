@@ -543,13 +543,7 @@
             $.getScript('js/lib/jquery.hotkeys.js');
             $.getScript('js/bindings/binding_todo.js');
             $.getScript('js/dropbox_key.js').always(function(){
-                // Only Load after key has been loaded.
-
-                // Load Debug first, if it exists
-                $.getScript('js/app.js').fail(function(){
-                    // else release
-                    $.getScript('js/app.min.js');
-                });
+                $.getScript('app.min.js');
             });
 
             // Optional use if you want to react to events.

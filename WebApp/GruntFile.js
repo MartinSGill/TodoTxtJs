@@ -21,7 +21,6 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-
 module.exports = function (grunt) {
 
     var version = grunt.option('version') || '1.6.0';
@@ -40,52 +39,41 @@ module.exports = function (grunt) {
                              server: {
                                  options: {
                                      port: 60000,
-                                     base: './src/'
+                                     base: './src/',
+                                     debug: true
                                  }
                              }
                          },
+
                          typescript: {
                              base: {
                                  src: ['./src/**/*.ts'],
-                                 dest: './src/js/app.js',
+                                 dest: './src/app.js',
                                  options: {
                                      module: 'commonjs',
                                      target: 'es5',
-                                     sourcemap: true,
-                                     fullSourceMapPath: true
+                                     sourceMap: true,
+                                     fullSourceMapPath: true,
+                                     removeComments: true
                                  }
                              }
                          },
+
                          less: {
-                             production: {
+                             release: {
                                  options: {
-                                     yuicompress: true
+                                     compress: true,
+                                     sourceMap: true
                                  },
-                                 files: {
-                                     "./src/css/modern.css": "./src/css/modern.less",
-                                     "./src/css/simple_default.css": "./src/css/simple_default.less",
-                                     "./src/css/simple_solarized_dark.css": "./src/css/simple_solarized_dark.less",
-                                     "./src/css/simple_solarized_light.css": "./src/css/simple_solarized_light.less"
-                                 }
+                                 files: [
+                                     { src: ["./src/css/modern.less"], dest: './src/css/modern.css' },
+                                     { src: ["./src/css/simple_default.less"], dest: './src/css/simple_default.css' },
+                                     { src: ["./src/css/simple_solarized_dark.less"], dest: './src/css/simple_solarized_dark.css' },
+                                     { src: ["./src/css/simple_solarized_light.less"], dest: './src/css/simple_solarized_light.css' }
+                                 ]
                              }
                          },
-                         watch: {
-                             typescript:
-                             {
-                                files: './src/**/*.ts',
-                                tasks: ['typescript']
-                             },
-                             less:
-                             {
-                                 files: './src/**/*.less',
-                                 tasks: ['less']
-                             }
-                         },
-                         open: {
-                             dev: {
-                                 path: 'http://localhost:60000/todotxt.html'
-                             }
-                         },
+
                          uglify: {
                              options: {
                                  compress: {
@@ -95,12 +83,18 @@ module.exports = function (grunt) {
                                      dead_code: true
                                  }
                              },
-                             my_target: {
-                                 files: {
-                                     './src/js/app.min.js': ['./src/js/app.js']
-                                 }
+                             release: {
+                                 options:
+                                 {
+                                     sourceMap: true,
+                                     sourceMapIn: './src/app.js.map'
+                                 },
+                                 files: [
+                                     { src: ['./src/app.js'], dest: './src/app.min.js' }
+                                 ]
                              }
                          },
+
                          compress: {
                              release: {
                                  options: {
@@ -109,18 +103,38 @@ module.exports = function (grunt) {
                                  files: [
                                      { expand: true, cwd: 'src/', src: ['*'], filter: 'isFile'},
                                      { expand: true, cwd: 'src/', src: ['.htaccess'] },
-                                     { expand: true, cwd: 'src/', src: ['js/app.min.js']},
+                                     { expand: true, cwd: 'src/', src: ['app.min.js']},
                                      { expand: true, cwd: 'src/', src: ['js/sample_dropbox_key.js']},
                                      { expand: true, cwd: 'src/', src: ['js/bindings/binding_todo.js']},
                                      { expand: true, cwd: 'src/', src: ['js/lib/jquery.hotkeys.js']},
-                                     { expand: true, cwd: 'src/', src: ['css/*.css']},
+                                     { expand: true, cwd: 'src/', src: ['css/*.css','!css/_*.css']},
                                      { expand: true, cwd: 'src/', src: ['images/*']}
                                  ]
                              }
+                         },
+
+                         watch: {
+                             typescript:
+                             {
+                                 files: './src/**/*.ts',
+                                 tasks: ['typescript']
+                             },
+                             less:
+                             {
+                                 files: './src/**/*.less',
+                                 tasks: ['less']
+                             }
+                         },
+
+                         open: {
+                             dev: {
+                                 path: 'http://localhost:60000/todotxt.html'
+                             }
                          }
+
                      });
 
-    grunt.registerTask('release', ['build', 'uglify', 'compress']);
-    grunt.registerTask('build', ['typescript', 'less']);
+    grunt.registerTask('release', ['build', 'compress']);
+    grunt.registerTask('build', ['typescript', 'less', 'uglify']);
     grunt.registerTask('default', ['build', 'connect', 'open', 'watch']);
 };

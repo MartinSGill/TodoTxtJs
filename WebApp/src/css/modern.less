@@ -226,7 +226,7 @@ section.hidden { display: none;  }
 ////////////////////////////////////////////////////////////////////////
 section.toolbar
 {
-  position: fixed;
+  position: absolute;
   top: @toolbar-top;
   width: 100%;
   height: @toolbar-height;
@@ -349,7 +349,7 @@ section.toolbar
 div.logo
 {
   display: inline-block;
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 5px;
   width: 32px;
@@ -361,7 +361,7 @@ div.logo
 span.pageHeading
 {
   display: block;
-  position: fixed;
+  position: absolute;
   top: 6px;
   left: 50px;
   color: white;
@@ -376,7 +376,7 @@ span.pageHeading
 section.addTodo
 {
   top: @addTodo-top;
-  position: fixed;
+  position: absolute;
   clear: both;
   padding: @addTodo-padding;
   background-color: @add-color;
@@ -408,7 +408,7 @@ section.addTodo
 ///////////////////////////////////////////////////////
 section.filters
 {
-  position: fixed;
+  position: absolute;
   top: @filter-top;
   padding: @filter-padding;
   background-color: @filter-color;
@@ -528,8 +528,9 @@ section#main {
   display: table;
   width: 100%;
   top: @main-top;
-  bottom: -@footer-height;
-  position: fixed;
+  position: absolute;
+
+  margin-bottom: @footer-height;
 
   border: 0 solid;
   border-top-width: 5px;
@@ -575,10 +576,15 @@ section#main {
 
     .todo-view-index
     {
-      display: none;
-      width: 20px;
+      .font-heading;
+      vertical-align: middle;
+      display: inline-block;
+      width: 18px;
+      padding: 1px;
       text-align: right;
-      font-size: 0.5em;
+      font-size: 0.4em;
+      border: thin solid #9b8f00;
+      background-color: #c09d00;
     }
 
     .todo-view-completedFlag
@@ -714,6 +720,8 @@ section#main {
     .deleteButton
     {
       display: inline-table;
+      float: right;
+      margin-top: 5px;
 
       a
       {
