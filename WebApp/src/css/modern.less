@@ -522,7 +522,8 @@ section.filters
 
     a:hover
     {
-      // TODO: not working
+      -ms-filter: invert(100%);
+      -webkit-filter: invert(100%);
       filter: invert(100%);
     }
   }
@@ -747,8 +748,8 @@ section#main {
 
       a:hover
       {
-        // TODO: not working
-        filter: invert(100%);
+        background: url('../images/delete_red.png') no-repeat;
+        background-size: 16px 14px;
       }
     }
   }
