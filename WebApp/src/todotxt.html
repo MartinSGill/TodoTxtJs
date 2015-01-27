@@ -426,7 +426,7 @@
                 <li>
                     <span class="todo-metadata todo-due-date todo-due-date_past">
                         <span class="todo-metadata-name" style="color: black">due</span>
-                        <span class="todo-metadata-seperator">:</span>
+                        <span class="todo-metadata-separator">:</span>
                         <span class="todo-metadata-value">Today</span>
                     </span>
                     Overdue, or due within 24 hours
@@ -505,9 +505,9 @@
         <div class="todo" data-bind="todo: $data, css: { completed: completed }, visible: $root.isDisplayed($data)">
             <div class="deleteButton deleteTodo"><a onclick="todoTxtView.removeTodo(this)">x</a></div>
             <div class="todo-view-display">
-                <span class="todo-view-index" data-bind="text: index"></span>
+                <span class="todo-view-index" data-bind="text: index" title="Line Number"></span>
                 <label>
-                    <input type="checkbox" data-bind="checked: completed, click: $root.onCompleteClick"/>
+                    <input type="checkbox" data-bind="checked: completed, click: $root.onCompleteClick" title="Completed" alt="Completed" />
                 </label>
                 <span data-bind="css: { completed: completed }">
                     <span class="todo-view-completedFlag" data-bind="visible: completed">x</span>

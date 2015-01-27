@@ -21,13 +21,13 @@
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="$PROJECT_DIR$/WebApp/build/node_modules/.bin/tsc.cmd" />
+      <option name="program" value="$PROJECT_DIR$/WebApp/node_modules/.bin/tsc.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="false">
+    <TaskOptions isEnabled="true">
       <option name="arguments" value="--no-color $FileName$" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" value="Compiles .less files into .css files" />
@@ -47,7 +47,7 @@
       </option>
       <option name="outputFromStdout" value="true" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="$PROJECT_DIR$/build/node_modules/.bin/lessc.cmd" />
+      <option name="program" value="$PROJECT_DIR$/WebApp/node_modules/.bin/lessc.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />

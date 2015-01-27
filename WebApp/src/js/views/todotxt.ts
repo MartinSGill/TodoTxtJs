@@ -116,6 +116,7 @@ module TodoTxtJs.View
             this._initializeAutoComplete();
             this._initializeKeyboardShortCuts();
             this._initializeNotifications();
+            this._initializeEvents();
 
             $(window).unload(this.save);
             this.load();
@@ -702,6 +703,14 @@ module TodoTxtJs.View
         {
             return Main._split( term ).pop();
         }
+
+        private _initializeEvents = () =>
+        {
+            $('.todo-view-display').click((event: JQueryEventObject) =>
+            {
+
+            })
+        };
 
         private _initializeKeyboardShortCuts = () =>
         {

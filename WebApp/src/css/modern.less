@@ -27,14 +27,16 @@
 // Colours
 ////////////////////////////////////////////////////////////////////////
 
-@page-background-color: white;
+@page-background-color: #fff7e5;
 @page-text-color: black;
 
 @options-color: paleturquoise;
 @help-color: palegoldenrod;
-@filter-color: palegoldenrod;
+@filter-color: #575700;
+@filter-text-color: white;
 @import-color: palegreen;
-@add-color: palegreen;
+@add-color: #0b3a00;
+@add-text-color: white;
 @export-color: palevioletred;
 
 @warning-color: red;
@@ -59,7 +61,7 @@
 @todo-dueDate-far: green;
 @todo-dueDate-far-text: white;
 
-@todo-hover: #fffda4;
+@todo-hover: #ffffff;
 
 @todo-createDate: #59955C;
 
@@ -110,6 +112,11 @@ body
   color: @page-text-color;
   margin: 0;
   min-width: 800px;
+}
+
+input, select
+{
+  background-color: @page-background-color;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -380,7 +387,7 @@ section.addTodo
   clear: both;
   padding: @addTodo-padding;
   background-color: @add-color;
-  color: @page-text-color;
+  color: @add-text-color;
   width: 100%;
   height: @addTodo-height;
 
@@ -412,11 +419,12 @@ section.filters
   top: @filter-top;
   padding: @filter-padding;
   background-color: @filter-color;
+  color: @filter-text-color;
   display: block;
   width: 100%;
   height: @filter-height;
   .font-heading;
-  font-size: 0.7em;
+  font-size: 0.9em;
 
   select, input, input[type=checkbox]
   {
@@ -666,7 +674,7 @@ section#main {
       padding-right: 2px;
     }
 
-    .todo-metadata-seperator
+    .todo-metadata-separator
     {
       display: none;
     }

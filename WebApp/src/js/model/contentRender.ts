@@ -134,7 +134,7 @@ module TodoTxtJs
                 var replacement = "";
                 replacement += '<span class="todo-metadata todo-due-date ' + ContentRender._dueDateDistanceStyle(date) + '">';
                 replacement += '  <span class="todo-metadata-name">$1</span>';
-                replacement += '  <span class="todo-metadata-seperator">:</span>';
+                replacement += '  <span class="todo-metadata-separator">:</span>';
                 replacement += '  <span class="todo-metadata-value">' + DateTime.dateToInformalString(date) + '</span>';
                 replacement += '</span>';
 
@@ -162,7 +162,7 @@ module TodoTxtJs
                     var replacement = "";
                     replacement += '<span class="todo-metadata">';
                     replacement += '  <span class="todo-metadata-name">' + data.name + '</span>';
-                    replacement += '  <span class="todo-metadata-seperator">:</span>';
+                    replacement += '  <span class="todo-metadata-separator">:</span>';
                     replacement += '  <span class="todo-metadata-value">' + data.value + '</span>';
                     replacement += '</span>';
                     formattedMessage = formattedMessage.replace(match[0], replacement);

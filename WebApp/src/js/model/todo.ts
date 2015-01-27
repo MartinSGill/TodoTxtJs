@@ -77,14 +77,8 @@ module TodoTxtJs
 
         public static isKnownMetaData(metaData: ITodoMetadata): boolean
         {
-            if (this._knownMetaData.indexOf(metaData.name) >= 0)
-            {
-                return true;
-            }
-
-            return false;
+            return this._knownMetaData.indexOf(metaData.name) >= 0;
         }
-
 
         private _initialiseComputedProperties() : void
         {
