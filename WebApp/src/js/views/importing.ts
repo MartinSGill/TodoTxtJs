@@ -31,7 +31,7 @@ module TodoTxtJs.View
 {
     export class Importing
     {
-        public appendImport: KnockoutObservable<boolean>;
+        public replaceImport: KnockoutObservable<boolean>;
         public importDetails: KnockoutObservable<string>;
 
         private _dropTarget:any;
@@ -42,7 +42,7 @@ module TodoTxtJs.View
 
         constructor(todoManager:TodoManager)
         {
-            this.appendImport = ko.observable<boolean>(false);
+            this.replaceImport = ko.observable<boolean>(false);
             this.importDetails = ko.observable<string>("");
 
             this._dropTarget = null;
@@ -97,7 +97,7 @@ module TodoTxtJs.View
 
         public onClick_Import()
         {
-            if (!this.appendImport())
+            if (this.replaceImport())
             {
                 this._todoManager.removeAll();
             }

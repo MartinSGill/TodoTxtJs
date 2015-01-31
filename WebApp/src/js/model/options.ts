@@ -155,7 +155,7 @@ module TodoTxtJs
 
             this.themes = [
                 { name: "Original", file: "simple_default.css" },
-                { name: "Modern", file: "modern.css" },
+                // { name: "Modern", file: "modern.css" },
                 { name: "Solarized Dark", file: "simple_solarized_dark.css" },
                 { name: "Solarized Light", file: "simple_solarized_light.css" }
             ];

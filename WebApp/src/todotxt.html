@@ -347,18 +347,19 @@
         <div id="fileUpload" class="uploadTarget">
             <span>Drop your todo.txt file here.</span>
         </div>
+        <div class="fileAlternative">or</div>
         <div class="filePicker">
             <label><input type="text" readonly></label><button data-bind="click: onClick_PickFile">Pick File</button>
         </div>
         <div class="importDetails" data-bind="text: importDetails">
 
         </div>
-        <div class="importAppendOption">
+        <div class="importReplaceOption">
             <label>
-                <input type="checkbox" data-bind="checked: appendImport"/>
-                Append
+                <input type="checkbox" data-bind="checked: replaceImport"/>
+                Replace
             </label>
-            <span class="warning" data-bind="visible: !appendImport()" >Delete existing entries</span>
+            <span class="warning" data-bind="visible: replaceImport()" >This deletes <b>ALL</b> existing entries</span>
         </div>
     </div>
 </section>
