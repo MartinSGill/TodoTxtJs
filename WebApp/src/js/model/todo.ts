@@ -339,20 +339,37 @@ module TodoTxtJs
         }
 
         /**
-         * Extracts all the flagged elements of a
+         * Extracts all the contexts
          * @param text The text to examine
-         * @param flag The flag character to search for (e.g. @ or +)
          * @return Array of lowercase matches, or undefined
          */
-        private static _findFlags(text, flag) : string[]
+        private static _findContexts(text) : string[]
         {
-            flag = flag.replace(/[\-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-            var regex = new RegExp("(?:\\W|^)" + flag + "([\\S_]+[A-Za-z0-9_](?!\\S))", 'g');
+            var regex = TodoTxtJs.Regex.Context;
             var result = [];
             var match = regex.exec(text);
             while (match !== null)
             {
-                result.push(match[1]);
+                result.push(match[2]);
+                match = regex.exec(text);
+            }
+
+            return result;
+        }
+
+        /**
+         * Extracts all the contexts
+         * @param text The text to examine
+         * @return Array of lowercase matches, or undefined
+         */
+        private static _findProjects(text) : string[]
+        {
+            var regex = TodoTxtJs.Regex.Project;
+            var result = [];
+            var match = regex.exec(text);
+            while (match !== null)
+            {
+                result.push(match[2]);
                 match = regex.exec(text);
             }
 
@@ -416,8 +433,8 @@ module TodoTxtJs
                     this._contents = match[5];
                 }
 
-                this._projects = Todo._findFlags(this._contents, '+');
-                this._contexts = Todo._findFlags(this._contents, '@');
+                this._projects = Todo._findProjects(this._contents);
+                this._contexts = Todo._findContexts(this._contents);
                 this._metadata = this._findMetadata(this._contents);
             }
         }

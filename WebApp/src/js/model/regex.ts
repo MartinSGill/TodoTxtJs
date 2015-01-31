@@ -27,9 +27,9 @@ module TodoTxtJs.Regex
 
     export var DueDate = /(due):(((?:19|20)[0-9]{2})-((?:0[1-9]|1[012]))-((?:0[1-9]|[12][0-9]|3[01])))/ig;
 
-    export var Context = /(?:\W|^)(@)([\S_]+[A-Za-z0-9_](?!\S))/ig;
+    export var Context = /(?:\W|^)(@)([^\s]+)/ig;
 
-    export var Project = /(?:\W|^)(\+)([\S_]+[A-Za-z0-9_](?!\S))/ig;
+    export var Project = /(?:\W|^)(\+)([^\s]+)/ig;
 
     export var Url = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
 }

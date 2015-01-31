@@ -35,3 +35,6 @@ Todo URL http://example.com/hello/there/world
 x 2013-01-01 2013-01-01 A todo with @every-thing +kitchen-sink http://example.com/hello/there/world due:2013-01-01
 x 2013-01-01 (E) Completed todo
 
+tämä on todo @kynällä
+tämä on toinen todo +päivällä
+tämä on kolmas todo @yöllä
