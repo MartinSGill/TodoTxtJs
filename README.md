@@ -2,7 +2,7 @@ TodoTxtJs
 =========
 A Typescript/Javascript web app implementation of TodoTxt.
 
-[![Build Status](https://travis-ci.org/MartinSGill/TodoTxtJs.svg?branch=v1.6)](https://travis-ci.org/MartinSGill/TodoTxtJs)
+[![Build Status](https://travis-ci.org/MartinSGill/TodoTxtJs.svg?branch=master)](https://travis-ci.org/MartinSGill/TodoTxtJs)
 
 __Don't forget to check out the [wiki](https://github.com/MartinSGill/TodoTxtJs/wiki) for more information.__
 
@@ -43,6 +43,7 @@ When?
 
 These include only headline feature changes. See the commits for full details.
 
+* v1.6 - Dropbox: file location, logout
 * v1.5 - Due Date filtering, preserving item index in file.
 * v1.4 - Support for informal dates, New Notification UI
 * v1.3 - Custom Sorting
