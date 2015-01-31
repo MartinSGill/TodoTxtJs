@@ -64,6 +64,8 @@ module TodoTxtJs.View
                 $dropTargetChild.on('dragover', this.dragOver);
                 $dropTargetChild.on('dragleave', this.dragLeave);
                 $dropTargetChild.on('drop', this.drop);
+
+                $('#filePicker').on('change', this.onChange_filePicker);
             });
         }
 
@@ -90,11 +92,6 @@ module TodoTxtJs.View
             this._resetImportData();
         }
 
-        public onClick_PickFile()
-        {
-
-        }
-
         public onClick_Import()
         {
             if (this.replaceImport())
@@ -106,6 +103,16 @@ module TodoTxtJs.View
             this._resetImportData();
             this._dialog.dialog("close");
         }
+
+        public onChange_filePicker = (event): boolean =>
+        {
+            if (event.target.files.length > 0)
+            {
+                var file = event.target.files[0];
+                this._readFile(file);
+            }
+            return false;
+        };
 
         private _resetImportData()
         {
@@ -148,17 +155,22 @@ module TodoTxtJs.View
             if (files.length > 0)
             {
                 var file = files[0];
-                var reader = new FileReader();
-
-                reader.onloadend = (event): void =>
-                {
-                    this._importData = (<any>event.target).result.split(/\r?\n/);
-                    this.importDetails("Ready to import " + this._importData.length + " entries.");
-                    this._enableImportButton();
-                };
-
-                reader.readAsText(file, 'UTF-8');
+                this._readFile(file);
             }
+        };
+
+        private _readFile = (file) =>
+        {
+            var reader = new FileReader();
+
+            reader.onloadend = (event): void =>
+            {
+                this._importData = (<any>event.target).result.split(/\r?\n/);
+                this.importDetails("Ready to import " + this._importData.length + " entries.");
+                this._enableImportButton();
+            };
+
+            reader.readAsText(file, 'UTF-8');
         };
 
         private _enableImportButton(enable:boolean = true)
