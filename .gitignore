@@ -5,7 +5,7 @@ src/js/*.map
 src/js/**/*.js
 src/js/**/*.map
 
-src/app.*
+app.*
 
 # Except for this one, which isn't generated
 !src/js/sample_dropbox_key.js
@@ -251,4 +251,3 @@ com_crashlytics_export_strings.xml
 Session.vim
 .netrwhist
 *~
-
