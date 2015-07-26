@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Main Files" pattern="!file:.idea//*&amp;&amp;!file:syntax//*&amp;&amp;!file:.gitignore&amp;&amp;!file:todotxtjs.iml&amp;&amp;(file:src//*/*.ts||file:src//*/*.css||file:src//*/*.png||file:src//*/*.html)||file:src/js/dropbox_key.js||file:src/js/events.js||file:src/js/sample_dropbox_key.js||file:src/js/bindings/binding_todo.js||file:src/todotxt.html" />
-</component>
