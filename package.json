@@ -1,0 +1,21 @@
+{
+  "name": "TodoTxtJs",
+  "version": "1.6.0",
+  "description": "build system for TodoTxtJs",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jake": "^8.0.12",
+    "karma": ">=0.13.3",
+    "karma-chrome-launcher": ">=0.2.0",
+    "karma-qunit": ">=0.1.1",
+    "less": "^2.5.1",
+    "typescript": ">=1.5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Martin Gill",
+  "license": "MIT"
+}

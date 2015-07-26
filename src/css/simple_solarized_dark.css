@@ -1,0 +1,777 @@
+@charset "utf-8";
+/*******************************************************************************
+ * Copyright (C) 2013-2015 Martin Gill
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
+/*******************************************************************************
+ * Copyright (C) 2013-2015 Martin Gill
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
+body {
+  background-color: #002b36;
+  color: #586e75;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+input {
+  background-color: #002b36;
+  color: #586e75;
+}
+a:link,
+a:visited {
+  color: #6c71c4;
+}
+textarea {
+  background-color: #002b36;
+  color: #586e75;
+}
+.pageHeading {
+  padding: 0;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  padding-left: 5px;
+  margin: 0;
+  display: block;
+  float: left;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: Arial sans-serif;
+}
+.page-splashScreen {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: table;
+}
+.page-splashScreen p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 5em;
+  font-family: fantasy;
+  font-variant: small-caps;
+}
+.page-splashScreen p:before {
+  content: "... ";
+}
+.page-splashScreen p:after {
+  content: " ...";
+}
+footer {
+  clear: both;
+  margin-top: 5px;
+  font-size: 0.6em;
+  text-align: center;
+}
+.ajax-spinner {
+  display: inline-block;
+  border-style: none;
+  height: 16px;
+  width: 16px;
+  padding: 0;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-image: url(data:image/gif;base64,R0lGODlhEAAQAPYAAP///wAAAPr6+pKSkoiIiO7u7sjIyNjY2J6engAAAI6OjsbGxjIyMlJSUuzs7KamppSUlPLy8oKCghwcHLKysqSkpJqamvT09Pj4+KioqM7OzkRERAwMDGBgYN7e3ujo6Ly8vCoqKjY2NkZGRtTU1MTExDw8PE5OTj4+PkhISNDQ0MrKylpaWrS0tOrq6nBwcKysrLi4uLq6ul5eXlxcXGJiYoaGhuDg4H5+fvz8/KKiohgYGCwsLFZWVgQEBFBQUMzMzDg4OFhYWBoaGvDw8NbW1pycnOLi4ubm5kBAQKqqqiQkJCAgIK6urnJyckpKSjQ0NGpqatLS0sDAwCYmJnx8fEJCQlRUVAoKCggICLCwsOTk5ExMTPb29ra2tmZmZmhoaNzc3KCgoBISEiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCAAAACwAAAAAEAAQAAAHaIAAgoMgIiYlg4kACxIaACEJCSiKggYMCRselwkpghGJBJEcFgsjJyoAGBmfggcNEx0flBiKDhQFlIoCCA+5lAORFb4AJIihCRbDxQAFChAXw9HSqb60iREZ1omqrIPdJCTe0SWI09GBACH5BAkIAAAALAAAAAAQABAAAAdrgACCgwc0NTeDiYozCQkvOTo9GTmDKy8aFy+NOBA7CTswgywJDTIuEjYFIY0JNYMtKTEFiRU8Pjwygy4ws4owPyCKwsMAJSTEgiQlgsbIAMrO0dKDGMTViREZ14kYGRGK38nHguHEJcvTyIEAIfkECQgAAAAsAAAAABAAEAAAB2iAAIKDAggPg4iJAAMJCRUAJRIqiRGCBI0WQEEJJkWDERkYAAUKEBc4Po1GiKKJHkJDNEeKig4URLS0ICImJZAkuQAhjSi/wQyNKcGDCyMnk8u5rYrTgqDVghgZlYjcACTA1sslvtHRgQAh+QQJCAAAACwAAAAAEAAQAAAHZ4AAgoOEhYaCJSWHgxGDJCQARAtOUoQRGRiFD0kJUYWZhUhKT1OLhR8wBaaFBzQ1NwAlkIszCQkvsbOHL7Y4q4IuEjaqq0ZQD5+GEEsJTDCMmIUhtgk1lo6QFUwJVDKLiYJNUd6/hoEAIfkECQgAAAAsAAAAABAAEAAAB2iAAIKDhIWGgiUlh4MRgyQkjIURGRiGGBmNhJWHm4uen4ICCA+IkIsDCQkVACWmhwSpFqAABQoQF6ALTkWFnYMrVlhWvIKTlSAiJiVVPqlGhJkhqShHV1lCW4cMqSkAR1ofiwsjJyqGgQAh+QQJCAAAACwAAAAAEAAQAAAHZ4AAgoOEhYaCJSWHgxGDJCSMhREZGIYYGY2ElYebi56fhyWQniSKAKKfpaCLFlAPhl0gXYNGEwkhGYREUywag1wJwSkHNDU3D0kJYIMZQwk8MjPBLx9eXwuETVEyAC/BOKsuEjYFhoEAIfkECQgAAAAsAAAAABAAEAAAB2eAAIKDhIWGgiUlh4MRgyQkjIURGRiGGBmNhJWHm4ueICImip6CIQkJKJ4kigynKaqKCyMnKqSEK05StgAGQRxPYZaENqccFgIID4KXmQBhXFkzDgOnFYLNgltaSAAEpxa7BQoQF4aBACH5BAkIAAAALAAAAAAQABAAAAdogACCg4SFggJiPUqCJSWGgkZjCUwZACQkgxGEXAmdT4UYGZqCGWQ+IjKGGIUwPzGPhAc0NTewhDOdL7Ykji+dOLuOLhI2BbaFETICx4MlQitdqoUsCQ2vhKGjglNfU0SWmILaj43M5oEAOwAAAAAAAAAAAA==);
+}
+.label {
+  font-weight: bold;
+}
+.logo {
+  display: inline-block;
+  float: left;
+  width: 32px;
+  height: 34px;
+  background-image: url('../images/todotxt_js_logo.png');
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+}
+.warning {
+  color: #dc322f;
+  font-size: smaller;
+}
+/*****************************************************
+ * Toolbar
+ *****************************************************/
+form {
+  margin: 0;
+}
+.toolbar {
+  float: right;
+  position: absolute;
+  top: 5px;
+  right: 40px;
+  display: block;
+  width: 100%;
+}
+.menu {
+  float: right;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  font-family: sans-serif;
+}
+.menuItem a {
+  float: right;
+  cursor: pointer;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  min-width: 50px;
+  height: 20px;
+  background-color: #6c71c4;
+  border-style: solid;
+  border-color: #073642;
+  border-width: thin;
+  text-align: center;
+  vertical-align: middle;
+  color: #93a1a1;
+  text-decoration: none;
+  position: relative;
+}
+.menuItem_help a {
+  min-width: 20px;
+}
+.menuItem a:hover {
+  background-color: #073642;
+  color: #d33682;
+}
+.menuItem.selected a {
+  background-color: #073642;
+  height: 25px;
+  z-index: 5001;
+}
+.notice {
+  display: block;
+  position: absolute;
+  width: 100%;
+  text-align: right;
+  font-size: 1.1em;
+}
+.notice-lastupdated {
+  display: block;
+  float: right;
+  font-size: 0.8em;
+}
+.notice-highlight {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.notice-highlight > span {
+  display: inline-block;
+  width: 40%;
+  padding: 3px;
+  border-radius: 10px;
+  background-color: #586e75;
+}
+.notice-error > span {
+  background-color: #dc322f;
+}
+#target {
+  height: 15px;
+  width: 300px;
+  display: inline-block;
+  position: absolute;
+  top: 25px;
+  right: 0;
+}
+.ui-effects-transfer {
+  border: 1px dotted #002b36;
+}
+.toolbox {
+  float: right;
+  position: absolute;
+  z-index: 5000;
+  top: 26px;
+  right: 2px;
+  width: 40%;
+  background-color: #073642;
+  color: #93a1a1;
+  padding: 3px;
+  display: none;
+}
+.toolbox > textarea {
+  display: block;
+  overflow-y: visible;
+  height: 300px;
+  width: 99%;
+}
+.exportTextArea {
+  display: block;
+  overflow-y: visible;
+  height: 300px;
+  width: 99%;
+}
+.toolbox > span {
+  clear: both;
+}
+.toolBox-footer {
+  text-align: right;
+  font-size: smaller;
+}
+.toolbox-warning {
+  background: #dc322f;
+  color: #586e75;
+}
+.toolbox-tip {
+  font-size: smaller;
+  font-style: italic;
+}
+.toolbox-help {
+  font-size: smaller;
+  font-variant: small-caps;
+  text-align: right;
+}
+/*******************************************************
+ * Options
+ ******************************************************/
+.options {
+  font-size: 16px;
+  font-family: 'Times New Roman', serif;
+}
+.options input,
+.options select {
+  font-family: 'Times New Roman', serif;
+}
+.options-group {
+  border: 1px solid #586e75;
+  margin-bottom: 15px;
+}
+.options-group h1 {
+  font-family: Verdana, sans-serif;
+  margin-top: 0;
+  padding: 2px;
+  font-size: 1em;
+  background-color: #2aa198;
+  color: #eee8d5;
+}
+.options-table {
+  display: table;
+  width: 100%;
+}
+.options-entry {
+  display: table-row;
+  width: 100%;
+}
+.options-name {
+  width: 125px;
+  display: table-cell;
+  padding-right: 2px;
+  font-weight: bold;
+}
+.options-value {
+  display: table-cell;
+  width: 150px;
+  text-align: right;
+  padding-right: 5px;
+}
+.options-decription {
+  display: table-cell;
+  width: 100%;
+}
+.options-warning {
+  color: #dc322f;
+  font-style: italic;
+}
+/*******************************************************
+ * Add
+ ******************************************************/
+.addTodo {
+  clear: both;
+  border: 1px solid #586e75;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #b58900;
+  color: #eee8d5;
+}
+.addTodo input {
+  width: 600px;
+}
+/*******************************************************
+* Filters
+******************************************************/
+.filters {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #586e75;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #2aa198;
+  display: block;
+}
+.filter-options-table {
+  display: table;
+  width: 100%;
+}
+.filter-options-row {
+  display: table-row;
+  width: 100%;
+}
+.quickFilter {
+  display: table-cell;
+  width: auto;
+  text-align: right;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.quickFilter-input {
+  width: 200px;
+}
+.quickFilter-label {
+  padding-right: 5px;
+}
+/*******************************************************
+* Display Options
+******************************************************/
+.display-options {
+  display: table-cell;
+  width: 33%;
+}
+.display-options-label {
+  display: inline-block;
+}
+.display-options-item {
+  display: inline-block;
+  padding-right: 2px;
+  border-left-color: #6c71c4;
+  border-left-style: dotted;
+  border-left-width: thin;
+}
+.display-options-sort {
+  display: table-cell;
+  margin-left: 100px;
+  margin-right: auto;
+  text-align: center;
+  width: 33%;
+}
+/*******************************************************
+* Delete Button
+******************************************************/
+.deleteButton {
+  display: inline-block;
+}
+.deleteButton a {
+  display: inline-table;
+  background-color: #93a1a1;
+  height: 0.8em;
+  width: 1.2em;
+  font-size: 12pt;
+  color: #073642;
+  border-radius: 50px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: capitalize;
+  text-align: center;
+  cursor: pointer;
+}
+.deleteButton a:hover {
+  color: #dc322f;
+}
+.deleteTodo {
+  display: inline-block;
+  float: right;
+}
+.main {
+  display: table;
+  width: 100%;
+}
+/*******************************************************
+* Todos
+******************************************************/
+.todo:hover {
+  background-color: #073642;
+}
+.todo-view-edit {
+  width: 100%;
+  display: none;
+}
+.todo-view-edit input {
+  width: 80%;
+  font-size: inherit;
+  margin-left: 25px;
+}
+.todo-view-edit .toolbox-tip {
+  font-size: 0.6em;
+  float: right;
+}
+.todo-view {
+  padding: 5px;
+  border: ridge thin #586e75;
+  border-radius: 5px;
+  font-size: 1.4em;
+  display: table-cell;
+  width: 100%;
+}
+.todo-view-display {
+  text-indent: -30px;
+  padding-left: 35px;
+}
+.todo-view-sidebar {
+  min-width: 150px;
+  display: table-cell;
+  padding-left: 5px;
+}
+.todo-view-sidebar h3 {
+  margin: 0;
+}
+.todo-view-sidebar ul {
+  margin: 0;
+  list-style-position: outside;
+  list-style-type: none;
+  padding-left: 10px;
+}
+.todo-view-sidebar-priorities {
+  list-style: none;
+  color: #859900;
+}
+.todo-view-sidebar-priorities li {
+  display: inline;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+.todo-view-index {
+  display: none;
+  width: 20px;
+  text-align: right;
+  font-size: 0.5em;
+}
+.todo-view-completedFlag {
+  display: none;
+}
+.todo-view-priorityBrace {
+  display: none;
+}
+.todo-view-priority {
+  font-weight: bold;
+  font-size: 1.2em;
+  font-family: sans-serif;
+  color: #859900;
+  text-shadow: 1px 1px 3px #eee8d5;
+  cursor: pointer;
+}
+.todo-view-priority-A {
+  color: #dc322f;
+}
+.todo-view-priority-B {
+  color: #cb4b16;
+}
+.todo-view-priority-C {
+  color: #b58900;
+}
+.todo-view-priority-D {
+  color: #6c71c4;
+}
+.todo-view-priority-E {
+  color: #268bd2;
+}
+.todo-view-message {
+  cursor: pointer;
+  text-indent: 0;
+}
+.todo-view-createDate {
+  color: #2aa198;
+  font-size: smaller;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+.todo-view-completedDate {
+  color: #586e75;
+  font-size: smaller;
+  font-family: sans-serif;
+}
+.todo-view-projectFlag {
+  margin-left: 0.3em;
+  color: #d33682;
+  cursor: pointer;
+}
+.todo-view-project {
+  color: #d33682;
+  font-family: sans-serif;
+  font-size: 1.0em;
+  cursor: pointer;
+}
+.todo-view-contextFlag {
+  margin-left: 0.3em;
+  color: #268bd2;
+  cursor: pointer;
+}
+.todo-view-context {
+  color: #268bd2;
+  font-family: sans-serif;
+  font-size: 1.0em;
+  cursor: pointer;
+}
+.todo-view-completed {
+  background-color: #002b36;
+}
+.todo-metadata {
+  display: inline-table;
+  font-size: smaller;
+  vertical-align: text-bottom;
+  background-color: #2aa198;
+  border-radius: 5px;
+  padding: 2px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.todo-metadata:hover .todo-metadata-name {
+  display: table-cell;
+}
+.todo-metadata-name {
+  color: #eee8d5;
+  display: table-cell;
+  font-size: smaller;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  padding-right: 2px;
+}
+.todo-metadata-separator {
+  display: none;
+}
+.todo-metadata-value {
+  background-color: #002b36;
+  padding-left: 2px;
+  color: #586e75;
+}
+.todo-due-date_past {
+  background-color: #dc322f;
+  color: #eee8d5;
+}
+.todo-due-date_near {
+  background-color: #b58900;
+  color: #93a1a1;
+}
+.todo-due-date_far {
+  background-color: #859900;
+  color: #eee8d5;
+}
+.todo-due-sidebar-past {
+  font-weight: bold;
+  color: #dc322f;
+  cursor: pointer;
+}
+.todo-due-sidebar-near {
+  font-weight: bold;
+  color: #b58900;
+  cursor: pointer;
+}
+.todo-due-sidebar-far {
+  font-weight: bold;
+  color: #859900;
+  cursor: pointer;
+}
+.todo-view-link_short,
+.todo-view-link_short:link,
+.todo-view-link_short:visited {
+  text-decoration: none;
+  background-color: #6c71c4;
+  color: #eee8d5;
+  border-radius: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-variant: small-caps;
+}
+.todo-view-link_short abbr {
+  color: #eee8d5;
+}
+.hidden {
+  display: none;
+}
+.import {
+  width: 400px;
+}
+.uploadTarget {
+  display: table-cell;
+  border: #eee8d5 dashed medium;
+  vertical-align: middle;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 380px;
+  height: 200px;
+}
+.filePicker input {
+  width: 405px;
+  margin-top: 5px;
+  background: #6c71c4;
+  font-style: italic;
+}
+.fileAlternative {
+  text-align: center;
+  font-size: larger;
+}
+.importDetails {
+  color: #859900;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+.dragOver {
+  border-color: #dc322f;
+  font-weight: bold;
+}
+/*#help
+{
+	border: #FF9900 solid 3px;
+	color: #c3ab00;
+	background-color: #000000;
+	padding: 15px;
+	max-width: 900px;
+	max-height: 600px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	vertical-align: middle;
+	border-radius: 10px;
+	-webkit-box-shadow: 10px 10px 10px #444444;
+	box-shadow: 10px 10px 10px #444444;
+	position: fixed;
+	top: 150px;
+	left: 450px;
+}*/
+.ui-autocomplete {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 1em;
+}
+.__floatLeft {
+  float: left;
+}
+.__floatRight {
+  float: right;
+}
+.__tt {
+  font-family: consolas, courier, sans-serif;
+}
+/*********************************************
+ * jQueryUI overrides
+ *********************************************/
+.ui-widget-content {
+  border: 1px solid #586e75;
+  background: #002b36 50% 50% repeat-x;
+  color: #586e75;
+}
+.ui-widget-content a {
+  color: #586e75;
+}
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header {
+  border: 1px solid #586e75;
+  background: #b58900 50% 50% repeat-x;
+  color: #eee8d5;
+}
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-widget-header a {
+  color: #eee8d5;
+}
+.ui-state-default a:visited {
+  color: #586e75;
+}
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  border: 1px solid #073642;
+  background: #073642 50% 50% repeat-x;
+  color: #d33682;
+}
+.ui-state-hover a,
+.ui-state-hover a:hover,
+.ui-state-hover a:link,
+.ui-state-hover a:visited {
+  color: #d33682;
+}
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  border: 1px solid #586e75;
+  background: #002b36 50% 50% repeat-x;
+  color: #d33682;
+}
+.ui-state-active a,
+.ui-state-active a:link,
+.ui-state-active a:visited {
+  color: #d33682;
+}
+/* ui-dialog: The outer container of the dialog. */
+.ui-dialog {
+  padding: 0;
+  background-color: #002b36;
+}
+/* ui-dialog-titlebar: The title bar containing the dialog's title and close button. */
+.ui-dialog-titlebar {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+/* ui-dialog-title: The container around the textual title of the dialog. */
+/* ui-dialog-titlebar-close: The dialog's close button. */
+/* ui-dialog-content: The container around the dialog's content. This is also the element the widget was instantiated with. */
+/* ui-dialog-buttonpane: The pane that contains the dialog's buttons. This will only be present if the buttons option is set. */
+/* ui-dialog-buttonset: The container around the buttons themselves. */
+/*********************************************
+ * jGrowl overrides
+ *********************************************/
+div.jGrowl div.jGrowl-notification,
+div.jGrowl div.jGrowl-closer {
+  background-color: #586e75;
+  background-image: none;
+  color: #002b36;
+  opacity: 100;
+  -moz-opacity: 100;
+  width: 350px;
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-header {
+  font-size: 16pt;
+  color: #dc322f;
+}
+div.jGrowl-message {
+  font-size: 14pt;
+}
