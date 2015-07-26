@@ -1,32 +1,19 @@
 
 # General exclusion for generated Javascript files under source.
-WebApp/src/js/*.js
-WebApp/src/js/*.map
-WebApp/src/js/**/*.js
-WebApp/src/js/**/*.map
+src/js/*.js
+src/js/*.map
+src/js/**/*.js
+src/js/**/*.map
 
-WebApp/src/app.*
+src/app.*
 
 # Except for this one, which isn't generated
-!WebApp/src/js/sample_dropbox_key.js
+!src/js/sample_dropbox_key.js
 
 # Ignore generated CSS files
-WebApp/src/css/**/*.css
-WebApp/src/css/*.css
-WebApp/src/css/*.map
-
-# Server (WebApp Mirror)
-
-TodoTxtJsServer/public/.htaccess
-TodoTxtJsServer/public/todotxt.html
-TodoTxtJsServer/public/css
-TodoTxtJsServer/public/favicon.ico
-TodoTxtJsServer/public/images
-TodoTxtJsServer/public/js
-
-# Build Output
-
-out
+src/css/**/*.css
+src/css/*.css
+src/css/*.map
 
 ######################################################################
 # Generic stuff
@@ -227,15 +214,15 @@ $RECYCLE.BIN/
 # ------------------------------------------------------------
 
 ## Directory-based project format
-# .idea/
+.idea/
 # if you remove the above rule, at least ignore user-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
+#.idea/workspace.xml
+#.idea/tasks.xml
 # and these sensitive or high-churn files:
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
+#.idea/dataSources.ids
+#.idea/dataSources.xml
+#.idea/sqlDataSources.xml
+#.idea/dynamic.xml
 
 ## File-based project format
 *.ipr
