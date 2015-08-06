@@ -11,29 +11,9 @@ var less_files = [
     'simple_solarized_light'
 ];
 
-var ts_base = './src/js/';
 var ts_files = new jake.FileList();
 ts_files.include('./src/js/**/*.ts');
-//var ts_files =
-//    [
-//        ts_base + 'model/contentRender.ts',
-//        ts_base + 'model/ModelFactory.ts',
-//        ts_base + 'model/options.ts',
-//        ts_base + 'model/regex.ts',
-//        ts_base + 'model/todo.ts',
-//        ts_base + 'model/todomanager.ts',
-//
-//        ts_base + 'storage/storage_browser.ts',
-//        ts_base + 'storage/storage_dropbox.ts',
-//
-//        ts_base + 'utils/datetime.ts',
-//        ts_base + 'utils/events.ts',
-//
-//        ts_base + 'views/displayOptions.ts',
-//        ts_base + 'views/exporting.ts',
-//        ts_base + 'views/importing.ts',
-//        ts_base + 'views/todotxt.ts'
-//    ];
+
 var ts_outfile = 'out/app.js';
 var ts_options = [
     '--out ' + ts_outfile,
