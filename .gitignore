@@ -5,6 +5,7 @@ src/js/*.map
 src/js/**/*.js
 src/js/**/*.map
 
+!src/js/bindings/binding_todo.js
 !src/js/lib/jquery.hotkeys.js
 app.*
 
@@ -16,7 +17,6 @@ app.*
 src/css/**/*.css
 src/css/*.css
 src/css/*.map
-
 
 typings
 
