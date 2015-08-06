@@ -5,10 +5,12 @@ src/js/*.map
 src/js/**/*.js
 src/js/**/*.map
 
+!src/js/lib/jquery.hotkeys.js
 app.*
 
 # Except for this one, which isn't generated
 !src/js/sample_dropbox_key.js
+
 
 # Ignore generated CSS files
 src/css/**/*.css
@@ -253,4 +255,3 @@ com_crashlytics_export_strings.xml
 *.un~
 Session.vim
 .netrwhist
-*~
