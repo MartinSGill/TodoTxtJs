@@ -174,5 +174,4 @@ declare module Dropbox
     }
 }
 
-declare var dropbox_key: string;
 

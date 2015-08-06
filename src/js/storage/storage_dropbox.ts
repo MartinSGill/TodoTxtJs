@@ -23,6 +23,9 @@
 
 /// <reference path="IStorageProvider.d.ts" />
 /// <reference path="../lib/dropbox.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
+declare var dropbox_key: string;
+
 
 module TodoTxtJs.StorageProviders
 {

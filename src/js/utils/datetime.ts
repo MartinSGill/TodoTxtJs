@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../lib/moment.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 
 module TodoTxtJs
 {
@@ -79,8 +79,8 @@ module TodoTxtJs
         public static distance(date: string, other?: Date): number;
         public static distance(date: any, other?: Date): number
         {
-            var left: Moment;
-            var right: Moment = moment(other);
+            var left: moment.Moment;
+            var right: moment.Moment = moment(other);
 
             if (date instanceof Date || (typeof(date) === "string"))
             {

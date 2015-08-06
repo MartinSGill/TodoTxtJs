@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="jquery.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 
 interface JGrowlOptions
 {
