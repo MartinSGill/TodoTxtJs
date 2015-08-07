@@ -3,6 +3,9 @@ var os = require('os');
 var path = require('path');
 var out_path = 'out';
 
+// Using join deals with nix/win issues
+var bin_path =  path.join('.', 'node_modules','.bin');
+
 var less_base = 'src/css';
 var less_files = [
     'modern',
@@ -40,7 +43,7 @@ function compileLessFile(file) {
     jake.logger.log('Compile LESS: ' + file);
     var in_file = path.join(less_base, file + '.less');
     var out_file = path.join(out_path, 'css', file + '.css');
-    var cmd = 'lessc --source-map ' + in_file + ' ' + out_file;
+    var cmd = path.join(bin_path, 'lessc') + ' --source-map ' + in_file + ' ' + out_file;
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
 
@@ -48,7 +51,7 @@ function compileTsFiles() {
     jake.logger.log('Compile TypeScript');
     var files = ts_files.toArray().join(' ');
     var options = ts_options.join(' ');
-    var cmd = "tsc " + options + ' ' + files;
+    var cmd = path.join(bin_path, 'tsc') + ' ' + options + ' ' + files;
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
 
@@ -99,6 +102,6 @@ task('html', ['out'], function (params) {
 
 desc('Run server');
 task('server', ['default'], function (params) {
-    var cmd = '.\\node_modules\\.bin\\http-server out -o';
+    var cmd = path.join(bin_path,'http-server') + ' out -o';
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 });
