@@ -541,15 +541,15 @@
     <!-- Local -->
     <script type="text/javascript">
         $(document).ready(function () {
-            $.getScript('js/lib/jquery.hotkeys.js');
-            $.getScript('js/bindings/binding_todo.js');
-            $.getScript('js/dropbox_key.js').always(function(){
-                $.getScript('app.min.js');
+            $.getScript('jquery.hotkeys.js');
+            $.getScript('binding_todo.js');
+            $.getScript('dropbox_key.js').always(function(){
+                $.getScript('app.js');
             });
 
             // Optional use if you want to react to events.
             // See utils/events.ts for examples of what's available.
-            $.getScript('js/events.js');
+            $.getScript('events.js');
         });
     </script>
 </section>

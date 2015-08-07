@@ -5,13 +5,14 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
+    "http-server": "^0.8.0",
     "jake": "^8.0.12",
     "karma": ">=0.13.3",
     "karma-chrome-launcher": ">=0.2.0",
     "karma-qunit": ">=0.1.1",
     "less": "^2.5.1",
     "tsd": "^0.6.3",
-    "typescript": ">=1.5.3",
+    "typescript": ">=1.5.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

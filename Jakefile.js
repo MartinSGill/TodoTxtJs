@@ -24,16 +24,16 @@ var ts_options = [
 ];
 
 var res_files = new jake.FileList();
-    res_files.include('src/images/dropbox-logos_dropbox-logotype-black-trimmed.png');
-    res_files.include('src/images/todotxt_js_logo.png');
+res_files.include('src/images/dropbox-logos_dropbox-logotype-black-trimmed.png');
+res_files.include('src/images/todotxt_js_logo.png');
 
 var sup_files = new jake.FileList();
-    sup_files.include('src/js/lib/jquery.hotkeys.js');
-    sup_files.include('src/js/bindings/binding_todo.js');
-    sup_files.include('src/js/sample_dropbox_key.js');
-    // Optional files
-    sup_files.include('src/js/dropbox_key.*');
-    sup_files.include('src/js/events.*');
+sup_files.include('src/js/lib/jquery.hotkeys.js');
+sup_files.include('src/js/bindings/binding_todo.js');
+sup_files.include('src/js/sample_dropbox_key.js');
+// Optional files
+sup_files.include('src/js/dropbox_key.*');
+sup_files.include('src/js/events.*');
 
 
 function compileLessFile(file) {
@@ -75,7 +75,7 @@ desc('Build/deploy resources');
 task('res', ['out'], function (params) {
     jake.logger.log('Compile Resources');
     res_files.toArray().forEach(function (file) {
-       var destination = path.join(out_path, 'images', path.basename(file));
+        var destination = path.join(out_path, 'images', path.basename(file));
         jake.cpR(file, destination);
     });
 });
@@ -95,4 +95,10 @@ task('html', ['out'], function (params) {
     var source = path.join('src', 'todotxt.html');
     var destination = path.join(out_path, 'index.html');
     jake.cpR(source, destination);
+});
+
+desc('Run server');
+task('server', ['default'], function (params) {
+    var cmd = '.\\node_modules\\.bin\\http-server out -o';
+    jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 });
