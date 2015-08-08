@@ -34,6 +34,7 @@ var sup_files = new jake.FileList();
 sup_files.include('src/js/lib/jquery.hotkeys.js');
 sup_files.include('src/js/bindings/binding_todo.js');
 sup_files.include('src/js/sample_dropbox_key.js');
+sup_files.include('src/favicon.ico');
 // Optional files
 sup_files.include('src/js/dropbox_key.*');
 sup_files.include('src/js/events.*');
