@@ -27,20 +27,20 @@ module TodoTxtJs
 {
     enum Weekdays
     {
-        sun = 0,
-        mon = 1,
-        tue = 2,
-        wed = 3,
-        thurs = 4,
-        fri = 5,
-        sat = 6,
-        sunday = 0,
-        monday = 1,
-        tuesday = 2,
+        sun       = 0,
+        mon       = 1,
+        tue       = 2,
+        wed       = 3,
+        thurs     = 4,
+        fri       = 5,
+        sat       = 6,
+        sunday    = 0,
+        monday    = 1,
+        tuesday   = 2,
         wednesday = 3,
-        thursday = 4,
-        friday = 5,
-        saturday = 6
+        thursday  = 4,
+        friday    = 5,
+        saturday  = 6
     }
 
     export class DateTime
@@ -50,7 +50,7 @@ module TodoTxtJs
          * @param date the date to format.
          * @returns {string}
          */
-        public static toISO8601Date(date : Date) : string
+        public static toISO8601Date(date:Date):string
         {
             var _moment = moment(date);
             return _moment.format("YYYY-MM-DD");
@@ -61,7 +61,7 @@ module TodoTxtJs
          * @param date the date to format
          * @returns {string}
          */
-        public static toISO8601DateTime(date : Date) : string
+        public static toISO8601DateTime(date:Date):string
         {
             var _moment = moment(date);
             return _moment.format("YYYY-MM-DD HH:mm:ss");
@@ -75,12 +75,12 @@ module TodoTxtJs
          * @param other The date to compare to, defaults to now.
          * @remarks Not overly accurate atm.
          */
-        public static distance(date: Date, other?: Date): number;
-        public static distance(date: string, other?: Date): number;
-        public static distance(date: any, other?: Date): number
+        public static distance(date:Date, other?:Date):number;
+        public static distance(date:string, other?:Date):number;
+        public static distance(date:any, other?:Date):number
         {
-            var left: moment.Moment;
-            var right: moment.Moment = moment(other);
+            var left:moment.Moment;
+            var right:moment.Moment = moment(other);
 
             if (date instanceof Date || (typeof(date) === "string"))
             {
@@ -99,7 +99,7 @@ module TodoTxtJs
             return left.startOf('day').diff(right.startOf('day'), 'days');
         }
 
-        public static dateToInformalString(date: Date) : string
+        public static dateToInformalString(date:Date):string
         {
             var distance = DateTime.distance(date);
             switch (distance)
@@ -116,7 +116,7 @@ module TodoTxtJs
                 default:
                     if (distance > 1 && distance < 7)
                     {
-                        var weekday :string = Weekdays[date.getDay()];
+                        var weekday:string = Weekdays[date.getDay()];
                         weekday = weekday[0].toUpperCase() + weekday.slice(1);
                         return weekday;
                     }
@@ -133,14 +133,14 @@ module TodoTxtJs
          * @param other The date to base this off, defaults to today.
          * @returns {Date}
          */
-        public static informalDayToDate(informal: string, other?: Date) : Date
+        public static informalDayToDate(informal:string, other?:Date):Date
         {
             var _informal = informal.toLowerCase();
-            var _other: Date;
+            var _other:Date;
             _other = (other instanceof Date) ? moment(other).startOf('day').toDate() : DateTime.today();
             var days = 0;
 
-            switch(_informal)
+            switch (_informal)
             {
                 case "today":
                     days = 0;
@@ -170,9 +170,9 @@ module TodoTxtJs
          * @param days The number of days (can be negative).
          * @param other The date to apply this to. Defaults to today.
          */
-        public static relativeDayToDate(days: string, other?: Date) : Date;
-        public static relativeDayToDate(days: number, other?: Date ) : Date;
-        public static relativeDayToDate(days: any, other?: Date) : Date
+        public static relativeDayToDate(days:string, other?:Date):Date;
+        public static relativeDayToDate(days:number, other?:Date):Date;
+        public static relativeDayToDate(days:any, other?:Date):Date
         {
             if (typeof days === "string")
             {
@@ -182,9 +182,12 @@ module TodoTxtJs
             {
                 days = <number>days;
             }
-            else { throw "Invalid Type"; }
+            else
+            {
+                throw "Invalid Type";
+            }
 
-            var _other;
+            var _other:moment.Moment;
             _other = other instanceof Date ? moment(other).startOf('day') : moment().startOf('day');
             var _result = _other.add('days', <number>days);
             return _result.toDate();
@@ -194,7 +197,7 @@ module TodoTxtJs
          * Returns to normalised date for Today.
          * @returns {Date}
          */
-        public static today() : Date
+        public static today():Date
         {
             return moment().startOf('day').toDate();
         }
@@ -206,14 +209,14 @@ module TodoTxtJs
          * @param weekday Weekday as number (same as Date.getDay() or string).
          * @param other The date to compare to. Defaults to today.
          */
-        public static weekdayToRelativeDay(weekday: string, other?: Date) : number;
-        public static weekdayToRelativeDay(weekday: number, other?: Date): number;
-        public static weekdayToRelativeDay(weekday: any, other?: Date): number
+        public static weekdayToRelativeDay(weekday:string, other?:Date):number;
+        public static weekdayToRelativeDay(weekday:number, other?:Date):number;
+        public static weekdayToRelativeDay(weekday:any, other?:Date):number
         {
-            var _weekday: Weekdays;
+            var _weekday:any;
             if (typeof weekday === "string")
             {
-                _weekday = Weekdays[<string>weekday];
+                _weekday = Weekdays[<any>weekday];
             }
             else if (typeof weekday === "number")
             {
@@ -224,9 +227,9 @@ module TodoTxtJs
                 throw "invalid type for weekday";
             }
 
-            var _other: Date;
+            var _other:Date;
             _other = (other instanceof Date) ? moment(other).startOf('day').toDate() : DateTime.today();
-            var result: number = 0;
+            var result:number = 0;
 
             if (_weekday == _other.getDay())
             {

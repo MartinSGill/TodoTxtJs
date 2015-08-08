@@ -37,30 +37,30 @@ module TodoTxtJs
 
     export class Todo
     {
-        public index: number = 0;
-        public createdDate: KnockoutComputed<string>;
-        public priority: KnockoutComputed<string>;
-        public priorityScore: KnockoutComputed<number>;
-        public completed: KnockoutComputed<boolean>;
-        public completedDate: KnockoutComputed<string>;
-        public contents: KnockoutComputed<string>;
-        public projects: KnockoutComputed<string[]>;
-        public contexts: KnockoutComputed<string[]>;
-        public text : KnockoutComputed<string>;
-        public metadata: KnockoutComputed<Array<ITodoMetadata>>;
-        public dueDate: KnockoutComputed<Date>;
+        public index:number = 0;
+        public createdDate:KnockoutComputed<string>;
+        public priority:KnockoutComputed<string>;
+        public priorityScore:KnockoutComputed<number>;
+        public completed:KnockoutComputed<boolean>;
+        public completedDate:KnockoutComputed<string>;
+        public contents:KnockoutComputed<string>;
+        public projects:KnockoutComputed<string[]>;
+        public contexts:KnockoutComputed<string[]>;
+        public text:KnockoutComputed<string>;
+        public metadata:KnockoutComputed<Array<ITodoMetadata>>;
+        public dueDate:KnockoutComputed<Date>;
 
-        private static _knownMetaData: string[] = ['due', 'http', 'https', 'ftp'];
-        private _priority: string = null;
-        private _createDate: string = null;
-        private _completed: boolean = false;
-        private _completedDate: string = null;
-        private _contents: string = null;
-        private _projects: string[] = [];
-        private _contexts: string[] = [];
-        private _metadata: Array<ITodoMetadata> = [];
+        private static _knownMetaData:string[] = ['due', 'http', 'https', 'ftp'];
+        private _priority:string = null;
+        private _createDate:string = null;
+        private _completed:boolean = false;
+        private _completedDate:string = null;
+        private _contents:string = null;
+        private _projects:string[] = [];
+        private _contexts:string[] = [];
+        private _metadata:Array<ITodoMetadata> = [];
 
-        private _text: KnockoutObservable<string>;
+        private _text:KnockoutObservable<string>;
 
         constructor(source:string)
         {
@@ -75,61 +75,61 @@ module TodoTxtJs
             this._parse();
         }
 
-        public static isKnownMetaData(metaData: ITodoMetadata): boolean
+        public static isKnownMetaData(metaData:ITodoMetadata):boolean
         {
             return this._knownMetaData.indexOf(metaData.name) >= 0;
         }
 
-        private _initialiseComputedProperties() : void
+        private _initialiseComputedProperties():void
         {
             this.text = ko.computed<string>(
-            {
-                owner: this,
-                read: () : string =>
                 {
-                    return this._text();
-                },
-                write: (value:string)=>
-                {
-                    this._text(value);
-                    this._parse();
-                }
-            });
+                    owner: this,
+                    read : ():string =>
+                    {
+                        return this._text();
+                    },
+                    write: (value:string)=>
+                    {
+                        this._text(value);
+                        this._parse();
+                    }
+                });
 
             this.createdDate = ko.computed<string>(
-            {
-                owner: this,
-                read: () : string =>
                 {
-                    this._parse();
-                    return this._createDate;
-                },
-                write: (value:string)=>
-                {
-                    this._createDate = value;
-                    this._render();
-                }
-            });
+                    owner: this,
+                    read : ():string =>
+                    {
+                        this._parse();
+                        return this._createDate;
+                    },
+                    write: (value:string)=>
+                    {
+                        this._createDate = value;
+                        this._render();
+                    }
+                });
 
             this.priority = ko.computed<string>(
-            {
-                owner: this,
-                read: () : string =>
                 {
-                    this._parse();
-                    return this._priority;
-                },
-                write: (value:string)=>
-                {
-                    this._priority = value;
-                    this._render();
-                }
-            });
+                    owner: this,
+                    read : ():string =>
+                    {
+                        this._parse();
+                        return this._priority;
+                    },
+                    write: (value:string)=>
+                    {
+                        this._priority = value;
+                        this._render();
+                    }
+                });
 
             this.priorityScore = ko.computed(
                 {
                     owner: this,
-                    read: (): number =>
+                    read : ():number =>
                     {
                         this._parse();
                         if (this._priority)
@@ -146,7 +146,7 @@ module TodoTxtJs
             this.completed = ko.computed<boolean>(
                 {
                     owner: this,
-                    read: () : boolean =>
+                    read : ():boolean =>
                     {
                         this._parse();
                         return this._completed;
@@ -173,24 +173,24 @@ module TodoTxtJs
                 });
 
             this.completedDate = ko.computed<string>(
-            {
-                owner: this,
-                read: () : string =>
                 {
-                    this._parse();
-                    return this._completedDate;
-                },
-                write: (value:string)=>
-                {
-                    this._completedDate = value;
-                    this._render();
-                }
-            });
+                    owner: this,
+                    read : ():string =>
+                    {
+                        this._parse();
+                        return this._completedDate;
+                    },
+                    write: (value:string)=>
+                    {
+                        this._completedDate = value;
+                        this._render();
+                    }
+                });
 
             this.projects = ko.computed(
                 {
                     owner: this,
-                    read: () : string[] =>
+                    read : ():string[] =>
                     {
                         this._parse();
                         return this._projects;
@@ -200,7 +200,7 @@ module TodoTxtJs
             this.contexts = ko.computed(
                 {
                     owner: this,
-                    read: () : string[] =>
+                    read : ():string[] =>
                     {
                         this._parse();
                         return this._contexts;
@@ -210,7 +210,7 @@ module TodoTxtJs
             this.contents = ko.computed(
                 {
                     owner: this,
-                    read: () : string =>
+                    read : ():string =>
                     {
                         this._parse();
                         return this._contents;
@@ -220,7 +220,7 @@ module TodoTxtJs
             this.metadata = ko.computed(
                 {
                     owner: this,
-                    read: (): Array<ITodoMetadata> =>
+                    read : ():Array<ITodoMetadata> =>
                     {
                         this._parse();
                         return this._metadata;
@@ -230,9 +230,9 @@ module TodoTxtJs
             this.dueDate = ko.computed(
                 {
                     owner: this,
-                    read: (): Date =>
+                    read : ():Date =>
                     {
-                        var result: Date = undefined;
+                        var result:Date = undefined;
                         var dateRegex = /((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01]))/;
 
                         var metadata = this.metadata();
@@ -255,15 +255,15 @@ module TodoTxtJs
                 });
         }
 
-        private _findMetadata(text : string) : Array<ITodoMetadata>
+        private _findMetadata(text:string):Array<ITodoMetadata>
         {
-            var result : Array<ITodoMetadata> = [];
+            var result:Array<ITodoMetadata> = [];
 
-            var match : any = Regex.MetaData.exec(text);
+            var match:any = Regex.MetaData.exec(text);
             while (match != null)
             {
                 var data = {
-                    name: match[1].toLowerCase(),
+                    name : match[1].toLowerCase(),
                     value: match[2]
                 };
 
@@ -280,12 +280,12 @@ module TodoTxtJs
             return result;
         }
 
-        private static _metadataToString(data: ITodoMetadata): string
+        private static _metadataToString(data:ITodoMetadata):string
         {
             return data.name + ":" + data.value;
         }
 
-        private static _processKnownMetadata(data: ITodoMetadata): ITodoMetadata
+        private static _processKnownMetadata(data:ITodoMetadata):ITodoMetadata
         {
             switch (data.name)
             {
@@ -296,7 +296,7 @@ module TodoTxtJs
             }
         }
 
-        private static _processMetadataDueDate(data: ITodoMetadata): ITodoMetadata
+        private static _processMetadataDueDate(data:ITodoMetadata):ITodoMetadata
         {
             var dateRegex = /((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01]))/;
             var relativeRegex = /(\d+)(d|w)?/;
@@ -310,7 +310,7 @@ module TodoTxtJs
                 else if (relativeRegex.test(data.value))
                 {
                     var match = relativeRegex.exec(data.value);
-                    var days: number = parseInt(match[1]);
+                    var days:number = parseInt(match[1]);
 
                     if (match[2] && match[2] == "w")
                     {
@@ -343,10 +343,10 @@ module TodoTxtJs
          * @param text The text to examine
          * @return Array of lowercase matches, or undefined
          */
-        private static _findContexts(text) : string[]
+        private static _findContexts(text:string):string[]
         {
             var regex = TodoTxtJs.Regex.Context;
-            var result = [];
+            var result:string[] = [];
             var match = regex.exec(text);
             while (match !== null)
             {
@@ -362,10 +362,10 @@ module TodoTxtJs
          * @param text The text to examine
          * @return Array of lowercase matches, or undefined
          */
-        private static _findProjects(text) : string[]
+        private static _findProjects(text:string):string[]
         {
             var regex = TodoTxtJs.Regex.Project;
-            var result = [];
+            var result:string[] = [];
             var match = regex.exec(text);
             while (match !== null)
             {
@@ -383,7 +383,7 @@ module TodoTxtJs
          *          can correctly do change detection and prevent it being called
          *          unnecessarily.
          */
-        private _parse() : void
+        private _parse():void
         {
             // Matches:
             // 1: Completed ( == 'x' )
@@ -439,7 +439,7 @@ module TodoTxtJs
             }
         }
 
-        private _render(): void
+        private _render():void
         {
             var result = '';
             if (this._completed)

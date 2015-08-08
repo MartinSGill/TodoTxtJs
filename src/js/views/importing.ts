@@ -30,14 +30,14 @@ module TodoTxtJs.View
 {
     export class Importing
     {
-        public replaceImport: KnockoutObservable<boolean>;
-        public importDetails: KnockoutObservable<string>;
+        public replaceImport:KnockoutObservable<boolean>;
+        public importDetails:KnockoutObservable<string>;
 
         private _dropTarget:any;
-        private _entered : number;
-        private _todoManager: TodoManager;
-        private _importData: Array<string>;
-        private _dialog: JQuery;
+        private _entered:number;
+        private _todoManager:TodoManager;
+        private _importData:Array<string>;
+        private _dialog:JQuery;
 
         constructor(todoManager:TodoManager)
         {
@@ -49,7 +49,8 @@ module TodoTxtJs.View
             this._todoManager = todoManager;
             this._importData = [];
 
-            $(document).ready(()=> {
+            $(document).ready(()=>
+            {
                 // Get jQuery events to support dataTransfer props
                 (<any>jQuery).event.props.push('dataTransfer');
                 this._dropTarget = $("#fileUpload");
@@ -72,20 +73,23 @@ module TodoTxtJs.View
         {
             var height = Math.round(window.innerHeight * 0.8);
             this._dialog = $("#importDialog").dialog({
-                dialogClass: "importDialog",
-                modal: true,
-                buttons: {
-                    Close: function () { $(this).dialog("close"); }
+                dialogClass  : "importDialog",
+                modal        : true,
+                buttons      : {
+                    Close: function ()
+                    {
+                        $(this).dialog("close");
+                    }
                 },
-                minHeight: 400,
-                maxHeight: height,
-                height: "auto",
-                minWidth: 450,
-                maxWidth: 450,
-                auto: "auto",
+                minHeight    : 400,
+                maxHeight    : height,
+                height       : "auto",
+                minWidth     : 450,
+                maxWidth     : 450,
+                auto         : "auto",
                 closeOnEscape: true,
-                draggable: false,
-                resizable: false
+                draggable    : false,
+                resizable    : false
             });
 
             this._resetImportData();
@@ -103,7 +107,7 @@ module TodoTxtJs.View
             this._dialog.dialog("close");
         }
 
-        public onChange_filePicker = (event): boolean =>
+        public onChange_filePicker = (event:any):boolean =>
         {
             if (event.target.files.length > 0)
             {
@@ -120,14 +124,14 @@ module TodoTxtJs.View
             this.importDetails("");
         }
 
-        private dragEnter = (event) : void =>
+        private dragEnter = (event:any):void =>
         {
             this._entered++;
             event.preventDefault();
             this._dropTarget.addClass("dragOver");
         };
 
-        private dragLeave = (event) : void =>
+        private dragLeave = (event:any):void =>
         {
             this._entered--;
             event.stopPropagation();
@@ -137,13 +141,13 @@ module TodoTxtJs.View
             }
         };
 
-        private dragOver = (event) : void =>
+        private dragOver = (event:DragEvent):void =>
         {
             event.dataTransfer.dropEffect = "copy";
             event.preventDefault();
         };
 
-        private drop = (event) : void =>
+        private drop = (event:DragEvent):void =>
         {
             event.preventDefault();
             this._dropTarget.removeClass("dragOver");
@@ -158,11 +162,11 @@ module TodoTxtJs.View
             }
         };
 
-        private _readFile = (file) =>
+        private _readFile = (file:File) =>
         {
             var reader = new FileReader();
 
-            reader.onloadend = (event): void =>
+            reader.onloadend = (event:Event):void =>
             {
                 this._importData = (<any>event.target).result.split(/\r?\n/);
                 this.importDetails("Ready to import " + this._importData.length + " entries.");
@@ -179,7 +183,10 @@ module TodoTxtJs.View
                 var buttons = this._dialog.dialog("option", "buttons");
                 if (enable)
                 {
-                    buttons.Import = () => { this.onClick_Import(); };
+                    buttons.Import = () =>
+                    {
+                        this.onClick_Import();
+                    };
                 }
                 else
                 {

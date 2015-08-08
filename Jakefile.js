@@ -28,7 +28,7 @@ var ts_options = [
     '--out ' + ts_outfile,
     '--sourceMap',
     '--module commonjs',
-    //'--noImplicitAny',
+    '--noImplicitAny',
     '--removeComments'
 ];
 
@@ -59,10 +59,11 @@ function compileLessFile(file) {
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
 
-function compileTsFiles() {
+function compileTsFiles(watch) {
     jake.logger.log('Compile TypeScript');
     var files = ts_files.toArray().join(' ');
     var options = ts_options.join(' ');
+    if (watch) { options += ' -w'; }
     var cmd = path.join(bin_path, 'tsc') + ' ' + options + ' ' + files;
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
@@ -85,6 +86,11 @@ namespace('build', function () {
     task('out', function () {
         jake.mkdirP(path.join(out_path, 'images'));
         jake.mkdirP(path.join(out_path, 'css'));
+    });
+
+    desc('Build TS files');
+    task('ts-watch', ['out'], function () {
+        compileTsFiles(true);
     });
 
     desc('Build TS files');

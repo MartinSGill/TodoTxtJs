@@ -33,14 +33,14 @@ module TodoTxtJs.StorageProviders
             storage: false,
             exports: true,
             imports: true,
-            logout: false
+            logout : false
         };
 
         // Not used
-        public path: KnockoutObservable<string>;
-        pathDescription = null;
+        public path:KnockoutObservable<string>;
+        public pathDescription:string = null;
 
-        load(onSuccess? : (Object) => void, onError?: (string) => void) : void
+        load(onSuccess?:(Object:{}) => void, onError?:(string:string) => void):void
         {
             if (window.localStorage["todos"])
             {
@@ -49,12 +49,12 @@ module TodoTxtJs.StorageProviders
             }
         }
 
-        save(data : Object, onSuccess? : () => void, onError?: (string) => void) : void
+        save(data:Object, onSuccess?:() => void, onError?:(string:string) => void):void
         {
             window.localStorage["todos"] = data;
         }
 
-        logout(onSuccess? : (Object) => void, onError?: (string) => void) : void
+        logout(onSuccess?:(Object:{}) => void, onError?:(string:string) => void):void
         {
             // not supported
         }

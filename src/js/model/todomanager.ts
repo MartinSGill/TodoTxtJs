@@ -30,9 +30,9 @@ module TodoTxtJs
         private _nextIndex = 0;
         private _data = ko.observableArray<Todo>([]);
 
-        public sortTypes: string[] = ["None", "Due Date", "Priority", "Create Date"];
-        public primarySort: KnockoutObservable<string>;
-        public secondarySort: KnockoutObservable<string>;
+        public sortTypes:string[] = ["None", "Due Date", "Priority", "Create Date"];
+        public primarySort:KnockoutObservable<string>;
+        public secondarySort:KnockoutObservable<string>;
 
         constructor()
         {
@@ -48,7 +48,7 @@ module TodoTxtJs
          * @param position Position in data array
          * @returns {TodoTxtJs.Todo}
          */
-        public getAt(position: number): Todo
+        public getAt(position:number):Todo
         {
             if (position >= this._data().length || position < 0)
             {
@@ -63,9 +63,9 @@ module TodoTxtJs
             return this._data().sort(this.sorter);
         }
 
-        public allProjects() : string[]
+        public allProjects():string[]
         {
-            var hash = {};
+            var hash:{ [project:string] : boolean } = {};
             for (var i = 0; i < this._data().length; i++)
             {
                 var projects = this._data()[i].projects();
@@ -75,8 +75,8 @@ module TodoTxtJs
                 }
             }
 
-            var result = [];
-            for(var name in hash)
+            var result:string[] = [];
+            for (var name in hash)
             {
                 if (hash.hasOwnProperty(name))
                 {
@@ -87,9 +87,9 @@ module TodoTxtJs
             return result;
         }
 
-        public allContexts() : string[]
+        public allContexts():string[]
         {
-            var hash = {};
+            var hash:{ [context:string] : boolean } = {};
             for (var i = 0; i < this._data().length; i++)
             {
                 var contexts = this._data()[i].contexts();
@@ -99,8 +99,8 @@ module TodoTxtJs
                 }
             }
 
-            var result : string[] = [];
-            for(var name in hash)
+            var result:string[] = [];
+            for (var name in hash)
             {
                 if (hash.hasOwnProperty(name))
                 {
@@ -111,7 +111,7 @@ module TodoTxtJs
             return result;
         }
 
-        public remove(index : number) : void
+        public remove(index:number):void
         {
             for (var i = 0; i < this._data().length; i++)
             {
@@ -123,17 +123,17 @@ module TodoTxtJs
             }
         }
 
-        public removeAll() : void
+        public removeAll():void
         {
             this._data.removeAll();
             this._nextIndex = 0;
         }
 
-        public add(newTodo: Todo) : void;
-        public add(newTodo: string) : void;
-        public add(newTodo: any) : void
+        public add(newTodo:Todo):void;
+        public add(newTodo:string):void;
+        public add(newTodo:any):void
         {
-            var todo: Todo;
+            var todo:Todo;
             if (typeof(newTodo) === "string")
             {
                 if (newTodo.trim() == "")
@@ -170,18 +170,24 @@ module TodoTxtJs
          * @param right The "right" todo
          * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
          */
-        private static _compareDueDate(left: Todo, right: Todo): number
+        private static _compareDueDate(left:Todo, right:Todo):number
         {
             if (left.dueDate() || right.dueDate())
             {
-                if (!left.dueDate()) return 1;
-                if (!right.dueDate()) return -1;
+                if (!left.dueDate())
+                {
+                    return 1;
+                }
+                if (!right.dueDate())
+                {
+                    return -1;
+                }
 
                 if (
                     left.dueDate().getFullYear() !== right.dueDate().getFullYear()
                     && left.dueDate().getMonth() !== right.dueDate().getMonth()
                     && left.dueDate().getDay() !== right.dueDate().getDay()
-                    )
+                )
                 {
                     return left.dueDate() < right.dueDate() ? -1 : 1;
                 }
@@ -195,12 +201,18 @@ module TodoTxtJs
          * @param right The "right" todo
          * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
          */
-        private static _compareCreateDate(left: Todo, right: Todo): number
+        private static _compareCreateDate(left:Todo, right:Todo):number
         {
             if (left.createdDate() || right.createdDate())
             {
-                if (!left.createdDate()) return 1;
-                if (!right.createdDate()) return -1;
+                if (!left.createdDate())
+                {
+                    return 1;
+                }
+                if (!right.createdDate())
+                {
+                    return -1;
+                }
 
                 if (left.createdDate() !== right.createdDate())
                 {
@@ -216,7 +228,7 @@ module TodoTxtJs
          * @param right The "right" todo
          * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
          */
-        private static _comparePriority(left: Todo, right: Todo): number
+        private static _comparePriority(left:Todo, right:Todo):number
         {
             // Now we check on priority
             if (left.priorityScore() !== right.priorityScore())
@@ -234,7 +246,7 @@ module TodoTxtJs
          * @returns 0 if equivalent, -1 if right comes before left. 1 if left comes before right.
          * @private
          */
-        private static _compareTodo(left: Todo, right: Todo, sortType: string): number
+        private static _compareTodo(left:Todo, right:Todo, sortType:string):number
         {
             switch (sortType)
             {
@@ -255,7 +267,7 @@ module TodoTxtJs
             }
         }
 
-        private sorter = (left: Todo, right: Todo): number =>
+        private sorter = (left:Todo, right:Todo):number =>
         {
             if (left.completed() !== right.completed())
             {
@@ -271,17 +283,23 @@ module TodoTxtJs
 
             //Primary Sort
             var result = TodoManager._compareTodo(left, right, this.primarySort());
-            if (result !== 0) return result;
+            if (result !== 0)
+            {
+                return result;
+            }
 
             // Secondary Sort
             result = TodoManager._compareTodo(left, right, this.secondarySort());
-            if (result !== 0) return result;
+            if (result !== 0)
+            {
+                return result;
+            }
 
             // Run out of significant values so use file order.
             return left.index < right.index ? -1 : 1;
         };
 
-        public addFromStringArray(newData : string[]) : void
+        public addFromStringArray(newData:string[]):void
         {
             for (var i = 0; i < newData.length; i++)
             {
@@ -289,13 +307,13 @@ module TodoTxtJs
             }
         }
 
-        public loadFromStringArray(newData : string[]) : void
+        public loadFromStringArray(newData:string[]):void
         {
             this.removeAll();
             this.addFromStringArray(newData);
         }
 
-        public exportToStringArray() : string[]
+        public exportToStringArray():string[]
         {
             var sorted = ko.observableArray<Todo>(this._data());
             sorted.sort((left, right)=> left.index - right.index);

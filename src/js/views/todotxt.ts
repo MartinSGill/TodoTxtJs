@@ -38,35 +38,35 @@ module TodoTxtJs.View
 {
     export class Main
     {
-        public version : KnockoutObservable<string>;
-        public title : KnockoutComputed<string>;
-        public allTodos: KnockoutComputed<Todo[]>;
-        public priorities: KnockoutComputed<string[]>;
-        public projects: KnockoutComputed<string[]>;
-        public contexts: KnockoutComputed<string[]>;
-        public dueTodayCount: KnockoutComputed<number>;
-        public dueSoonCount: KnockoutComputed<number>;
-        public dueSomedayCount: KnockoutComputed<number>;
+        public version:KnockoutObservable<string>;
+        public title:KnockoutComputed<string>;
+        public allTodos:KnockoutComputed<Todo[]>;
+        public priorities:KnockoutComputed<string[]>;
+        public projects:KnockoutComputed<string[]>;
+        public contexts:KnockoutComputed<string[]>;
+        public dueTodayCount:KnockoutComputed<number>;
+        public dueSoonCount:KnockoutComputed<number>;
+        public dueSomedayCount:KnockoutComputed<number>;
 
-        public newPriorityFilter: KnockoutObservable<string>;
+        public newPriorityFilter:KnockoutObservable<string>;
 
-        public displayOptions: DisplayOptions;
-        public options: Options;
-        public importing: Importing;
-        public exporting: Exporting;
+        public displayOptions:DisplayOptions;
+        public options:Options;
+        public importing:Importing;
+        public exporting:Exporting;
 
-        public filters: KnockoutObservable<string>;
-        public filtered: KnockoutComputed<boolean>;
+        public filters:KnockoutObservable<string>;
+        public filtered:KnockoutComputed<boolean>;
 
-        public renderOptions: KnockoutComputed<any>;
+        public renderOptions:KnockoutComputed<any>;
 
-        public newTodoText: KnockoutObservable<string>;
-        public lastUpdated: KnockoutObservable<string>;
-        public pageReady: KnockoutObservable<boolean>;
+        public newTodoText:KnockoutObservable<string>;
+        public lastUpdated:KnockoutObservable<string>;
+        public pageReady:KnockoutObservable<boolean>;
 
-        private _title: KnockoutObservable<string>;
-        private _todoManager: TodoManager;
-        private static _queryStringParams: any;
+        private _title:KnockoutObservable<string>;
+        private _todoManager:TodoManager;
+        private static _queryStringParams:any;
 
         constructor()
         {
@@ -87,21 +87,29 @@ module TodoTxtJs.View
 
             this.displayOptions = new DisplayOptions(this._todoManager);
             this.options = ModelFactory.getOptions();
-            this.renderOptions = ko.computed({ owner: this, read: this._getRenderOptions });
+            this.renderOptions = ko.computed({owner: this, read: this._getRenderOptions});
 
             this.importing = new Importing(this._todoManager);
             this.exporting = new Exporting(this._todoManager);
 
             this.filters = ko.observable<string>("");
-            this.filters.subscribe((newValue: string) => { Main.setQueryString("filter", newValue); });
-            this.filtered = ko.computed({ owner: this, read: this._getIsFiltered });
+            this.filters.subscribe((newValue:string) =>
+            {
+                Main.setQueryString("filter", newValue);
+            });
+            this.filtered = ko.computed({owner: this, read: this._getIsFiltered});
             this.title = ko.computed(
                 {
                     owner: this,
-                    read: ()=>
+                    read : ()=>
                     {
-                        if (!this.filtered()) return this._title();
-                        else return this._title() + " (filtered)";
+                        if (!this.filtered())
+                        {
+                            return this._title();
+                        } else
+                        {
+                            return this._title() + " (filtered)";
+                        }
                     }
                 });
 
@@ -109,7 +117,10 @@ module TodoTxtJs.View
 
             this.lastUpdated = ko.observable<string>(undefined);
             this.pageReady = ko.observable<boolean>(false);
-            $(document).ready(() => { this.pageReady(true); });
+            $(document).ready(() =>
+            {
+                this.pageReady(true);
+            });
 
             this._initializeAutoComplete();
             this._initializeKeyboardShortCuts();
@@ -122,7 +133,7 @@ module TodoTxtJs.View
             this._applyQueryString();
         }
 
-        public removeTodo(element:HTMLElement) : void
+        public removeTodo(element:HTMLElement):void
         {
             var index = parseInt($(element).parents(".todo").find(".todo-view-index").text(), 10);
             TodoTxtJs.Events.onRemove();
@@ -146,12 +157,12 @@ module TodoTxtJs.View
         /**
          * Alias for load.
          */
-        public refresh() : void
+        public refresh():void
         {
             this.load();
         }
 
-        public save = () : void =>
+        public save = ():void =>
         {
             var message = "Saving to " + this.options.storage();
             if (this.options.storageInfo().path)
@@ -169,10 +180,10 @@ module TodoTxtJs.View
                 TodoTxtJs.Events.onSaveComplete(this.options.storage());
             };
 
-            var onError = (error) =>
+            var onError = (error:string) =>
             {
-                $.jGrowl(error, { header: "Error Saving", sticky: true });
-                this.lastUpdated("Error: [" + error  +  "]");
+                $.jGrowl(error, {header: "Error Saving", sticky: true});
+                this.lastUpdated("Error: [" + error + "]");
                 TodoTxtJs.Events.onError("Error Saving (" + this.options.storage() + ") : [" + error + "]");
             };
 
@@ -180,7 +191,7 @@ module TodoTxtJs.View
             this.displayOptions.save();
         };
 
-        public load() : void
+        public load():void
         {
             if (Main.getQueryString("defaults"))
             {
@@ -193,7 +204,7 @@ module TodoTxtJs.View
                 this.displayOptions.load();
             }
 
-            var onSuccess = (data): void =>
+            var onSuccess = (data:string[]):void =>
             {
                 this._todoManager.removeAll();
                 this._todoManager.loadFromStringArray(data);
@@ -202,9 +213,9 @@ module TodoTxtJs.View
                 TodoTxtJs.Events.onLoadComplete(this.options.storage());
             };
 
-            var onError = (error): void =>
+            var onError = (error:string):void =>
             {
-                $.jGrowl(error, { header: "Error loading", sticky: true });
+                $.jGrowl(error, {header: "Error loading", sticky: true});
                 TodoTxtJs.Events.onError("Error Loading (" + this.options.storage() + ") : [" + error + "]");
             };
 
@@ -222,7 +233,7 @@ module TodoTxtJs.View
             }
         }
 
-        public logout = () : void =>
+        public logout = ():void =>
         {
             this.options.storageInfo().logout(() =>
             {
@@ -234,10 +245,10 @@ module TodoTxtJs.View
 
                 $.jGrowl("You have been logged out of " + oldStore + ". Now using Browser storage.");
                 this.load();
-            } );
+            });
         };
 
-        public addNewTodo(): void
+        public addNewTodo():void
         {
             var source = this.newTodoText();
             if (source == null || source.trim().length == 0)
@@ -265,7 +276,7 @@ module TodoTxtJs.View
          * Uses the save on change option to determine if
          * the current contents should be saved.
          */
-        public saveOnChange() : void
+        public saveOnChange():void
         {
             if (this.options.saveOnChange())
             {
@@ -273,14 +284,14 @@ module TodoTxtJs.View
             }
         }
 
-        public onCompleteClick = (data, event) : boolean =>
+        public onCompleteClick = (data:any, event:any):boolean =>
         {
             this.saveOnChange();
             // Ensure event is processed by other handlers as well
             return true;
         };
 
-        public clearFilters(): void
+        public clearFilters():void
         {
             this.filters("");
         }
@@ -290,7 +301,7 @@ module TodoTxtJs.View
          * text of the specified HTMLElement.
          * @param newFilter The HTMLElement that contains the new filter value.
          */
-        public addFilterFromElement(newFilter: HTMLElement) : void
+        public addFilterFromElement(newFilter:HTMLElement):void
         {
             var filterText = $(newFilter).text();
             if (filterText.length == 1)
@@ -304,7 +315,7 @@ module TodoTxtJs.View
          * Adds a new filter term to the filters list.
          * @param newFilter The text of the new filter.
          */
-        public addFilter(newFilter : string) : void
+        public addFilter(newFilter:string):void
         {
             if (this.filters().indexOf(newFilter.toLowerCase()) > -1)
             {
@@ -326,7 +337,7 @@ module TodoTxtJs.View
          * @param todo The todo object to inspect.
          * @returns true if the Todo should be visible.
          */
-        public isDisplayed(todo: Todo): boolean
+        public isDisplayed(todo:Todo):boolean
         {
             if (!this.displayOptions.showCompleted() && todo.completed())
             {
@@ -420,53 +431,56 @@ module TodoTxtJs.View
             return result;
         }
 
-        public onClick_ShowImport(/*data?: any, event?: Event*/): boolean
+        public onClick_ShowImport(/*data?: any, event?: Event*/):boolean
         {
             this.importing.onClick_ShowDialog();
             return false;
         }
 
-        public onClick_ShowExport(/*data?: any, event?: Event*/): boolean
+        public onClick_ShowExport(/*data?: any, event?: Event*/):boolean
         {
             this.exporting.onClick_ShowDialog();
             return false;
         }
 
-        public onClick_ShowHelp(/*data?: any, event?: Event*/): boolean
+        public onClick_ShowHelp(/*data?: any, event?: Event*/):boolean
         {
             var width = Math.round(window.innerWidth * 0.8);
             var height = Math.round(window.innerHeight * 0.8);
             //this.showHelp(!this.showHelp());
             $("#help").dialog({
-                dialogClass: "helpDialog",
-                modal: true,
-                buttons: {
-                    Ok: function () { $(this).dialog("close"); }
+                dialogClass  : "helpDialog",
+                modal        : true,
+                buttons      : {
+                    Ok: function ()
+                    {
+                        $(this).dialog("close");
+                    }
                 },
-                minHeight: 400,
-                maxHeight: height,
-                height: "auto",
-                minWidth: 800,
-                maxWidth: width,
-                auto: "auto",
+                minHeight    : 400,
+                maxHeight    : height,
+                height       : "auto",
+                minWidth     : 800,
+                maxWidth     : width,
+                auto         : "auto",
                 closeOnEscape: true,
-                draggable: false,
-                resizable: false
+                draggable    : false,
+                resizable    : false
             });
 
             return false;
         }
 
-        public onClick_ShowOptions(/*data?: any, event?: Event*/): boolean
+        public onClick_ShowOptions(/*data?: any, event?: Event*/):boolean
         {
             var width = Math.round(window.innerWidth * 0.8);
             var height = Math.round(window.innerHeight * 0.8);
             var self = this;
             var oldStorage = this.options.storageInfo();
             $("#optionsDialog").dialog({
-                dialogClass: "optionsDialog",
-                modal: true,
-                buttons: {
+                dialogClass  : "optionsDialog",
+                modal        : true,
+                buttons      : {
                     Done: function ()
                     {
                         self.options.save();
@@ -478,7 +492,7 @@ module TodoTxtJs.View
                         $(this).dialog("close");
                     }
                 },
-                close: function (/* event, ui */)
+                close        : function (/* event, ui */)
                 {
                     // Undo storage change
                     if (oldStorage.name != self.options.storageInfo().name)
@@ -486,14 +500,14 @@ module TodoTxtJs.View
                         self.options.storageInfo(oldStorage);
                     }
                 },
-                maxHeight: height,
-                height: "auto",
-                minWidth: 800,
-                maxWidth: width,
-                auto: "auto",
+                maxHeight    : height,
+                height       : "auto",
+                minWidth     : 800,
+                maxWidth     : width,
+                auto         : "auto",
                 closeOnEscape: true,
-                draggable: false,
-                resizable: false
+                draggable    : false,
+                resizable    : false
             });
 
             return false;
@@ -503,17 +517,17 @@ module TodoTxtJs.View
          * Splits a list of terms into individual terms.
          * @param val the list of terms.
          */
-        private static _split(val:string ) : string[]
+        private static _split(val:string):string[]
         {
-            return val.split( /\s+/ );
+            return val.split(/\s+/);
         }
 
         /**
          * An array of all possible auto-complete values.
          */
-        private _newTodoAutoCompleteValues() : string[]
+        private _newTodoAutoCompleteValues():string[]
         {
-            var result = [];
+            var result:string[] = [];
             var contexts = this._todoManager.allContexts();
             var projects = this._todoManager.allProjects();
 
@@ -530,19 +544,19 @@ module TodoTxtJs.View
             return result;
         }
 
-        private _getIsFiltered() : boolean
+        private _getIsFiltered():boolean
         {
             return (this.filters() && this.filters().length > 0);
         }
 
-        private _getAllTodos(): Array<Todo>
+        private _getAllTodos():Array<Todo>
         {
             return this._todoManager.all();
         }
 
-        private _getAllPriorities(): string[]
+        private _getAllPriorities():string[]
         {
-            var hash = {};
+            var hash:{ [priority:string]: boolean } = {};
             for (var i = 0; i < this.allTodos().length; i++)
             {
                 if (this.isDisplayed(this.allTodos()[i]))
@@ -555,8 +569,8 @@ module TodoTxtJs.View
                 }
             }
 
-            var result = [];
-            for(var name in hash)
+            var result:string[] = [];
+            for (var name in hash)
             {
                 if (hash.hasOwnProperty(name))
                 {
@@ -567,9 +581,9 @@ module TodoTxtJs.View
             return result.sort();
         }
 
-        private _getAllProjects() : string[]
+        private _getAllProjects():string[]
         {
-            var hash = {};
+            var hash:{ [project:string]: boolean } = {};
             for (var i = 0; i < this.allTodos().length; i++)
             {
                 if (this.isDisplayed(this.allTodos()[i]))
@@ -589,8 +603,8 @@ module TodoTxtJs.View
                 }
             }
 
-            var result = [];
-            for(var name in hash)
+            var result:string[] = [];
+            for (var name in hash)
             {
                 if (hash.hasOwnProperty(name))
                 {
@@ -601,9 +615,9 @@ module TodoTxtJs.View
             return result.sort();
         }
 
-        private _getAllContexts() : string[]
+        private _getAllContexts():string[]
         {
-            var hash = {};
+            var hash:{ [context:string]: boolean } = {};
             for (var i = 0; i < this.allTodos().length; i++)
             {
                 if (this.isDisplayed(this.allTodos()[i]))
@@ -623,8 +637,8 @@ module TodoTxtJs.View
                 }
             }
 
-            var result = [];
-            for(var name in hash)
+            var result:string[] = [];
+            for (var name in hash)
             {
                 if (hash.hasOwnProperty(name))
                 {
@@ -635,7 +649,7 @@ module TodoTxtJs.View
             return result.sort();
         }
 
-        private _getDueTodayCount(): number
+        private _getDueTodayCount():number
         {
             var result = 0;
             for (var i = 0; i < this.allTodos().length; i++)
@@ -654,7 +668,7 @@ module TodoTxtJs.View
             return result;
         }
 
-        private _getDueSoonCount(): number
+        private _getDueSoonCount():number
         {
             var result = 0;
             for (var i = 0; i < this.allTodos().length; i++)
@@ -673,7 +687,7 @@ module TodoTxtJs.View
             return result;
         }
 
-        private _getDueSomedayCount(): number
+        private _getDueSomedayCount():number
         {
             var result = 0;
             for (var i = 0; i < this.allTodos().length; i++)
@@ -697,14 +711,14 @@ module TodoTxtJs.View
          * @param term the list of terms to process.
          * @returns the last term in the list.
          */
-        private _extractLast(term:string) : string
+        private _extractLast(term:string):string
         {
-            return Main._split( term ).pop();
+            return Main._split(term).pop();
         }
 
         private _initializeEvents = () =>
         {
-            $('.todo-view-display').click((event: JQueryEventObject) =>
+            $('.todo-view-display').click((event:JQueryEventObject) =>
             {
 
             })
@@ -712,13 +726,13 @@ module TodoTxtJs.View
 
         private _initializeKeyboardShortCuts = () =>
         {
-            $(document).bind('keydown', 'n', function(event)
+            $(document).bind('keydown', 'n', function (event)
             {
                 event.preventDefault();
                 $(".addTodo Input").focus();
             });
 
-            function help(event)
+            function help(event:Event)
             {
                 event.preventDefault();
                 var help = $("#help");
@@ -739,7 +753,7 @@ module TodoTxtJs.View
          * Get the options for rendering the HTML contents of the todo.
          * @returns an options object.
          */
-        private _getRenderOptions(): any
+        private _getRenderOptions():any
         {
             var result = new ContentRenderOptions();
             result.shortUrls = this.displayOptions.showShortUrls();
@@ -751,16 +765,19 @@ module TodoTxtJs.View
         {
             if (!Main._queryStringParams)
             {
-                var params = {},
-                    e,
-                    a = /\+/g,  // Regex for replacing addition symbol with a space
-                    r = /([^&=]+)=?([^&]*)/g,
-                    d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-                    q = window.location.search.substring(1);
+                var params:{ [name:string]:string } = {},
+                    e:RegExpExecArray,
+                    a                               = /\+/g,  // Regex for replacing addition symbol with a space
+                    r                               = /([^&=]+)=?([^&]*)/g,
+                    d                               = function (s:any)
+                    {
+                        return decodeURIComponent(s.replace(a, " "));
+                    },
+                    q                               = window.location.search.substring(1);
 
                 while (e = r.exec(q))
                 {
-                    var value: any = d(e[2]);
+                    var value:any = d(e[2]);
                     if (value === "")
                     {
                         value = true;
@@ -799,14 +816,14 @@ module TodoTxtJs.View
             }
         }
 
-        public static setQueryString(name: string, value:any)
+        public static setQueryString(name:string, value:any)
         {
             Main._parseQueryString();
             Main._queryStringParams[name] = value;
             Main._writeQueryString();
         }
 
-        public static getQueryString(name)
+        public static getQueryString(name:string)
         {
             Main._parseQueryString();
             return Main._queryStringParams[name];
@@ -824,81 +841,85 @@ module TodoTxtJs.View
         /**
          * Initializes the auto-complete functionality.
          */
-        private _initializeAutoComplete() : void
+        private _initializeAutoComplete():void
         {
             var _self = this;
-            $( "#newTodoInput" )
+            $("#newTodoInput")
                 // don't navigate away from the field on tab when selecting an item
-                .bind( "keydown", function( event ) {
-                           if ( event.keyCode === $.ui.keyCode.TAB &&
-                               $( this ).data( "ui-autocomplete" ).menu.active ) {
-                               event.preventDefault();
-                           }
-                       })
+                .bind("keydown", function (event)
+                {
+                    if (event.keyCode === $.ui.keyCode.TAB &&
+                        $(this).data("ui-autocomplete").menu.active)
+                    {
+                        event.preventDefault();
+                    }
+                })
                 .autocomplete({
-                                  minLength: 1,
-                                  source: function(request: { term:string }, response: (data:any) => void)
-                                  {
-                                      // delegate back to autocomplete, but extract the last term
-                                      response( (<any>$.ui.autocomplete).filter(
-                                          _self._newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
-                                  },
-                                  focus: function()
-                                  {
-                                      // prevent value inserted on focus
-                                      return false;
-                                  },
-                                  select: function( event: Event, ui: any )
-                                  {
-                                      var terms = Main._split( this.value );
-                                      // remove the current input
-                                      terms.pop();
-                                      // add the selected item
-                                      terms.push( ui.item.value );
-                                      // add placeholder to get the comma-and-space at the end
-                                      terms.push( "" );
-                                      _self.newTodoText(terms.join( " " ));
-                                      return false;
-                                  }
-                              });
+                    minLength: 1,
+                    source   : function (request:{ term:string }, response:(data:any) => void)
+                    {
+                        // delegate back to autocomplete, but extract the last term
+                        response((<any>$.ui.autocomplete).filter(
+                            _self._newTodoAutoCompleteValues(), _self._extractLast(request.term)));
+                    },
+                    focus    : function ()
+                    {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select   : function (event:Event, ui:any)
+                    {
+                        var terms = Main._split(this.value);
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push(ui.item.value);
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push("");
+                        _self.newTodoText(terms.join(" "));
+                        return false;
+                    }
+                });
 
-            $( "#filters" )
+            $("#filters")
                 // don't navigate away from the field on tab when selecting an item
-                .bind( "keydown", function( event ) {
-                           if ( event.keyCode === $.ui.keyCode.TAB &&
-                               $( this ).data( "ui-autocomplete" ).menu.active ) {
-                               event.preventDefault();
-                           }
-                       })
+                .bind("keydown", function (event)
+                {
+                    if (event.keyCode === $.ui.keyCode.TAB &&
+                        $(this).data("ui-autocomplete").menu.active)
+                    {
+                        event.preventDefault();
+                    }
+                })
                 .autocomplete({
-                                  minLength: 1,
-                                  source: function(request: { term:string }, response: (data:any) => void)
-                                  {
-                                      // delegate back to autocomplete, but extract the last term
-                                      response((<any>$.ui.autocomplete).filter(
-                                          _self._newTodoAutoCompleteValues(), _self._extractLast( request.term ) ) );
-                                  },
-                                  focus: function()
-                                  {
-                                      // prevent value inserted on focus
-                                      return false;
-                                  },
-                                  select: function(event: Event, ui)
-                                  {
-                                      var terms = Main._split( this.value );
-                                      // remove the current input
-                                      terms.pop();
-                                      // add the selected item
-                                      terms.push( ui.item.value );
-                                      // add placeholder to get the comma-and-space at the end
-                                      terms.push( "" );
-                                      _self.filters(terms.join( " " ));
-                                      return false;
-                                  }
-                              });
+                    minLength: 1,
+                    source   : function (request:{ term:string }, response:(data:any) => void)
+                    {
+                        // delegate back to autocomplete, but extract the last term
+                        response((<any>$.ui.autocomplete).filter(
+                            _self._newTodoAutoCompleteValues(), _self._extractLast(request.term)));
+                    },
+                    focus    : function ()
+                    {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select   : function (event:Event, ui:any)
+                    {
+                        var terms = Main._split(this.value);
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push(ui.item.value);
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push("");
+                        _self.filters(terms.join(" "));
+                        return false;
+                    }
+                });
         }
 
-        private _initializeNotifications(): void
+        private _initializeNotifications():void
         {
             $.jGrowl.defaults.position = 'bottom-right';
         }
@@ -906,6 +927,6 @@ module TodoTxtJs.View
 
 }
 
-var todoTxtView : TodoTxtJs.View.Main = new TodoTxtJs.View.Main();
+var todoTxtView:TodoTxtJs.View.Main = new TodoTxtJs.View.Main();
 ko.applyBindings(todoTxtView, document.head);
 ko.applyBindings(todoTxtView);

@@ -25,16 +25,19 @@ module TodoTxtJs
 {
     export class Events
     {
-        constructor() { throw new Error("Static class, cannot 'new'."); }
+        constructor()
+        {
+            throw new Error("Static class, cannot 'new'.");
+        }
 
-        private static _subscribers = {};
+        private static _subscribers:{ [id : string]: ((message:string) => void)[] } = {};
 
         /**
          * Subscribe to events.
          * @param eventName Name of the event to subscribe to.
          * @param callback Callback to invoke when event fires.
          */
-        public static subscribe(eventName:string, callback : () => void) : void
+        public static subscribe(eventName:string, callback:(message:string) => void):void
         {
             if (!Events._subscribers.hasOwnProperty(eventName))
             {
@@ -43,7 +46,7 @@ module TodoTxtJs
             Events._subscribers[eventName].push(callback);
         }
 
-        private static _publishSimpleEvent(name: string, value?: any) : void
+        private static _publishSimpleEvent(name:string, value?:any):void
         {
             if (Events._subscribers.hasOwnProperty(name))
             {
@@ -55,7 +58,7 @@ module TodoTxtJs
             }
         }
 
-        public static onError(error : string) : void
+        public static onError(error:string):void
         {
             if (Events._subscribers.hasOwnProperty(name))
             {
@@ -70,7 +73,7 @@ module TodoTxtJs
         /**
          * Call when a Todo is marked as complete.
          */
-        public static onComplete() : void
+        public static onComplete():void
         {
             Events._publishSimpleEvent("onComplete");
         }
@@ -78,7 +81,7 @@ module TodoTxtJs
         /**
          * Call when a Todo is created.
          */
-        public static onNew() : void
+        public static onNew():void
         {
             Events._publishSimpleEvent("onNew");
         }
@@ -86,7 +89,7 @@ module TodoTxtJs
         /**
          * Call when a Todo is removed.
          */
-        public static onRemove() : void
+        public static onRemove():void
         {
             Events._publishSimpleEvent("onRemove");
         }
@@ -94,7 +97,7 @@ module TodoTxtJs
         /**
          * Call when a Load operation completes.
          */
-        public static onLoadComplete(type: string) : void
+        public static onLoadComplete(type:string):void
         {
             Events._publishSimpleEvent("onLoadComplete", type);
         }
@@ -102,7 +105,7 @@ module TodoTxtJs
         /**
          * Call when a save operation completes.
          */
-        public static onSaveComplete(type: string) : void
+        public static onSaveComplete(type:string):void
         {
             Events._publishSimpleEvent("onSaveComplete", type)
         }

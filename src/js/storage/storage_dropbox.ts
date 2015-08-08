@@ -24,27 +24,26 @@
 /// <reference path="IStorageProvider.d.ts" />
 /// <reference path="../lib/dropbox.d.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
-declare var dropbox_key: string;
-
+declare var dropbox_key:string;
 
 module TodoTxtJs.StorageProviders
 {
     export class DropboxStorage implements IStorageProvider
     {
-        public name: string = "Dropbox";
-        public description: string = "Stores your Todos in '/Todo/todo.txt' in your Dropbox account.";
+        public name:string = "Dropbox";
+        public description:string = "Stores your Todos in '/Todo/todo.txt' in your Dropbox account.";
         public controls = {
             storage: true,
             exports: true,
             imports: true,
-            logout: true
+            logout : true
         };
 
-        public path: KnockoutObservable<string>;
-        public pathDescription: string = "The path to the file to use, from the root of your dropbox folder. Use forward-slashes for directories, e.g. 'Todo/todo.txt'. Don't forget to 'Save' or 'Load' only changing the path.";
+        public path:KnockoutObservable<string>;
+        public pathDescription:string = "The path to the file to use, from the root of your dropbox folder. Use forward-slashes for directories, e.g. 'Todo/todo.txt'. Don't forget to 'Save' or 'Load' only changing the path.";
 
-        private _versionTag: string;
-        private _client: Dropbox.Client;
+        private _versionTag:string;
+        private _client:Dropbox.Client;
 
         constructor()
         {
@@ -56,25 +55,28 @@ module TodoTxtJs.StorageProviders
             });
 
             this.path = ko.observable<string>('Todo/todo.txt');
-            this._client.authDriver(new Dropbox.Drivers.Redirect({ rememberUser: true }));
+            this._client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
         }
 
-        public load = (onSuccess?: (Object) => void, onError?: (string) => void): void =>
+        public load = (onSuccess?:(Object:{}) => void, onError?:(string:string) => void):void =>
         {
             this.authenticate(()=>
             {
-                this._client.readFile(this.path(), null, (error: Dropbox.ApiError, data: any, stat: Dropbox.File.Stat) =>
+                this._client.readFile(this.path(), null, (error:Dropbox.ApiError, data:any, stat:Dropbox.File.Stat) =>
                 {
                     this._onFileRead(error, data, stat, onSuccess, onError)
                 });
-            }, onError);
+            }, <any>onError);
         };
 
-        public save = (data: Object, onSuccess?: () => void, onError?: (string) => void): void =>
+        public save = (data:Object, onSuccess?:() => void, onError?:(string:string) => void):void =>
         {
             this.authenticate(() =>
             {
-                this._client.writeFile(this.path(), data, { /*lastVersionTag: this._versionTag,*/ noOverwrite: false }, function (error/*, data*/)
+                this._client.writeFile(this.path(), data, {
+                    /*lastVersionTag: this._versionTag,*/
+                    noOverwrite: false
+                }, function (error/*, data*/)
                 {
                     if (error)
                     {
@@ -91,19 +93,18 @@ module TodoTxtJs.StorageProviders
                         onSuccess();
                     }
                 });
-            }, onError);
+            }, <any>onError);
         };
 
-        private _onFileRead = (error: Dropbox.ApiError,
-            data: any,
-            stat: Dropbox.File.Stat,
-            onSuccess: (todos: string[]) => void,
-            onError: (error: string) => void)
-            : void =>
+        private _onFileRead = (error:Dropbox.ApiError,
+                               data:any,
+                               stat:Dropbox.File.Stat,
+                               onSuccess:(todos:string[]) => void,
+                               onError:(error:string) => void):void =>
         {
             if (error)
             {
-                var errorMsg: string = <any>(JSON.parse(error.responseText)).error;
+                var errorMsg:string = <any>(JSON.parse(error.responseText)).error;
                 if (onError)
                 {
                     onError(errorMsg);
@@ -116,13 +117,16 @@ module TodoTxtJs.StorageProviders
             onSuccess(todos);
         };
 
-        private _authenticating: boolean = false;
+        private _authenticating:boolean = false;
 
-        private authenticate = (onSuccess, onError): void =>
+        private authenticate = (onSuccess:() => void, onError:(error:Dropbox.ApiError) => void):void =>
         {
             // Prevent other requests while authenticating
             // e.g. the save triggered on page close (i.e. when redirecting to authenticate!)
-            if (this._authenticating) { return; }
+            if (this._authenticating)
+            {
+                return;
+            }
             this._authenticating = true;
 
             if (this._client.isAuthenticated())
@@ -132,7 +136,7 @@ module TodoTxtJs.StorageProviders
             }
             else
             {
-                this._client.authenticate((error) =>
+                this._client.authenticate((error:Dropbox.ApiError) =>
                 {
                     if (error)
                     {
@@ -146,10 +150,11 @@ module TodoTxtJs.StorageProviders
             }
         };
 
-        logout(onSuccess? : (Object) => void, onError?: (string) => void) : void
+        logout(onSuccess?:(Object:{}) => void, onError?:(string:string) => void):void
         {
-            if (this._client.isAuthenticated()) {
-                var result = this._client.signOut((error) =>
+            if (this._client.isAuthenticated())
+            {
+                var result = this._client.signOut((error:Dropbox.ApiError) =>
                 {
                     if (!error && onSuccess)
                     {
@@ -157,9 +162,9 @@ module TodoTxtJs.StorageProviders
                     }
                     else if (onError)
                     {
-                        onError(error);
+                        onError(<any>error);
                     }
-                } );
+                });
             }
         }
     }

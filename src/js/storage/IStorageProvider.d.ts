@@ -21,6 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
+/// <reference path="../../../typings/tsd.d.ts" />
 declare module TodoTxtJs.StorageProviders
 {
     export interface IStorageProviderControls
@@ -67,7 +68,7 @@ declare module TodoTxtJs.StorageProviders
          * @param onSuccess Callback on successful load. Contains the loaded todos.
          * @param onError Callback on failed load.
          */
-        load(onSuccess? : (object) => void, onError?: (string) => void) : void;
+        load(onSuccess?:(object:{}) => void, onError?:(string:string) => void) : void;
 
         /**
          * Saves Todos to the provider.
@@ -75,13 +76,13 @@ declare module TodoTxtJs.StorageProviders
          * @param onSuccess Callback on successful load. Contains the loaded todos.
          * @param onError Callback on failed save.
          */
-        save(data : Object, onSuccess? : () => void, onError?: (string) => void) : void;
+        save(data:Object, onSuccess?:() => void, onError?:(string:string) => void) : void;
 
         /**
          * Disconnects (or logs out) a linked account. Disable by not enabling the logout control.
          * @param onSuccess Callback on successful load. Contains the loaded todos.
          * @param onError Callback on failed save.
          */
-        logout(onSuccess? : (object) => void, onError?: (string) => void) : void;
+        logout(onSuccess?:(object:{}) => void, onError?:(string:string) => void) : void;
     }
 }

@@ -37,36 +37,36 @@ module TodoTxtJs
 
     export class Options
     {
-        public storageOptions : KnockoutObservableArray<StorageProviders.IStorageProvider>;
-        public storageInfo : KnockoutObservable<StorageProviders.IStorageProvider>;
-        public storage : KnockoutComputed<string>;
-        public storagePath : KnockoutComputed<string>;
-        public storagePathDescription: KnockoutComputed<string>;
-        public addCreatedDate : KnockoutObservable<boolean>;
-        public addCreatedDateDescription : KnockoutObservable<string>;
+        public storageOptions:KnockoutObservableArray<StorageProviders.IStorageProvider>;
+        public storageInfo:KnockoutObservable<StorageProviders.IStorageProvider>;
+        public storage:KnockoutComputed<string>;
+        public storagePath:KnockoutComputed<string>;
+        public storagePathDescription:KnockoutComputed<string>;
+        public addCreatedDate:KnockoutObservable<boolean>;
+        public addCreatedDateDescription:KnockoutObservable<string>;
 
-        public removeCompletePriority: KnockoutObservable<boolean>;
-        public removeCompletePriorityDescription: KnockoutObservable<string>;
+        public removeCompletePriority:KnockoutObservable<boolean>;
+        public removeCompletePriorityDescription:KnockoutObservable<string>;
 
-        public showStorageControls: KnockoutComputed<boolean>;
-        public showImport: KnockoutComputed<boolean>;
-        public showExport: KnockoutComputed<boolean>;
+        public showStorageControls:KnockoutComputed<boolean>;
+        public showImport:KnockoutComputed<boolean>;
+        public showExport:KnockoutComputed<boolean>;
 
-        public saveOnChange: KnockoutObservable<boolean>;
-        public saveOnChangeDescription: KnockoutObservable<string>;
+        public saveOnChange:KnockoutObservable<boolean>;
+        public saveOnChangeDescription:KnockoutObservable<string>;
 
-        public caseSensitive: KnockoutObservable<boolean>;
-        public caseSensitiveDescription: KnockoutObservable<string>;
+        public caseSensitive:KnockoutObservable<boolean>;
+        public caseSensitiveDescription:KnockoutObservable<string>;
 
-        public swapSidebarPosition: KnockoutObservable<boolean>;
-        public swapSidebarPositionDescription: KnockoutObservable<string>;
+        public swapSidebarPosition:KnockoutObservable<boolean>;
+        public swapSidebarPositionDescription:KnockoutObservable<string>;
 
-        public theme: KnockoutComputed<IThemeDefinition>;
-        public themeDescription: KnockoutObservable<string>;
-        public themes: IThemeDefinition[];
-        public themeUrl: KnockoutComputed<string>;
+        public theme:KnockoutComputed<IThemeDefinition>;
+        public themeDescription:KnockoutObservable<string>;
+        public themes:IThemeDefinition[];
+        public themeUrl:KnockoutComputed<string>;
 
-        public themeName: KnockoutObservable<string>;
+        public themeName:KnockoutObservable<string>;
 
         constructor()
         {
@@ -86,21 +86,21 @@ module TodoTxtJs
 
             this.storageInfo = ko.observable(this.storageOptions()[0]);
             this.storage = ko.computed<string>({
-                       owner: this,
-                       read: () =>
-                       {
-                           return this.storageInfo().name;
-                       }
-                   });
+                owner: this,
+                read : () =>
+                {
+                    return this.storageInfo().name;
+                }
+            });
 
             this.storagePath = ko.computed({
                 owner: this,
-                read: () =>
+                read : () =>
                 {
                     var result = this.storageInfo().path;
                     return result ? result() : null;
                 },
-                write: (value: string) =>
+                write: (value:string) =>
                 {
                     this.storageInfo().path(value);
                 }
@@ -108,7 +108,7 @@ module TodoTxtJs
 
             this.storagePathDescription = ko.computed<string>({
                 owner: this,
-                read: () =>
+                read : () =>
                 {
                     return this.storageInfo().pathDescription;
                 }
@@ -121,28 +121,28 @@ module TodoTxtJs
             this.removeCompletePriorityDescription = ko.observable<string>("Compatibility with official apps. Removes the priority from a Todo when it's marked as completed.");
 
             this.showStorageControls = ko.computed({
-                       owner: this,
-                       read: ()=>
-                       {
-                           return this.storageInfo().controls.storage;
-                       }
-                   });
+                owner: this,
+                read : ()=>
+                {
+                    return this.storageInfo().controls.storage;
+                }
+            });
 
             this.showImport = ko.computed({
-                      owner: this,
-                      read: ()=>
-                      {
-                          return this.storageInfo().controls.imports;
-                      }
-                   });
+                owner: this,
+                read : ()=>
+                {
+                    return this.storageInfo().controls.imports;
+                }
+            });
 
             this.showExport = ko.computed({
-                      owner: this,
-                      read: ()=>
-                      {
-                          return this.storageInfo().controls.exports;
-                      }
-                   });
+                owner: this,
+                read : ()=>
+                {
+                    return this.storageInfo().controls.exports;
+                }
+            });
 
             this.saveOnChange = ko.observable<boolean>(true);
             this.saveOnChangeDescription = ko.observable<string>("Save changes immediately after you add/remove/edit a Todo.");
@@ -154,17 +154,17 @@ module TodoTxtJs
             this.swapSidebarPositionDescription = ko.observable<string>("Place the sidebar on the left of the Todo list.");
 
             this.themes = [
-                { name: "Original", file: "simple_default.css" },
+                {name: "Original", file: "simple_default.css"},
                 // { name: "Modern", file: "modern.css" },
-                { name: "Solarized Dark", file: "simple_solarized_dark.css" },
-                { name: "Solarized Light", file: "simple_solarized_light.css" }
+                {name: "Solarized Dark", file: "simple_solarized_dark.css"},
+                {name: "Solarized Light", file: "simple_solarized_light.css"}
             ];
 
             this.themeName = ko.observable<string>(this.themes[0].name);
             this.themeDescription = ko.observable<string>("The theme to use for this page.");
             this.theme = ko.computed({
                 owner: this,
-                read: ()=>
+                read : ()=>
                 {
                     for (var i = 0; i < this.themes.length; i++)
                     {
@@ -179,16 +179,16 @@ module TodoTxtJs
             });
             this.themeUrl = ko.computed({
                 owner: this,
-                read: ()=>
+                read : ()=>
                 {
                     return "css/" + this.theme().file;
                 }
             });
         }
 
-        public save() : void
+        public save():void
         {
-            var oldOptions : any = {};
+            var oldOptions:any = {};
             if (window.localStorage["TodoTxtJsOptions"])
             {
                 oldOptions = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
@@ -198,15 +198,15 @@ module TodoTxtJs
             window.localStorage["TodoTxtJsOptions"] = ko.toJSON(this);
         }
 
-        public load() : void
+        public load():void
         {
             if (window.localStorage["TodoTxtJsOptions"])
             {
-                var options: any = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
+                var options:any = JSON.parse(window.localStorage["TodoTxtJsOptions"]);
 
                 // Only load actual options, so we don't break the view model
                 // Storage
-                var i;
+                var i:number;
                 if (options.hasOwnProperty("storage"))
                 {
                     for (i = 0; i < this.storageOptions().length; i++)
