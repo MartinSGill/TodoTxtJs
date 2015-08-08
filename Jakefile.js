@@ -100,6 +100,12 @@ task('html', ['out'], function (params) {
     jake.cpR(source, destination);
 });
 
+desc('Run Tests');
+task('test', ['default'], function (params) {
+    var cmd = path.join(bin_path,'karma') + ' start --single-run';
+    jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
+});
+
 desc('Run server');
 task('server', ['default'], function (params) {
     var cmd = path.join(bin_path,'http-server') + ' out -o';
