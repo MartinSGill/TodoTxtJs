@@ -6,6 +6,9 @@ var out_path = 'out';
 // Using join deals with nix/win issues
 var bin_path = path.join('.', 'node_modules', '.bin');
 
+////////////////////////////////////////////////////////////////
+// LESS
+////////////////////////////////////////////////////////////////
 var less_base = 'src/css';
 var less_files = [
     'modern',
@@ -14,6 +17,9 @@ var less_files = [
     'simple_solarized_light'
 ];
 
+////////////////////////////////////////////////////////////////
+// TypeScript
+////////////////////////////////////////////////////////////////
 var ts_files = new jake.FileList();
 ts_files.include('./src/js/**/*.ts');
 
@@ -26,6 +32,9 @@ var ts_options = [
     '--removeComments'
 ];
 
+////////////////////////////////////////////////////////////////
+// Static Files
+////////////////////////////////////////////////////////////////
 var res_files = new jake.FileList();
 res_files.include('src/images/dropbox-logos_dropbox-logotype-black-trimmed.png');
 res_files.include('src/images/todotxt_js_logo.png');
@@ -39,7 +48,9 @@ sup_files.include('src/favicon.ico');
 sup_files.include('src/js/dropbox_key.*');
 sup_files.include('src/js/events.*');
 
-
+////////////////////////////////////////////////////////////////
+// Functions
+////////////////////////////////////////////////////////////////
 function compileLessFile(file) {
     jake.logger.log('Compile LESS: ' + file);
     var inFile = path.join(less_base, file + '.less');
@@ -55,6 +66,10 @@ function compileTsFiles() {
     var cmd = path.join(bin_path, 'tsc') + ' ' + options + ' ' + files;
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
+
+////////////////////////////////////////////////////////////////
+// Tasks
+////////////////////////////////////////////////////////////////
 
 desc('This is the default task.');
 task('default', ['build', 'test']);
