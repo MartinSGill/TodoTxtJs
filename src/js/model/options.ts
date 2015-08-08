@@ -27,7 +27,7 @@
 /// <reference path="../storage/storage_dropbox.ts" />
 /// <reference path="../utils/events.ts" />
 
-module TodoTxtJs
+namespace TodoTxtJs
 {
     export interface IThemeDefinition
     {

@@ -23,7 +23,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 /// <reference path="../model/todo.ts" />
 
-module TodoTxtJs
+namespace TodoTxtJs
 {
     export class TodoManager
     {

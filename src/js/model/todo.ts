@@ -27,7 +27,7 @@
 /// <reference path="regex.ts" />
 /// <reference path="ModelFactory.ts" />
 
-module TodoTxtJs
+namespace TodoTxtJs
 {
     export interface ITodoMetadata
     {

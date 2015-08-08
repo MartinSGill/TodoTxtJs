@@ -23,7 +23,7 @@
 
 /// <reference path="IStorageProvider.d.ts" />
 
-module TodoTxtJs.StorageProviders
+namespace TodoTxtJs.StorageProviders
 {
     export class BrowserStorage implements IStorageProvider
     {

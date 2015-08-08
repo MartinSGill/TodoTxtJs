@@ -26,7 +26,7 @@
 /// <reference path="../model/todo.ts" />
 /// <reference path="../model/regex.ts" />
 
-module TodoTxtJs
+namespace TodoTxtJs
 {
     export class ContentRenderOptions
     {

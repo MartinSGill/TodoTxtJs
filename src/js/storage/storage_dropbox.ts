@@ -26,7 +26,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 declare var dropbox_key:string;
 
-module TodoTxtJs.StorageProviders
+namespace TodoTxtJs.StorageProviders
 {
     export class DropboxStorage implements IStorageProvider
     {

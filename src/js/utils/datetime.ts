@@ -23,7 +23,7 @@
 
 /// <reference path="../../../typings/tsd.d.ts" />
 
-module TodoTxtJs
+namespace TodoTxtJs
 {
     enum Weekdays
     {

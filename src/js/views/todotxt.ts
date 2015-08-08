@@ -34,7 +34,7 @@
 /// <reference path="../views/importing.ts" />
 /// <reference path="../views/exporting.ts" />
 
-module TodoTxtJs.View
+namespace TodoTxtJs.View
 {
     export class Main
     {

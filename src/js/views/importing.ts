@@ -26,7 +26,7 @@
 /// <reference path="../model/todo.ts" />
 /// <reference path="../model/todomanager.ts" />
 
-module TodoTxtJs.View
+namespace TodoTxtJs.View
 {
     export class Importing
     {

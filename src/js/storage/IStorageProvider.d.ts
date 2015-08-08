@@ -22,7 +22,7 @@
  ******************************************************************************/
 
 /// <reference path="../../../typings/tsd.d.ts" />
-declare module TodoTxtJs.StorageProviders
+declare namespace TodoTxtJs.StorageProviders
 {
     export interface IStorageProviderControls
     {

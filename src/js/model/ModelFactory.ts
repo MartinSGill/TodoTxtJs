@@ -24,7 +24,7 @@
 /// <reference path="options.ts" />
 /// <reference path="todomanager.ts" />
 
-module TodoTxtJs
+namespace TodoTxtJs
 {
     export class ModelFactory
     {

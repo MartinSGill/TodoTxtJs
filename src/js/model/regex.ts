@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-module TodoTxtJs.Regex
+namespace TodoTxtJs.Regex
 {
     export var MetaData = /(?:\W|^)([A-Za-z0-9_]*):([^\s:]*(?=\s|$))/g;
 

@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-module TodoTxtJs
+namespace TodoTxtJs
 {
     export class Events
     {
