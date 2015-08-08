@@ -4,7 +4,7 @@ var path = require('path');
 var out_path = 'out';
 
 // Using join deals with nix/win issues
-var bin_path =  path.join('.', 'node_modules','.bin');
+var bin_path = path.join('.', 'node_modules', '.bin');
 
 var less_base = 'src/css';
 var less_files = [
@@ -41,9 +41,9 @@ sup_files.include('src/js/events.*');
 
 function compileLessFile(file) {
     jake.logger.log('Compile LESS: ' + file);
-    var in_file = path.join(less_base, file + '.less');
-    var out_file = path.join(out_path, 'css', file + '.css');
-    var cmd = path.join(bin_path, 'lessc') + ' --source-map ' + in_file + ' ' + out_file;
+    var inFile = path.join(less_base, file + '.less');
+    var outFile = path.join(out_path, 'css', file + '.css');
+    var cmd = path.join(bin_path, 'lessc') + ' --source-map ' + inFile + ' ' + outFile;
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
 
@@ -56,58 +56,68 @@ function compileTsFiles() {
 }
 
 desc('This is the default task.');
-task('default', ['less', 'ts', 'res', 'html', 'sup']);
+task('default', ['build', 'test']);
 
-desc('Ensure build artifacts folder exists.');
-task('out', function () {
-    jake.mkdirP(path.join(out_path, 'images'));
-    jake.mkdirP(path.join(out_path, 'css'));
+desc('This is the default task.');
+task('build', ['build:less', 'build:ts', 'build:res', 'build:html', 'build:sup'], function(){
+    jake.logger.log('Build complete.');
 });
 
-desc('Build TS files');
-task('ts', ['out'], function () {
-    compileTsFiles();
-});
+namespace('build', function () {
 
-desc('Build Less files');
-task('less', ['out'], function () {
-    less_files.forEach(compileLessFile);
-});
-
-desc('Build/deploy resources');
-task('res', ['out'], function () {
-    jake.logger.log('Compile Resources');
-    res_files.toArray().forEach(function (file) {
-        var destination = path.join(out_path, 'images', path.basename(file));
-        jake.cpR(file, destination);
+    desc('Ensure build artifacts folder exists.');
+    task('out', function () {
+        jake.mkdirP(path.join(out_path, 'images'));
+        jake.mkdirP(path.join(out_path, 'css'));
     });
-});
 
-desc('Build/deploy supplementary JS files');
-task('sup', ['out'], function () {
-    jake.logger.log('Compile Supplemental Files');
-    sup_files.toArray().forEach(function (file) {
-        var destination = path.join(out_path, path.basename(file));
-        jake.cpR(file, destination);
+    desc('Build TS files');
+    task('ts', ['out'], function () {
+        compileTsFiles();
     });
-});
 
-desc('Build/deploy HTML');
-task('html', ['out'], function () {
-    jake.logger.log('Compile HTML');
-    var source = path.join('src', 'todotxt.html');
-    var destination = path.join(out_path, 'index.html');
-    jake.cpR(source, destination);
+    desc('Build Less files');
+    task('less', ['out'], function () {
+        less_files.forEach(compileLessFile);
+    });
+
+    desc('Build/deploy resources');
+    task('res', ['out'], function () {
+        jake.logger.log('Compile Resources');
+        res_files.toArray().forEach(function (file) {
+            var destination = path.join(out_path, 'images', path.basename(file));
+            jake.cpR(file, destination);
+        });
+    });
+
+    desc('Build/deploy supplementary JS files');
+    task('sup', ['out'], function () {
+        jake.logger.log('Compile Supplemental Files');
+        sup_files.toArray().forEach(function (file) {
+            var destination = path.join(out_path, path.basename(file));
+            jake.cpR(file, destination);
+        });
+    });
+
+    desc('Build/deploy HTML');
+    task('html', ['out'], function () {
+        jake.logger.log('Compile HTML');
+        var source = path.join('src', 'todotxt.html');
+        var destination = path.join(out_path, 'index.html');
+        jake.cpR(source, destination);
+    });
 });
 
 desc('Run Tests');
-task('test', ['default'], function () {
-    var cmd = path.join(bin_path,'karma') + ' start --single-run';
+task('test', [], function () {
+    jake.logger.log('Starting test run.');
+    var cmd = path.join(bin_path, 'karma') + ' start --single-run';
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 });
 
 desc('Run server');
 task('server', ['default'], function () {
-    var cmd = path.join(bin_path,'http-server') + ' out -o';
+    jake.logger.log('Starting Server...');
+    var cmd = path.join(bin_path, 'http-server') + ' out -o';
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 });
