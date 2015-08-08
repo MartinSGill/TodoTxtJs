@@ -21,10 +21,9 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-module("Reality");
-test( "Reality Check",
-function()
-{
-  ok( 1 === 1, "Passed");
+describe("Reality", function() {
+  it("should be real", function() {
+    expect(true).toBe(true);
+  });
 });
 
