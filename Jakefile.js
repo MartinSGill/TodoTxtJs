@@ -59,23 +59,23 @@ desc('This is the default task.');
 task('default', ['less', 'ts', 'res', 'html', 'sup']);
 
 desc('Ensure build artifacts folder exists.');
-task('out', function (params) {
+task('out', function () {
     jake.mkdirP(path.join(out_path, 'images'));
     jake.mkdirP(path.join(out_path, 'css'));
 });
 
 desc('Build TS files');
-task('ts', ['out'], function (params) {
+task('ts', ['out'], function () {
     compileTsFiles();
 });
 
 desc('Build Less files');
-task('less', ['out'], function (params) {
+task('less', ['out'], function () {
     less_files.forEach(compileLessFile);
 });
 
 desc('Build/deploy resources');
-task('res', ['out'], function (params) {
+task('res', ['out'], function () {
     jake.logger.log('Compile Resources');
     res_files.toArray().forEach(function (file) {
         var destination = path.join(out_path, 'images', path.basename(file));
@@ -84,7 +84,7 @@ task('res', ['out'], function (params) {
 });
 
 desc('Build/deploy supplementary JS files');
-task('sup', ['out'], function (params) {
+task('sup', ['out'], function () {
     jake.logger.log('Compile Supplemental Files');
     sup_files.toArray().forEach(function (file) {
         var destination = path.join(out_path, path.basename(file));
@@ -93,7 +93,7 @@ task('sup', ['out'], function (params) {
 });
 
 desc('Build/deploy HTML');
-task('html', ['out'], function (params) {
+task('html', ['out'], function () {
     jake.logger.log('Compile HTML');
     var source = path.join('src', 'todotxt.html');
     var destination = path.join(out_path, 'index.html');
@@ -101,13 +101,13 @@ task('html', ['out'], function (params) {
 });
 
 desc('Run Tests');
-task('test', ['default'], function (params) {
+task('test', ['default'], function () {
     var cmd = path.join(bin_path,'karma') + ' start --single-run';
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 });
 
 desc('Run server');
-task('server', ['default'], function (params) {
+task('server', ['default'], function () {
     var cmd = path.join(bin_path,'http-server') + ' out -o';
     jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 });
