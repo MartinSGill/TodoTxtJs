@@ -107,5 +107,78 @@ describe('TodoItems.Tokenizer', function(){
             expect(actual[2].type).toBe(tt.TokenType.priority);
             expect(actual[3].type).toBe(tt.TokenType.text);
         });
+
+        it('finds a project at beginning of text', function(){
+            var actual = tokenize('+project do some stuff')[0];
+            expect(actual.type).toBe(tt.TokenType.project);
+            expect(actual.text).toBe('project');
+        });
+
+        it('finds a project at middle of text', function(){
+            var actual = tokenize('do some +project stuff')[1];
+            expect(actual.type).toBe(tt.TokenType.project);
+            expect(actual.text).toBe('project');
+        });
+
+        it('finds a project at end of text', function(){
+            var actual = tokenize('do some stuff +project')[1];
+            expect(actual.type).toBe(tt.TokenType.project);
+            expect(actual.text).toBe('project');
+        });
+
+        it('finds all projects in text', function(){
+            var actual = tokenize('do +projectA then +projectB then +projectC');
+
+            expect(actual[1].type).toBe(tt.TokenType.project);
+            expect(actual[1].text).toBe('projectA');
+
+            expect(actual[3].type).toBe(tt.TokenType.project);
+            expect(actual[3].text).toBe('projectB');
+
+            expect(actual[5].type).toBe(tt.TokenType.project);
+            expect(actual[5].text).toBe('projectC');
+        });
+
+        it('finds a context at beginning of text', function(){
+            var actual = tokenize('@context do some stuff')[0];
+            expect(actual.type).toBe(tt.TokenType.context);
+            expect(actual.text).toBe('context');
+        });
+
+        it('finds a context at middle of text', function(){
+            var actual = tokenize('do some @context stuff')[1];
+            expect(actual.type).toBe(tt.TokenType.context);
+            expect(actual.text).toBe('context');
+        });
+
+        it('finds a context at end of text', function(){
+            var actual = tokenize('do some stuff @context')[1];
+            expect(actual.type).toBe(tt.TokenType.context);
+            expect(actual.text).toBe('context');
+        });
+
+        it('finds all contexts in text', function(){
+            var actual = tokenize('do @contextA then @contextB then @contextC');
+
+            expect(actual[1].type).toBe(tt.TokenType.context);
+            expect(actual[1].text).toBe('contextA');
+
+            expect(actual[3].type).toBe(tt.TokenType.context);
+            expect(actual[3].text).toBe('contextB');
+
+            expect(actual[5].type).toBe(tt.TokenType.context);
+            expect(actual[5].text).toBe('contextC');
+        });
+
+        it('returns completed, createDate, priority, project, context & text', function(){
+            var actual = tokenize('x 2015-05-10 2015-05-15 (A) Some +project text in a @context');
+            expect(actual[0].type).toBe(tt.TokenType.completed);
+            expect(actual[1].type).toBe(tt.TokenType.createDate);
+            expect(actual[2].type).toBe(tt.TokenType.priority);
+            expect(actual[3].type).toBe(tt.TokenType.text);
+            expect(actual[4].type).toBe(tt.TokenType.project);
+            expect(actual[5].type).toBe(tt.TokenType.text);
+            expect(actual[6].type).toBe(tt.TokenType.context);
+        });
     });
 });

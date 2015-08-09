@@ -29,13 +29,16 @@ namespace TodoTxtJs.TodoItems
     {
         class TokenizeResult
         {
-            tokenList: Token[] = [];
-            remainingText: string = '';
+            tokenList:Token[] = [];
+            remainingText:string = '';
         }
 
-        export function tokenize(text:string): Token[]
+        export function tokenize(text:string):Token[]
         {
-            if (text === '') return [];
+            if (text === '')
+            {
+                return [];
+            }
 
             var result = new TokenizeResult();
             result.remainingText = text;
@@ -44,15 +47,12 @@ namespace TodoTxtJs.TodoItems
             findCreated(result);
             findPriority(result);
 
-            var foundToken = findNextToken(result);
-            while (foundToken) { foundToken = findNextToken(result); }
+            findRemainingTokens(result);
 
-
-            result.tokenList.push(new Token(TokenType.text, result.remainingText.trim()));
             return result.tokenList;
         }
 
-        function findCompleted(result: TokenizeResult)
+        function findCompleted(result:TokenizeResult)
         {
             const REGEX_COMPLETED = /^x (((?:19|20)[0-9]{2})-((?:0[1-9]|1[012]))-((?:0[1-9]|[12][0-9]|3[01])))(?=\s+\S+)/;
             var matches = result.remainingText.match(REGEX_COMPLETED);
@@ -63,7 +63,7 @@ namespace TodoTxtJs.TodoItems
             }
         }
 
-        function findCreated(result: TokenizeResult)
+        function findCreated(result:TokenizeResult)
         {
             const REGEX_DATE = /^(((?:19|20)[0-9]{2})-((?:0[1-9]|1[012]))-((?:0[1-9]|[12][0-9]|3[01])))(?=\s+\S+)/;
             var matches = result.remainingText.match(REGEX_DATE);
@@ -74,7 +74,7 @@ namespace TodoTxtJs.TodoItems
             }
         }
 
-        function findPriority(result: TokenizeResult)
+        function findPriority(result:TokenizeResult)
         {
             const REGEX_PRIORITY = /^\(([A-Z])\)(?=\s+\S+)/;
             var matches = result.remainingText.match(REGEX_PRIORITY);
@@ -85,9 +85,53 @@ namespace TodoTxtJs.TodoItems
             }
         }
 
-        function findNextToken(result: TokenizeResult): boolean
+        function findToken(remainingText:string)
         {
-            return false;
+            const TOKEN_PATTERNS = [
+                {type: TokenType.project, regex: /^\+([^\s]+)/},
+                {type: TokenType.context, regex: /^@([^\s]+)/}
+            ];
+
+            for (var i = 0; i < TOKEN_PATTERNS.length; i++)
+            {
+                var pattern = TOKEN_PATTERNS[i];
+                var matches = remainingText.match(pattern.regex);
+                if (matches)
+                {
+                    return {type: pattern.type, text: matches[1], length: matches[0].length};
+                }
+            }
+        }
+
+        function findRemainingTokens(result:TokenizeResult)
+        {
+            var text = '';
+            var remainingText = result.remainingText;
+            do
+            {
+                var foundToken = findToken(remainingText);
+                if (foundToken)
+                {
+                    if (text.trim().length > 0)
+                    {
+                        result.tokenList.push(new Token(TokenType.text, text.trim()));
+                        text = '';
+                    }
+
+                    result.tokenList.push(new Token(foundToken.type, foundToken.text));
+                    remainingText = remainingText.substr(foundToken.length).trim();
+                }
+
+                text += remainingText.substring(0, 1);
+                remainingText = remainingText.substring(1);
+            } while (remainingText.length > 0);
+
+            if (text.trim().length > 0)
+            {
+                result.tokenList.push(new Token(TokenType.text, text.trim()));
+            }
+
+            result.remainingText = remainingText;
         }
     }
 }
