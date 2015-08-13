@@ -180,5 +180,26 @@ describe('TodoItems.Tokenizer', function(){
             expect(actual[5].type).toBe(tt.TokenType.text);
             expect(actual[6].type).toBe(tt.TokenType.context);
         });
+
+        it('finds metadata at start of text', function(){
+            var actual = tokenize('meta:data and some stuff')[0];
+            expect(actual.type).toBe(tt.TokenType.metadata);
+            expect(actual.subType).toBe('meta');
+            expect(actual.text).toBe('data');
+        });
+
+        it('finds metadata at end of text', function(){
+            var actual = tokenize('some stuff meta:data')[1];
+            expect(actual.type).toBe(tt.TokenType.metadata);
+            expect(actual.subType).toBe('meta');
+            expect(actual.text).toBe('data');
+        });
+
+        it('finds metadata at middle of text', function(){
+            var actual = tokenize('some stuff meta:data some other stuff')[1];
+            expect(actual.type).toBe(tt.TokenType.metadata);
+            expect(actual.subType).toBe('meta');
+            expect(actual.text).toBe('data');
+        });
     });
 });

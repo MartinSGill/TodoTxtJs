@@ -21,30 +21,34 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-namespace TodoTxtJs.TodoItems
-{
-    export enum TokenType
-    {
-        text,
-        createDate,
-        completed,
-        priority,
-        project,
-        context,
-        metadata
-    }
+describe('TodoItems.Metadata', function () {
+    describe('Url', function () {
 
-    export class Token
-    {
-        type: TokenType;
-        text: string;
-        subType: string;
+        var tt = TodoTxtJs.TodoItems;
+        var tm = tt.Metadata;
 
-        constructor(type?:TokenType, text?:string, subType?:string)
-        {
-            this.type = type ? type : TokenType.text;
-            this.text = text ? text : '';
-            this.subType = subType ? subType : '';
-        }
-    }
-}
+        it('constructs a correct url object', function () {
+            expect(new tm.Url('//www.example.com', 'http')).not.toBe(null);
+        });
+
+        it('throws for an incorrect sub type', function () {
+            expect( function() { new tm.Url('20150515', 'due'); }).toThrow()
+        });
+
+        it('throws for an incorrect url value', function () {
+            expect( function() { new tm.Url('2015-05-15', 'http'); }).toThrow()
+        });
+
+        it('recognises https', function () {
+            expect(new tm.Url('//www.example.com', 'https')).not.toBe(null);
+        });
+
+        it('recognises telnet', function () {
+            expect(new tm.Url('//www.example.com', 'telnet')).not.toBe(null);
+        });
+
+        it('recognises parametered URLs', function () {
+            expect(new tm.Url('//www.regexbuddy.com/index.html?param=value&param2=value2', 'http')).not.toBe(null);
+        });
+    });
+});

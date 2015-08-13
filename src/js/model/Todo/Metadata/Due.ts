@@ -21,30 +21,23 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-namespace TodoTxtJs.TodoItems
+/// <reference path="GenericMetadata.ts" />
+
+namespace TodoTxtJs.TodoItems.Metadata
 {
-    export enum TokenType
+    export class Due extends GenericMetadata
     {
-        text,
-        createDate,
-        completed,
-        priority,
-        project,
-        context,
-        metadata
-    }
-
-    export class Token
-    {
-        type: TokenType;
-        text: string;
-        subType: string;
-
-        constructor(type?:TokenType, text?:string, subType?:string)
+        constructor(text?:string, subType?:string)
         {
-            this.type = type ? type : TokenType.text;
-            this.text = text ? text : '';
-            this.subType = subType ? subType : '';
+            const REGEX_DATE = /(((?:19|20)[0-9]{2})-((?:0[1-9]|1[012]))-((?:0[1-9]|[12][0-9]|3[01])))/;
+            if (subType == 'due' && text.match(REGEX_DATE))
+            {
+                super(text, subType);
+            }
+            else
+            {
+                throw 'Not a correctly formed due metadata';
+            }
         }
     }
 }

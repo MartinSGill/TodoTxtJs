@@ -21,10 +21,71 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
+/// <reference path="token.ts" />
+/// <reference path="Metadata/GenericMetadata.ts" />
+
 namespace TodoTxtJs.TodoItems
 {
     export class Item
     {
+        private tokens: Token[];
 
+        constructor(tokens: Token[])
+        {
+            if (tokens === null)
+            {
+                throw "No tokens given";
+            }
+
+            this.tokens = tokens;
+        }
+
+        public completed(): boolean
+        {
+            return this.findTokens(TokenType.completed).length == 1;
+        }
+
+        public completedDate(): string
+        {
+            var tokens = this.findTokens(TokenType.completed);
+            if (tokens.length == 0) return null;
+            return tokens[0].text;
+        }
+
+        public priority(): string
+        {
+            var tokens = this.findTokens(TokenType.priority);
+            if (tokens.length == 0) return null;
+            return tokens[0].text;
+        }
+
+        public createDate(): string
+        {
+            var tokens = this.findTokens(TokenType.createDate);
+            if (tokens.length == 0) return null;
+            return tokens[0].text;
+        }
+
+        public projects(): string[]
+        {
+            var tokens = this.findTokens(TokenType.project);
+            return tokens.map(function(item) { return item.text });
+        }
+
+        public contexts(): string[]
+        {
+            var tokens = this.findTokens(TokenType.context);
+            return tokens.map(function(item) { return item.text });
+        }
+
+        public metadata(): Metadata.GenericMetadata[]
+        {
+            return this.findTokens(TokenType.metadata);
+        }
+
+        private findTokens(type: TokenType) : Token[]
+        {
+            return this.tokens.filter(function(item) { return item.type == type; });
+        }
     }
 }

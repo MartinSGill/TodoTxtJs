@@ -89,7 +89,8 @@ namespace TodoTxtJs.TodoItems
         {
             const TOKEN_PATTERNS = [
                 {type: TokenType.project, regex: /^\+([^\s]+)/},
-                {type: TokenType.context, regex: /^@([^\s]+)/}
+                {type: TokenType.context, regex: /^@([^\s]+)/},
+                {type: TokenType.metadata, regex: /^([A-Za-z0-9_]*):([^\s:]*)(?=(\s|$))/}
             ];
 
             for (var i = 0; i < TOKEN_PATTERNS.length; i++)
@@ -98,7 +99,13 @@ namespace TodoTxtJs.TodoItems
                 var matches = remainingText.match(pattern.regex);
                 if (matches)
                 {
-                    return {type: pattern.type, text: matches[1], length: matches[0].length};
+                    switch (pattern.type)
+                    {
+                        case TokenType.metadata:
+                            return {token: new Token(pattern.type, matches[2], matches[1]), length: matches[0].length};
+                        default:
+                            return {token: new Token(pattern.type, matches[1]), length: matches[0].length};
+                    }
                 }
             }
         }
@@ -118,7 +125,7 @@ namespace TodoTxtJs.TodoItems
                         text = '';
                     }
 
-                    result.tokenList.push(new Token(foundToken.type, foundToken.text));
+                    result.tokenList.push(foundToken.token);
                     remainingText = remainingText.substr(foundToken.length).trim();
                 }
 

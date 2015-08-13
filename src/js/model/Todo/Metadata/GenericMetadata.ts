@@ -21,30 +21,15 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-namespace TodoTxtJs.TodoItems
+/// <reference path="../token.ts" />
+
+namespace TodoTxtJs.TodoItems.Metadata
 {
-    export enum TokenType
+    export class GenericMetadata extends Token
     {
-        text,
-        createDate,
-        completed,
-        priority,
-        project,
-        context,
-        metadata
-    }
-
-    export class Token
-    {
-        type: TokenType;
-        text: string;
-        subType: string;
-
-        constructor(type?:TokenType, text?:string, subType?:string)
+        constructor(text?:string, subType?:string)
         {
-            this.type = type ? type : TokenType.text;
-            this.text = text ? text : '';
-            this.subType = subType ? subType : '';
+            super(TokenType.metadata, text, subType);
         }
     }
 }
