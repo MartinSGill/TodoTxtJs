@@ -38,13 +38,13 @@ namespace TodoTxtJs.TodoItems
     {
         type: TokenType;
         text: string;
-        subType: string;
+        id: string;
 
-        constructor(type?:TokenType, text?:string, subType?:string)
+        constructor(type?:TokenType, text?:string, id?:string)
         {
             this.type = type ? type : TokenType.text;
             this.text = text ? text : '';
-            this.subType = subType ? subType : '';
+            this.id = id ? id : '';
         }
     }
 }

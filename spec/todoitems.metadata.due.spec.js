@@ -28,15 +28,15 @@ describe('TodoItems.Metadata', function () {
         var tm = tt.Metadata;
 
         it('constructs a correct due object', function () {
-            expect(new tm.Due('2015-05-15', 'due')).not.toBe(null);
+            expect(new tm.Due('due', '2015-05-15')).not.toBe(null);
         });
 
         it('throws for an incorrect due object', function () {
-            expect( function() { new tm.Due('20150515', 'due'); }).toThrow()
+            expect( function() { new tm.Due('due', '20150515'); }).toThrow()
         });
 
         it('throws for an incorrect due object', function () {
-            expect( function() { new tm.Due('2015-05-15', 'DUE'); }).toThrow()
+            expect( function() { new tm.Due('DUE', '2015-05-15'); }).toThrow()
         });
     });
 });

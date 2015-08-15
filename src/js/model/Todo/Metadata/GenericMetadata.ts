@@ -27,9 +27,9 @@ namespace TodoTxtJs.TodoItems.Metadata
 {
     export class GenericMetadata extends Token
     {
-        constructor(text?:string, subType?:string)
+        constructor(id:string, text:string)
         {
-            super(TokenType.metadata, text, subType);
+            super(TokenType.metadata, text, id);
         }
     }
 }

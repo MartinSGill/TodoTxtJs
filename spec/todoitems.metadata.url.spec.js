@@ -28,27 +28,27 @@ describe('TodoItems.Metadata', function () {
         var tm = tt.Metadata;
 
         it('constructs a correct url object', function () {
-            expect(new tm.Url('//www.example.com', 'http')).not.toBe(null);
+            expect(new tm.Url('http', '//www.example.com')).not.toBe(null);
         });
 
         it('throws for an incorrect sub type', function () {
-            expect( function() { new tm.Url('20150515', 'due'); }).toThrow()
+            expect( function() { new tm.Url('due', '20150515'); }).toThrow()
         });
 
         it('throws for an incorrect url value', function () {
-            expect( function() { new tm.Url('2015-05-15', 'http'); }).toThrow()
+            expect( function() { new tm.Url('http', '2015-05-15'); }).toThrow()
         });
 
         it('recognises https', function () {
-            expect(new tm.Url('//www.example.com', 'https')).not.toBe(null);
+            expect(new tm.Url('https', '//www.example.com')).not.toBe(null);
         });
 
         it('recognises telnet', function () {
-            expect(new tm.Url('//www.example.com', 'telnet')).not.toBe(null);
+            expect(new tm.Url('telnet', '//www.example.com')).not.toBe(null);
         });
 
         it('recognises parametered URLs', function () {
-            expect(new tm.Url('//www.regexbuddy.com/index.html?param=value&param2=value2', 'http')).not.toBe(null);
+            expect(new tm.Url('http', '//www.regexbuddy.com/index.html?param=value&param2=value2')).not.toBe(null);
         });
     });
 });

@@ -33,8 +33,6 @@ describe('TodoItems.Item', function () {
         });
 
         it('throws if no tokens given', function () {
-            var tokens = [ new tt.Token(tt.TokenType.text, 'This is some text') ];
-
             expect(function() { new tt.Item(null) }).toThrow();
         });
     });
@@ -261,5 +259,43 @@ describe('TodoItems.Item', function () {
             expect(target.metadata().length).toBe(0);
         });
 
+        it("correctly returns metadata value", function () {
+            var tokens = [
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Metadata.GenericMetadata('metadataA', 'A'),
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Metadata.GenericMetadata('metadataB', 'B'),
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Metadata.GenericMetadata('metadataC', 'C'),
+                new tt.Token(tt.TokenType.text, 'This is some text')
+            ];
+            var target = new tt.Item(tokens);
+            expect(target.metadataValue('metadataB')).toBe('B');
+        });
+
+        it("correctly returns first metadata value found", function () {
+            var tokens = [
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Metadata.GenericMetadata('metadataA', 'A'),
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Metadata.GenericMetadata('metadataA', 'B'),
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Metadata.GenericMetadata('metadataA', 'C'),
+                new tt.Token(tt.TokenType.text, 'This is some text')
+            ];
+            var target = new tt.Item(tokens);
+            expect(target.metadataValue('metadataA')).toBe('A');
+        });
+
+        it("correctly returns null for no metadata value", function () {
+            var tokens = [
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Token(tt.TokenType.text, 'This is some text'),
+                new tt.Token(tt.TokenType.text, 'This is some text')
+            ];
+            var target = new tt.Item(tokens);
+            expect(target.metadataValue('bob')).toBe(null);
+        });
     });
 });

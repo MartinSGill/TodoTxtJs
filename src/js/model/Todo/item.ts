@@ -83,6 +83,12 @@ namespace TodoTxtJs.TodoItems
             return this.findTokens(TokenType.metadata);
         }
 
+        public metadataValue(id: string): string
+        {
+            var metadata = this.metadata().filter((item) => { return item.id == id });
+            return metadata.length > 0 ? metadata[0].text : null;
+        }
+
         private findTokens(type: TokenType) : Token[]
         {
             return this.tokens.filter(function(item) { return item.type == type; });

@@ -27,12 +27,12 @@ namespace TodoTxtJs.TodoItems.Metadata
 {
     export class Due extends GenericMetadata
     {
-        constructor(text?:string, subType?:string)
+        constructor(id:string, text:string)
         {
             const REGEX_DATE = /(((?:19|20)[0-9]{2})-((?:0[1-9]|1[012]))-((?:0[1-9]|[12][0-9]|3[01])))/;
-            if (subType == 'due' && text.match(REGEX_DATE))
+            if (id == 'due' && text.match(REGEX_DATE))
             {
-                super(text, subType);
+                super(id, text);
             }
             else
             {

@@ -27,12 +27,12 @@ namespace TodoTxtJs.TodoItems.Metadata
 {
     export class Url extends GenericMetadata
     {
-        constructor(text?:string, subType?:string)
+        constructor(id:string, text:string)
         {
             const REGEX_URL = /^[a-z][a-z0-9+.-]*:\/\/([a-z0-9._~%!$&'()*+,;=-]+@)?([a-z0-9._~%-]+|\[[a-f0-9:.]+\]|\[v[a-f0-9][a-z0-9._~%!$&'()*+,;=:-]+\])(:[0-9]+)?(\/[a-z0-9._~%!$&'()*+,;=:@-]+)*\/?(\?[a-z0-9._~%!$&'()*+,;=:@\/?-]*)?(#[a-z0-9._~%!$&'()*+,;=:@\/?-]*)?$/;
-            if ((subType + ':' + text).match(REGEX_URL))
+            if ((id + ':' + text).match(REGEX_URL))
             {
-                super(text, subType);
+                super(id, text);
             }
             else
             {

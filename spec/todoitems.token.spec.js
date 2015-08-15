@@ -26,12 +26,12 @@ describe('TodoItems.Token', function(){
 
         it('defaults subType to empty string', function(){
             target = new TodoTxtJs.TodoItems.Token();
-            expect(target.subType).toBe('');
+            expect(target.id).toBe('');
         });
 
         it('correctly sets token subType', function(){
             target = new TodoTxtJs.TodoItems.Token(TodoTxtJs.TodoItems.TokenType.metadata, 'bob', 'sub');
-            expect(target.subType).toBe('sub');
+            expect(target.id).toBe('sub');
         });
     });
 });
