@@ -35,6 +35,11 @@ describe('TodoItems.Item', function () {
         it('throws if no tokens given', function () {
             expect(function() { new tt.Item(null) }).toThrow();
         });
+
+        it('initializes index to zero', function () {
+            var tokens = [ new tt.Token(tt.TokenType.text, 'This is some text') ];
+            expect(new tt.Item(tokens).index).toBe(0);
+        });
     });
 
     describe('completed', function(){
