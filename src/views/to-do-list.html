@@ -1,0 +1,17 @@
+<div class="toDoList">
+    <h2>{{ vm.name }}</h2>
+
+    <form ng-submit="vm.save()">
+        <input type="text" ng-model="vm.newItemName" placeholder="Task name">
+        <button type="submit" class="btn btn-default" style="">Add Item</button>
+    </form>
+
+    <ul>
+        <li ng-repeat="item in vm.listItems" ng-class="{ complete: item.isComplete }">
+            <label>
+                <input type="checkbox" ng-click="vm.toggle(item)" ng-checked="item.isComplete">
+                {{ item.name }}
+            </label>
+        </li>
+    </ul>
+</div>
