@@ -29,7 +29,7 @@ namespace TodoTxt.Controllers
 {
     export class ToDoListController {
         name: string;
-        listItems: ListItem[];
+        listItems: Models.ListItem[];
 
         newItemName: string;
 
@@ -43,14 +43,14 @@ namespace TodoTxt.Controllers
 
         save() {
             if (this.newItemName && this.newItemName.length > 0) {
-                var newItem = new ListItem(this.newItemName);
+                var newItem = new Models.ListItem(this.newItemName);
                 this.listItems.push(newItem);
 
                 this.newItemName = null;
             }
         }
 
-        toggle(listItem: ListItem): boolean {
+        toggle(listItem: Models.ListItem): boolean {
             listItem.isComplete = !listItem.isComplete;
             return listItem.isComplete;
         }

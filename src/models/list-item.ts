@@ -21,11 +21,10 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-module TodoTxt
+namespace TodoTxt.Models
 {
     export class ListItem
     {
-
         constructor(public name:string,
                     public isComplete:boolean = false)
         {

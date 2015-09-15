@@ -22,8 +22,8 @@ module.exports = function (config) {
             'http://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.2.12/jquery.jgrowl.min.js',
             'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js',
             'out/app.js',
-            'spec/all.js', // Jasmine
-            'spec/*.spec.js'
+            'spec/tools/all.js', // Jasmine
+            'spec/**/*.spec.js'
         ],
 
 

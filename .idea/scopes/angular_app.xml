@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="angular-app" pattern="file[TodoTxtJs]:src/views//*||file[TodoTxtJs]:src/models//*||file[TodoTxtJs]:src/directives//*||file[TodoTxtJs]:src/controllers//*||file:src/main.js.map||file:src/main.js||file:src/main.ts||file:src/default.html" />
+</component>
