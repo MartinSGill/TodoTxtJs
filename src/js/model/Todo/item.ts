@@ -22,7 +22,10 @@
  ******************************************************************************/
 
 /// <reference path="token.ts" />
+/// <reference path="tokenizer.ts" />
 /// <reference path="Metadata/GenericMetadata.ts" />
+/// <reference path="serializers/stringSerializer.ts" />
+/// <reference path="serializers/htmlSerializer.ts" />
 
 namespace TodoTxtJs.TodoItems
 {
@@ -39,6 +42,12 @@ namespace TodoTxtJs.TodoItems
             }
 
             this.tokens = tokens;
+        }
+
+        // TODO: Write Test
+        public static parseString(text: string): Item
+        {
+            return new Item(Tokenizer.tokenize(text));
         }
 
         public completed():boolean
@@ -64,6 +73,29 @@ namespace TodoTxtJs.TodoItems
                 return null;
             }
             return tokens[0].text;
+        }
+
+
+        // TODO: Write tests
+        public setCreateDate(date:string):void
+        {
+            var tokens = this.findTokens(TokenType.createDate);
+            if (tokens.length == 0)
+            {
+                var created = new Token(TokenType.createDate, date);
+                if (this.completed())
+                {
+                    this.tokens.splice(1, 0, created);
+                }
+                else
+                {
+                    this.tokens.splice(0, 0, created);
+                }
+            }
+            else
+            {
+                tokens[0].text = date;
+            }
         }
 
         public createDate():string
@@ -106,6 +138,16 @@ namespace TodoTxtJs.TodoItems
                 return item.id == id
             });
             return metadata.length > 0 ? metadata[0].text : null;
+        }
+
+        public toString(): string
+        {
+            return Serializers.stringSerializer(this.tokens);
+        }
+
+        public toHtml(): string
+        {
+            return Serializers.htmlSerializer(this.tokens);
         }
 
         private findTokens(type:TokenType):Token[]

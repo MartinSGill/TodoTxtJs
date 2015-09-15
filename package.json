@@ -1,6 +1,6 @@
 {
   "name": "TodoTxtJs",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "build system for TodoTxtJs",
   "main": "index.js",
   "dependencies": {},

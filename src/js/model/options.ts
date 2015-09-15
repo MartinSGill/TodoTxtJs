@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="../storage/IStorageProvider.d.ts" />
 /// <reference path="../storage/storage_browser.ts" />
 /// <reference path="../storage/storage_dropbox.ts" />

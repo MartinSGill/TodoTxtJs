@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+/// <reference path="src/typings/tsd.d.ts" />
+
 var os = require('os');
 var path = require('path');
 var out_path = 'out';
@@ -26,7 +29,9 @@ ts_files.include('./src/js/**/*.ts');
 var ts_outfile = 'out/app.js';
 var ts_options = [
     '--out ' + ts_outfile,
+    '--outDir ' + 'out',
     '--sourceMap',
+    '--sourceRoot debug',
     '--module commonjs',
     '--noImplicitAny',
     '--removeComments'
@@ -94,8 +99,17 @@ namespace('build', function () {
     });
 
     desc('Build TS files');
-    task('ts', ['out'], function () {
+    task('ts', ['out', 'ts-debug'], function () {
         compileTsFiles();
+    });
+
+    desc('Place debug TS files');
+    task('ts-debug', function(){
+        ts_files.toArray().forEach(function (file) {
+            var destination = path.join(out_path, 'debug', file);
+            jake.mkdirP(path.join(out_path, 'debug', path.dirname(file).replace(/src[\\/]js[\\/]/, '')));
+            jake.cpR(file, destination.replace(/src[\\/]js[\\/]/, ''));
+        });
     });
 
     desc('Build Less files');

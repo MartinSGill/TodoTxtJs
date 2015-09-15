@@ -20,7 +20,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="../model/todo.ts" />
 
 namespace TodoTxtJs

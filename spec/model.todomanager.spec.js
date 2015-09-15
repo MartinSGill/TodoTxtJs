@@ -21,6 +21,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
+/// <reference path="../src/typings/tsd.d.ts" />
+
 describe('TodoManager', function () {
     describe('Add Todos', function () {
         it('can store a string todo', function () {

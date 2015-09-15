@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../model/todo.ts" />
 /// <reference path="../model/todomanager.ts" />

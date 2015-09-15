@@ -18,7 +18,8 @@ src/css/**/*.css
 src/css/*.css
 src/css/*.map
 
-typings
+src/typings
+src/lib
 
 ######################################################################
 # Generic stuff
