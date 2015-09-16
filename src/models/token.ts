@@ -46,5 +46,10 @@ namespace TodoTxt.Models
             this.text = text ? text : '';
             this.id = id ? id : '';
         }
+
+        public typeString()
+        {
+            return TokenType[this.type];
+        }
     }
 }

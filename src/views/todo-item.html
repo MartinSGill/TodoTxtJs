@@ -1,9 +1,14 @@
 <div class="toDoItem">
-    <table>
-        <tr ng-repeat="token in vm.item.tokens()">
-            <td>{{ token.type }}</td>
-            <td>{{ token.text }}</td>
-        </tr>
-    </table>
+    <span ng-repeat="token in vm.item.tokens()" style="white-space-treatment: collapsed">
+        <span ng-switch="token.typeString()">
+            <span ng-switch-when="text">{{ token.text }}</span>
+            <span ng-switch-when="createDate">{{ token.text }}</span>
+            <span ng-switch-when="completed">x</span>
+            <span ng-switch-when="priority">({{ token.text }})</span>
+            <span ng-switch-when="context">@{{ token.text }}</span>
+            <span ng-switch-when="project">+{{ token.text }}</span>
+            <span ng-switch-when="metadata">{{ token.id }}:{{ token.text }}</span>
+        </span>
+    </span>
     <hr/>
 </div>
