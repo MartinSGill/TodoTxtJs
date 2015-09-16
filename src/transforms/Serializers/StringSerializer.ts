@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../token.ts" />
+/// <reference path="../../js/model/Todo/token.ts" />
 
 namespace TodoTxtJs.TodoItems.Serializers
 {

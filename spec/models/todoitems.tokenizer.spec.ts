@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/js/model/todo/tokenizer.ts" />
+/// <reference path="../../src/transforms/tokenizer.ts" />
 
 namespace TodoTxtJs.TodoItems.Tokenizer.Specs
 {

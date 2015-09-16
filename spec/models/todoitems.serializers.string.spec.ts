@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/js/model/todo/serializers/StringSerializer.ts" />
+/// <reference path="../../src/transforms/Serializers/StringSerializer.ts" />
 
 namespace TodoTxtJs.TodoItems.Serializers.Specs
 {

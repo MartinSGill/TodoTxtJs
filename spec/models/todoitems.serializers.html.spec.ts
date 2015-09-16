@@ -22,8 +22,8 @@
  ******************************************************************************/
 
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/js/model/todo/tokenizer.ts" />
-/// <reference path="../../src/js/model/todo/serializers/HtmlSerializer.ts" />
+/// <reference path="../../src/transforms/tokenizer.ts" />
+/// <reference path="../../src/transforms/Serializers/HtmlSerializer.ts" />
 
 namespace TodoTxtJs.TodoItems.Serializers.Specs
 {

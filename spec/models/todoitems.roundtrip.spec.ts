@@ -23,8 +23,8 @@
 
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
 /// <reference path="../tools/all.d.ts" />
-/// <reference path="../../src/js/model/todo/tokenizer.ts" />
-/// <reference path="../../src/js/model/todo/serializers/StringSerializer.ts" />
+/// <reference path="../../src/transforms/tokenizer.ts" />
+/// <reference path="../../src/transforms/Serializers/StringSerializer.ts" />
 
 namespace TodoTxtJs.TodoItems.Specs
 {

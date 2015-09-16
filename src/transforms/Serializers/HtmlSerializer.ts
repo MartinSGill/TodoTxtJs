@@ -21,8 +21,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../token.ts" />
-/// <reference path="../metadata/GenericMetadata.ts" />
+/// <reference path="../../js/model/Todo/token.ts" />
+/// <reference path="../../js/model/Todo/Metadata/GenericMetadata.ts" />
 
 namespace TodoTxtJs.TodoItems.Serializers
 {
