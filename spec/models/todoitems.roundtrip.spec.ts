@@ -24,7 +24,7 @@
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
 /// <reference path="../tools/all.d.ts" />
 /// <reference path="../../src/transforms/tokenizer.ts" />
-/// <reference path="../../src/transforms/Serializers/StringSerializer.ts" />
+/// <reference path="../../src/transforms/serializers/string-serializer.ts" />
 
 namespace TodoTxt.Models.Specs
 {

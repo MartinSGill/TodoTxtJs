@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/transforms/Serializers/StringSerializer.ts" />
+/// <reference path="../../src/transforms/serializers/string-serializer.ts" />
 
 namespace TodoTxt.Transforms.Serializers.Specs
 {

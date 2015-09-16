@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/Models/Metadata/url.ts" />
+/// <reference path="../../src/models/metadata/url.ts" />
 
 namespace TodoTxt.Models.Metadata.Specs
 {

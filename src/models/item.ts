@@ -23,9 +23,9 @@
 
 /// <reference path="token.ts" />
 /// <reference path="../transforms/tokenizer.ts" />
-/// <reference path="Metadata/GenericMetadata.ts" />
-/// <reference path="../transforms/Serializers/StringSerializer.ts" />
-/// <reference path="../transforms/Serializers/HtmlSerializer.ts" />
+/// <reference path="metadata/generic-metadata.ts" />
+/// <reference path="../transforms/serializers/string-serializer.ts" />
+/// <reference path="../transforms/serializers/html-serializer.ts" />
 
 namespace TodoTxt.Models
 {

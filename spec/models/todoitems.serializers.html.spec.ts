@@ -23,7 +23,7 @@
 
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
 /// <reference path="../../src/transforms/tokenizer.ts" />
-/// <reference path="../../src/transforms/Serializers/HtmlSerializer.ts" />
+/// <reference path="../../src/transforms/serializers/html-serializer.ts" />
 
 namespace TodoTxt.Transforms.Serializers.Specs
 {
