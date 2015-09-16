@@ -22,15 +22,15 @@
  ******************************************************************************/
 
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="token.ts" />
+/// <reference path="../../src/Models/token.ts" />
 
-namespace TodoTxtJs.TodoItems.Specs
+namespace TodoTxt.Models.Specs
 {
-    describe('TodoItems.Token', () =>
+    describe('Models.Token', () =>
     {
         describe('Construction', () =>
         {
-            it('defaults to token type', () =>
+            it('defaults to Token type', () =>
             {
                 var target = new Token();
                 expect(target.type).toBe(TokenType.text);
@@ -42,13 +42,13 @@ namespace TodoTxtJs.TodoItems.Specs
                 expect(target.text).toBe('');
             });
 
-            it('correctly sets token type', () =>
+            it('correctly sets Token type', () =>
             {
                 var target = new Token(TokenType.completed);
                 expect(target.type).toBe(TokenType.completed);
             });
 
-            it('correctly sets token type', () =>
+            it('correctly sets Token type', () =>
             {
                 var target = new Token(TokenType.completed, 'bob');
                 expect(target.text).toBe('bob');
@@ -60,7 +60,7 @@ namespace TodoTxtJs.TodoItems.Specs
                 expect(target.id).toBe('');
             });
 
-            it('correctly sets token subType', () =>
+            it('correctly sets Token subType', () =>
             {
                 var target = new Token(TokenType.metadata, 'bob', 'sub');
                 expect(target.id).toBe('sub');

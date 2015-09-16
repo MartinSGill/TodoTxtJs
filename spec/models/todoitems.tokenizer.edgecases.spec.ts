@@ -24,34 +24,33 @@
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
 /// <reference path="../../src/transforms/tokenizer.ts" />
 
-namespace TodoTxtJs.TodoItems.Specs
+namespace TodoTxt.Transforms.Tokenizer.Specs
 {
-    describe('TodoItems.Tokenizer', () =>
+    import TokenType = Models.TokenType;
+
+    describe('Models.Tokenizer', () =>
     {
         describe('tokenize', () =>
         {
-            var tt = TokenType;
-            var tokenize = Tokenizer.tokenize;
-
             describe('edge cases', () =>
             {
                 it('correctly deals with non-metadata colons', () =>
                 {
                     var actual = tokenize('Todo with due date: due:2013-01-01');
-                    expect(actual[0].type).toBe(tt.text);
+                    expect(actual[0].type).toBe(TokenType.text);
                     expect(actual[0].text).toBe('Todo with due date:');
-                    expect(actual[1].type).toBe(tt.metadata);
+                    expect(actual[1].type).toBe(TokenType.metadata);
                     expect(actual[1].text).toBe('2013-01-01');
                 });
 
                 it('correctly deals with two metadata in a row', () =>
                 {
                     var actual = tokenize('Todo with metadata meta:data key:value');
-                    expect(actual[0].type).toBe(tt.text);
+                    expect(actual[0].type).toBe(TokenType.text);
                     expect(actual[0].text).toBe('Todo with metadata');
-                    expect(actual[1].type).toBe(tt.metadata);
+                    expect(actual[1].type).toBe(TokenType.metadata);
                     expect(actual[1].text).toBe('data');
-                    expect(actual[2].type).toBe(tt.metadata);
+                    expect(actual[2].type).toBe(TokenType.metadata);
                     expect(actual[2].text).toBe('value');
                 });
             });

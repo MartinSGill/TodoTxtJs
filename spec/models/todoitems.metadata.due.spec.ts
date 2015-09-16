@@ -22,27 +22,24 @@
  ******************************************************************************/
 
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="Metadata/due.ts" />
+/// <reference path="../../src/models/Metadata/due.ts" />
 
-namespace TodoTxtJs.TodoItems.Metadata.Specs
+namespace TodoTxt.Models.Metadata.Specs
 {
-    describe('TodoItems.Metadata', () =>
+    describe('Models.Metadata', () =>
     {
         describe('Due', () =>
         {
-            var tt = TodoTxtJs.TodoItems;
-            var tm = tt.Metadata;
-
             it('constructs a correct due object', () =>
             {
-                expect(new tm.Due('due', '2015-05-15')).not.toBe(null);
+                expect(new Due('due', '2015-05-15')).not.toBe(null);
             });
 
             it('throws for an incorrect due object', () =>
             {
                 expect(() =>
                 {
-                    new tm.Due('due', '20150515');
+                    new Due('due', '20150515');
                 }).toThrow()
             });
 
@@ -50,7 +47,7 @@ namespace TodoTxtJs.TodoItems.Metadata.Specs
             {
                 expect(() =>
                 {
-                    new tm.Due('DUE', '2015-05-15');
+                    new Due('DUE', '2015-05-15');
                 }).toThrow()
             });
         });

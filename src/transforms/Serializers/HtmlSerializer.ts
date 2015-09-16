@@ -24,8 +24,12 @@
 /// <reference path="../../models/token.ts" />
 /// <reference path="../../models/Metadata/GenericMetadata.ts" />
 
-namespace TodoTxtJs.TodoItems.Serializers
+namespace TodoTxt.Transforms.Serializers
 {
+    import Token = TodoTxt.Models.Token;
+    import TokenType = TodoTxt.Models.TokenType;
+    import Metadata = TodoTxt.Models.Metadata;
+
     export interface metaDataRenderer
     {
         (item:Metadata.GenericMetadata):string;

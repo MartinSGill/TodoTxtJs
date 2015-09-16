@@ -23,7 +23,7 @@
 
 /// <reference path="item.ts" />
 
-namespace TodoTxtJs.TodoItems
+namespace TodoTxt.Models
 {
     export class List
     {

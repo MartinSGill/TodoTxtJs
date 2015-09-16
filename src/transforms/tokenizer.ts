@@ -23,10 +23,13 @@
 
 /// <reference path="../models/token.ts" />
 
-namespace TodoTxtJs.TodoItems
+namespace TodoTxt.Transforms
 {
     export namespace Tokenizer
     {
+        import Token = TodoTxt.Models.Token;
+        import TokenType = TodoTxt.Models.TokenType;
+
         class TokenizeResult
         {
             tokenList:Token[] = [];

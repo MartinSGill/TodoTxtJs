@@ -23,8 +23,11 @@
 
 /// <reference path="../../models/token.ts" />
 
-namespace TodoTxtJs.TodoItems.Serializers
+namespace TodoTxt.Transforms.Serializers
 {
+    import Token = TodoTxt.Models.Token;
+    import TokenType = TodoTxt.Models.TokenType;
+
     export function stringSerializer(tokens: Token[]):string
     {
         var result = '';

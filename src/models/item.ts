@@ -27,8 +27,11 @@
 /// <reference path="../transforms/Serializers/StringSerializer.ts" />
 /// <reference path="../transforms/Serializers/HtmlSerializer.ts" />
 
-namespace TodoTxtJs.TodoItems
+namespace TodoTxt.Models
 {
+    import Tokenizer = TodoTxt.Transforms.Tokenizer;
+    import Serializers = TodoTxt.Transforms.Serializers;
+
     export class Item
     {
         private tokens:Token[];

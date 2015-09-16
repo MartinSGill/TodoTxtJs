@@ -23,7 +23,7 @@
 
 /// <reference path="../token.ts" />
 
-namespace TodoTxtJs.TodoItems.Metadata
+namespace TodoTxt.Models.Metadata
 {
     export class GenericMetadata extends Token
     {

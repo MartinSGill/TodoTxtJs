@@ -21,27 +21,24 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="Metadata/url.ts" />
+/// <reference path="../../src/Models/Metadata/url.ts" />
 
-namespace TodoTxtJs.TodoItems.Metadata.Specs
+namespace TodoTxt.Models.Metadata.Specs
 {
-    describe('TodoItems.Metadata', () =>
+    describe('Models.Metadata', () =>
     {
         describe('Url', () =>
         {
-            var tt = TodoTxtJs.TodoItems;
-            var tm = tt.Metadata;
-
             it('constructs a correct url object', () =>
             {
-                expect(new tm.Url('http', '//www.example.com')).not.toBe(null);
+                expect(new Url('http', '//www.example.com')).not.toBe(null);
             });
 
             it('throws for an incorrect sub type', () =>
             {
                 expect(() =>
                 {
-                    new tm.Url('due', '20150515');
+                    new Url('due', '20150515');
                 }).toThrow()
             });
 
@@ -49,23 +46,23 @@ namespace TodoTxtJs.TodoItems.Metadata.Specs
             {
                 expect(() =>
                 {
-                    new tm.Url('http', '2015-05-15');
+                    new Url('http', '2015-05-15');
                 }).toThrow()
             });
 
             it('recognises https', () =>
             {
-                expect(new tm.Url('https', '//www.example.com')).not.toBe(null);
+                expect(new Url('https', '//www.example.com')).not.toBe(null);
             });
 
             it('recognises telnet', () =>
             {
-                expect(new tm.Url('telnet', '//www.example.com')).not.toBe(null);
+                expect(new Url('telnet', '//www.example.com')).not.toBe(null);
             });
 
-            it('recognises parametered URLs', () =>
+            it('recognises parametrised URLs', () =>
             {
-                expect(new tm.Url('http', '//www.example.com/index.html?param=value&param2=value2')).not.toBe(null);
+                expect(new Url('http', '//www.example.com/index.html?param=value&param2=value2')).not.toBe(null);
             });
         });
     });

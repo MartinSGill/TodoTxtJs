@@ -26,9 +26,9 @@
 /// <reference path="../../src/transforms/tokenizer.ts" />
 /// <reference path="../../src/transforms/Serializers/StringSerializer.ts" />
 
-namespace TodoTxtJs.TodoItems.Specs
+namespace TodoTxt.Models.Specs
 {
-    describe('TodoItems', () =>
+    describe('Models', () =>
     {
         describe('Round Trips', () =>
         {
@@ -69,8 +69,8 @@ namespace TodoTxtJs.TodoItems.Specs
                     'tämä on kolmas todo @yöllä'
                 ], function (value)
                 {
-                    var tokens = TodoTxtJs.TodoItems.Tokenizer.tokenize(value);
-                    var actual = TodoTxtJs.TodoItems.Serializers.stringSerializer(tokens);
+                    var tokens = Transforms.Tokenizer.tokenize(value);
+                    var actual = Transforms.Serializers.stringSerializer(tokens);
                     expect(actual).toBe(value);
                 });
             });

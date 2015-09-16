@@ -25,29 +25,28 @@
 /// <reference path="../../src/transforms/tokenizer.ts" />
 /// <reference path="../../src/transforms/Serializers/HtmlSerializer.ts" />
 
-namespace TodoTxtJs.TodoItems.Serializers.Specs
+namespace TodoTxt.Transforms.Serializers.Specs
 {
-    describe('TodoItems.Serializers.Html', () =>
-    {
-        var token = TodoTxtJs.TodoItems.Token;
-        var tt = TodoTxtJs.TodoItems.TokenType;
-        var s = TodoTxtJs.TodoItems.Serializers;
+    import Token = Models.Token;
+    import TokenType = Models.TokenType;
 
+    describe('Models.Serializers.Html', () =>
+    {
         it('correctly serializes text', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text')
+                new Token(TokenType.text, 'This is some text')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>This is some text</span>");
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>This is some text</span>");
         });
 
         it('correctly serializes completed todo', () =>
         {
             var tokens = [
-                new token(tt.completed, '2015-05-15'),
-                new token(tt.text, 'This is some text')
+                new Token(TokenType.completed, '2015-05-15'),
+                new Token(TokenType.text, 'This is some text')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo completed'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo completed'>"
                 + "<span class='completeDate'>2015-05-15</span>"
                 + "This is some text</span>");
         });
@@ -55,10 +54,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes prioritized todo', () =>
         {
             var tokens = [
-                new token(tt.priority, 'B'),
-                new token(tt.text, 'This is some text')
+                new Token(TokenType.priority, 'B'),
+                new Token(TokenType.text, 'This is some text')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "<span class='priorityBraceLeft'>(</span>"
                 + "<span class='priority'>B</span>"
                 + "<span class='priorityBraceRight'>)</span>"
@@ -68,10 +67,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with create-date', () =>
         {
             var tokens = [
-                new token(tt.createDate, '2015-05-15'),
-                new token(tt.text, 'This is some text')
+                new Token(TokenType.createDate, '2015-05-15'),
+                new Token(TokenType.text, 'This is some text')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "<span class='createDate'>2015-05-15</span>"
                 + "This is some text</span>");
         });
@@ -79,12 +78,12 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with all leading elements', () =>
         {
             var tokens = [
-                new token(tt.completed, '2015-05-15'),
-                new token(tt.createDate, '2015-05-14'),
-                new token(tt.priority, 'B'),
-                new token(tt.text, 'This is some text')
+                new Token(TokenType.completed, '2015-05-15'),
+                new Token(TokenType.createDate, '2015-05-14'),
+                new Token(TokenType.priority, 'B'),
+                new Token(TokenType.text, 'This is some text')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo completed'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo completed'>"
                 + "<span class='completeDate'>2015-05-15</span>"
                 + "<span class='createDate'>2015-05-14</span>"
                 + "<span class='priorityBraceLeft'>(</span>"
@@ -96,10 +95,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with a project', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text'),
-                new token(tt.project, 'project')
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.project, 'project')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is some text"
                 + "<span class='projectSymbol'>+</span>"
                 + "<span class='project'>project</span>"
@@ -109,14 +108,14 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with multiple projects', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is'),
-                new token(tt.project, 'projectA'),
-                new token(tt.text, 'This is'),
-                new token(tt.project, 'projectB'),
-                new token(tt.text, 'This is'),
-                new token(tt.project, 'projectC')
+                new Token(TokenType.text, 'This is'),
+                new Token(TokenType.project, 'projectA'),
+                new Token(TokenType.text, 'This is'),
+                new Token(TokenType.project, 'projectB'),
+                new Token(TokenType.text, 'This is'),
+                new Token(TokenType.project, 'projectC')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is"
                 + "<span class='projectSymbol'>+</span>"
                 + "<span class='project'>projectA</span>"
@@ -132,10 +131,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with a context', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text'),
-                new token(tt.context, 'context')
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.context, 'context')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is some text"
                 + "<span class='contextSymbol'>@</span>"
                 + "<span class='context'>context</span>"
@@ -145,14 +144,14 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with multiple contexts', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is'),
-                new token(tt.context, 'contextA'),
-                new token(tt.text, 'This is'),
-                new token(tt.context, 'contextB'),
-                new token(tt.text, 'This is'),
-                new token(tt.context, 'contextC')
+                new Token(TokenType.text, 'This is'),
+                new Token(TokenType.context, 'contextA'),
+                new Token(TokenType.text, 'This is'),
+                new Token(TokenType.context, 'contextB'),
+                new Token(TokenType.text, 'This is'),
+                new Token(TokenType.context, 'contextC')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is"
                 + "<span class='contextSymbol'>@</span>"
                 + "<span class='context'>contextA</span>"
@@ -168,10 +167,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with metadata', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text'),
-                new token(tt.metadata, 'value', 'id')
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.metadata, 'value', 'id')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is some text"
                 + "<span class='metadata meta-id'>"
                 + "<span class='meta-key'>id</span>"
@@ -183,14 +182,14 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with multiple metadata', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text'),
-                new token(tt.metadata, 'value', 'id'),
-                new token(tt.text, 'This is some text'),
-                new token(tt.metadata, 'value2', 'id2'),
-                new token(tt.text, 'This is some text'),
-                new token(tt.metadata, 'value3', 'id3')
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.metadata, 'value', 'id'),
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.metadata, 'value2', 'id2'),
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.metadata, 'value3', 'id3')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is some text"
                 + "<span class='metadata meta-id'>"
                 + "<span class='meta-key'>id</span>"
@@ -212,10 +211,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with url (http) metadata', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text'),
-                new token(tt.metadata, '//example.com/somePage', 'http')
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.metadata, '//example.com/somePage', 'http')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is some text"
                 + "<span class='metadata meta-http'>"
                 + "<a href='http://example.com/somePage'>http://example.com/somePage</a>"
@@ -226,10 +225,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with url (https) metadata', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text'),
-                new token(tt.metadata, '//example.com/somePage', 'https')
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.metadata, '//example.com/somePage', 'https')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is some text"
                 + "<span class='metadata meta-https'>"
                 + "<a href='https://example.com/somePage'>https://example.com/somePage</a>"
@@ -240,10 +239,10 @@ namespace TodoTxtJs.TodoItems.Serializers.Specs
         it('correctly serializes todo with url (ftp) metadata', () =>
         {
             var tokens = [
-                new token(tt.text, 'This is some text'),
-                new token(tt.metadata, '//example.com/somePage', 'ftp')
+                new Token(TokenType.text, 'This is some text'),
+                new Token(TokenType.metadata, '//example.com/somePage', 'ftp')
             ];
-            expect(s.htmlSerializer(tokens)).toBe("<span class='todo'>"
+            expect(htmlSerializer(tokens)).toBe("<span class='todo'>"
                 + "This is some text"
                 + "<span class='metadata meta-ftp'>"
                 + "<a href='ftp://example.com/somePage'>ftp://example.com/somePage</a>"

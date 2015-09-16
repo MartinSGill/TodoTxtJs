@@ -23,7 +23,7 @@
 
 /// <reference path="GenericMetadata.ts" />
 
-namespace TodoTxtJs.TodoItems.Metadata
+namespace TodoTxt.Models.Metadata
 {
     export class Url extends GenericMetadata
     {

@@ -20,42 +20,45 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
+
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="list.ts" />
+/// <reference path="../../src/models/list.ts" />
+/// <reference path="../../src/models/item.ts"/>
+/// <reference path="../../src/transforms/tokenizer.ts"/>
 
-namespace TodoTxtJs.TodoItems.Specs
+namespace TodoTxt.Models.Specs
 {
-    describe('TodoItems.Item', () =>
-    {
-       var tt = TodoTxtJs.TodoItems;
+    import Tokenizer = TodoTxt.Transforms.Tokenizer;
 
+    describe('Models.Item', () =>
+    {
         describe('constructor', () =>
         {
             it('constructs a valid class', () =>
             {
-                expect(new tt.List()).not.toBe(null);
+                expect(new List()).not.toBe(null);
             });
 
             it('initializes next index to 0', () =>
             {
-                var target = new tt.List();
+                var target = new List();
                 expect(target.nextIndex()).toBe(0);
             });
 
             it('initializes all items to empty array', () =>
             {
-                var target = new tt.List();
+                var target = new List();
                 expect(target.all()).toEqual([]);
             });
         });
 
         describe('adding items', () =>
         {
-            var item = new tt.Item([new tt.Token(tt.TokenType.text, 'This is some text')]);
+            var item = new Item([new Token(TokenType.text, 'This is some text')]);
 
             it('can add an item', () =>
             {
-                var target = new tt.List();
+                var target = new List();
                 expect(() =>
                 {
                     target.add(item);
@@ -64,14 +67,14 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('increments next index after add', () =>
             {
-                var target = new tt.List();
+                var target = new List();
                 target.add(item);
                 expect(target.nextIndex()).toBe(1);
             });
 
             it('add new item to all items', () =>
             {
-                var target = new tt.List();
+                var target = new List();
                 target.add(item);
                 expect(target.all().length).toBe(1);
                 expect(target.all()[0]).toEqual(item);
@@ -79,7 +82,7 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('throws when not adding an Item object', () =>
             {
-                var target = new tt.List();
+                var target = new List();
                 expect(() =>
                 {
                     target.add(<any>'hello');
@@ -88,9 +91,9 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('sets index for added item', () =>
             {
-                var target = new tt.List();
-                target.add(new tt.Item(tt.Tokenizer.tokenize('This is a todo')));
-                target.add(new tt.Item(tt.Tokenizer.tokenize('This is a todo')));
+                var target = new List();
+                target.add(new Item(Tokenizer.tokenize('This is a todo')));
+                target.add(new Item(Tokenizer.tokenize('This is a todo')));
 
                 expect(target.all()[0].index).toBe(0);
                 expect(target.all()[1].index).toBe(1);
@@ -98,8 +101,8 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('resets index for added item', () =>
             {
-                var target = new tt.List();
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a todo'));
+                var target = new List();
+                var item = new Item(Tokenizer.tokenize('This is a todo'));
                 item.index = 55;
                 target.add(item);
 
@@ -111,34 +114,34 @@ namespace TodoTxtJs.TodoItems.Specs
         {
             it('returns empty array for no projects', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a todo'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a todo'));
+                var target = new List();
                 target.add(item);
                 expect(target.projects().length).toBe(0);
             });
 
             it('lists projects in items', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a +project'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a +project'));
+                var target = new List();
                 target.add(item);
                 expect(target.projects().length).toBeGreaterThan(0);
             });
 
             it('lists correct project name in items', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a +project'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a +project'));
+                var target = new List();
                 target.add(item);
                 expect(target.projects()[0]).toBe('project');
             });
 
             it('lists all only unique projects', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a +project'));
-                var item2 = new tt.Item(tt.Tokenizer.tokenize('This is a +project'));
-                var item3 = new tt.Item(tt.Tokenizer.tokenize('This is a +project'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a +project'));
+                var item2 = new Item(Tokenizer.tokenize('This is a +project'));
+                var item3 = new Item(Tokenizer.tokenize('This is a +project'));
+                var target = new List();
                 target.add(item);
                 target.add(item2);
                 target.add(item3);
@@ -147,10 +150,10 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('lists all projects', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a +projectA'));
-                var item2 = new tt.Item(tt.Tokenizer.tokenize('This is a +projectB'));
-                var item3 = new tt.Item(tt.Tokenizer.tokenize('This is a +projectC'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a +projectA'));
+                var item2 = new Item(Tokenizer.tokenize('This is a +projectB'));
+                var item3 = new Item(Tokenizer.tokenize('This is a +projectC'));
+                var target = new List();
                 target.add(item);
                 target.add(item2);
                 target.add(item3);
@@ -161,9 +164,9 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('lists projects alphabetically', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a +project'));
-                var item2 = new tt.Item(tt.Tokenizer.tokenize('This is a +aProject'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a +project'));
+                var item2 = new Item(Tokenizer.tokenize('This is a +aProject'));
+                var target = new List();
                 target.add(item);
                 target.add(item2);
                 expect(target.projects()[0]).toBe('aProject');
@@ -176,34 +179,34 @@ namespace TodoTxtJs.TodoItems.Specs
         {
             it('returns empty array for no contexts', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a todo'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a todo'));
+                var target = new List();
                 target.add(item);
                 expect(target.contexts().length).toBe(0);
             });
 
             it('lists contexts in items', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a @context'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a @context'));
+                var target = new List();
                 target.add(item);
                 expect(target.contexts().length).toBeGreaterThan(0);
             });
 
             it('lists correct context name in items', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a @context'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a @context'));
+                var target = new List();
                 target.add(item);
                 expect(target.contexts()[0]).toBe('context');
             });
 
             it('lists all only unique contexts', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a @context'));
-                var item2 = new tt.Item(tt.Tokenizer.tokenize('This is a @context'));
-                var item3 = new tt.Item(tt.Tokenizer.tokenize('This is a @context'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a @context'));
+                var item2 = new Item(Tokenizer.tokenize('This is a @context'));
+                var item3 = new Item(Tokenizer.tokenize('This is a @context'));
+                var target = new List();
                 target.add(item);
                 target.add(item2);
                 target.add(item3);
@@ -212,10 +215,10 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('lists all contexts', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a @contextA'));
-                var item2 = new tt.Item(tt.Tokenizer.tokenize('This is a @contextB'));
-                var item3 = new tt.Item(tt.Tokenizer.tokenize('This is a @contextC'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a @contextA'));
+                var item2 = new Item(Tokenizer.tokenize('This is a @contextB'));
+                var item3 = new Item(Tokenizer.tokenize('This is a @contextC'));
+                var target = new List();
                 target.add(item);
                 target.add(item2);
                 target.add(item3);
@@ -226,9 +229,9 @@ namespace TodoTxtJs.TodoItems.Specs
 
             it('lists contexts alphabetically', () =>
             {
-                var item = new tt.Item(tt.Tokenizer.tokenize('This is a @context'));
-                var item2 = new tt.Item(tt.Tokenizer.tokenize('This is a @acontext'));
-                var target = new tt.List();
+                var item = new Item(Tokenizer.tokenize('This is a @context'));
+                var item2 = new Item(Tokenizer.tokenize('This is a @acontext'));
+                var target = new List();
                 target.add(item);
                 target.add(item2);
                 expect(target.contexts()[0]).toBe('acontext');
