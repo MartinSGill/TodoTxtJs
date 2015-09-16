@@ -22,38 +22,26 @@
  ******************************************************************************/
 
 /// <reference path="../typings/tsd.d.ts" />
-/// <reference path="../directives/to-do-list.ts" />
-/// <reference path="../models/list.ts" />
-/// <reference path="../models/item.ts" />
-/// <reference path="../transforms/tokenizer.ts" />
+/// <reference path="../controllers/todo-item-controller.ts" />
 
-namespace TodoTxt.Controllers
+namespace TodoTxt.Directives
 {
-    export class ToDoListController {
-        name: string;
-        list: Models.List;
+    export interface IToDoItemScope
+    {
+        item: TodoTxt.Models.Item;
+    }
 
-        newItemName: string;
-
-        static $inject = [
-            "$scope"
-        ];
-        constructor(isolateScope: Directives.IToDoListScope) {
-            this.name = isolateScope.name;
-            this.list = new Models.List();
-        }
-
-        save() {
-            if (this.newItemName && this.newItemName.length > 0) {
-                this.list.add(Models.Item.parseString(this.newItemName));
-                this.newItemName = null;
-            }
-        }
-
-        toggle(item: Models.Item): boolean {
-            console.log(JSON.stringify(item));
-            //listItem.completed(!listItem.completed());
-            return item.completed();
+    export function todoItem():ng.IDirective
+    {
+        return {
+            restrict    : "E",
+            scope       : {
+                item: "="
+            },
+            controller  : Controllers.TodoItemController,
+            controllerAs: "vm",
+            templateUrl : "./views/todo-item.html",
+            replace     : true
         }
     }
 }

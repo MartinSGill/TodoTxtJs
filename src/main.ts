@@ -23,6 +23,7 @@
 /// <reference path="typings/tsd.d.ts" />
 /// <reference path="controllers/to-do-list-controller.ts" />
 /// <reference path="directives/to-do-list.ts" />
+/// <reference path="directives/todo-item.ts" />
 
 module TodoTxt
 {

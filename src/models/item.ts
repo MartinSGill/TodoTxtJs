@@ -34,7 +34,7 @@ namespace TodoTxt.Models
 
     export class Item
     {
-        private tokens:Token[];
+        private item_tokens:Token[];
         public index:number = 0;
 
         constructor(tokens:Token[])
@@ -44,13 +44,18 @@ namespace TodoTxt.Models
                 throw "No tokens given";
             }
 
-            this.tokens = tokens;
+            this.item_tokens = tokens;
         }
 
         // TODO: Write Test
         public static parseString(text: string): Item
         {
             return new Item(Tokenizer.tokenize(text));
+        }
+
+        public tokens(): Token[]
+        {
+            return this.item_tokens;
         }
 
         public completed():boolean
@@ -88,11 +93,11 @@ namespace TodoTxt.Models
                 var created = new Token(TokenType.createDate, date);
                 if (this.completed())
                 {
-                    this.tokens.splice(1, 0, created);
+                    this.item_tokens.splice(1, 0, created);
                 }
                 else
                 {
-                    this.tokens.splice(0, 0, created);
+                    this.item_tokens.splice(0, 0, created);
                 }
             }
             else
@@ -145,17 +150,17 @@ namespace TodoTxt.Models
 
         public toString(): string
         {
-            return Serializers.stringSerializer(this.tokens);
+            return Serializers.stringSerializer(this.item_tokens);
         }
 
         public toHtml(): string
         {
-            return Serializers.htmlSerializer(this.tokens);
+            return Serializers.htmlSerializer(this.item_tokens);
         }
 
         private findTokens(type:TokenType):Token[]
         {
-            return this.tokens.filter(function (item)
+            return this.item_tokens.filter(function (item)
             {
                 return item.type == type;
             });

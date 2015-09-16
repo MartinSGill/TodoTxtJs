@@ -21,13 +21,22 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-namespace TodoTxt.Models
+/// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../directives/todo-item.ts" />
+/// <reference path="../models/list.ts" />
+/// <reference path="../models/item.ts" />
+/// <reference path="../transforms/tokenizer.ts" />
+
+namespace TodoTxt.Controllers
 {
-    export class ListItem
-    {
-        constructor(public name:string,
-                    public isComplete:boolean = false)
-        {
+    export class TodoItemController {
+        item: Models.Item;
+
+        static $inject = [
+            "$scope"
+        ];
+        constructor(isolateScope: Directives.IToDoItemScope) {
+            this.item = isolateScope.item;
         }
     }
 }

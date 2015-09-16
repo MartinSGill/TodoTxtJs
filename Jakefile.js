@@ -24,11 +24,29 @@ var less_files = [
 // TypeScript
 ////////////////////////////////////////////////////////////////
 var ts_files = new jake.FileList();
-ts_files.include('./src/**/*.ts');
+ts_files.include('./src/js/**/*.ts');
+
+var ts_files_a = new jake.FileList();
+ts_files_a.include('./src/main.ts');
+ts_files_a.include('./src/controllers/**/*.ts');
+ts_files_a.include('./src/directives/**/*.ts');
+ts_files_a.include('./src/models/**/*.ts');
+ts_files_a.include('./src/transforms/**/*.ts');
+
 
 var ts_outfile = 'out/app.js';
+var ts_outfile_a  = 'out/todotxt.js';
 var ts_options = [
   '--out ' + ts_outfile,
+  '--outDir ' + 'out',
+  '--sourceMap',
+  '--sourceRoot debug',
+  '--module commonjs',
+  '--noImplicitAny',
+  '--removeComments'
+];
+var ts_options_a = [
+  '--out ' + ts_outfile_a,
   '--outDir ' + 'out',
   '--sourceMap',
   '--sourceRoot debug',
@@ -64,13 +82,18 @@ function compileLessFile(file) {
   jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
 
-function compileTsFiles(watch) {
+function compileTsFiles() {
   jake.logger.log('Compile TypeScript');
   var files = ts_files.toArray().join(' ');
   var options = ts_options.join(' ');
-  if (watch) {
-    options += ' -w';
-  }
+  var cmd = path.join(bin_path, 'tsc') + ' ' + options + ' ' + files;
+  jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
+}
+
+function compileTsFilesA() {
+  jake.logger.log('Compile TypeScript (Angular)');
+  var files = ts_files_a.toArray().join(' ');
+  var options = ts_options_a.join(' ');
   var cmd = path.join(bin_path, 'tsc') + ' ' + options + ' ' + files;
   jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
@@ -96,13 +119,9 @@ namespace('build', function () {
   });
 
   desc('Build TS files');
-  task('ts-watch', ['out'], function () {
-    compileTsFiles(true);
-  });
-
-  desc('Build TS files');
   task('ts', ['out', 'ts-debug'], function () {
     compileTsFiles();
+    compileTsFilesA();
   });
 
   desc('Place debug TS files');
