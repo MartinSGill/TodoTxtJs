@@ -22,7 +22,7 @@
  ******************************************************************************/
 
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/js/model/todo/Metadata/due.ts" />
+/// <reference path="Metadata/due.ts" />
 
 namespace TodoTxtJs.TodoItems.Metadata.Specs
 {

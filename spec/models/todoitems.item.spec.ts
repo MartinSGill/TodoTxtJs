@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/js/model/todo/item.ts" />
+/// <reference path="item.ts" />
 
 namespace TodoTxtJs.TodoItems.Specs
 {

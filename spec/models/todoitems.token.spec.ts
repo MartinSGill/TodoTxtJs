@@ -22,7 +22,7 @@
  ******************************************************************************/
 
 /// <reference path="../../src/typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../src/js/model/todo/token.ts" />
+/// <reference path="token.ts" />
 
 namespace TodoTxtJs.TodoItems.Specs
 {

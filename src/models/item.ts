@@ -22,10 +22,10 @@
  ******************************************************************************/
 
 /// <reference path="token.ts" />
-/// <reference path="../../../transforms/tokenizer.ts" />
+/// <reference path="../transforms/tokenizer.ts" />
 /// <reference path="Metadata/GenericMetadata.ts" />
-/// <reference path="../../../transforms/Serializers/stringSerializer.ts" />
-/// <reference path="../../../transforms/Serializers/htmlSerializer.ts" />
+/// <reference path="../transforms/Serializers/StringSerializer.ts" />
+/// <reference path="../transforms/Serializers/HtmlSerializer.ts" />
 
 namespace TodoTxtJs.TodoItems
 {
