@@ -23,6 +23,7 @@ module.exports = function (config) {
       'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js',
       'src/lib/angular/angular.min.js',
       'out/app.js',
+      'out/todotxt.js',
       'spec/tools/all.js', // Jasmine
       'spec/**/*.spec.js'
     ],

@@ -26,6 +26,9 @@ var less_files = [
 var ts_files = new jake.FileList();
 ts_files.include('./src/js/**/*.ts');
 
+var ts_spec_files = new jake.FileList();
+ts_spec_files.include('./spec/**/*.ts');
+
 var ts_files_a = new jake.FileList();
 ts_files_a.include('./src/main.ts');
 ts_files_a.include('./src/controllers/**/*.ts');
@@ -90,6 +93,19 @@ function compileTsFiles() {
   jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
 }
 
+function compileTsSpecFiles() {
+  jake.logger.log('Compile TypeScript Specs');
+  var files = ts_spec_files.toArray().join(' ');
+  var options = [
+    '--sourceMap',
+    '--module commonjs',
+    '--noImplicitAny',
+    '--removeComments'
+  ];
+  var cmd = path.join(bin_path, 'tsc') + ' ' + options.join(' ') + ' ' + files;
+  jake.exec(cmd, {printStdout: !jake.program.opts.quiet, breakOnError: true});
+}
+
 function compileTsFilesA() {
   jake.logger.log('Compile TypeScript (Angular)');
   var files = ts_files_a.toArray().join(' ');
@@ -122,6 +138,7 @@ namespace('build', function () {
   task('ts', ['out', 'ts-debug'], function () {
     compileTsFiles();
     compileTsFilesA();
+    compileTsSpecFiles();
   });
 
   desc('Place debug TS files');
