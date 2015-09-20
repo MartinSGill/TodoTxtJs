@@ -21,15 +21,53 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../../models/token.ts" />
-
-namespace TodoTxt.Models.Metadata
+namespace TodoTxt
 {
-    export class GenericMetadata extends Token
+    class Logging
     {
-        constructor(id:string, text:string)
+        public static info(text: string, className?:string)
         {
-            super(TokenType.metadata, text, id);
+            if (className) text = "["+ className + "]" + text;
+            if (typeof console !== 'undefined')
+            {
+                console.info(text);
+            }
+        }
+
+        public static debug(text: string, className?:string)
+        {
+            if (className) text = "["+ className + "]" + text;
+            if (typeof console !== 'undefined')
+            {
+                if (console.debug)
+                {
+                    console.log(text);
+                }
+                else
+                {
+                    console.info("DEBUG:" + text);
+                }
+            }
+        }
+
+        public static warn(text: string, className?:string)
+        {
+            if (className) text = "["+ className + "]" + text;
+            if (typeof console !== 'undefined')
+            {
+                console.warn(text);
+            }
+        }
+
+        public static error(text: string, className?:string)
+        {
+            if (className) text = "["+ className + "]" + text;
+            if (typeof console !== 'undefined')
+            {
+                console.error(text);
+            }
         }
     }
+
+    export var log = Logging;
 }

@@ -21,15 +21,32 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../../models/token.ts" />
+/// <reference path="../typings/angularjs/angular.d.ts" />
+/// <reference path="../utils/logging.ts" />
+/// <reference path="../models/list.ts" />
 
-namespace TodoTxt.Models.Metadata
+namespace TodoTxt.Services
 {
-    export class GenericMetadata extends Token
+    import Item = TodoTxt.Models.Item;
+    export class ListService implements ng.IServiceProvider
     {
-        constructor(id:string, text:string)
+        $get: any;
+        private items: Models.List;
+
+        constructor(...args: any[])
         {
-            super(TokenType.metadata, text, id);
+            log.debug("init", 'ListService');
+            this.items = new TodoTxt.Models.List();
+        }
+
+        public all() : Models.Item[]
+        {
+            return this.items.all();
+        }
+
+        public add(text: string) : void
+        {
+            this.items.add(Item.parseString(text));
         }
     }
 }

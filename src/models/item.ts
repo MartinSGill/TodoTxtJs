@@ -21,11 +21,11 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="token.ts" />
+/// <reference path="../models/token.ts" />
+/// <reference path="../models/metadata/generic-metadata.ts" />
 /// <reference path="../transforms/tokenizer.ts" />
-/// <reference path="metadata/generic-metadata.ts" />
-/// <reference path="../transforms/serializers/string-serializer.ts" />
 /// <reference path="../transforms/serializers/html-serializer.ts" />
+/// <reference path="../transforms/serializers/string-serializer.ts" />
 
 namespace TodoTxt.Models
 {

@@ -22,6 +22,7 @@
  ******************************************************************************/
 
 /// <reference path="../models/token.ts" />
+/// <reference path="../models/metadata/generic-metadata.ts" />
 
 namespace TodoTxt.Transforms
 {

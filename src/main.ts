@@ -20,14 +20,18 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-/// <reference path="typings/tsd.d.ts" />
+
+/// <reference path="typings/angularjs/angular.d.ts" />
 /// <reference path="controllers/to-do-list-controller.ts" />
+/// <reference path="controllers/todo-item-controller.ts" />
 /// <reference path="directives/to-do-list.ts" />
 /// <reference path="directives/todo-item.ts" />
+/// <reference path="services/list-service.ts" />
 
 module TodoTxt
 {
-    angular.module("todoTxtApp", [])
+    angular.module("todoTxtApp", [ 'ngMaterial' ])
         .controller(TodoTxt.Controllers)
-        .directive(TodoTxt.Directives);
+        .directive(TodoTxt.Directives)
+        .service('ListService', TodoTxt.Services.ListService);
 }

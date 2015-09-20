@@ -21,8 +21,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../typings/tsd.d.ts" />
 /// <reference path="../controllers/todo-item-controller.ts" />
+/// <reference path="../services/list-service.ts" />
 
 namespace TodoTxt.Directives
 {

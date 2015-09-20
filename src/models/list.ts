@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="item.ts" />
+/// <reference path="../models/item.ts" />
 
 namespace TodoTxt.Models
 {

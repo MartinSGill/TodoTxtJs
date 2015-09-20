@@ -21,37 +21,42 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../typings/tsd.d.ts" />
-/// <reference path="../directives/to-do-list.ts" />
-/// <reference path="../models/list.ts" />
+/// <reference path="../utils/logging.ts" />
 /// <reference path="../models/item.ts" />
-/// <reference path="../transforms/tokenizer.ts" />
+/// <reference path="../directives/to-do-list.ts" />
+/// <reference path="../services/list-service.ts" />
 
 namespace TodoTxt.Controllers
 {
-    export class ToDoListController {
-        name: string;
-        list: Models.List;
-
-        newItemName: string;
+    export class ToDoListController
+    {
+        name:string;
+        newItemName:string;
+        list: Services.ListService;
 
         static $inject = [
-            "$scope"
+            "$scope",
+            "ListService"
         ];
-        constructor(isolateScope: Directives.IToDoListScope) {
+
+        constructor(isolateScope:Directives.IToDoListScope, listService:Services.ListService)
+        {
+            log.debug('init', 'TodoListController');
             this.name = isolateScope.name;
-            this.list = new Models.List();
+            this.list = listService;
         }
 
-        save() {
-            if (this.newItemName && this.newItemName.length > 0) {
-                this.list.add(Models.Item.parseString(this.newItemName));
+        save()
+        {
+            if (this.newItemName && this.newItemName.length > 0)
+            {
+                this.list.add(this.newItemName);
                 this.newItemName = null;
             }
         }
 
-        toggle(item: Models.Item): boolean {
-            console.log(JSON.stringify(item));
+        toggle(item:Models.Item):boolean
+        {
             //listItem.completed(!listItem.completed());
             return item.completed();
         }

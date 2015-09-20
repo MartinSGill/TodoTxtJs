@@ -21,11 +21,12 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../typings/tsd.d.ts" />
 /// <reference path="../controllers/to-do-list-controller.ts" />
+/// <reference path="../services/list-service.ts" />
 
 namespace TodoTxt.Directives
 {
+    import ListService = TodoTxt.Services.ListService;
     export interface IToDoListScope
     {
         name: string
@@ -36,7 +37,7 @@ namespace TodoTxt.Directives
         return {
             restrict    : "E",
             scope       : {
-                name: "@"
+                name: "@",
             },
             controller  : Controllers.ToDoListController,
             controllerAs: "vm",

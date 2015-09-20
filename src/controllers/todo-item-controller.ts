@@ -21,11 +21,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-/// <reference path="../typings/tsd.d.ts" />
-/// <reference path="../directives/todo-item.ts" />
-/// <reference path="../models/list.ts" />
 /// <reference path="../models/item.ts" />
-/// <reference path="../transforms/tokenizer.ts" />
+/// <reference path="../directives/todo-item.ts" />
 
 namespace TodoTxt.Controllers
 {
