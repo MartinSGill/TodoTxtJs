@@ -30,7 +30,12 @@
 
 module TodoTxt
 {
-    angular.module("todoTxtApp", [ 'ngMaterial' ])
+    angular.module("todoTxtApp", [ 'ngMaterial', 'material.core.theming' ])
+        .config(function($mdThemingProvider : any) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('indigo')
+            .accentPalette('purple')
+            .dark(); })
         .controller(TodoTxt.Controllers)
         .directive(TodoTxt.Directives)
         .service('ListService', TodoTxt.Services.ListService);
