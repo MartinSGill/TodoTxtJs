@@ -66,6 +66,7 @@ declare module Dropbox
         secret?: string;
         token?: string;
         uid?: string;
+        sandbox?: boolean;
     }
 
     interface ClientAuthenticateOptions

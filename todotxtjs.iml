@@ -7,5 +7,14 @@
     <orderEntry type="library" name="jQuery-2.0.0" level="application" />
     <orderEntry type="library" name="jQuery UI-1.10.2" level="application" />
     <orderEntry type="library" name="Knockout-2.2.1" level="application" />
+    <orderEntry type="library" name="dropbox" level="application" />
+    <orderEntry type="library" name="jquery-2.0.0" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
+    <orderEntry type="library" name="jquery.jgrowl" level="application" />
+    <orderEntry type="library" name="knockout-2.2.1" level="application" />
+    <orderEntry type="library" name="moment" level="application" />
+    <orderEntry type="library" name="TodoTxtJsServer node_modules" level="project" />
+    <orderEntry type="library" name="WebApp node_modules" level="project" />
+    <orderEntry type="library" name="TodoTxtJs node_modules" level="project" />
   </component>
 </module>

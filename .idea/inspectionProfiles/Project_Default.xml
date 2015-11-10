@@ -5332,9 +5332,6 @@
     <inspection_tool class="UnusedDefine" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Project Files" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="UnusedImport" enabled="true" level="WARNING" enabled_by_default="false">
-      <scope name="Project Files" level="WARNING" enabled="false" />
-    </inspection_tool>
     <inspection_tool class="UnusedLabel" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="true" />
     </inspection_tool>

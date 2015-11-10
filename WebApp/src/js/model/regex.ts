@@ -31,6 +31,6 @@ module TodoTxtJs.Regex
 
     export var Project = /(?:\W|^)(\+)([^\s]+)/ig;
 
-    export var Url = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$])/ig;
+    export var Url = /(\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[\-A-Z0-9()+&@#\/%=~_|$?!:,.]*[A-Z0-9()+&@#\/%=~_|$])/ig;
 }
 

@@ -450,7 +450,7 @@ module TodoTxtJs.View
                 height: "auto",
                 minWidth: 800,
                 maxWidth: width,
-                auto: "auto",
+                //auto: "auto",
                 closeOnEscape: true,
                 draggable: false,
                 resizable: false
@@ -492,7 +492,7 @@ module TodoTxtJs.View
                 height: "auto",
                 minWidth: 800,
                 maxWidth: width,
-                auto: "auto",
+                //auto: "auto",
                 closeOnEscape: true,
                 draggable: false,
                 resizable: false

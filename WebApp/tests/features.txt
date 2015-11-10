@@ -38,3 +38,5 @@ x 2013-01-01 (E) Completed todo
 tämä on todo @kynällä
 tämä on toinen todo +päivällä
 tämä on kolmas todo @yöllä
+
+2013-01-01 A todo with url with parentheses http://example.com/hello/t(her)e/world due:2013-01-01

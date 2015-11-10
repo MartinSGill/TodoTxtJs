@@ -22,6 +22,8 @@
  ******************************************************************************/
 
 /// <reference path="../lib/knockout.d.ts" />
+/// <reference path="../lib/jquery.d.ts" />
+/// <reference path="../lib/jqueryui.d.ts" />
 /// <reference path="../model/todomanager.ts" />
 
 module TodoTxtJs.View
@@ -56,7 +58,7 @@ module TodoTxtJs.View
                 height: "auto",
                 minWidth: 800,
                 maxWidth: width,
-                auto: "auto",
+                //auto: "auto",
                 closeOnEscape: true,
                 draggable: false,
                 resizable: false
@@ -66,7 +68,7 @@ module TodoTxtJs.View
         public getExportText() : string
         {
             var todos : string[] = this._todoManager.exportToStringArray();
-            return todos.join("\n");
+            return todos.join("\n") + "\n";
         }
 
         public _fillExportBox() : void
