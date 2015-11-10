@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/spec" libraries="{Node.js Globals, Node.js v0.10.33 Core Modules, TodoTxtJs node_modules, jquery-2.0.0, knockout-2.2.1}" />
+    <file url="file://$PROJECT_DIR$/spec" libraries="{Node.js Core, TodoTxtJs node_modules, jquery-2.0.0, knockout-2.2.1}" />
     <file url="file://$PROJECT_DIR$/src" libraries="{HTML5 / EcmaScript 5, dropbox, jquery-2.0.0, jquery-ui, jquery.jgrowl, knockout-2.2.1, moment}" />
     <excludedPredefinedLibrary name="HTML" />
     <excludedPredefinedLibrary name="HTML5 / EcmaScript 5" />

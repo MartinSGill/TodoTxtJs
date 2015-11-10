@@ -20,7 +20,6 @@
         </array>
       </option>
       <option name="outputFromStdout" value="true" />
-      <option name="passParentEnvs" value="true" />
       <option name="program" value="C:/Program Files/nodejs/node.exe" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
@@ -40,7 +39,6 @@
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="passParentEnvs" value="true" />
       <option name="program" value="C:/tools/ruby-2.2.2-i386-mingw32/bin/sass.bat" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />

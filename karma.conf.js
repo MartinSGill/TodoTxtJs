@@ -7,11 +7,9 @@ module.exports = function (config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
-
 
     // list of files / patterns to load in the browser
     files: [
@@ -21,8 +19,8 @@ module.exports = function (config) {
       'http://cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.9.2/dropbox.min.js',
       'http://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.2.12/jquery.jgrowl.min.js',
       'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js',
-      'src/lib/angular-mocks/angular-mocks.js',
       'src/lib/angular/angular.min.js',
+      'src/lib/angular-mocks/angular-mocks.js',
       'out/app.js',
       'out/todotxt.js',
       'spec/tools/all.js', // Jasmine

@@ -12,7 +12,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="TodoTxtJs node_modules" level="project" />
     <orderEntry type="library" name="moment" level="application" />
-    <orderEntry type="library" name="Node.js v0.10.33 Core Modules" level="application" />
     <orderEntry type="library" name="dropbox" level="application" />
     <orderEntry type="library" name="jquery-2.0.0" level="application" />
     <orderEntry type="library" name="jquery-ui" level="application" />
