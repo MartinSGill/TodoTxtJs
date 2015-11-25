@@ -38,10 +38,10 @@ namespace TodoTxt.Transforms.Serializers
     var customMetadataRenderers:{ [id:string]:metaDataRenderer } = {};
 
     /**
-     * Allows registration of custom Metadata renderers.
+     * Allows registration of custom metadata renderers.
      * Use this to override rendering for a specific metadata id,
      * e.g. URLs.
-     * @param id Metadata Id. e.g. "id" from "id:value"
+     * @param id metadata Id. e.g. "id" from "id:value"
      * @param callback The function that renders the metadata content.
      */
     export function registerMetadataRenderer(id:string, callback:metaDataRenderer)

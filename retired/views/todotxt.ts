@@ -30,9 +30,9 @@
 /// <reference path="../model/contentRender.ts" />
 /// <reference path="../model/todomanager.ts" />
 /// <reference path="../model/options.ts" />
-/// <reference path="../views/displayOptions.ts" />
-/// <reference path="../views/importing.ts" />
-/// <reference path="../views/exporting.ts" />
+/// <reference path="displayOptions.ts" />
+/// <reference path="importing.ts" />
+/// <reference path="exporting.ts" />
 
 namespace TodoTxtJs.View
 {

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="TypeScriptCompiler">
     <option name="isCompilerEnabled" value="true" />
-    <option name="typeScriptServiceDirectory" value="E:\Projects\TodoTxtJs\node_modules\typescript\bin" />
     <option name="typeScriptCompilerParams" value="--noImplicitAny" />
-    <option name="scopeName" value="typescript-compiler" />
-    <option name="versionType" value="SERVICE_DIRECTORY" />
+    <option name="scopeName" value="src" />
+    <option name="useConfig" value="true" />
   </component>
 </project>

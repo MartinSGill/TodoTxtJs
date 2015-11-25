@@ -23,8 +23,8 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="../utils/datetime.ts" />
 /// <reference path="../utils/events.ts" />
-/// <reference path="../model/todo.ts" />
-/// <reference path="../model/regex.ts" />
+/// <reference path="todo.ts" />
+/// <reference path="regex.ts" />
 
 namespace TodoTxtJs
 {

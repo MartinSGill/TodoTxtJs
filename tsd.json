@@ -5,19 +5,10 @@
   "path": "src/typings",
   "bundle": "src/typings/tsd.d.ts",
   "installed": {
-    "knockout/knockout.d.ts": {
-      "commit": "f6c8ca47193fb67947944a3170912672ac3e908e"
-    },
-    "jquery/jquery.d.ts": {
-      "commit": "52b0ea5c9719831eecf6ba7436660e30061a4b3c"
-    },
     "moment/moment.d.ts": {
       "commit": "f6c8ca47193fb67947944a3170912672ac3e908e"
     },
     "moment/moment-node.d.ts": {
-      "commit": "f6c8ca47193fb67947944a3170912672ac3e908e"
-    },
-    "jqueryui/jqueryui.d.ts": {
       "commit": "f6c8ca47193fb67947944a3170912672ac3e908e"
     },
     "angularjs/angular.d.ts": {
@@ -31,6 +22,9 @@
     },
     "jasmine/jasmine.d.ts": {
       "commit": "52b0ea5c9719831eecf6ba7436660e30061a4b3c"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
     }
   }
 }

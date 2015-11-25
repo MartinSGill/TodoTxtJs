@@ -4,9 +4,9 @@ src/**/*.js
 src/**/*.map
 
 # Except for these, which aren't generated
-!src/js/bindings/binding_todo.js
-!src/js/lib/jquery.hotkeys.js
-!src/js/sample_dropbox_key.js
+!retired/bindings/binding_todo.js
+!retired/lib/jquery.hotkeys.js
+!retired/sample_dropbox_key.js
 
 # Ignore generated CSS files
 src/css/**/*.css
