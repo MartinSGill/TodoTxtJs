@@ -1,0 +1,113 @@
+@import '_material_colors';
+@import '_main';
+
+@color-formatted-text-project: @theme-accentColor;
+@color-formatted-text-context: @theme-primaryColor;
+
+@color-formatted-text-priority: @theme-accentColor;
+
+@color-formatted-background-metadata: @theme-accentColor;
+@color-formatted-text-metadata-value: @theme-primaryTextColor;
+@color-formatted-text-metadata-key: @theme-backgroundPrimaryColor;
+@color-formatted-background-metadata-value: @theme-backgroundPrimaryColor;
+@color-formatted-text-metadata-url: @theme-darkPrimaryColor;
+
+@color-formatted-text-create-date: @theme-accentColor;
+@color-formatted-text-completed: @theme-accentColor;
+
+@color-formatted-background: @theme-backgroundPrimaryColor;
+
+@color-formatted-background-toolbox: @theme-backgroundPrimaryColor;
+@color-formatted-text-toolbox: @theme-secondaryTextColor;
+
+tr.todo-formatted {
+  display: block;
+  background-color: @color-formatted-background;
+  font-size: 18pt;
+  width: 100%;
+  outline: thin solid @palette-Black-Dividers;
+  border-collapse: collapse;
+
+  span {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  td.left, td.right {
+    width: auto;
+    background-color: @color-formatted-background-toolbox;
+    color: @color-formatted-text-toolbox;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+  }
+
+  td.main {
+    width: 100%;
+    padding: 4px 5px;
+  }
+
+  .material-icons {
+    vertical-align: bottom;
+  }
+
+  .priority {
+    color: @color-formatted-text-priority;
+    font-weight: bold;
+    text-shadow: 1px 1px @palette-Grey-800; // TODO: refactor
+
+    .symbol {
+      display: none;
+    }
+  }
+
+  .item-completed {
+    background-color: @theme-dividerColor;
+  }
+
+  .createDate {
+    color: @color-formatted-text-create-date;
+  }
+
+  .completed {
+    color: @color-formatted-text-completed;
+  }
+
+  .project {
+    color: @color-formatted-text-project;
+  }
+
+  .context {
+    color: @color-formatted-text-context;
+  }
+
+  .metadata {
+    padding: 3px;
+    background-color: @color-formatted-background-metadata;
+    border: 1px solid @color-formatted-background-metadata;
+    border-radius: 15px;
+    font-size: smaller;
+
+    .key {
+      font-variant: small-caps;
+      color: @color-formatted-text-metadata-key;
+      .material-icons {
+        font-variant: normal;
+      }
+    }
+
+    .value {
+      padding: 2px 5px 2px 2px;
+      background-color: @color-formatted-background-metadata-value;
+      color: @color-formatted-text-metadata-value;
+      border-bottom-right-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .url {
+      color: @color-formatted-text-metadata-url;
+    }
+  }
+}

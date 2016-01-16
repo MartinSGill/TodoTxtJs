@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectTasksOptions" suppressed-tasks="Less">
+  <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="E:\Projects\TodoTxtJs\node_modules\less\bin\lessc --no-color $FileName$" />
+      <option name="arguments" value="--no-color $FileName$" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" value="Compiles .less files into .css files" />
       <option name="exitCodeBehavior" value="ERROR" />
@@ -20,28 +20,9 @@
         </array>
       </option>
       <option name="outputFromStdout" value="true" />
-      <option name="program" value="C:/Program Files/nodejs/node.exe" />
+      <option name="program" value="$USER_HOME$/AppData/Roaming/npm/lessc.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="$FileDir$" />
-      <envs />
-    </TaskOptions>
-    <TaskOptions isEnabled="true">
-      <option name="arguments" value=" --no-cache --update $FileName$:$FileNameWithoutExtension$.css" />
-      <option name="checkSyntaxErrors" value="true" />
-      <option name="description" value="Compiles .scss files into .css files" />
-      <option name="exitCodeBehavior" value="ERROR" />
-      <option name="fileExtension" value="scss" />
-      <option name="immediateSync" value="true" />
-      <option name="name" value="SCSS" />
-      <option name="output" value="$FileNameWithoutExtension$.css" />
-      <option name="outputFilters">
-        <array />
-      </option>
-      <option name="outputFromStdout" value="false" />
-      <option name="program" value="C:/tools/ruby-2.2.2-i386-mingw32/bin/sass.bat" />
-      <option name="scopeName" value="Project Files" />
-      <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>

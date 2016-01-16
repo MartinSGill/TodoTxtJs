@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <title>Angular 2 QuickStart</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,latin-ext,greek,greek-ext,vietnamese,cyrillic-ext,cyrillic' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css" type="text/css"/>
+
+  <!-- 1. Load libraries -->
+  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="node_modules/rxjs/bundles/Rx.js"></script>
+  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+  <!-- 2. Configure SystemJS -->
+  <script>
+    System.config({
+      packages: {
+        app: {
+          format: 'register',
+          defaultExtension: 'js'
+        }
+      }
+    });
+    System.import('app/boot')
+        .then(null, console.error.bind(console));
+  </script>
+</head>
+
+<!-- 3. Display the application -->
+<body>
+<todotxt-app>Loading...</todotxt-app>
+</body>
+
+</html>

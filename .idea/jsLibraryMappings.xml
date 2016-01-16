@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/spec" libraries="{Node.js Core, TodoTxtJs node_modules}" />
-    <file url="file://$PROJECT_DIR$/src" libraries="{HTML5 / EcmaScript 5}" />
-    <excludedPredefinedLibrary name="HTML" />
-    <excludedPredefinedLibrary name="HTML5 / EcmaScript 5" />
+    <file url="file://$PROJECT_DIR$" libraries="{TodoTxt2 node_modules}" />
   </component>
 </project>

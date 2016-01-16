@@ -1,7 +1,7 @@
 
 # General exclusion for generated Javascript files under source.
-src/**/*.js
-src/**/*.map
+app/**/*.js
+app/**/*.map
 
 # Except for these, which aren't generated
 !retired/bindings/binding_todo.js
@@ -9,9 +9,7 @@ src/**/*.map
 !retired/sample_dropbox_key.js
 
 # Ignore generated CSS files
-src/css/**/*.css
-src/css/*.css
-src/css/*.map
+styles/**/*.css
 
 # Temp until all tests are TS.
 spec/models/**/*.js
