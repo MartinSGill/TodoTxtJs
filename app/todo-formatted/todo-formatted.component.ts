@@ -10,7 +10,7 @@ import {Item} from './../models/item';
     directives: [CORE_DIRECTIVES]
 })
 export class TodoFormatted implements OnChanges {
-    @Input() todo:string = "";
+    @Input() todo:any = "";
     public item:Item;
 
     public ngOnChanges(changes:{

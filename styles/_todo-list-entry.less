@@ -1,0 +1,34 @@
+@import '_palette';
+
+@color-formatted-background-toolbox: @theme-backgroundPrimaryColor;
+@color-formatted-text-toolbox: @theme-secondaryTextColor;
+
+table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.todo-list-entry {
+  tr {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td.left, td.right {
+    width: auto;
+    background-color: @color-formatted-background-toolbox;
+    color: @color-formatted-text-toolbox;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+  }
+
+  td.main {
+    width: 100%;
+    padding: 4px 5px;
+  }
+
+}

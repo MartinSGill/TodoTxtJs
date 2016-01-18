@@ -1,0 +1,7 @@
+<tr class="todo-list-entry">
+  <td class="left"><i class="material-icons">reorder</i></td>
+  <td class="main" [ngClass]='{ "item-completed": todo.completed() }' ><!--
+      --><todo-formatted [todo]="todo"></todo-formatted><!--
+  --></td>
+  <td class="right"><i class="material-icons">edit</i><i class="material-icons">delete</i></td>
+</tr>

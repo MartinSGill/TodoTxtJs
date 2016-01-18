@@ -8,7 +8,7 @@ export class TodoService {
     private items:Item[];
 
     constructor() {
-        this.items = TODOS.slice(0,3);
+        this.items = TODOS;//.slice(0,3);
     }
 
     public nextIndex():number {
