@@ -1,6 +1,6 @@
-<div>
-  <label><input type="text" [(ngModel)]="value" placeholder="New Todo"/></label>
+<div class="todo-entry">
   <table>
     <todo-formatted todo="{{value}}"></todo-formatted>
   </table>
+  <input type="text" [(ngModel)]="value" placeholder="New Todo"/><i class="material-icons"(click)="add()">add_box</i>
 </div>

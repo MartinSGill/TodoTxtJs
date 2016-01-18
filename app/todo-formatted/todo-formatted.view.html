@@ -13,7 +13,7 @@
             <span *ngSwitchWhen="'priority'" [ngClass]="token.typeString()">
                 <span class="symbol">(</span><span class="text">{{ token.text }}</span><span class="symbol">)</span>
             </span>
-            <span *ngSwitchWhen="'context'" [ngClass]="token.typeString()">
+              <span *ngSwitchWhen="'context'" [ngClass]="token.typeString()">
                 <span class="symbol"><i class="material-icons">place</i></span><span
                 class="text">{{ token.text }}</span>
             </span>

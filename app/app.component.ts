@@ -12,9 +12,6 @@ import {TodoService} from './services/todo.service';
     styleUrls: ['app/app.style.css'],
     directives: [TodoEntry, TodoList]
 })
-export class TodoTxtApp  implements OnInit {
+export class TodoTxtApp {
     public title = "New Todo";
-    ngOnInit() {
-
-    }
 }
