@@ -1,0 +1,8 @@
+tr(class="todo-list-entry")
+  td(class="left")
+    i(class="material-icons action-icon") reorder
+  td(class="main")&attributes({'[ngClass]': "{ 'item-completed': todo.completed() }"})
+    todo-formatted&attributes({'[todo]': "todo"})
+  td(class="right")
+    i(class="material-icons action-icon") edit
+    i(class="material-icons action-icon") delete

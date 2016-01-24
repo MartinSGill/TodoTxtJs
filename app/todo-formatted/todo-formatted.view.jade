@@ -1,0 +1,43 @@
+div(class="todo-formatted")&attributes({"[ngClass]": "{ 'item-completed': item.completed() }"})
+  i(class="material-icons button")&attributes({"*ngIf":"!item.completed()"}) check_box_outline_blank
+  i(class="material-icons button")&attributes({"*ngIf":"item.completed()"}) check_box
+  span()&attributes({"*ngFor":"#token of item.tokens()"})
+    span&attributes({"[ngSwitch]":"token.typeString()"})
+      span&attributes({"*ngSwitchWhen":"'text'", "[ngClass]":"token.typeString()"}) {{ token.text }}
+      span&attributes({"*ngSwitchWhen":"'createDate'", "[ngClass]":"token.typeString()", "class":"date"}) {{ token.text }}
+      span&attributes({"*ngSwitchWhen":"'completed'", "[ngClass]":"token.typeString()", "class":"date"}) {{ token.text }}
+      span&attributes({"*ngSwitchWhen":"'priority'", "[ngClass]":"token.typeString()"})
+        span(class="symbol") (
+        span(class="text") {{ token.text }}
+        span(class="symbol") )
+      span&attributes({"*ngSwitchWhen": "'context'", "[ngClass]":"token.typeString()"})
+        span(class="symbol")
+          i(class="material-icons") place
+        span(class="text") {{ token.text }}
+      span&attributes({"*ngSwitchWhen":"'project'", "[ngClass]": "token.typeString()"})
+        span(class="symbol")
+          i(class="material-icons") folder
+        span(class="text") {{ token.text }}
+      span&attributes({"*ngSwitchWhen":"'metadata'"})
+        span&attributes({"[ngSwitch]":"token.id"})
+          span&attributes({"*ngSwitchWhen":"'http'", "[ngClass]": "token.id", "class":"url"})
+            a(href="{{ token.id + ':' + token.text }}" target="_blank")
+              i(class="material-icons") web
+              span(class="url-text") {{ token.id + ':' + token.text }}
+          span&attributes({"*ngSwitchWhen": "'https'", "[ngClass]": "token.id", "class": "url"})
+            a(href="{{ token.id + ':' + token.text }}" target="_blank")
+              i(class="material-icons") web
+              span(class="url-text") {{ token.id + ':' + token.text }}
+          span&attributes({"*ngSwitchWhen": "'ftp'", "[ngClass]": "token.id", "class": "url"})
+            a(href="{{ token.id + ':' + token.text }}" target="_blank")
+              i(class="material-icons") web
+              span(class="url-text") {{ token.id + ':' + token.text }}
+          span&attributes({"*ngSwitchWhen": "'due'", "[ngClass]": "token.id", "class": "due metadata"})
+            span(class="key")
+              i(class="material-icons") today&nbsp;
+            span(class="value") {{ token.text }}
+          span&attributes({"*ngSwitchDefault":"", "[ngClass]":"token.typeString()"})
+            span(class="key")
+              i(class="material-icons") turned_in_not
+              | {{ token.id }}&nbsp;
+            span(class="value") {{ token.text }}

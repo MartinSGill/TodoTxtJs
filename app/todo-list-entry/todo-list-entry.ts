@@ -5,14 +5,15 @@ import {TodoService} from './../services/todo.service';
 import {Item} from "../models/item";
 
 @Component({
-    selector: 'todo-list-entry'
+  selector: 'todo-list-entry'
 })
 @View({
-    templateUrl: 'app/todo-list-entry/todo-list-entry.html',
-    directives: [CORE_DIRECTIVES, TodoFormatted]
+  templateUrl: 'app/todo-list-entry/todo-list-entry.html',
+  directives: [CORE_DIRECTIVES, TodoFormatted]
 })
 export class TodoListEntry {
-    @Input() public todo:Item;
+  @Input() public todo:Item;
 
-    constructor(private _todoService:TodoService) { };
+  constructor(private _todoService:TodoService) {
+  };
 }

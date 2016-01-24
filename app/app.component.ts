@@ -9,7 +9,6 @@ import {TodoService} from './services/todo.service';
 })
 @View({
     templateUrl: 'app/app.view.html',
-    styleUrls: ['app/app.style.css'],
     directives: [TodoEntry, TodoList]
 })
 export class TodoTxtApp {

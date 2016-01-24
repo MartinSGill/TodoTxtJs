@@ -2,6 +2,7 @@
 # General exclusion for generated Javascript files under source.
 app/**/*.js
 app/**/*.map
+app/**/*.html
 
 # Except for these, which aren't generated
 !retired/bindings/binding_todo.js

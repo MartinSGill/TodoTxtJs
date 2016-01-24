@@ -13,16 +13,22 @@
 @color-formatted-text-metadata-url: @theme-darkPrimaryColor;
 
 @color-formatted-text-create-date: @theme-accentColor;
-@color-formatted-text-completed: @theme-accentColor;
+@color-formatted-text-completed: @theme-secondaryTextColor;
 
 @color-formatted-background: @theme-backgroundPrimaryColor;
+
+@token-margin: 2px;
+
+todo-formatted.item-completed {
+  background-color: @theme-dividerColor;
+}
 
 div.todo-formatted {
   display: block;
   background-color: @color-formatted-background;
   font-size: 18pt;
   width: 100%;
-  outline: thin solid @palette-Black-Dividers;
+  outline: thin solid @palette-Black-Dividers; // TODO: refactor - theme value
   border-collapse: collapse;
 
   span {
@@ -32,45 +38,57 @@ div.todo-formatted {
   }
 
   .material-icons {
-    vertical-align: bottom;
+    vertical-align: sub;
   }
 
   .priority {
+    margin-left: @token-margin;
+    margin-right: @token-margin;
     color: @color-formatted-text-priority;
     font-weight: bold;
-    text-shadow: 1px 1px @palette-Grey-800; // TODO: refactor
+    text-shadow: 1px 1px @palette-Grey-800; // TODO: refactor - theme value
 
     .symbol {
       display: none;
     }
   }
 
-  .item-completed {
-    background-color: @theme-dividerColor;
+  .date {
+    display: inline-block;
+    font-variant: all-small-caps;
+    font-size: 0.6em;
+    font-weight: bold;
   }
 
   .createDate {
+    margin-left: @token-margin;
     color: @color-formatted-text-create-date;
   }
 
   .completed {
+    margin-left: @token-margin;
     color: @color-formatted-text-completed;
   }
 
   .project {
+    margin-left: @token-margin;
     color: @color-formatted-text-project;
   }
 
   .context {
+    margin-left: @token-margin;
     color: @color-formatted-text-context;
   }
 
   .metadata {
+    display: inline-block;
+    margin-left: @token-margin;
     padding: 3px;
     background-color: @color-formatted-background-metadata;
     border: 1px solid @color-formatted-background-metadata;
     border-radius: 15px;
     font-size: smaller;
+
 
     .key {
       font-variant: small-caps;
@@ -87,9 +105,13 @@ div.todo-formatted {
       border-bottom-right-radius: 15px;
       border-top-right-radius: 15px;
     }
+  }
 
-    .url {
-      color: @color-formatted-text-metadata-url;
+  .url {
+    color: @color-formatted-text-metadata-url;
+
+    .url-text {
+      display: none;
     }
   }
 }
