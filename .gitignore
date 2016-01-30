@@ -4,6 +4,9 @@ src/app/**/*.js
 src/app/**/*.map
 src/app/**/*.html
 
+spec/**/*.js
+spec/**/*.map
+
 # Except for these, which aren't generated
 !retired/bindings/binding_todo.js
 !retired/lib/jquery.hotkeys.js
