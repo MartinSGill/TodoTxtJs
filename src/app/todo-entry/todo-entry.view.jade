@@ -1,5 +1,5 @@
 div(class="todo-new")
   todo-formatted(todo="{{value}}")
   input(type="text" placeholder="New Todo")&attributes({"[(ngModel)]": "value"} )
-  i(class="material-icons action-icon")&attributes({"(click)": "add()"}) add_box
+  i(class="material-icons action-icon" title="Add")&attributes({"(click)": "add()"}) add_box
 
