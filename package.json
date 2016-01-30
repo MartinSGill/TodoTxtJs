@@ -4,7 +4,7 @@
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "lite": "lite-server",
+    "lite": "lite-server --baseDir src",
     "start": "concurrent \"npm run tsc:w\" \"npm run lite\" "
   },
   "license": "MIT",
