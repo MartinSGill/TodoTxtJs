@@ -30,7 +30,7 @@ export class StringSerializer implements Serializer {
         var result = '';
         tokens.forEach((item) => {
             switch (item.type) {
-                case TokenType.completed:
+                case TokenType.complete:
                     result += 'x ' + item.text;
                     break;
                 case TokenType.createDate:
