@@ -1,6 +1,8 @@
 div(class="todo-formatted")&attributes({"[ngClass]": "{ 'item-completed': item.completed() }"})
-  i(class="material-icons button action-icon" title="Complete")&attributes({"*ngIf":"!item.completed()"}) check_box_outline_blank
-  i(class="material-icons button action-icon" title="Complete")&attributes({"*ngIf":"item.completed()"}) check_box
+  i(class="material-icons button action-icon"
+    title="Complete")&attributes({"*ngIf":"!item.completed()", "(click)":"item.complete()"}) check_box_outline_blank
+  i(class="material-icons button action-icon"
+    title="Complete")&attributes({"*ngIf":"item.completed()", "(click)":"item.complete()"}) check_box
   span()&attributes({"*ngFor":"#token of item.tokens()"})
     span&attributes({"[ngSwitch]":"token.typeString()"})
       span&attributes({"*ngSwitchWhen":"'text'", "[ngClass]":"token.typeString()"}) {{ token.text }}

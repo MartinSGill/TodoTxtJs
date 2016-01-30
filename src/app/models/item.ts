@@ -46,13 +46,24 @@ export class Item {
     this.item_tokens = [];
   }
 
-  // TODO: Write Test
   public static parseString(text:string):Item {
     return new Item(Tokenizer.tokenize(text));
   }
 
   public tokens():Token[] {
     return this.item_tokens;
+  }
+
+  public complete() {
+    if (this.completed())
+    {
+      this.item_tokens =
+      this.item_tokens.filter((item) => { return item.type != TokenType.completed });
+    }
+    else
+    {
+      this.item_tokens.splice(0,0,new Token(TokenType.completed, "2015-01-01"));
+    }
   }
 
   public completed():boolean {

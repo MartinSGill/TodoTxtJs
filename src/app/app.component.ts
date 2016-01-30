@@ -12,5 +12,5 @@ import {TodoService} from './services/todo.service';
     directives: [TodoEntry, TodoList]
 })
 export class TodoTxtApp {
-    public title = "New Todo";
+    public title = "TodoTxtJS";
 }
