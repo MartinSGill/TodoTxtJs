@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TodoTxt2.iml" filepath="$PROJECT_DIR$/TodoTxt2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TodoTxtJS.iml" filepath="$PROJECT_DIR$/TodoTxtJS.iml" />
     </modules>
   </component>
 </project>
