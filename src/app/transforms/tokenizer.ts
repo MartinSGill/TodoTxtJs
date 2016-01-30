@@ -51,7 +51,7 @@ export namespace Tokenizer {
         const REGEX_COMPLETED = /^x (((?:19|20)[0-9]{2})-((?:0[1-9]|1[012]))-((?:0[1-9]|[12][0-9]|3[01])))(?=\s+\S+)/;
         var matches = result.remainingText.match(REGEX_COMPLETED);
         if (matches) {
-            result.tokenList.push(new Token(TokenType.complete, matches[1]));
+            result.tokenList.push(new Token(TokenType.completed, matches[1]));
             result.remainingText = result.remainingText.substr(matches[0].length).trim();
         }
     }

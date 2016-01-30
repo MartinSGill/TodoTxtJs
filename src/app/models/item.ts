@@ -55,12 +55,12 @@ export class Item {
     return this.item_tokens;
   }
 
-  public complete():boolean {
-    return this.findTokens(TokenType.complete).length == 1;
+  public completed():boolean {
+    return this.findTokens(TokenType.completed).length == 1;
   }
 
   public completedDate():string {
-    var tokens = this.findTokens(TokenType.complete);
+    var tokens = this.findTokens(TokenType.completed);
     if (tokens.length == 0) {
       return null;
     }
@@ -80,7 +80,7 @@ export class Item {
     var tokens = this.findTokens(TokenType.createDate);
     if (tokens.length == 0) {
       var created = new Token(TokenType.createDate, date);
-      if (this.complete()) {
+      if (this.completed()) {
         this.item_tokens.splice(1, 0, created);
       }
       else {

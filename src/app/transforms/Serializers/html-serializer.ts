@@ -53,14 +53,14 @@ export class HtmlSerializer implements Serializer {
 
     public serialize(tokens:Token[]):string {
         var result = "<span class='todo";
-        if (tokens[0].type == TokenType.complete) {
+        if (tokens[0].type == TokenType.completed) {
             result += ' completed';
         }
         result += "'>";
 
         tokens.forEach((item) => {
             switch (item.type) {
-                case TokenType.complete:
+                case TokenType.completed:
                     result += "<span class='completeDate'>";
                     result += item.text;
                     result += "</span>";

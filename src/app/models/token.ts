@@ -25,7 +25,7 @@ export enum TokenType
 {
     text,
     createDate,
-    complete,
+    completed,
     priority,
     project,
     context,
