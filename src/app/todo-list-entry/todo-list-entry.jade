@@ -4,5 +4,5 @@ tr(class="todo-list-entry")
   td(class="main")&attributes({'[ngClass]': "{ 'item-completed': todo.complete() }"})
     todo-formatted&attributes({'[todo]': "todo"})
   td(class="right")
-    i(class="material-icons action-icon") edit
-    i(class="material-icons action-icon") delete
+    i(class="material-icons action-icon" title="Edit") edit
+    i(class="material-icons action-icon delete" title="Delete")&attributes({"(click)":"remove()"}) delete

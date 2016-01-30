@@ -16,4 +16,8 @@ export class TodoListEntry {
 
   constructor(private _todoService:TodoService) {
   };
+
+  public remove() {
+    this.todo.remove();
+  }
 }

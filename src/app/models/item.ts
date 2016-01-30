@@ -27,107 +27,115 @@ import {GenericMetadata} from './metadata/metadata'
 import {StringSerializer, HtmlSerializer} from '../transforms/serializers/serializer'
 
 export class Item {
-    private item_tokens:Token[];
-    public index:number = 0;
+  private item_tokens:Token[];
+  public index:number = 0;
 
-    constructor(tokens:Token[]) {
-        if (tokens === null) {
-            throw "No tokens given";
-        }
-
-        this.item_tokens = tokens;
+  constructor(tokens:Token[]) {
+    if (tokens === null) {
+      throw "No tokens given";
     }
 
-    // TODO: Write Test
-    public static parseString(text:string):Item {
-        return new Item(Tokenizer.tokenize(text));
-    }
+    this.item_tokens = tokens;
+  }
 
-    public tokens():Token[] {
-        return this.item_tokens;
-    }
+  public removed():boolean {
+    return this.item_tokens.length === 0;
+  }
 
-    public complete():boolean {
-        return this.findTokens(TokenType.complete).length == 1;
-    }
+  public remove():void {
+    this.item_tokens = [];
+  }
 
-    public completedDate():string {
-        var tokens = this.findTokens(TokenType.complete);
-        if (tokens.length == 0) {
-            return null;
-        }
-        return tokens[0].text;
-    }
+  // TODO: Write Test
+  public static parseString(text:string):Item {
+    return new Item(Tokenizer.tokenize(text));
+  }
 
-    public priority():string {
-        var tokens = this.findTokens(TokenType.priority);
-        if (tokens.length == 0) {
-            return null;
-        }
-        return tokens[0].text;
-    }
+  public tokens():Token[] {
+    return this.item_tokens;
+  }
 
-    // TODO: Write tests
-    public setCreateDate(date:string):void {
-        var tokens = this.findTokens(TokenType.createDate);
-        if (tokens.length == 0) {
-            var created = new Token(TokenType.createDate, date);
-            if (this.complete()) {
-                this.item_tokens.splice(1, 0, created);
-            }
-            else {
-                this.item_tokens.splice(0, 0, created);
-            }
-        }
-        else {
-            tokens[0].text = date;
-        }
-    }
+  public complete():boolean {
+    return this.findTokens(TokenType.complete).length == 1;
+  }
 
-    public createDate():string {
-        var tokens = this.findTokens(TokenType.createDate);
-        if (tokens.length == 0) {
-            return null;
-        }
-        return tokens[0].text;
+  public completedDate():string {
+    var tokens = this.findTokens(TokenType.complete);
+    if (tokens.length == 0) {
+      return null;
     }
+    return tokens[0].text;
+  }
 
-    public projects():string[] {
-        var tokens = this.findTokens(TokenType.project);
-        return tokens.map(function (item) {
-            return item.text
-        });
+  public priority():string {
+    var tokens = this.findTokens(TokenType.priority);
+    if (tokens.length == 0) {
+      return null;
     }
+    return tokens[0].text;
+  }
 
-    public contexts():string[] {
-        var tokens = this.findTokens(TokenType.context);
-        return tokens.map(function (item) {
-            return item.text
-        });
+  // TODO: Write tests
+  public setCreateDate(date:string):void {
+    var tokens = this.findTokens(TokenType.createDate);
+    if (tokens.length == 0) {
+      var created = new Token(TokenType.createDate, date);
+      if (this.complete()) {
+        this.item_tokens.splice(1, 0, created);
+      }
+      else {
+        this.item_tokens.splice(0, 0, created);
+      }
     }
+    else {
+      tokens[0].text = date;
+    }
+  }
 
-    public metadata():GenericMetadata[] {
-        return this.findTokens(TokenType.metadata);
+  public createDate():string {
+    var tokens = this.findTokens(TokenType.createDate);
+    if (tokens.length == 0) {
+      return null;
     }
+    return tokens[0].text;
+  }
 
-    public metadataValue(id:string):string {
-        var metadata = this.metadata().filter((item) => {
-            return item.id == id
-        });
-        return metadata.length > 0 ? metadata[0].text : null;
-    }
+  public projects():string[] {
+    var tokens = this.findTokens(TokenType.project);
+    return tokens.map(function (item) {
+      return item.text
+    });
+  }
 
-    public toString():string {
-        return new StringSerializer().serialize(this.item_tokens);
-    }
+  public contexts():string[] {
+    var tokens = this.findTokens(TokenType.context);
+    return tokens.map(function (item) {
+      return item.text
+    });
+  }
 
-    public toHtml():string {
-        return new HtmlSerializer().serialize(this.item_tokens);
-    }
+  public metadata():GenericMetadata[] {
+    return this.findTokens(TokenType.metadata);
+  }
 
-    private findTokens(type:TokenType):Token[] {
-        return this.item_tokens.filter(function (item) {
-            return item.type == type;
-        });
-    }
+  public metadataValue(id:string):string {
+    var metadata = this.metadata().filter((item) => {
+      return item.id == id
+    });
+    return metadata.length > 0 ? metadata[0].text : null;
+  }
+
+  public toString():string {
+    return new StringSerializer().serialize(this.item_tokens);
+  }
+
+  public toHtml():string {
+    return new HtmlSerializer().serialize(this.item_tokens);
+  }
+
+  private findTokens(type:TokenType):Token[] {
+    return this.item_tokens.filter(function (item) {
+      return item.type == type;
+    });
+  }
 }
