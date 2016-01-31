@@ -24,10 +24,11 @@
 }
 
 div.todo-formatted {
+  padding: 2px;
   display: block;
   background-color: @color-formatted-background;
   font-size: 18pt;
-  width: 100%;
+  width: auto;
   outline: thin solid @palette-Black-Dividers; // TODO: refactor - theme value
   border-collapse: collapse;
 
@@ -67,11 +68,13 @@ div.todo-formatted {
 
   .completed {
     margin-left: @token-margin;
+    margin-right: @token-margin;
     color: @color-formatted-text-completed;
   }
 
   .project {
     margin-left: @token-margin;
+    margin-right: @token-margin;
     color: @color-formatted-text-project;
   }
 
@@ -88,7 +91,6 @@ div.todo-formatted {
     border: 1px solid @color-formatted-background-metadata;
     border-radius: 15px;
     font-size: smaller;
-
 
     .key {
       font-variant: small-caps;

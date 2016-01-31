@@ -1,4 +1,7 @@
 div(class="todo-new")
-  todo-formatted(todo="{{value}}")
-  input(type="text" placeholder="Type New Todo Here")&attributes({"[(ngModel)]": "value"} )
+
+  div(class="tooltip-parent")
+    input(type="text" placeholder="Type New Todo Here")&attributes({"[(ngModel)]": "value"} )
+    todo-formatted(todo="{{value}}" class="tooltip")
+
   i(class="material-icons action-icon" title="Add")&attributes({"(click)": "add()"}) add_box
