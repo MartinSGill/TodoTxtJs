@@ -39,16 +39,24 @@ body {
   color: @theme-accentColor;
 }
 
-section#new-todo {
+#new-todo {
 
 }
 
-section#todo-list {
-  display: inline-block;
-  float: right;
+#main-box {
+  display: -webkit-flex;
+  display: flex;
 }
 
-section#sidebar {
-  display: inline-block;
-  float: left;
+#sidebar {
+  width: 150px;
+}
+
+#todo-list {
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+#footer {
+  clear: both;
 }
