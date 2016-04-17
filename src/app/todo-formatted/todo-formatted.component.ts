@@ -1,11 +1,9 @@
-import {Component, View, Input, OnChanges, SimpleChange} from 'angular2/core';
+import {Component, Input, OnChanges, SimpleChange} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {Item} from './../models/item';
 
 @Component({
-    selector: 'todo-formatted'
-})
-@View({
+    selector: 'todo-formatted',
     templateUrl: 'app/todo-formatted/todo-formatted.view.html',
     directives: [CORE_DIRECTIVES]
 })

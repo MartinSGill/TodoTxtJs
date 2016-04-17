@@ -1,4 +1,4 @@
-import {Component, View, OnInit} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {TodoFormatted} from './../todo-formatted/todo-formatted.component';
 import {Item} from './../models/item';
@@ -7,8 +7,6 @@ import {TodoListEntry} from "../todo-list-entry/todo-list-entry";
 
 @Component({
     selector: 'todo-list',
-})
-@View({
     template: `<table class="todo-list"><todo-list-entry *ngFor="#item of todos" [todo]="item"></todo-list-entry></table>`,
     directives: [CORE_DIRECTIVES, TodoListEntry]
 })

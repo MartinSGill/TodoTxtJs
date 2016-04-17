@@ -1,3 +1,5 @@
+/.vscode
+/typings
 
 # General exclusion for generated Javascript files under source.
 src/app/**/*.js

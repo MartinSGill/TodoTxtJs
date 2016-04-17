@@ -1,12 +1,10 @@
-import {Component, View} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {TodoFormatted} from './../todo-formatted/todo-formatted.component';
 import {TodoService} from "../services/todo.service";
 import {Item} from "../models/item";
 
 @Component({
-    selector: 'todo-entry'
-})
-@View({
+    selector: 'todo-entry',
     templateUrl: 'app/todo-entry/todo-entry.view.html',
     directives: [TodoFormatted]
 })
