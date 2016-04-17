@@ -11,8 +11,18 @@ import {OptionsService} from '../services/options.service';
   directives: [CORE_DIRECTIVES]
 })
 export class Sidebar {
-  constructor(_todoService: TodoService, _optionsService: OptionsService)
-  {
 
+  public contexts:Array<string>;
+  public projects:Array<string>;
+
+  constructor(private _todoService: TodoService, _optionsService: OptionsService)
+  {
+    this.getItems();
+  }
+
+  private getItems()
+  {
+    this.contexts = this._todoService.contexts();
+    this.projects = this._todoService.projects();
   }
 }

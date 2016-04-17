@@ -1,7 +1,11 @@
 div(class="sidebar")
-  h1 Contexts
-    ul
-      li blah
-  h1 Projects
-    ul
-      li blah
+  section
+    h1 Contexts
+    span&attributes({'class':'context', '*ngFor': "#item of contexts"})
+      i(class="material-icons") place
+      | {{ item }}
+  section
+    h1 Projects
+    span&attributes({'class':'project', '*ngFor': "#item of projects"})
+      i(class="material-icons") folder
+      | {{ item }}
