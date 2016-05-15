@@ -56,7 +56,7 @@ How?
 
 With thanks to their authors.
 
-* [Typescript](http://http://www.typescriptlang.org/)
+* [Typescript](http://www.typescriptlang.org/)
 * [KnockoutJS](http://www.knockoutjs.com)
 * [jQuery](http://jquery.com)
 * [jQuery.hotkeys](https://github.com/jeresig/jquery.hotkeys/)
