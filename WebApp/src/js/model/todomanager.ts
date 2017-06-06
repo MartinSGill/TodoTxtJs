@@ -179,8 +179,8 @@ module TodoTxtJs
 
                 if (
                     left.dueDate().getFullYear() !== right.dueDate().getFullYear()
-                    && left.dueDate().getMonth() !== right.dueDate().getMonth()
-                    && left.dueDate().getDay() !== right.dueDate().getDay()
+                    || left.dueDate().getMonth() !== right.dueDate().getMonth()
+                    || left.dueDate().getDay() !== right.dueDate().getDay()
                     )
                 {
                     return left.dueDate() < right.dueDate() ? -1 : 1;
